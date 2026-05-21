@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { CustodyComparison } from "@/components/illustrations/custody-comparison";
 import { Section } from "@/components/section";
 import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
@@ -78,15 +79,19 @@ export function BentoGrid() {
                 </p>
               </div>
               <div className="mt-6 flex justify-center">
-                <img
-                  src={item.imageSrc}
-                  alt={item.imageAlt}
-                  className={cn(
-                    "h-64 w-auto select-none object-contain object-top transition-transform duration-500 group-hover:-translate-y-2 sm:h-80",
-                    item.fullWidth && "sm:h-96"
-                  )}
-                  draggable={false}
-                />
+                {item.id === "custody-comparison" ? (
+                  <CustodyComparison />
+                ) : (
+                  <img
+                    src={item.imageSrc}
+                    alt={item.imageAlt}
+                    className={cn(
+                      "h-64 w-auto select-none object-contain object-top transition-transform duration-500 group-hover:-translate-y-2 sm:h-80",
+                      item.fullWidth && "sm:h-96"
+                    )}
+                    draggable={false}
+                  />
+                )}
               </div>
             </motion.div>
           );

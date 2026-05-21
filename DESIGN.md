@@ -206,7 +206,7 @@ Do not recolor, restyle, or stretch the artwork. Do not place on top of imagery.
 
 ### Specimen Blocks
 
-Each pillar in the "What's different" section is paired with a specimen: a small typographic exhibit that demonstrates the property rather than illustrating it. Examples: a wrapped serialization of a blinded token, a stylized Lightning invoice fragment, a redemption arrow to a Lightning address. Mono, hairline-bordered, flat, with a `[N]` index mark in the top-left corner.
+Each pillar in the "What's different" section is paired with a specimen: a small typographic exhibit that demonstrates the property rather than illustrating it. Examples: a wrapped serialization of blinded ecash, a stylized Lightning invoice fragment, a redemption arrow to a Lightning address. Mono, hairline-bordered, flat, with a `[N]` index mark in the top-left corner.
 
 Specimen blocks are not cards. They are exhibits.
 
@@ -240,4 +240,4 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Don't** apply ambient shadows to flat surfaces. The Phone Placeholder shadow is the only exception, scoped to that component.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.
 - **Don't** redefine tokens at the call site. New utilities go through the `@theme inline` block in `globals.css`.
-- **Don't** claim "self-custodial" or "no custodian." Cashu is custodial: mints hold the underlying Bitcoin. The accurate framing is bearer tokens plus unconditional withdrawal to any Lightning address. Candor is the brand; overclaiming corrodes it.
+- **Don't** claim "self-custodial" or "no custodian." Cashu is custodial: mints hold the underlying Bitcoin. The accurate framing is bearer ecash plus unconditional withdrawal to any Lightning address. Candor is the brand; overclaiming corrodes it.
