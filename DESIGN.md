@@ -145,6 +145,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 - **Lead** (Articulat CF 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
 - **Body** (Articulat CF 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
 - **Label** (JetBrains Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Eyebrows like `[001] CASHU PROTOCOL`, pill-tag chips, and the lower rail of the hero.
+- **Button** (Geist Mono 500, letter-spacing 0.06em, uppercase): The label face for every pill CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
 
 ### Named Rules
 
@@ -154,7 +155,9 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The Balanced Wrap Rule.** All headings carry `text-wrap: balance`. All long-form prose carries `text-wrap: pretty`. The page never ships a heading with an orphaned single word on the last line if the browser can prevent it.
 
-**The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, and the version stamp in the footer. It does NOT appear on body prose, headings, or button labels. Decorative mono is costume.
+**The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.
+
+**The Button-Label Rule.** Geist Mono carries every button label on the page: the header CTA, the closing CTA pills, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows). It is the only place Geist appears; it does not appear on display, body, or label runs.
 
 ## 4. Elevation
 
@@ -175,6 +178,8 @@ Pill-shaped (`border-radius: 9999px`), no border-radius variants. Three roles, d
 - **CTA (`pill-cta`)**: Inverse-surface fill. On dark sections: paper background, inkwell text. On light sections: inkwell background, paper text. Hover swaps fill to Cashu Lilac with inkwell text. Used at most once per section for the primary action.
 - **Outline (`pill-outline`)**: Transparent fill, foreground/30% border, hover lifts border opacity to 100%. Used adjacent to CTAs for secondary actions ("Read the docs").
 - **Tag (`pill-tag`)**: Static label chip, border in current `--border` token, JetBrains Mono. Never clickable; used to enumerate audience archetypes inside columns.
+
+**The Hero Badge Exception.** A single glass-pill badge sits above the hero headline, carrying the wordmark `cashu.me` as an eyebrow. It is the only sanctioned glassmorphic moment on the page. Treatment: `bg-foreground/[0.06]`, `backdrop-blur-xl`, hairline border at `border-foreground/25`, `rounded-full`, `type-label` text. Inert (no anchor wrapper — the header lockup already routes home). Never duplicated; if a second glass surface appears elsewhere, it is a bug.
 
 ### Chips
 
@@ -237,7 +242,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards.
 - **Don't** use em dashes (`—` or `--`) in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.
 - **Don't** use `background-clip: text` gradient text, decorative glassmorphism, or border-left side stripes.
-- **Don't** use display fonts other than Articulat CF or mono fonts other than JetBrains Mono. Two families is the cap. No Switzer, no Satoshi, no Inter, no Geist.
+- **Don't** use display fonts other than Articulat CF. No Switzer, no Satoshi, no Inter for display or body. Geist Mono is permitted only as the button-label face per the Button-Label Rule, never on display, body, or label runs.
 - **Don't** use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.
 - **Don't** apply ambient shadows to flat surfaces. The Phone Placeholder shadow is the only exception, scoped to that component.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.

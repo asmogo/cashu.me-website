@@ -26,7 +26,7 @@ export function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: easeOutCubic }}
-          className="type-display-1 text-foreground"
+          className="type-display-2 text-foreground"
         >
           No install? Run it in the browser.
         </motion.h2>

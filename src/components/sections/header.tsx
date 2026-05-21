@@ -111,16 +111,10 @@ export function Header() {
               href={siteConfig.links.wallet}
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "group hidden gap-2 lg:inline-flex"
+                "hidden lg:inline-flex"
               )}
             >
               {siteConfig.cta}
-              <span
-                aria-hidden
-                className="text-foreground/60 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:text-foreground"
-              >
-                →
-              </span>
             </Link>
 
             <div className="block lg:hidden">

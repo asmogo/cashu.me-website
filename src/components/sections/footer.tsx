@@ -45,7 +45,7 @@ export function Footer() {
 
         {/* Bottom row — socials + copyright */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-5">
             {social.map((s) => (
               <a
                 key={s.label}
@@ -53,7 +53,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={s.label}
-                className="flex size-9 items-center justify-center rounded-none border border-border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+                className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 {s.icon}
               </a>

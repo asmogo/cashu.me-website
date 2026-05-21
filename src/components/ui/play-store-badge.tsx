@@ -16,17 +16,35 @@ export function PlayStoreBadge({ href, className }: PlayStoreBadgeProps) {
       )}
     >
       <svg
-        viewBox="0 0 512 512"
-        className="size-7 flex-shrink-0 fill-current"
+        viewBox="0 0 29 32"
+        className="h-7 w-auto flex-shrink-0 text-white"
         aria-hidden="true"
+        fill="currentColor"
       >
-        <path d="M325.3 234.3 104.9 51l268.5 156.5-48.1 26.8zM69 32c-12.4 6.4-20.7 18.4-20.7 33.9v380.2c0 15.5 8.3 27.5 20.7 33.9l243.5-227-243.5-221zm393.6 199.5-72.2-41.7-54.1 49.7L390.4 290l72.6-41.7c21.7-17.1 21.7-29.5 0-46.8h-.4zM104.9 461 325.3 277.7l-48.1-26.8L104.9 461z" />
+        {/* Official Google Play geometry, grayscaled via per-face opacity so it
+            reads as a folded volume rather than four colored facets. */}
+        <path
+          opacity="0.7"
+          d="M13.5401 15.28L0.120056 29.34C0.270745 29.8741 0.541554 30.3667 0.911782 30.7801C1.28201 31.1934 1.74185 31.5167 2.25616 31.7251C2.77047 31.9335 3.32563 32.0216 3.87919 31.9826C4.43275 31.9436 4.97006 31.7785 5.45006 31.5L20.5501 22.9L13.5401 15.28Z"
+        />
+        <path
+          opacity="1"
+          d="M27.11 12.89L20.58 9.15002L13.23 15.6L20.61 22.88L27.09 19.18C27.6641 18.8794 28.145 18.4275 28.4805 17.8731C28.816 17.3187 28.9934 16.683 28.9934 16.035C28.9934 15.387 28.816 14.7514 28.4805 14.197C28.145 13.6426 27.6641 13.1906 27.09 12.89H27.11Z"
+        />
+        <path
+          opacity="0.45"
+          d="M0.120039 2.66003C0.0389183 2.95992 -0.00144445 3.26937 3.94718e-05 3.58003V28.42C0.000850852 28.7305 0.0411748 29.0397 0.120039 29.34L14 15.64L0.120039 2.66003Z"
+        />
+        <path
+          opacity="0.6"
+          d="M13.6401 16L20.5801 9.15001L5.50006 0.510007C4.93274 0.177748 4.28751 0.00177385 3.63006 7.15214e-06C2.83604 -0.00156636 2.06328 0.256535 1.42958 0.734967C0.795887 1.2134 0.336011 1.88592 0.120056 2.65001L13.6401 16Z"
+        />
       </svg>
       <span className="flex flex-col items-start leading-none">
-        <span className="font-sans text-[10px] tracking-tight text-white/80">
+        <span className="type-button text-[10px] text-white/80">
           Get it on
         </span>
-        <span className="mt-1 font-sans text-[19px] font-semibold tracking-tight">
+        <span className="mt-1 type-button text-[16px]">
           Google Play
         </span>
       </span>

@@ -33,7 +33,7 @@ export const siteConfig = {
       title: "Bearer ecash, in your pocket.",
       description:
         "Your ecash lives on your device. No account, no login, no balance tied to your name.",
-      imageSrc: "/images/iphone-placeholder.png",
+      imageSrc: "/images/screen-receive-ecash.png",
       direction: "ltr" as const,
     },
     {
@@ -47,7 +47,7 @@ export const siteConfig = {
       title: "Lose the phone, keep the cash.",
       description:
         "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware: it's tied to words.",
-      imageSrc: "/images/iphone-placeholder.png",
+      imageSrc: "/images/screen-backup.png",
       direction: "ltr" as const,
     },
   ],
@@ -71,11 +71,12 @@ export const siteConfig = {
       fullWidth: false,
     },
     {
+      id: "lightning-address",
       title: "On-chain, BOLT12, Lightning address.",
       content:
         "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline. Open the wallet and they mint into ecash.",
-      imageSrc: "/images/iphone-placeholder.png",
-      imageAlt: "Phone showing payments received in the Cashu wallet",
+      imageSrc: "/images/screen-lightning-address.png",
+      imageAlt: "Bottom sheet showing a Lightning Address QR code with Copy and Share actions",
       fullWidth: false,
     },
   ],
@@ -91,9 +92,9 @@ export const siteConfig = {
         "You lose the ecash minted there. The protocol does not solve this. Mitigate by choosing mints with known operators, holding small amounts per mint, and redeeming regularly to a Lightning wallet you control.",
     },
     {
-      question: "How is this different from Wallet of Satoshi?",
+      question: "How is this different from a custodial wallet?",
       answer:
-        "Wallet of Satoshi holds a balance in a database tied to your account and can rate-limit, suspend, or geofence you. A Cashu mint holds bitcoin but issues you blinded bearer ecash. You can swap to another mint, send ecash peer-to-peer, or withdraw to any Lightning address, without permission.",
+        "Account-based wallets hold a balance in a database tied to your identity and can rate-limit, suspend, or geofence you. A Cashu mint also holds bitcoin, but it issues you blinded bearer ecash instead of an account balance. You can swap to another mint, send ecash peer-to-peer, or withdraw to any Lightning address, without permission.",
     },
     {
       question: "Can I back it up?",

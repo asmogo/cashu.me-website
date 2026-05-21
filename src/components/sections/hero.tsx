@@ -42,9 +42,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeOutCubic }}
-          className="mb-10 type-label text-muted-foreground"
+          className="mb-10 flex justify-center"
         >
-          {siteConfig.name}
+          <span className="inline-flex items-center rounded-full border border-foreground/25 bg-foreground/[0.06] px-3 py-1.5 backdrop-blur-xl type-label text-foreground">
+            {siteConfig.name}
+          </span>
         </motion.div>
 
         <motion.h1

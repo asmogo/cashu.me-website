@@ -100,6 +100,13 @@
   text-transform: uppercase;
 }
 
+@utility type-button {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 /* Articulat CF — self-hosted from /public/fonts. Used for display headings. */
 @font-face {
   font-family: "Articulat CF";

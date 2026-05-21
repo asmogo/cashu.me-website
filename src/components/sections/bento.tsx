@@ -90,6 +90,15 @@ export function BentoGrid() {
                       draggable={false}
                     />
                   </div>
+                ) : item.id === "lightning-address" ? (
+                  <div className="w-full max-w-[340px] self-end">
+                    <img
+                      src={item.imageSrc}
+                      alt={item.imageAlt}
+                      className="block h-auto w-full select-none transition-transform duration-500 group-hover:-translate-y-1"
+                      draggable={false}
+                    />
+                  </div>
                 ) : (
                   <img
                     src={item.imageSrc}

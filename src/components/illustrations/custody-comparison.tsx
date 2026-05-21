@@ -350,7 +350,7 @@ export function CustodyComparison() {
         <Lane
           active={inView}
           reduceMotion={reduceMotion}
-          checkpoint="BANK"
+          checkpoint="CUSTODIAN"
           packetDelay={packetDelay}
           variant="bank"
         >
