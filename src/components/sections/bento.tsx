@@ -50,10 +50,8 @@ export function BentoGrid() {
   return (
     <Section
       id="bento"
-      index="002"
       variant="editorial"
-      title="Why ecash"
-      subtitle="the difference between a balance and bearer cash"
+      hideHeader
       className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-base)] lg:px-10"
       ref={ref}
     >
