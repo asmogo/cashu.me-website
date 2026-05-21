@@ -32,6 +32,15 @@
    Single source of truth for the editorial type system.
    See /PRODUCT.md and /DESIGN.md for the brand spec. */
 
+@utility text-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 18vw, 14rem);
+  font-weight: 600;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
 @utility text-display-1 {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 10vw, 10.5rem);

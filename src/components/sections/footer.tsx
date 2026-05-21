@@ -1,5 +1,4 @@
 import { Icons } from "@/components/icons";
-import { Logo } from "@/components/logo";
 import { siteConfig } from "@/lib/config";
 
 const social = [
@@ -11,15 +10,41 @@ const social = [
 export function Footer() {
   return (
     <footer className="border-t border-border/60">
-      <div className="container mx-auto flex max-w-[var(--max-container-width)] flex-col gap-10 px-6 py-12 lg:px-10">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <div className="flex items-center gap-2.5">
-            <Logo className="size-7" />
-            <span className="font-display text-base font-semibold uppercase tracking-[0.14em]">
-              {siteConfig.name}
-            </span>
-          </div>
+      <div className="container mx-auto flex max-w-[var(--max-container-width)] flex-col px-6 pt-16 pb-10 lg:px-10 lg:pt-20">
+        {/* Utility columns */}
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
+          {siteConfig.footer.columns.map((col) => (
+            <div key={col.label} className="flex flex-col gap-4">
+              <span className="text-label text-muted-foreground">
+                {col.label}
+              </span>
+              <ul className="flex flex-col gap-2.5">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="text-base text-foreground/85 transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
+        {/* The brand sign-off */}
+        <div className="py-12 md:py-20">
+          <div className="text-wordmark uppercase text-foreground select-none">
+            {siteConfig.name}
+          </div>
+        </div>
+
+        {/* Bottom row — socials + copyright */}
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-center gap-2">
             {social.map((s) => (
               <a
@@ -34,13 +59,11 @@ export function Footer() {
               </a>
             ))}
           </div>
-        </div>
 
-        <div className="flex flex-col justify-between gap-2 text-base text-muted-foreground md:flex-row md:items-end">
-          <p className="max-w-md">{siteConfig.footer.tagline}</p>
-          <p className="font-mono text-[0.75rem] uppercase tracking-[0.1em]">
-            {siteConfig.footer.attribution}
-          </p>
+          <div className="flex flex-col gap-1 text-label text-muted-foreground sm:items-end sm:text-right">
+            <span>{siteConfig.footer.copyright}</span>
+            <span>{siteConfig.footer.attribution}</span>
+          </div>
         </div>
       </div>
     </footer>

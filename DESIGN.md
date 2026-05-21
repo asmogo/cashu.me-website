@@ -150,6 +150,8 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The Specimen Scale Rule.** Display 1 is reserved for the page's two apex moments: the opening hero ("Bearer cash for the web.") and the closing CTA ("Take it with you."). Together they bookend the page. No element in the body of the page ever reaches that size.
 
+**The Wordmark Tier.** A single scale step exists above Display 1 — `text-wordmark` (`clamp(4rem, 18vw, 14rem)`, weight 600, tracking -0.05em). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere. The Specimen Scale Rule is unchanged: Display 1 remains exclusive to the hero and closing CTA; the wordmark is a brand mark, not a heading, and operates outside that hierarchy.
+
 **The Balanced Wrap Rule.** All headings carry `text-wrap: balance`. All long-form prose carries `text-wrap: pretty`. The page never ships a heading with an orphaned single word on the last line if the browser can prevent it.
 
 **The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, and the version stamp in the footer. It does NOT appear on body prose, headings, or button labels. Decorative mono is costume.

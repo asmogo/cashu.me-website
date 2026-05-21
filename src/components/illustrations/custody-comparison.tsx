@@ -18,8 +18,8 @@ const CUSTODIAL_FIELDS = [
   "10:42:31",
 ];
 
-const LOOP_DURATION = 5.0;
-const REPEAT_DELAY = 1.2;
+const LOOP_DURATION = 4.0;
+const REPEAT_DELAY = 0.6;
 
 const BEAT = {
   enter: 0.05,
@@ -27,10 +27,12 @@ const BEAT = {
   boxCenter: 0.32,
   scanDone: 0.62,
   exit: 0.72,
+  exitDone: 0.85,
   fadeOut: 0.95,
 } as const;
 
 const CHIP_TRAVEL_PX = -160;
+const PACKET_ORIGIN = "-50%";
 
 interface LaneProps {
   active: boolean;
@@ -77,29 +79,33 @@ function Lane({
           </span>
         </div>
 
-        {/* The packet (dot): enters, holds in the box during the scan,
-            then continues out and fades. The -translate-x-1/2 centers the
-            dot on the `left` coordinate so it lands on box-center, not its
-            left edge. */}
+        {/* The packet (dot): emerges from the identifier tile, settles into the
+            box, then departs. Mint vanishes the dot during the hold (mint can't
+            see the data) and re-emits after; bank stays bright throughout
+            (custodian sees everything). */}
         <motion.div
           aria-hidden
           className="absolute top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--scan)]"
-          initial={{ left: "0%", opacity: 0 }}
+          initial={{ left: PACKET_ORIGIN, opacity: 0 }}
           animate={
             active
               ? reduceMotion
                 ? { left: "100%", opacity: 1 }
                 : {
                     left: [
-                      "0%",
+                      PACKET_ORIGIN,
                       "0%",
                       "var(--box-center)",
                       "var(--box-center)",
                       "100%",
+                      "100%",
                     ],
-                    opacity: [0, 1, 1, 1, 0],
+                    opacity:
+                      variant === "mint"
+                        ? [0, 1, 0, 0, 1, 0]
+                        : [0, 1, 1, 1, 1, 0],
                   }
-              : { left: "0%", opacity: 0 }
+              : { left: PACKET_ORIGIN, opacity: 0 }
           }
           transition={
             reduceMotion
@@ -109,8 +115,21 @@ function Lane({
                   delay: packetDelay,
                   repeat: Infinity,
                   repeatDelay: REPEAT_DELAY,
-                  ease: easeOutCubic,
-                  times: [0, BEAT.enter, BEAT.boxCenter, BEAT.exit, 1],
+                  ease: [
+                    easeOutCubic,
+                    easeOutCubic,
+                    "linear",
+                    easeOutCubic,
+                    "linear",
+                  ],
+                  times: [
+                    0,
+                    BEAT.enter,
+                    BEAT.boxCenter,
+                    BEAT.exit,
+                    BEAT.exitDone,
+                    1,
+                  ],
                 }
           }
         />
@@ -168,9 +187,9 @@ function Lane({
             animate={
               active
                 ? reduceMotion
-                  ? { opacity: 0.7, y: 0 }
+                  ? { opacity: 1, y: 0 }
                   : {
-                      opacity: [0, 0, 0.85, 0.85, 0, 0],
+                      opacity: [0, 0, 1, 1, 0, 0],
                       y: [4, 4, 0, 0, 0, 4],
                     }
                 : { opacity: 0, y: 4 }
@@ -195,7 +214,7 @@ function Lane({
                   }
             }
           >
-            <Eye className="size-4 text-foreground/70" />
+            <Eye className="size-4 text-foreground" />
           </motion.div>
         )}
       </div>

@@ -109,11 +109,20 @@ function Feature({
           layout.imageAlignClass
         )}
       >
-        <img
-          src={imageSrc}
-          alt={title}
-          className="h-auto w-full max-w-[300px] drop-shadow-2xl"
-        />
+        <div className="relative">
+          {/* Soft halo lifts the phone off the inkwell, matching the hero. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          >
+            <div className="size-[520px] rounded-full bg-foreground/[0.08] blur-[140px]" />
+          </div>
+          <img
+            src={imageSrc}
+            alt={title}
+            className="relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
+          />
+        </div>
       </div>
     </div>
   );

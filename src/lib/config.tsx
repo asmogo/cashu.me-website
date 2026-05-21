@@ -1,5 +1,16 @@
 import type { ReactNode } from "react";
 
+const links = {
+  wallet: "https://wallet.cashu.me",
+  spec: "https://github.com/cashubtc/nuts",
+  repo: "https://github.com/cashubtc/cashu.me",
+  docs: "https://docs.cashu.space",
+  nostr: "https://primal.net/cashubtc",
+  twitter: "https://x.com/CashuBTC",
+  appStore: "https://apps.apple.com/app/idTODO",
+  playStore: "https://play.google.com/store/apps/details?id=meTODO",
+};
+
 export const siteConfig = {
   name: "cashu.me",
   description: "The native Cashu wallet.",
@@ -16,16 +27,7 @@ export const siteConfig = {
     "wallet",
     "open source",
   ],
-  links: {
-    wallet: "https://wallet.cashu.me",
-    spec: "https://github.com/cashubtc/nuts",
-    repo: "https://github.com/cashubtc/cashu.me",
-    docs: "https://docs.cashu.space",
-    nostr: "https://primal.net/cashubtc",
-    twitter: "https://x.com/CashuBTC",
-    appStore: "https://apps.apple.com/app/idTODO",
-    playStore: "https://play.google.com/store/apps/details?id=meTODO",
-  },
+  links,
   featureHighlight: [
     {
       title: "Bearer ecash, in your pocket.",
@@ -35,10 +37,10 @@ export const siteConfig = {
       direction: "ltr" as const,
     },
     {
-      title: "Pay anyone, with a tap.",
+      title: "Tap to pay.",
       description:
-        "Generate a Cashu Request, share the QR, get paid. Payments arrive over Nostr in seconds. No invoice expiry, no settlement window.",
-      imageSrc: "/images/iphone-placeholder.png",
+        "Hold your phone near the terminal. Payment clears over Nostr in seconds. No card network, no settlement window.",
+      imageSrc: "/images/screen-tap-to-pay.png",
       direction: "rtl" as const,
     },
     {
@@ -106,6 +108,32 @@ export const siteConfig = {
   footer: {
     tagline: "Bearer cash for the web.",
     attribution: "Open source under MIT.",
+    copyright: "© 2026 cashu.me",
+    columns: [
+      {
+        label: "Wallet",
+        links: [
+          { label: "Open cashu.me", href: links.wallet },
+          { label: "App Store", href: links.appStore },
+          { label: "Play Store", href: links.playStore },
+        ],
+      },
+      {
+        label: "Protocol",
+        links: [
+          { label: "Spec (NUTs)", href: links.spec },
+          { label: "Source", href: links.repo },
+          { label: "Docs", href: links.docs },
+        ],
+      },
+      {
+        label: "Community",
+        links: [
+          { label: "Nostr", href: links.nostr },
+          { label: "X", href: links.twitter },
+        ],
+      },
+    ],
   },
 };
 
