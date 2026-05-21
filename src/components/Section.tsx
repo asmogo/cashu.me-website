@@ -1,48 +1,159 @@
-import { type HTMLAttributes } from "react";
+"use client";
 
-type Variant = "dark" | "light";
-type Pad = "sm" | "md" | "lg" | "xl" | "flush";
+import { easeInOutCubic } from "@/lib/animation";
+import { cn } from "@/lib/utils";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { forwardRef, useRef } from "react";
+import type { ReactNode, RefObject } from "react";
 
-interface SectionProps extends HTMLAttributes<HTMLElement> {
-  variant: Variant;
-  /**
-   * Vertical padding scale. Use to vary section heights for rhythm.
-   * - sm: dense / supporting section
-   * - md: standard
-   * - lg: default
-   * - xl: showcase / closing section
-   * - flush: full-viewport heroes that own their own rhythm
-   */
-  pad?: Pad;
-  /** @deprecated alias for pad="flush" */
-  flush?: boolean;
+interface SectionProps {
+  id?: string;
+  index?: string;
+  variant?: "centered" | "editorial";
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  children?: ReactNode;
+  className?: string;
+  align?: "left" | "center" | "right";
+  headerSlot?: ReactNode;
+  hideHeader?: boolean;
 }
 
-const padBy: Record<Pad, string> = {
-  sm: "py-14 md:py-20 lg:py-24",
-  md: "py-20 md:py-28 lg:py-32",
-  lg: "py-24 md:py-32 lg:py-40",
-  xl: "py-28 md:py-40 lg:py-52",
-  flush: "",
-};
+const Section = forwardRef<HTMLElement, SectionProps>(
+  (
+    {
+      id,
+      index,
+      variant = "centered",
+      title,
+      subtitle,
+      description,
+      children,
+      className,
+      align = "center",
+      headerSlot,
+      hideHeader = false,
+    },
+    forwardedRef
+  ) => {
+    const internalRef = useRef<HTMLElement>(null);
+    const ref = (forwardedRef as RefObject<HTMLElement>) || internalRef;
 
-export function Section({
-  variant,
-  pad,
-  flush = false,
-  className = "",
-  children,
-  ...rest
-}: SectionProps) {
-  const resolved: Pad = flush ? "flush" : (pad ?? "lg");
-  return (
-    <section
-      data-theme={variant}
-      data-section
-      className={`bg-background text-foreground ${padBy[resolved]} ${className}`}
-      {...rest}
-    >
-      {children}
-    </section>
-  );
-}
+    const { scrollYProgress } = useScroll({
+      target: ref,
+      offset: ["start end", "end start"],
+    });
+
+    const opacity = useTransform(scrollYProgress, [0, 0.05, 0.1], [0, 0, 1], {
+      ease: easeInOutCubic,
+    });
+    const y = useTransform(scrollYProgress, [0, 0.05, 0.1], [30, 30, 0], {
+      ease: easeInOutCubic,
+    });
+
+    const hasHeaderContent = !!(title || subtitle || description || headerSlot);
+
+    const renderEyebrow = () =>
+      (index || title) && (
+        <motion.div
+          className="flex items-baseline gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+          style={{ opacity, y }}
+        >
+          {index && <span aria-hidden>[{index}]</span>}
+          {title && (
+            <span className="text-primary font-semibold">{title}</span>
+          )}
+        </motion.div>
+      );
+
+    const renderSubtitle = (extra?: string) =>
+      subtitle && (
+        <motion.h2
+          className={cn(
+            "font-display text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl",
+            extra
+          )}
+          style={{ opacity, y }}
+        >
+          {subtitle}
+        </motion.h2>
+      );
+
+    const renderDescription = (extra?: string) =>
+      description && (
+        <motion.p
+          className={cn(
+            "text-lg leading-8 text-muted-foreground text-balance",
+            extra
+          )}
+          style={{ opacity, y }}
+        >
+          {description}
+        </motion.p>
+      );
+
+    const centeredAlignment =
+      align === "left"
+        ? "text-left"
+        : align === "right"
+          ? "text-right"
+          : "text-center";
+
+    return (
+      <section id={id} ref={ref}>
+        <div className={cn(className)}>
+          {!hideHeader && hasHeaderContent && variant === "centered" && (
+            <div className={cn(centeredAlignment, "space-y-4 pb-10 mx-auto")}>
+              {renderEyebrow()}
+              {renderSubtitle(
+                cn(
+                  "mt-4 max-w-lg sm:max-w-none",
+                  align === "center" && "mx-auto",
+                  align === "right" && "ml-auto"
+                )
+              )}
+              {renderDescription(
+                cn(
+                  "mt-6 max-w-2xl",
+                  align === "center" && "mx-auto",
+                  align === "right" && "ml-auto"
+                )
+              )}
+            </div>
+          )}
+
+          {!hideHeader && variant === "editorial" && (
+            <div className="border-t border-border/60 pt-8 pb-12 sm:pt-10 sm:pb-16">
+              {headerSlot ? (
+                headerSlot
+              ) : (
+                <div className="grid grid-cols-12 gap-x-6 gap-y-6 lg:gap-x-10">
+                  <div className="col-span-12 lg:col-span-4">
+                    {renderEyebrow()}
+                  </div>
+                  {subtitle && (
+                    <div className="col-span-12 lg:col-span-9 lg:col-start-1">
+                      {renderSubtitle()}
+                    </div>
+                  )}
+                  {description && (
+                    <div className="col-span-12 lg:col-span-7 lg:col-start-6">
+                      {renderDescription("max-w-[55ch]")}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {children}
+        </div>
+      </section>
+    );
+  }
+);
+
+Section.displayName = "Section";
+
+export { Section };
