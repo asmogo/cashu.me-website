@@ -104,7 +104,7 @@ export const siteConfig = {
   ] as { question: string; answer: ReactNode }[],
   footer: {
     tagline: "Bearer cash for the web.",
-    attribution: "Open source under MIT. Long live free money.",
+    attribution: "Open source under MIT.",
   },
 };
 

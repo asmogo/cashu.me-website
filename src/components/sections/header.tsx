@@ -1,6 +1,7 @@
 "use client";
 
 import { Icons } from "@/components/icons";
+import { Logo } from "@/components/logo";
 import { MobileDrawer } from "@/components/mobile-drawer";
 import { buttonVariants } from "@/components/ui/button";
 import { easeInOutCubic } from "@/lib/animation";
@@ -58,27 +59,53 @@ export function Header() {
           }}
           className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl"
         >
-          <div className="container mx-auto flex max-w-[var(--max-container-width)] items-center justify-between px-6 py-3 lg:px-10">
+          <div className="container mx-auto flex max-w-[var(--max-container-width)] items-center justify-between px-6 py-4 lg:px-10">
             <Link
               href="/"
               title="cashu.me"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
             >
-              <Icons.logo className="size-7 text-primary" />
-              <span className="font-display text-lg font-semibold tracking-tight">
+              <Logo className="size-7" />
+              <span className="font-display text-sm font-semibold uppercase tracking-[0.14em]">
                 {siteConfig.name}
               </span>
             </Link>
-            <div className="hidden lg:block">
+
+            <div className="hidden items-center gap-1 lg:flex">
+              <a
+                href={siteConfig.links.repo}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="GitHub"
+                className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+              >
+                <Icons.github className="size-[18px]" />
+              </a>
+              <a
+                href={siteConfig.links.spec}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+              >
+                Spec
+              </a>
+              <Link
+                href={siteConfig.links.docs}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+              >
+                Docs
+              </Link>
               <Link
                 href={siteConfig.links.wallet}
                 className={cn(
-                  buttonVariants({ variant: "default", size: "sm" })
+                  buttonVariants({ variant: "outline", size: "sm" }),
+                  "ml-2"
                 )}
               >
                 {siteConfig.cta}
               </Link>
             </div>
+
             <div className="block lg:hidden">
               <MobileDrawer />
             </div>

@@ -15,13 +15,13 @@ export function Hero() {
       id="hero"
       className="relative min-h-[100vh] w-full overflow-hidden"
     >
-      {/* Lilac radial glow behind phones */}
+      {/* Soft radial glow behind phones */}
       <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 0.5, scale: 1 }}
+          animate={{ opacity: 0.35, scale: 1 }}
           transition={{ duration: 2.4, ease: easeInOutCubic, delay: 0.3 }}
-          className="size-[700px] rounded-full bg-primary/30 blur-[140px]"
+          className="size-[700px] rounded-full bg-foreground/10 blur-[140px]"
         />
       </div>
 
@@ -60,6 +60,14 @@ export function Hero() {
           transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.7 }}
           className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
         >
+          <a
+            href={siteConfig.links.repo}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="transition-colors hover:text-foreground"
+          >
+            → View source on GitHub
+          </a>
           <Link
             href={siteConfig.links.spec}
             className="transition-colors hover:text-foreground"
