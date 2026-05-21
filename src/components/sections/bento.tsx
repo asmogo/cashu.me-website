@@ -6,7 +6,7 @@ import { Section } from "@/components/section";
 import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const CARD_SHAPES = [
@@ -17,6 +17,7 @@ const CARD_SHAPES = [
 
 export function BentoGrid() {
   const ref = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion() ?? false;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -42,11 +43,13 @@ export function BentoGrid() {
     ease: easeInOutCubic,
   });
 
-  const motions = [
-    { opacity: opacity1, y: y1 },
-    { opacity: opacity2, y: y2 },
-    { opacity: opacity3, y: y3 },
-  ];
+  const motions = reduceMotion
+    ? [{}, {}, {}]
+    : [
+        { opacity: opacity1, y: y1 },
+        { opacity: opacity2, y: y2 },
+        { opacity: opacity3, y: y3 },
+      ];
 
   return (
     <Section
@@ -86,6 +89,8 @@ export function BentoGrid() {
                     <img
                       src={item.imageSrc}
                       alt={item.imageAlt}
+                      width={585}
+                      height={1266}
                       className="h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2"
                       draggable={false}
                     />
@@ -95,6 +100,8 @@ export function BentoGrid() {
                     <img
                       src={item.imageSrc}
                       alt={item.imageAlt}
+                      width={1287}
+                      height={1504}
                       className="block h-auto w-full select-none transition-transform duration-500 group-hover:-translate-y-1"
                       draggable={false}
                     />
@@ -103,6 +110,8 @@ export function BentoGrid() {
                   <img
                     src={item.imageSrc}
                     alt={item.imageAlt}
+                    width={900}
+                    height={1840}
                     className={cn(
                       "h-64 w-auto select-none object-contain object-top transition-transform duration-500 group-hover:-translate-y-2 sm:h-80",
                       item.fullWidth && "sm:h-96"

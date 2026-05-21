@@ -5,7 +5,7 @@ import { Section } from "@/components/section";
 import { easeOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 interface FeatureLayout {
@@ -42,6 +42,7 @@ interface FeatureProps {
   imageSrc: string;
   isActive: boolean;
   layout: FeatureLayout;
+  reduceMotion: boolean;
 }
 
 function Feature({
@@ -50,6 +51,7 @@ function Feature({
   imageSrc,
   isActive,
   layout,
+  reduceMotion,
 }: FeatureProps) {
   const textVariants = {
     hidden: { opacity: 0, y: 16 },
@@ -73,6 +75,8 @@ function Feature({
     },
   };
 
+  const animateState = reduceMotion || isActive ? "visible" : "hidden";
+
   return (
     <div
       className={cn(
@@ -82,8 +86,8 @@ function Feature({
     >
       <motion.div
         className={cn("col-span-12", layout.textClass)}
-        initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
+        initial={reduceMotion ? "visible" : "hidden"}
+        animate={animateState}
         variants={textVariants}
       >
         <div className="flex max-w-xl flex-col gap-6">
@@ -120,6 +124,8 @@ function Feature({
           <img
             src={imageSrc}
             alt={title}
+            width={921}
+            height={2000}
             className="relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
           />
         </div>
@@ -130,6 +136,7 @@ function Feature({
 
 export function FeatureHighlight() {
   const features = siteConfig.featureHighlight;
+  const reduceMotion = useReducedMotion() ?? false;
   const [activeFeature, setActiveFeature] = useState(-1);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -167,6 +174,7 @@ export function FeatureHighlight() {
           title={feature.title}
           description={feature.description}
           imageSrc={feature.imageSrc}
+          reduceMotion={reduceMotion}
         />
       ))}
     </Section>

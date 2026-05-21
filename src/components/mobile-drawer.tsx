@@ -24,7 +24,10 @@ const links = [
 export function MobileDrawer() {
   return (
     <Drawer>
-      <DrawerTrigger aria-label="Open menu">
+      <DrawerTrigger
+        aria-label="Open menu"
+        className="inline-flex h-11 w-11 items-center justify-center -mr-2"
+      >
         <Menu className="size-6" />
       </DrawerTrigger>
       <DrawerContent>

@@ -2,32 +2,6 @@
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-@keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
-
-@utility animate-accordion-down {
-  animation: accordion-down 0.2s ease-out;
-}
-
-@utility animate-accordion-up {
-  animation: accordion-up 0.2s ease-out;
-}
-
 @keyframes cashu-loading {
   0%, 100% {
     opacity: 0.35;
@@ -287,6 +261,19 @@ body::after {
     body::before {
       opacity: 0.05;
     }
+  }
+}
+
+/* Belt-and-braces: any animation that slips past a useReducedMotion()
+   gate (third-party libs, CSS-driven loops) still resolves instantly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

@@ -101,7 +101,7 @@ The aesthetic is editorial and committed, not enterprise. Restraint is the voice
 - Editorial scale (hero up to ~10rem at large viewports), tight tracking (`-0.035em`), short leading (0.94).
 - Section-scoped dark/light theming via `[data-theme]` — themes alternate, not chosen.
 - Lilac accent used sparingly: `[N]` marks, CTA hover, `::selection`. Never large fields.
-- Native `<details>` accordion, native `<a>` pill buttons. No bespoke widgets where the platform suffices.
+- Native `<details>` accordion, native `<a>` rectangular buttons. No bespoke widgets where the platform suffices.
 - Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome.
 
 ## 2. Colors
@@ -127,7 +127,9 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The One Voice Rule.** Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point. If a section reads "colorful," the rule is broken.
 
-**The No-Pure-Black, No-Pure-White Rule.** Every surface tints toward the brand hue at chroma 0.005–0.01. Today's `#0a0a0a` and `#ffffff` are temporary — the next color pass replaces them with `oklch(13% 0.003 280)` and `oklch(99% 0.003 280)` (a near-imperceptible lilac warmth that prevents the surfaces from reading as raw RGB).
+**The Scan Color Exemption.** The `--scan` token (green, `#86efac` on dark / `#16a34a` on light) is the sole sanctioned non-lilac chromatic, scoped to `custody-comparison.tsx` where it carries the surveillance metaphor (the bank lane "sees" a green packet; the mint lane blurs it). It must not appear elsewhere on the page.
+
+**The No-Pure-Black, No-Pure-White Rule.** Every surface tints toward the brand hue at chroma 0.005–0.01. Inkwell renders as `oklch(13% 0.003 280)` and Specimen Cream as `oklch(99% 0.003 280)` (a near-imperceptible lilac warmth that prevents the surfaces from reading as raw RGB). Legacy spec values `#0a0a0a` and `#ffffff` are kept above only for documentation reference.
 
 ## 3. Typography
 
@@ -145,7 +147,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 - **Lead** (Articulat CF 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
 - **Body** (Articulat CF 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
 - **Label** (JetBrains Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Eyebrows like `[001] CASHU PROTOCOL`, pill-tag chips, and the lower rail of the hero.
-- **Button** (Geist Mono 500, letter-spacing 0.06em, uppercase): The label face for every pill CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
+- **Button** (Geist Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
 
 ### Named Rules
 
@@ -157,33 +159,35 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.
 
-**The Button-Label Rule.** Geist Mono carries every button label on the page: the header CTA, the closing CTA pills, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows). It is the only place Geist appears; it does not appear on display, body, or label runs.
+**The Button-Label Rule.** Geist Mono carries every button label on the page: the header CTA, the closing CTA, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows). It is the only place Geist appears; it does not appear on display, body, or label runs.
 
 ## 4. Elevation
 
-Flat by default. The system does not use ambient shadows on surfaces, cards, or buttons. Depth is communicated by surface inversion (dark vs light section) and by 1px hairline rules — never by elevation.
+Flat by default. The system does not use ambient shadows on surfaces, cards, or buttons. Depth is communicated by surface inversion (dark vs light section) and by 1px hairline rules, never by elevation.
 
-No exceptions. Earlier drafts allowed a single deep drop shadow on the `<PhonePlaceholder>`; that component has been retired in favor of `<BrowserChrome>`, which is also flat (no shadow, hairline border).
+The sole sanctioned exceptions are phones and banknote-style mockups: objects depicting physical things in the world. The hero phone trio carries a deep ambient shadow against the inkwell because they are not UI surfaces, they are objects. Used at most once per section.
 
 ### Named Rules
 
-**The Flat-by-Default Rule.** Buttons, cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones, banknote-style mockups). Never decorative.
+**The Flat-by-Default Rule.** Buttons, cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones, banknote-style mockups). Never decorative, never on UI surfaces.
 
 ## 5. Components
 
-### Buttons (Pills)
+### Buttons
 
-Pill-shaped (`border-radius: 9999px`), no border-radius variants. Three roles, distinguished by surface treatment, not shape.
+Sharp rectangles (`border-radius: 0`). The editorial register prefers severity to softness; the absence of a curve signals broadsheet, not consumer app. Three roles, distinguished by surface treatment, not shape.
 
-- **CTA (`pill-cta`)**: Inverse-surface fill. On dark sections: paper background, inkwell text. On light sections: inkwell background, paper text. Hover swaps fill to Cashu Lilac with inkwell text. Used at most once per section for the primary action.
-- **Outline (`pill-outline`)**: Transparent fill, foreground/30% border, hover lifts border opacity to 100%. Used adjacent to CTAs for secondary actions ("Read the docs").
-- **Tag (`pill-tag`)**: Static label chip, border in current `--border` token, JetBrains Mono. Never clickable; used to enumerate audience archetypes inside columns.
+- **CTA (default fill)**: Inverse-surface fill. On dark sections: paper background, inkwell text. On light sections: inkwell background, paper text. Hover lightens to `foreground/90`. Used at most once per section for the primary action.
+- **Outline**: Transparent fill, hairline border in `--border`, hover lifts border to `foreground/40` and tints background to `foreground/5`. Used adjacent to CTAs for secondary actions ("View source").
+- **Ghost / Link**: Text-only affordances. Ghost picks up a subtle background tint on hover; Link underlines.
 
-**The Hero Badge Exception.** A single glass-pill badge sits above the hero headline, carrying the wordmark `cashu.me` as an eyebrow. It is the only sanctioned glassmorphic moment on the page. Treatment: `bg-foreground/[0.06]`, `backdrop-blur-xl`, hairline border at `border-foreground/25`, `rounded-full`, `type-label` text. Inert (no anchor wrapper — the header lockup already routes home). Never duplicated; if a second glass surface appears elsewhere, it is a bug.
+Touch target: 44px minimum height on every button (`h-11`). Padding varies by size.
+
+**The Hero Badge Exception.** A single glass-pill badge sits above the hero headline, carrying the wordmark `cashu.me` as an eyebrow. It is the only sanctioned pill on the page (`rounded-full`), and the only sanctioned glassmorphic moment. Treatment: `bg-foreground/[0.06]`, `backdrop-blur-xl`, hairline border at `border-foreground/25`, `type-label` text. Inert (no anchor wrapper, the header lockup already routes home). Never duplicated.
 
 ### Chips
 
-Tag chips and CTA pills share the same pill primitive. Tag chips are not state-bearing; they are always cosmetic enumerations.
+Tag chips are cosmetic enumerations, never state-bearing. They share the rectangular geometry of buttons by default; if a pill chip is needed to echo the hero badge, treat it as a deliberate one-off.
 
 ### Cards / Containers
 
@@ -244,7 +248,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Don't** use `background-clip: text` gradient text, decorative glassmorphism, or border-left side stripes.
 - **Don't** use display fonts other than Articulat CF. No Switzer, no Satoshi, no Inter for display or body. Geist Mono is permitted only as the button-label face per the Button-Label Rule, never on display, body, or label runs.
 - **Don't** use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.
-- **Don't** apply ambient shadows to flat surfaces. The Phone Placeholder shadow is the only exception, scoped to that component.
+- **Don't** apply ambient shadows to flat surfaces. The only sanctioned exceptions are phones and banknote-style mockups (objects depicting physical things), used at most once per section.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.
 - **Don't** redefine tokens at the call site. New utilities go through the `@theme inline` block in `globals.css`.
 - **Don't** claim "self-custodial" or "no custodian." Cashu is custodial: mints hold the underlying Bitcoin. The accurate framing is bearer ecash plus unconditional withdrawal to any Lightning address. Candor is the brand; overclaiming corrodes it.

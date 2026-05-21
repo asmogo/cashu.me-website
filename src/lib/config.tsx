@@ -8,6 +8,7 @@ const links = {
   nostr: "https://primal.net/cashubtc",
   twitter: "https://x.com/CashuBTC",
   opencash: "http://opencash.dev/",
+  // Placeholders until the apps are listed. Swap in the real IDs before launch.
   appStore: "https://apps.apple.com/app/idTODO",
   playStore: "https://play.google.com/store/apps/details?id=meTODO",
 };

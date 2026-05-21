@@ -59,6 +59,8 @@ function Lane({
         <img
           src="/images/cashu-logo.png"
           alt="Cashu"
+          width={512}
+          height={512}
           className="size-9 select-none rounded-none object-cover [image-rendering:pixelated]"
           draggable={false}
         />

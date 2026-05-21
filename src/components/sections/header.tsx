@@ -6,7 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion, useAnimation, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -24,6 +24,7 @@ const navLinkClass = cn(
 );
 
 export function Header() {
+  const reduceMotion = useReducedMotion() ?? false;
   const [isVisible, setIsVisible] = useState(true);
   const [addBorder, setAddBorder] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -51,24 +52,33 @@ export function Header() {
     controls.start(isVisible ? "visible" : "hidden");
   }, [isVisible, controls]);
 
-  const headerVariants = {
-    hidden: { opacity: 0, y: "-100%" },
-    visible: { opacity: 1, y: 0 },
-  };
+  const headerVariants = reduceMotion
+    ? {
+        hidden: { opacity: 1, y: 0 },
+        visible: { opacity: 1, y: 0 },
+      }
+    : {
+        hidden: { opacity: 0, y: "-100%" },
+        visible: { opacity: 1, y: 0 },
+      };
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.header
-          initial="hidden"
+          initial={reduceMotion ? "visible" : "hidden"}
           animate={controls}
           exit="hidden"
           variants={headerVariants}
-          transition={{
-            duration: isInitialLoad ? 0.8 : 0.3,
-            delay: isInitialLoad ? 0.3 : 0,
-            ease: easeInOutCubic,
-          }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : {
+                  duration: isInitialLoad ? 0.8 : 0.3,
+                  delay: isInitialLoad ? 0.3 : 0,
+                  ease: easeInOutCubic,
+                }
+          }
           className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl"
         >
           <div className="container relative mx-auto flex max-w-[var(--max-container-width)] items-center justify-between gap-6 px-6 py-4 lg:px-10">
@@ -124,9 +134,9 @@ export function Header() {
             </div>
           </div>
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: addBorder ? 1 : 0 }}
-            transition={{ duration: 0.2 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.2 }}
             className="absolute inset-x-0 bottom-0 h-px bg-border"
           />
         </motion.header>
