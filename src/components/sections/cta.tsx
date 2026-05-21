@@ -5,7 +5,6 @@ import { easeOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function CTA() {
@@ -52,13 +51,9 @@ export function CTA() {
         >
           <Link
             href={siteConfig.links.wallet}
-            className={cn(
-              buttonVariants({ variant: "default", size: "lg" }),
-              "group"
-            )}
+            className={cn(buttonVariants({ variant: "default", size: "lg" }))}
           >
-            Open {siteConfig.name}
-            <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" />
+            Open Cashu.me
           </Link>
           <Link
             href={siteConfig.links.repo}
