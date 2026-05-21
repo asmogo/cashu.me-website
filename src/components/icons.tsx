@@ -1,22 +1,6 @@
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
-  logo: (props: IconProps) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M14.5 8.5a3.5 3.5 0 0 0-5 0L8 10l1.5 1.5a3.5 3.5 0 0 0 5 0" />
-      <path d="M14.5 15.5a3.5 3.5 0 0 1-5 0L8 14l1.5-1.5a3.5 3.5 0 0 1 5 0" />
-    </svg>
-  ),
   github: (props: IconProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path

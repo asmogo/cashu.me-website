@@ -1,4 +1,5 @@
 import { Icons } from "@/components/icons";
+import { Logo } from "@/components/logo";
 import { siteConfig } from "@/lib/config";
 
 const social = [
@@ -12,14 +13,14 @@ export function Footer() {
     <footer className="border-t border-border/60">
       <div className="container mx-auto flex max-w-[var(--max-container-width)] flex-col gap-10 px-6 py-12 lg:px-10">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <div className="flex items-center gap-2">
-            <Icons.logo className="size-7 text-primary" />
-            <span className="font-display text-lg font-semibold tracking-tight">
+          <div className="flex items-center gap-2.5">
+            <Logo className="size-7" />
+            <span className="font-display text-base font-semibold uppercase tracking-[0.14em]">
               {siteConfig.name}
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {social.map((s) => (
               <a
                 key={s.label}
@@ -27,7 +28,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={s.label}
-                className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+                className="flex size-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
               >
                 {s.icon}
               </a>
