@@ -8,6 +8,12 @@ import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+const CARD_SHAPES = [
+  { rounded: "rounded-[2rem]", minHeight: "min-h-[460px]" },
+  { rounded: "rounded-2xl", minHeight: "min-h-[360px]" },
+  { rounded: "rounded-2xl", minHeight: "min-h-[420px]" },
+];
+
 export function BentoGrid() {
   const ref = useRef<HTMLElement>(null);
 
@@ -44,42 +50,49 @@ export function BentoGrid() {
   return (
     <Section
       id="bento"
+      index="002"
+      variant="editorial"
       title="Why ecash"
       subtitle="the difference between a balance and bearer cash"
-      className="container mx-auto max-w-[var(--max-container-width)] px-6 lg:px-10"
+      className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-base)] lg:px-10"
       ref={ref}
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {siteConfig.bento.map((item, index) => (
-          <motion.div
-            key={index}
-            style={motions[index]}
-            className={cn(
-              "group relative grid grid-rows-[auto_1fr] overflow-hidden rounded-3xl border border-border/60 bg-muted p-6 pb-0 sm:p-8",
-              item.fullWidth && "md:col-span-2"
-            )}
-          >
-            <div className="flex flex-col">
-              <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-                {item.title}
-              </h3>
-              <p className="mt-3 max-w-prose text-sm text-muted-foreground sm:text-base">
-                {item.content}
-              </p>
-            </div>
-            <div className="mt-6 flex justify-center">
-              <img
-                src={item.imageSrc}
-                alt={item.imageAlt}
-                className={cn(
-                  "h-64 w-auto select-none object-contain object-top transition-transform duration-500 group-hover:-translate-y-2 sm:h-80",
-                  item.fullWidth && "sm:h-96"
-                )}
-                draggable={false}
-              />
-            </div>
-          </motion.div>
-        ))}
+        {siteConfig.bento.map((item, index) => {
+          const shape = CARD_SHAPES[index] ?? CARD_SHAPES[CARD_SHAPES.length - 1];
+          return (
+            <motion.div
+              key={index}
+              style={motions[index]}
+              className={cn(
+                "group relative grid grid-rows-[auto_1fr] overflow-hidden border border-border/60 bg-muted p-6 pb-0 sm:p-8",
+                shape.rounded,
+                shape.minHeight,
+                item.fullWidth && "md:col-span-2"
+              )}
+            >
+              <div className="flex flex-col">
+                <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                  {item.title}
+                </h3>
+                <p className="mt-3 max-w-prose text-sm text-muted-foreground sm:text-base">
+                  {item.content}
+                </p>
+              </div>
+              <div className="mt-6 flex justify-center">
+                <img
+                  src={item.imageSrc}
+                  alt={item.imageAlt}
+                  className={cn(
+                    "h-64 w-auto select-none object-contain object-top transition-transform duration-500 group-hover:-translate-y-2 sm:h-80",
+                    item.fullWidth && "sm:h-96"
+                  )}
+                  draggable={false}
+                />
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </Section>
   );

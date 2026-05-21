@@ -23,6 +23,8 @@ export const siteConfig = {
     docs: "https://docs.cashu.space",
     nostr: "https://primal.net/cashubtc",
     twitter: "https://x.com/CashuBTC",
+    appStore: "https://apps.apple.com/app/idTODO",
+    playStore: "https://play.google.com/store/apps/details?id=meTODO",
   },
   featureHighlight: [
     {
@@ -73,14 +75,6 @@ export const siteConfig = {
       fullWidth: false,
     },
   ],
-  comparison: {
-    title: "Comparison",
-    subtitle: "What your wallet sees",
-    description:
-      "Drag the handle. Same payment, two ledgers. One ties every transaction to your name. The other does not.",
-    leftLabel: "Your bank",
-    rightLabel: "Cashu",
-  },
   faqs: [
     {
       question: "Is this custodial?",

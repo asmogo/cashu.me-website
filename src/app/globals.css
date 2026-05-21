@@ -139,6 +139,10 @@
     monospace;
 
   --max-container-width: 1200px;
+
+  --section-y-tight: clamp(4rem, 8vw, 6rem);
+  --section-y-base: clamp(6rem, 12vw, 10rem);
+  --section-y-wide: clamp(8rem, 16vw, 14rem);
 }
 
 html {

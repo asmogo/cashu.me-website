@@ -194,9 +194,15 @@ Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains 
 
 ### Browser Chrome (signature component)
 
-The wallet is a PWA, not a native app. The signature visual is a stylized desktop-browser chrome (`<BrowserChrome>`): three small dot controls on the left, a transparent URL bar reading `cashu.me`, and a hairline-bordered content area below. Reads as honest representation of where the wallet actually lives. Replaces the phone-bezel convention that the rest of the wallet category overuses.
+The wallet ships natively on iOS and Android, and also runs in any modern browser without install. The signature visual is a stylized desktop-browser chrome (`<BrowserChrome>`): three small dot controls on the left, a transparent URL bar reading `cashu.me`, and a hairline-bordered content area below. It represents the browser path honestly: the path that needs no app-store install, the path most visitors discovering the page from a desktop link will take first. Scoped to the wallet-showcase section; the hero is permitted to use platform-store badges for native install.
 
-Used at most once on the page, in the wallet showcase, with a single composed mock interior. Never repeated within a section.
+Used at most once on the page, with a single composed mock interior. Never repeated within a section.
+
+### Store Badges
+
+Official Apple "Download on the App Store" SVG and Google "Get it on Google Play" artwork, used verbatim from each platform's marketing-resources kit. Reserved for the hero, where they signal native install. Sized so both share a 48px (mobile) / 56px (desktop) baseline height, anchored on a shared baseline grid so the artwork inside each badge aligns optically. These are the one place where third-party brand assets are allowed to override the Bearer Specimen aesthetic: recognition is the conversion driver, the aesthetic concession is one-time and confined to the hero.
+
+Do not recolor, restyle, or stretch the artwork. Do not place on top of imagery. Do not rotate.
 
 ### Specimen Blocks
 

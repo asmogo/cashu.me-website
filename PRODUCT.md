@@ -14,7 +14,7 @@ brand
 
 ## Product Purpose
 
-cashu.me is the open-source progressive web wallet for the Cashu ecash protocol. The site exists to give a Bitcoin-literate visitor a credible, fast answer to "what is Cashu, what does cashu.me give me, and should I use it?"
+cashu.me is the open-source Cashu ecash wallet. Native on iOS and Android. Also runs in the browser, no install required. The site exists to give a Bitcoin-literate visitor a credible, fast answer to "what is Cashu, what does cashu.me give me, and should I install it?"
 
 Success: a visitor leaves with the right mental model and tries the wallet. They understand that mints custody the underlying Bitcoin, that they hold bearer tokens, and that exit to any Lightning address is unconditional. Failure: they leave thinking they're locked in the way Wallet of Satoshi locks them in, or that the mint can freeze them specifically.
 

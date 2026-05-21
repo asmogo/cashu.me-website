@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
+import { AppStoreBadge } from "@/components/ui/app-store-badge";
+import { PlayStoreBadge } from "@/components/ui/play-store-badge";
 import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {
@@ -48,23 +48,23 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.5 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+        >
+          <AppStoreBadge href={siteConfig.links.appStore} />
+          <PlayStoreBadge href={siteConfig.links.playStore} />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.7 }}
+          className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
         >
           <Link
-            href={siteConfig.links.wallet}
-            className={cn(
-              buttonVariants({ variant: "default", size: "lg" }),
-              "group"
-            )}
-          >
-            {siteConfig.cta}
-            <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-          <Link
             href={siteConfig.links.spec}
-            className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+            className="transition-colors hover:text-foreground"
           >
-            Read the spec
+            → Read the spec
           </Link>
         </motion.div>
 

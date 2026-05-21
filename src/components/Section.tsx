@@ -8,28 +8,37 @@ import type { ReactNode, RefObject } from "react";
 
 interface SectionProps {
   id?: string;
+  index?: string;
+  variant?: "centered" | "editorial";
   title?: string;
   subtitle?: string;
   description?: string;
   children?: ReactNode;
   className?: string;
   align?: "left" | "center" | "right";
+  headerSlot?: ReactNode;
+  hideHeader?: boolean;
 }
 
 const Section = forwardRef<HTMLElement, SectionProps>(
   (
-    { id, title, subtitle, description, children, className, align = "center" },
+    {
+      id,
+      index,
+      variant = "centered",
+      title,
+      subtitle,
+      description,
+      children,
+      className,
+      align = "center",
+      headerSlot,
+      hideHeader = false,
+    },
     forwardedRef
   ) => {
     const internalRef = useRef<HTMLElement>(null);
     const ref = (forwardedRef as RefObject<HTMLElement>) || internalRef;
-
-    const alignmentClass =
-      align === "left"
-        ? "text-left"
-        : align === "right"
-          ? "text-right"
-          : "text-center";
 
     const { scrollYProgress } = useScroll({
       target: ref,
@@ -43,46 +52,101 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       ease: easeInOutCubic,
     });
 
+    const hasHeaderContent = !!(title || subtitle || description || headerSlot);
+
+    const renderEyebrow = () =>
+      (index || title) && (
+        <motion.div
+          className="flex items-baseline gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+          style={{ opacity, y }}
+        >
+          {index && <span aria-hidden>[{index}]</span>}
+          {title && (
+            <span className="text-primary font-semibold">{title}</span>
+          )}
+        </motion.div>
+      );
+
+    const renderSubtitle = (extra?: string) =>
+      subtitle && (
+        <motion.h2
+          className={cn(
+            "font-display text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl",
+            extra
+          )}
+          style={{ opacity, y }}
+        >
+          {subtitle}
+        </motion.h2>
+      );
+
+    const renderDescription = (extra?: string) =>
+      description && (
+        <motion.p
+          className={cn(
+            "text-lg leading-8 text-muted-foreground text-balance",
+            extra
+          )}
+          style={{ opacity, y }}
+        >
+          {description}
+        </motion.p>
+      );
+
+    const centeredAlignment =
+      align === "left"
+        ? "text-left"
+        : align === "right"
+          ? "text-right"
+          : "text-center";
+
     return (
       <section id={id} ref={ref}>
-        <div className={cn("sm:py-20 py-12", className)}>
-          {(title || subtitle || description) && (
-            <div className={cn(alignmentClass, "space-y-4 pb-10 mx-auto")}>
-              {title && (
-                <motion.h2
-                  className="text-sm text-primary text-balance font-mono font-semibold tracking-wider uppercase"
-                  style={{ opacity, y }}
-                >
-                  {title}
-                </motion.h2>
+        <div className={cn(className)}>
+          {!hideHeader && hasHeaderContent && variant === "centered" && (
+            <div className={cn(centeredAlignment, "space-y-4 pb-10 mx-auto")}>
+              {renderEyebrow()}
+              {renderSubtitle(
+                cn(
+                  "mt-4 max-w-lg sm:max-w-none",
+                  align === "center" && "mx-auto",
+                  align === "right" && "ml-auto"
+                )
               )}
-
-              {subtitle && (
-                <motion.h3
-                  className={cn(
-                    "font-display mt-4 max-w-lg text-4xl text-balance font-semibold sm:max-w-none sm:text-5xl md:text-6xl leading-[1.05] tracking-tight text-foreground",
-                    align === "center" && "mx-auto",
-                    align === "right" && "ml-auto"
-                  )}
-                  style={{ opacity, y }}
-                >
-                  {subtitle}
-                </motion.h3>
-              )}
-              {description && (
-                <motion.p
-                  className={cn(
-                    "mt-6 text-lg leading-8 text-muted-foreground text-balance max-w-2xl",
-                    align === "center" && "mx-auto",
-                    align === "right" && "ml-auto"
-                  )}
-                  style={{ opacity, y }}
-                >
-                  {description}
-                </motion.p>
+              {renderDescription(
+                cn(
+                  "mt-6 max-w-2xl",
+                  align === "center" && "mx-auto",
+                  align === "right" && "ml-auto"
+                )
               )}
             </div>
           )}
+
+          {!hideHeader && variant === "editorial" && (
+            <div className="border-t border-border/60 pt-8 pb-12 sm:pt-10 sm:pb-16">
+              {headerSlot ? (
+                headerSlot
+              ) : (
+                <div className="grid grid-cols-12 gap-x-6 gap-y-6 lg:gap-x-10">
+                  <div className="col-span-12 lg:col-span-4">
+                    {renderEyebrow()}
+                  </div>
+                  {subtitle && (
+                    <div className="col-span-12 lg:col-span-9 lg:col-start-1">
+                      {renderSubtitle()}
+                    </div>
+                  )}
+                  {description && (
+                    <div className="col-span-12 lg:col-span-7 lg:col-start-6">
+                      {renderDescription("max-w-[55ch]")}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
           {children}
         </div>
       </section>
