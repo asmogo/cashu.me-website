@@ -77,43 +77,13 @@ function Lane({
           </span>
         </div>
 
-        {/* Laser scan line — clipped to the checkpoint band, sweeps top→bottom
-            during the packet's hold beat. Runs on both variants. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] overflow-hidden sm:w-[14%]"
-        >
-          <motion.div
-            className="absolute inset-x-0 h-px bg-primary shadow-[0_0_6px] shadow-primary/60"
-            initial={{ top: "0%", opacity: 0 }}
-            animate={
-              active && !reduceMotion
-                ? {
-                    top: ["0%", "0%", "100%", "100%"],
-                    opacity: [0, 1, 1, 0],
-                  }
-                : { opacity: 0 }
-            }
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : {
-                    duration: LOOP_DURATION,
-                    delay: packetDelay,
-                    repeat: Infinity,
-                    repeatDelay: REPEAT_DELAY,
-                    ease: easeInOutCubic,
-                    times: [0, BEAT.boxCenter, BEAT.scanDone, BEAT.exit],
-                  }
-            }
-          />
-        </div>
-
-        {/* The packet (lilac dot): enters, holds in the box during the scan,
-            then continues out and fades. */}
+        {/* The packet (dot): enters, holds in the box during the scan,
+            then continues out and fades. The -translate-x-1/2 centers the
+            dot on the `left` coordinate so it lands on box-center, not its
+            left edge. */}
         <motion.div
           aria-hidden
-          className="absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary"
+          className="absolute top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--scan)]"
           initial={{ left: "0%", opacity: 0 }}
           animate={
             active
@@ -144,6 +114,49 @@ function Lane({
                 }
           }
         />
+
+        {/* Mint variant: a frosted overlay sits above the dot and blurs it
+            as it passes behind. Editorially: the mint verifies the packet
+            but doesn't see its contents — the dot blurs into the box. */}
+        {variant === "mint" && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] bg-foreground/[0.06] backdrop-blur-[10px] sm:w-[14%]"
+          />
+        )}
+
+        {/* Laser scan line — clipped to the checkpoint band, sweeps top→bottom
+            during the packet's hold beat. Rendered AFTER the mint overlay so
+            it stays sharp on top while the dot beneath gets blurred. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] overflow-hidden sm:w-[14%]"
+        >
+          <motion.div
+            className="absolute inset-x-0 h-px bg-[var(--scan)] shadow-[0_0_6px_var(--scan)]"
+            initial={{ top: "0%", opacity: 0 }}
+            animate={
+              active && !reduceMotion
+                ? {
+                    top: ["0%", "0%", "100%", "100%"],
+                    opacity: [0, 1, 1, 0],
+                  }
+                : { opacity: 0 }
+            }
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : {
+                    duration: LOOP_DURATION,
+                    delay: packetDelay,
+                    repeat: Infinity,
+                    repeatDelay: REPEAT_DELAY,
+                    ease: easeInOutCubic,
+                    times: [0, BEAT.boxCenter, BEAT.scanDone, BEAT.exit],
+                  }
+            }
+          />
+        </div>
 
         {/* Bank variant: eye fades in under the box as the packet enters,
             holds during the scan, fades out as the packet exits. */}
@@ -291,7 +304,7 @@ export function CustodyComparison() {
               packetDelay={packetDelay}
               tIn={BEAT.scanDone}
               className={cn(
-                "inline-flex items-center border border-primary/40 bg-primary/[0.06] px-2 py-1 text-label text-primary"
+                "inline-flex items-center border border-[color-mix(in_oklab,var(--scan)_40%,transparent)] bg-[color-mix(in_oklab,var(--scan)_8%,transparent)] px-2 py-1 text-label text-[color:var(--scan)]"
               )}
             >
               ✓ VALID

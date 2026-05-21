@@ -30,7 +30,7 @@ export const siteConfig = {
     {
       title: "Bearer ecash, in your pocket.",
       description:
-        "Your ecash lives on your device. No account, no login, no balance tied to your name. Lose the device, lose the cash, like the physical version.",
+        "Your ecash lives on your device. No account, no login, no balance tied to your name.",
       imageSrc: "/images/iphone-placeholder.png",
       direction: "ltr" as const,
     },
@@ -42,9 +42,9 @@ export const siteConfig = {
       direction: "rtl" as const,
     },
     {
-      title: "Your mints, your rules.",
+      title: "Lose the phone, keep the cash.",
       description:
-        "Pick the mints you trust. Hold ecash from many at once. Swap between operators in a single Lightning hop, without asking.",
+        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware — it's tied to words.",
       imageSrc: "/images/iphone-placeholder.png",
       direction: "ltr" as const,
     },

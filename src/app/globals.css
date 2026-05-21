@@ -154,6 +154,7 @@
   --destructive-foreground: oklch(98% 0.003 280);
   --card: oklch(15% 0.003 280);
   --card-foreground: oklch(98% 0.003 280);
+  --scan: #86efac;
 }
 
 [data-theme="light"] {
@@ -170,6 +171,7 @@
   --secondary-foreground: oklch(13% 0.003 280);
   --accent: oklch(95% 0.005 280);
   --accent-foreground: oklch(13% 0.003 280);
+  --scan: #16a34a;
 }
 
 @theme inline {
@@ -190,6 +192,7 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-scan: var(--scan);
 
   --font-display:
     "Articulat CF", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
