@@ -1,6 +1,6 @@
 "use client";
 
-import { easeOutCubic } from "@/lib/animation";
+import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import {
   motion,
@@ -8,6 +8,7 @@ import {
   useReducedMotion,
   type Variants,
 } from "framer-motion";
+import { Eye } from "lucide-react";
 import { useRef } from "react";
 
 const CUSTODIAL_FIELDS = [
@@ -23,6 +24,7 @@ interface LaneProps {
   identifier: string;
   checkpoint: string;
   packetDelay: number;
+  variant: "mint" | "bank";
   children: React.ReactNode;
 }
 
@@ -32,6 +34,7 @@ function Lane({
   identifier,
   checkpoint,
   packetDelay,
+  variant,
   children,
 }: LaneProps) {
   return (
@@ -86,6 +89,40 @@ function Lane({
                 }
           }
         />
+
+        {/* Mint variant: frosted overlay over the checkpoint band so the
+            packet visibly blurs as it crosses behind. Stacks above the packet
+            because it's rendered after in DOM order. */}
+        {variant === "mint" && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] bg-foreground/[0.03] backdrop-blur-[8px] sm:w-[14%]"
+          />
+        )}
+
+        {/* Bank variant: an eye icon sits below the band and pulses, signalling
+            constant surveillance. */}
+        {variant === "bank" && (
+          <motion.div
+            aria-hidden
+            className="absolute top-full mt-1.5 left-[41%] flex w-[18%] items-center justify-center sm:left-[40%] sm:w-[14%]"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={
+              active
+                ? reduceMotion
+                  ? { opacity: 1, scale: 1 }
+                  : { opacity: [0.55, 1, 0.55], scale: [1, 1.06, 1] }
+                : { opacity: 0, scale: 0.85 }
+            }
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { duration: 2.4, repeat: Infinity, ease: easeInOutCubic }
+            }
+          >
+            <Eye className="size-4 text-foreground/70" />
+          </motion.div>
+        )}
       </div>
 
       {/* Output zone */}
@@ -126,6 +163,7 @@ export function CustodyComparison() {
           identifier="CASHU.ME"
           checkpoint="MINT"
           packetDelay={0.6}
+          variant="mint"
         >
           <motion.div
             initial="hidden"
@@ -160,6 +198,7 @@ export function CustodyComparison() {
           identifier="CUSTODIAL"
           checkpoint="BANK"
           packetDelay={0.6}
+          variant="bank"
         >
           <motion.div
             initial="hidden"
