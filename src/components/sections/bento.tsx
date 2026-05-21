@@ -2,7 +2,6 @@
 "use client";
 
 import { CustodyComparison } from "@/components/illustrations/custody-comparison";
-import { IMessageChat } from "@/components/illustrations/imessage-chat";
 import { Section } from "@/components/section";
 import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
@@ -83,7 +82,14 @@ export function BentoGrid() {
                 {item.id === "custody-comparison" ? (
                   <CustodyComparison />
                 ) : item.id === "imessage-chat" ? (
-                  <IMessageChat />
+                  <div className="aspect-[585/422] w-full overflow-hidden rounded-[2rem] border border-white/10 [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)] [mask-image:linear-gradient(to_bottom,black_55%,transparent)]">
+                    <img
+                      src={item.imageSrc}
+                      alt={item.imageAlt}
+                      className="h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2"
+                      draggable={false}
+                    />
+                  </div>
                 ) : (
                   <img
                     src={item.imageSrc}

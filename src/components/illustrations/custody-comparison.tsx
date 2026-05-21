@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
@@ -8,7 +9,7 @@ import {
   useReducedMotion,
   type Variants,
 } from "framer-motion";
-import { Eye } from "lucide-react";
+import { Eye, Landmark } from "lucide-react";
 import { useRef } from "react";
 
 const CUSTODIAL_FIELDS = [
@@ -37,7 +38,6 @@ const PACKET_ORIGIN = "-50%";
 interface LaneProps {
   active: boolean;
   reduceMotion: boolean;
-  identifier: string;
   checkpoint: string;
   packetDelay: number;
   variant: "mint" | "bank";
@@ -47,7 +47,6 @@ interface LaneProps {
 function Lane({
   active,
   reduceMotion,
-  identifier,
   checkpoint,
   packetDelay,
   variant,
@@ -55,13 +54,19 @@ function Lane({
 }: LaneProps) {
   return (
     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-6">
-      {/* Left identifier tile */}
-      <div className="flex items-center gap-3">
-        <div className="size-9 border border-foreground/20 bg-foreground/[0.04]" />
-        <span className="hidden type-label text-muted-foreground sm:inline">
-          {identifier}
-        </span>
-      </div>
+      {/* Left identifier */}
+      {variant === "mint" ? (
+        <img
+          src="/images/cashu-logo.png"
+          alt="Cashu"
+          className="size-9 select-none rounded-none object-cover [image-rendering:pixelated]"
+          draggable={false}
+        />
+      ) : (
+        <div className="flex size-9 items-center justify-center border border-foreground/20 bg-foreground/[0.04]">
+          <Landmark className="size-5 text-foreground/70" strokeWidth={1.75} />
+        </div>
+      )}
 
       {/* Rail + checkpoint + packet */}
       <div
@@ -311,7 +316,6 @@ export function CustodyComparison() {
         <Lane
           active={inView}
           reduceMotion={reduceMotion}
-          identifier="CASHU.ME"
           checkpoint="MINT"
           packetDelay={packetDelay}
           variant="mint"
@@ -346,7 +350,6 @@ export function CustodyComparison() {
         <Lane
           active={inView}
           reduceMotion={reduceMotion}
-          identifier="CUSTODIAL"
           checkpoint="BANK"
           packetDelay={packetDelay}
           variant="bank"

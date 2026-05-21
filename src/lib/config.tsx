@@ -66,16 +66,16 @@ export const siteConfig = {
       title: "iMessage, SMS, Bluetooth, your group chat.",
       content:
         "Ecash is just text. Anywhere you can paste a string — a chat, an SMS, a Bluetooth share — you can send money. No app to install on their end.",
-      imageSrc: "/images/iphone-placeholder.png",
-      imageAlt: "iMessage chat showing an ecash token sent as a text message",
+      imageSrc: "/images/screen-imessage.png",
+      imageAlt: "iMessage chat where a long cashu token is sent in reply to '$5 for lunch'",
       fullWidth: false,
     },
     {
-      title: "Open the wallet. Send. Done.",
+      title: "On-chain, BOLT12, lightning address.",
       content:
-        "No KYC. No account. No confirmation step. The whole experience is the four taps it takes to spend.",
+        "Hand out a Bitcoin address, a BOLT12 offer, or a lightning address — receive sats from anywhere. Payments pile up while the wallet's closed. Open it, and they're yours.",
       imageSrc: "/images/iphone-placeholder.png",
-      imageAlt: "Cashu send flow",
+      imageAlt: "Phone showing payments received in the Cashu wallet",
       fullWidth: false,
     },
   ],
