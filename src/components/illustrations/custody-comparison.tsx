@@ -18,6 +18,20 @@ const CUSTODIAL_FIELDS = [
   "10:42:31",
 ];
 
+const LOOP_DURATION = 5.0;
+const REPEAT_DELAY = 1.2;
+
+const BEAT = {
+  enter: 0.05,
+  boxLeft: 0.25,
+  boxCenter: 0.32,
+  scanDone: 0.62,
+  exit: 0.72,
+  fadeOut: 0.95,
+} as const;
+
+const CHIP_TRAVEL_PX = -160;
+
 interface LaneProps {
   active: boolean;
   reduceMotion: boolean;
@@ -48,7 +62,9 @@ function Lane({
       </div>
 
       {/* Rail + checkpoint + packet */}
-      <div className="relative flex h-9 items-center">
+      <div
+        className="relative flex h-9 items-center [--box-center:43%] sm:[--box-center:41%]"
+      >
         {/* The rail */}
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-foreground/15" />
 
@@ -61,7 +77,40 @@ function Lane({
           </span>
         </div>
 
-        {/* The packet (lilac dot travelling left → right, looping) */}
+        {/* Laser scan line — clipped to the checkpoint band, sweeps top→bottom
+            during the packet's hold beat. Runs on both variants. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] overflow-hidden sm:w-[14%]"
+        >
+          <motion.div
+            className="absolute inset-x-0 h-px bg-primary shadow-[0_0_6px] shadow-primary/60"
+            initial={{ top: "0%", opacity: 0 }}
+            animate={
+              active && !reduceMotion
+                ? {
+                    top: ["0%", "0%", "100%", "100%"],
+                    opacity: [0, 1, 1, 0],
+                  }
+                : { opacity: 0 }
+            }
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : {
+                    duration: LOOP_DURATION,
+                    delay: packetDelay,
+                    repeat: Infinity,
+                    repeatDelay: REPEAT_DELAY,
+                    ease: easeInOutCubic,
+                    times: [0, BEAT.boxCenter, BEAT.scanDone, BEAT.exit],
+                  }
+            }
+          />
+        </div>
+
+        {/* The packet (lilac dot): enters, holds in the box during the scan,
+            then continues out and fades. */}
         <motion.div
           aria-hidden
           className="absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary"
@@ -71,7 +120,13 @@ function Lane({
               ? reduceMotion
                 ? { left: "100%", opacity: 1 }
                 : {
-                    left: ["0%", "100%"],
+                    left: [
+                      "0%",
+                      "0%",
+                      "var(--box-center)",
+                      "var(--box-center)",
+                      "100%",
+                    ],
                     opacity: [0, 1, 1, 1, 0],
                   }
               : { left: "0%", opacity: 0 }
@@ -80,44 +135,51 @@ function Lane({
             reduceMotion
               ? { duration: 0 }
               : {
-                  duration: 2.6,
+                  duration: LOOP_DURATION,
                   delay: packetDelay,
                   repeat: Infinity,
-                  repeatDelay: 1.8,
+                  repeatDelay: REPEAT_DELAY,
                   ease: easeOutCubic,
-                  times: [0, 0.05, 0.45, 0.95, 1],
+                  times: [0, BEAT.enter, BEAT.boxCenter, BEAT.exit, 1],
                 }
           }
         />
 
-        {/* Mint variant: frosted overlay over the checkpoint band so the
-            packet visibly blurs as it crosses behind. Stacks above the packet
-            because it's rendered after in DOM order. */}
-        {variant === "mint" && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] bg-foreground/[0.03] backdrop-blur-[8px] sm:w-[14%]"
-          />
-        )}
-
-        {/* Bank variant: an eye icon sits below the band and pulses, signalling
-            constant surveillance. */}
+        {/* Bank variant: eye fades in under the box as the packet enters,
+            holds during the scan, fades out as the packet exits. */}
         {variant === "bank" && (
           <motion.div
             aria-hidden
-            className="absolute top-full mt-1.5 left-[41%] flex w-[18%] items-center justify-center sm:left-[40%] sm:w-[14%]"
-            initial={{ opacity: 0, scale: 0.85 }}
+            className="absolute top-full mt-2 left-[34%] flex w-[18%] items-center justify-center sm:w-[14%]"
+            initial={{ opacity: 0, y: 4 }}
             animate={
               active
                 ? reduceMotion
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: [0.55, 1, 0.55], scale: [1, 1.06, 1] }
-                : { opacity: 0, scale: 0.85 }
+                  ? { opacity: 0.7, y: 0 }
+                  : {
+                      opacity: [0, 0, 0.85, 0.85, 0, 0],
+                      y: [4, 4, 0, 0, 0, 4],
+                    }
+                : { opacity: 0, y: 4 }
             }
             transition={
               reduceMotion
                 ? { duration: 0 }
-                : { duration: 2.4, repeat: Infinity, ease: easeInOutCubic }
+                : {
+                    duration: LOOP_DURATION,
+                    delay: packetDelay,
+                    repeat: Infinity,
+                    repeatDelay: REPEAT_DELAY,
+                    ease: easeInOutCubic,
+                    times: [
+                      0,
+                      BEAT.boxLeft,
+                      BEAT.boxCenter,
+                      BEAT.scanDone,
+                      BEAT.exit,
+                      1,
+                    ],
+                  }
             }
           >
             <Eye className="size-4 text-foreground/70" />
@@ -131,23 +193,80 @@ function Lane({
   );
 }
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
+interface ExtractingChipProps {
+  active: boolean;
+  reduceMotion: boolean;
+  packetDelay: number;
+  tIn: number;
+  className?: string;
+  children: React.ReactNode;
+}
+
+function ExtractingChip({
+  active,
+  reduceMotion,
+  packetDelay,
+  tIn,
+  className,
+  children,
+}: ExtractingChipProps) {
+  return (
+    <motion.span
+      className={className}
+      initial={{ opacity: 0, x: CHIP_TRAVEL_PX }}
+      animate={
+        active
+          ? reduceMotion
+            ? { opacity: 1, x: 0 }
+            : {
+                opacity: [0, 0, 1, 1, 0],
+                x: [CHIP_TRAVEL_PX, CHIP_TRAVEL_PX, 0, 0, 0],
+              }
+          : { opacity: 0, x: CHIP_TRAVEL_PX }
+      }
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : {
+              duration: LOOP_DURATION,
+              delay: packetDelay,
+              repeat: Infinity,
+              repeatDelay: REPEAT_DELAY,
+              ease: easeOutCubic,
+              times: [
+                0,
+                Math.max(0, tIn - 0.02),
+                tIn,
+                BEAT.fadeOut,
+                Math.min(1, BEAT.fadeOut + 0.04),
+              ],
+            }
+      }
+    >
+      {children}
+    </motion.span>
+  );
+}
+
+const captionVariants: Variants = {
+  hidden: { opacity: 0, y: 6 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.18, delayChildren: 0.2 },
+    y: 0,
+    transition: { duration: 0.5, ease: easeOutCubic, delay: 0.4 },
   },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 6 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOutCubic } },
 };
 
 export function CustodyComparison() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15%" });
+  const inView = useInView(ref, { margin: "-15%" });
   const reduceMotion = useReducedMotion() ?? false;
+
+  const packetDelay = 0.6;
+
+  // Bank chips emerge as the scan line crosses their notional row.
+  const scanWindow = BEAT.scanDone - BEAT.boxCenter;
+  const chipStep = scanWindow / CUSTODIAL_FIELDS.length;
 
   return (
     <div
@@ -162,30 +281,30 @@ export function CustodyComparison() {
           reduceMotion={reduceMotion}
           identifier="CASHU.ME"
           checkpoint="MINT"
-          packetDelay={0.6}
+          packetDelay={packetDelay}
           variant="mint"
         >
-          <motion.div
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={containerVariants}
-            className="flex flex-col items-start gap-2"
-          >
-            <motion.span
-              variants={itemVariants}
+          <div className="flex flex-col items-start gap-2">
+            <ExtractingChip
+              active={inView}
+              reduceMotion={reduceMotion}
+              packetDelay={packetDelay}
+              tIn={BEAT.scanDone}
               className={cn(
                 "inline-flex items-center border border-primary/40 bg-primary/[0.06] px-2 py-1 text-label text-primary"
               )}
             >
               ✓ VALID
-            </motion.span>
+            </ExtractingChip>
             <motion.span
-              variants={itemVariants}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              variants={captionVariants}
               className="text-label text-muted-foreground"
             >
               Mint sees nothing else.
             </motion.span>
-          </motion.div>
+          </div>
         </Lane>
 
         {/* Hairline divider */}
@@ -197,32 +316,31 @@ export function CustodyComparison() {
           reduceMotion={reduceMotion}
           identifier="CUSTODIAL"
           checkpoint="BANK"
-          packetDelay={0.6}
+          packetDelay={packetDelay}
           variant="bank"
         >
-          <motion.div
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={containerVariants}
-            transition={{ delayChildren: 1.6 }}
-            className="flex flex-col items-start gap-1.5"
-          >
-            {CUSTODIAL_FIELDS.map((field) => (
-              <motion.span
+          <div className="flex flex-col items-start gap-1.5">
+            {CUSTODIAL_FIELDS.map((field, i) => (
+              <ExtractingChip
                 key={field}
-                variants={itemVariants}
+                active={inView}
+                reduceMotion={reduceMotion}
+                packetDelay={packetDelay}
+                tIn={BEAT.boxCenter + i * chipStep}
                 className="inline-flex items-center border border-foreground/20 bg-foreground/[0.03] px-2 py-1 text-label text-foreground/80"
               >
                 {field}
-              </motion.span>
+              </ExtractingChip>
             ))}
             <motion.span
-              variants={itemVariants}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              variants={captionVariants}
               className="mt-1 text-label text-foreground/55"
             >
               Custodian sees all of it.
             </motion.span>
-          </motion.div>
+          </div>
         </Lane>
       </div>
     </div>
