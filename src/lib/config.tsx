@@ -13,7 +13,7 @@ const links = {
 
 export const siteConfig = {
   name: "cashu.me",
-  description: "The native Cashu wallet.",
+  description: "A Cashu Wallet.",
   tagline:
     "cashu.me is the first ecash wallet, now native on iPhone and Android and runs in any browser. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
   url: "https://cashu.me",
