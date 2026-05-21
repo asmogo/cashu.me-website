@@ -75,7 +75,7 @@ export function BentoGrid() {
                 <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
                   {item.title}
                 </h3>
-                <p className="mt-3 max-w-prose text-sm text-muted-foreground sm:text-base">
+                <p className="mt-3 max-w-prose text-base leading-relaxed text-muted-foreground sm:text-lg">
                   {item.content}
                 </p>
               </div>

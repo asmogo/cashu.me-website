@@ -40,7 +40,7 @@ export function FAQ() {
         <h2 className="font-display text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl">
           things to know
         </h2>
-        <p className="text-base leading-7 text-muted-foreground text-balance max-w-[40ch]">
+        <p className="text-lg leading-7 text-muted-foreground text-balance max-w-[40ch]">
           Bearer instruments are high-stakes. Read these before you put real
           money in.
         </p>

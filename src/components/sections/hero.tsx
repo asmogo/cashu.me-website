@@ -26,11 +26,26 @@ export function Hero() {
       </div>
 
       <main className="relative mx-auto max-w-[var(--max-container-width)] px-6 pt-32 text-center sm:pt-40 md:pt-48 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: easeOutCubic }}
+          className="mb-8 flex items-center justify-center gap-3 font-mono text-[0.75rem] uppercase tracking-[0.1em] text-muted-foreground"
+        >
+          <span aria-hidden="true">[01]</span>
+          <span>Cashu protocol</span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.1 }}
-          className="font-display text-5xl font-semibold tracking-tighter text-foreground sm:text-6xl md:text-7xl lg:text-[88px]"
+          style={{
+            fontSize: "clamp(3.5rem, 10vw, 10.5rem)",
+            lineHeight: 0.94,
+            letterSpacing: "-0.035em",
+          }}
+          className="font-display font-medium text-foreground"
         >
           {siteConfig.description}
         </motion.h1>
@@ -39,7 +54,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.3 }}
-          className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground sm:text-xl"
+          style={{
+            fontSize: "clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)",
+            lineHeight: 1.4,
+          }}
+          className="mx-auto mt-10 max-w-[50ch] text-muted-foreground"
         >
           {siteConfig.tagline}
         </motion.p>
@@ -48,7 +67,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.5 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
           <AppStoreBadge href={siteConfig.links.appStore} />
           <PlayStoreBadge href={siteConfig.links.playStore} />
@@ -58,7 +77,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: easeOutCubic, delay: 0.7 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 font-mono text-[0.75rem] uppercase tracking-[0.1em] text-muted-foreground"
         >
           <a
             href={siteConfig.links.repo}

@@ -47,7 +47,7 @@ export function MobileDrawer() {
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noreferrer noopener" : undefined}
-              className="flex items-center justify-between rounded-md py-3 text-base text-foreground/90 transition-colors hover:text-foreground"
+              className="flex items-center justify-between rounded-none py-3 text-base text-foreground/90 transition-colors hover:text-foreground"
             >
               <span>{link.label}</span>
               {link.label === "GitHub" && (

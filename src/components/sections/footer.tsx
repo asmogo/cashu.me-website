@@ -28,7 +28,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={s.label}
-                className="flex size-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+                className="flex size-9 items-center justify-center rounded-none border border-border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
               >
                 {s.icon}
               </a>
@@ -36,9 +36,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col justify-between gap-2 text-sm text-muted-foreground md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-2 text-base text-muted-foreground md:flex-row md:items-end">
           <p className="max-w-md">{siteConfig.footer.tagline}</p>
-          <p className="font-mono text-xs uppercase tracking-[0.18em]">
+          <p className="font-mono text-[0.75rem] uppercase tracking-[0.1em]">
             {siteConfig.footer.attribution}
           </p>
         </div>

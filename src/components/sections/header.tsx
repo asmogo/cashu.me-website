@@ -77,7 +77,7 @@ export function Header() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="GitHub"
-                className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="inline-flex size-9 items-center justify-center rounded-none text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
               >
                 <Icons.github className="size-[18px]" />
               </a>
@@ -85,13 +85,13 @@ export function Header() {
                 href={siteConfig.links.spec}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="rounded-none px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
               >
                 Spec
               </a>
               <Link
                 href={siteConfig.links.docs}
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="rounded-none px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
               >
                 Docs
               </Link>

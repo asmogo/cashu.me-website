@@ -11,7 +11,7 @@ export function AppStoreBadge({ href, className }: AppStoreBadgeProps) {
       href={href}
       aria-label="Download cashu.me on the App Store"
       className={cn(
-        "group inline-flex h-14 items-center gap-3 rounded-md border border-white/15 bg-black px-4 text-white transition-colors hover:border-white/30",
+        "group inline-flex h-14 items-center gap-3 rounded-none border border-white/15 bg-black px-4 text-white transition-colors hover:border-white/30",
         className
       )}
     >

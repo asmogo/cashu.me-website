@@ -11,7 +11,7 @@ export function Logo({ className }: LogoProps) {
       src="/images/cashu-logo.png"
       alt="cashu.me"
       className={cn(
-        "size-8 select-none rounded-md object-cover",
+        "size-8 select-none rounded-none object-cover",
         "[image-rendering:pixelated]",
         className
       )}

@@ -145,11 +145,8 @@ export function FeatureHighlight() {
   return (
     <Section
       id="features"
-      index="001"
       variant="editorial"
-      title="Features"
-      subtitle="cash in three taps"
-      description="Receive, request, send. The wallet does not get in the way."
+      hideHeader
       className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-wide)] lg:px-10"
       ref={containerRef}
     >
