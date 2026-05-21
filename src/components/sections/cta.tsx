@@ -39,7 +39,7 @@ export function CTA() {
           className="mx-auto mt-10 max-w-[50ch] type-lead text-foreground/75"
         >
           Open cashu.me in any modern browser. Add it to your home screen for
-          offline use. Same wallet, same protocol, no install.
+          one-tap launch. Same wallet, same protocol, no install.
         </motion.p>
 
         <motion.div

@@ -15,7 +15,7 @@ export const siteConfig = {
   name: "cashu.me",
   description: "A Cashu Wallet.",
   tagline:
-    "cashu.me is the first ecash wallet, now native on iPhone and Android and runs in any browser. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
+    "cashu.me is the first Cashu ecash wallet, now native on iPhone and Android and runs in any browser. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
   url: "https://cashu.me",
   cta: "Open wallet",
   keywords: [
@@ -39,14 +39,14 @@ export const siteConfig = {
     {
       title: "Tap to pay.",
       description:
-        "Hold your phone near the terminal. Payment clears over Nostr in seconds. No card network, no settlement window.",
+        "Hold your phone near the receiver. The ecash token transfers over NFC in seconds. No card network, no settlement window.",
       imageSrc: "/images/screen-tap-to-pay.png",
       direction: "rtl" as const,
     },
     {
       title: "Lose the phone, keep the cash.",
       description:
-        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware — it's tied to words.",
+        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware: it's tied to words.",
       imageSrc: "/images/iphone-placeholder.png",
       direction: "ltr" as const,
     },
@@ -54,7 +54,7 @@ export const siteConfig = {
   bento: [
     {
       id: "custody-comparison",
-      title: "Custodial wallets see everything.",
+      title: "Account wallets see everything.",
       content:
         "Every send, every receive, every contact, tied to a single account in someone else's database. A change of policy is a change of access.",
       imageSrc: "/images/iphone-placeholder.png",
@@ -65,15 +65,15 @@ export const siteConfig = {
       id: "imessage-chat",
       title: "iMessage, SMS, Bluetooth, your group chat.",
       content:
-        "Ecash is just text. Anywhere you can paste a string — a chat, an SMS, a Bluetooth share — you can send money. No app to install on their end.",
+        "Ecash is just text. Anywhere you can paste a string (a chat, an SMS, a Bluetooth share), you can send money. No app to install on their end.",
       imageSrc: "/images/screen-imessage.png",
-      imageAlt: "iMessage chat where a long cashu token is sent in reply to '$5 for lunch'",
+      imageAlt: "iMessage chat where a long Cashu token is sent in reply to '$5 for lunch'",
       fullWidth: false,
     },
     {
-      title: "On-chain, BOLT12, lightning address.",
+      title: "On-chain, BOLT12, Lightning address.",
       content:
-        "Hand out a Bitcoin address, a BOLT12 offer, or a lightning address — receive sats from anywhere. Payments pile up while the wallet's closed. Open it, and they're yours.",
+        "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline. Open the wallet and they mint into ecash.",
       imageSrc: "/images/iphone-placeholder.png",
       imageAlt: "Phone showing payments received in the Cashu wallet",
       fullWidth: false,
@@ -98,7 +98,7 @@ export const siteConfig = {
     {
       question: "Can I back it up?",
       answer:
-        "Yes. cashu.me exports your ecash and mint settings as an encrypted backup. Restore by importing on any device. ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
+        "Two ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
     },
     {
       question: "Where can I read the protocol?",
