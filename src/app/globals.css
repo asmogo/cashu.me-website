@@ -302,3 +302,29 @@ p {
   outline-offset: 4px;
   border-radius: 2px;
 }
+
+/* FAQ accordion — let the native <details> panel unfold instead of snapping.
+   Driven entirely by ::details-content + interpolate-size, so the markup stays
+   native (keyboard, SEO, no JS). Chromium animates the open/close; engines
+   without these features fall back to the instant native toggle. Reduced-motion
+   users always get the instant toggle (and the global killswitch below). */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  details.accordion-item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 320ms cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 240ms cubic-bezier(0.25, 1, 0.5, 1),
+      content-visibility 320ms allow-discrete;
+  }
+
+  details.accordion-item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}

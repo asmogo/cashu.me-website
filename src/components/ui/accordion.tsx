@@ -19,7 +19,7 @@ export function AccordionItem({
     <details
       {...props}
       open={defaultOpen}
-      className={cn("group border-b border-border", className)}
+      className={cn("accordion-item group border-b border-border", className)}
     >
       <summary
         className={cn(

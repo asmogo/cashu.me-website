@@ -54,10 +54,11 @@ function Feature({
   reduceMotion,
 }: FeatureProps) {
   const textVariants = {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: {
         duration: 0.5,
         ease: easeOutCubic,
@@ -67,10 +68,11 @@ function Feature({
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
     visible: {
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: { duration: 0.3, ease: easeOutCubic },
     },
   };

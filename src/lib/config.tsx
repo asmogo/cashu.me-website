@@ -5,19 +5,20 @@ const links = {
   spec: "https://github.com/cashubtc/nuts",
   repo: "https://github.com/cashubtc/cashu.me",
   docs: "https://docs.cashu.space",
-  nostr: "https://primal.net/cashubtc",
+  nostr:
+    "https://primal.net/p/nprofile1qqs0y3tvskgs9gpgxxu5ahgz3fmms3rzmxt504qceqtz4a6pdgfwlkghwl6j8",
   twitter: "https://x.com/CashuBTC",
   opencash: "http://opencash.dev/",
-  // Placeholders until the apps are listed. Swap in the real IDs before launch.
-  appStore: "https://apps.apple.com/app/idTODO",
-  playStore: "https://play.google.com/store/apps/details?id=meTODO",
+  // iOS ships via TestFlight (public beta); the Android native build is still in
+  // closed beta, so there is no Play Store listing yet.
+  testflight: "https://testflight.apple.com/join/Wz4jWRxn",
 };
 
 export const siteConfig = {
   name: "cashu.me",
   description: "A Cashu Wallet.",
   tagline:
-    "cashu.me is the first Cashu ecash wallet, now native on iPhone and Android and runs in any browser. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
+    "cashu.me is the first Cashu ecash wallet. The iPhone app is in public beta on TestFlight, the Android app is in closed beta, and the wallet runs in any browser today. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
   url: "https://cashu.me",
   cta: "Open wallet",
   keywords: [
@@ -118,8 +119,7 @@ export const siteConfig = {
         label: "Wallet",
         links: [
           { label: "Open cashu.me", href: links.wallet },
-          { label: "App Store", href: links.appStore },
-          { label: "Play Store", href: links.playStore },
+          { label: "iOS (TestFlight)", href: links.testflight },
         ],
       },
       {

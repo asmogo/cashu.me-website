@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useAnimation, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
   { label: "GitHub", href: siteConfig.links.repo, external: true },
@@ -27,7 +27,10 @@ export function Header() {
   const reduceMotion = useReducedMotion() ?? false;
   const [isVisible, setIsVisible] = useState(true);
   const [addBorder, setAddBorder] = useState(false);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  // A ref, not state: the first-reveal flag is read inside the controls effect
+  // (never during render) to pick the slower opening timing, then flipped —
+  // without triggering a re-render.
+  const isInitialLoad = useRef(true);
   const controls = useAnimation();
 
   useEffect(() => {
@@ -41,7 +44,6 @@ export function Header() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    setIsInitialLoad(false);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -49,8 +51,16 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    controls.start(isVisible ? "visible" : "hidden");
-  }, [isVisible, controls]);
+    const transition = reduceMotion
+      ? { duration: 0 }
+      : {
+          duration: isInitialLoad.current ? 0.8 : 0.3,
+          delay: isInitialLoad.current ? 0.3 : 0,
+          ease: easeInOutCubic,
+        };
+    controls.start(isVisible ? "visible" : "hidden", transition);
+    isInitialLoad.current = false;
+  }, [isVisible, controls, reduceMotion]);
 
   const headerVariants = reduceMotion
     ? {
@@ -73,11 +83,7 @@ export function Header() {
           transition={
             reduceMotion
               ? { duration: 0 }
-              : {
-                  duration: isInitialLoad ? 0.8 : 0.3,
-                  delay: isInitialLoad ? 0.3 : 0,
-                  ease: easeInOutCubic,
-                }
+              : { duration: 0.3, ease: easeInOutCubic }
           }
           className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl"
         >

@@ -1,12 +1,5 @@
 import { FooterWordmark } from "@/components/footer-wordmark";
-import { Icons } from "@/components/icons";
 import { siteConfig } from "@/lib/config";
-
-const social = [
-  { label: "GitHub", url: siteConfig.links.repo, icon: <Icons.github className="size-5" /> },
-  { label: "X", url: siteConfig.links.twitter, icon: <Icons.twitter className="size-4" /> },
-  { label: "Nostr", url: siteConfig.links.nostr, icon: <Icons.nostr className="size-5" /> },
-];
 
 export function Footer() {
   return (
@@ -42,26 +35,12 @@ export function Footer() {
           <FooterWordmark text={siteConfig.name} />
         </div>
 
-        {/* Bottom row — socials + copyright */}
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="-mx-2 flex items-center gap-2">
-            {social.map((s) => (
-              <a
-                key={s.label}
-                href={s.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={s.label}
-                className="inline-flex h-11 w-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-1 type-label text-muted-foreground sm:items-end sm:text-right">
-            <span>{siteConfig.footer.copyright}</span>
-            <span>{siteConfig.footer.attribution}</span>
+        {/* Bottom row — copyright */}
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-end">
+          <div className="type-label text-muted-foreground sm:text-right">
+            <span>
+              {siteConfig.footer.copyright} · {siteConfig.footer.attribution}
+            </span>
           </div>
         </div>
       </div>

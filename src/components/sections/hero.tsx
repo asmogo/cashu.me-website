@@ -79,8 +79,8 @@ export function Hero() {
 
       <main className="relative mx-auto max-w-[var(--max-container-width)] px-6 pt-32 text-center sm:pt-40 md:pt-48 lg:px-10">
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
@@ -107,8 +107,8 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
@@ -120,8 +120,8 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
@@ -129,13 +129,26 @@ export function Hero() {
           }
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
-          <AppStoreBadge href={siteConfig.links.appStore} />
-          <PlayStoreBadge href={siteConfig.links.playStore} />
+          <AppStoreBadge href={siteConfig.links.testflight} />
+          <PlayStoreBadge />
         </motion.div>
 
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: 0.8, ease: easeOutCubic, delay: 0.6 }
+          }
+          className="mt-5 type-label text-muted-foreground"
+        >
+          iOS in public beta on TestFlight · Android coming soon
+        </motion.p>
+
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
