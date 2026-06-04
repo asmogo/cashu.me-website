@@ -78,21 +78,6 @@ export function Hero() {
       </div>
 
       <main className="relative mx-auto max-w-[var(--max-container-width)] px-6 pt-32 text-center sm:pt-40 md:pt-48 lg:px-10">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={
-            reduceMotion
-              ? { duration: 0 }
-              : { duration: 0.8, ease: easeOutCubic }
-          }
-          className="mb-10 flex justify-center"
-        >
-          <span className="inline-flex items-center rounded-full border border-foreground/25 bg-foreground/[0.06] px-3 py-1.5 backdrop-blur-xl type-label text-foreground">
-            {siteConfig.name}
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
