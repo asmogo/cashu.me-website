@@ -25,7 +25,7 @@ export default function Error({
         Something went wrong.
       </h1>
       <p className="mt-6 max-w-[50ch] type-lead text-foreground/75">
-        Something failed on this page. The wallet and protocol are unaffected.
+        This page failed to load. The wallet and protocol are unaffected.
         Try again, or return to the homepage.
       </p>
       {error.digest && (

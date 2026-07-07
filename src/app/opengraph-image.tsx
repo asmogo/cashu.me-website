@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "cashu.me, A Cashu Wallet.";
+export const alt = "cashu.me, hold your ecash.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default async function OpengraphImage() {
               border: `1px solid ${LILAC}`,
             }}
           />
-          [001] CASHU.ME
+          CASHU.ME
         </div>
 
         <div
@@ -65,7 +65,7 @@ export default async function OpengraphImage() {
               color: PAPER,
             }}
           >
-            A Cashu Wallet.
+            Hold your ecash.
           </div>
 
           <div

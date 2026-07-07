@@ -313,7 +313,7 @@ export function CustodyComparison() {
     <div
       ref={ref}
       className="w-full max-w-[640px] py-2 sm:py-4"
-      aria-label="How custodial wallets see your transactions vs how Cashu mints don't."
+      aria-label="Comparison: a custodial wallet sees every detail of your transactions. A Cashu mint only verifies the ecash is valid, nothing else."
     >
       <div className="flex flex-col gap-10 sm:gap-14">
         {/* Ecash lane */}
