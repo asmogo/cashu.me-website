@@ -56,14 +56,16 @@ function Lane({
     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-6">
       {/* Left identifier */}
       {variant === "mint" ? (
-        <img
-          src="/images/cashu-logo.png"
-          alt="Cashu"
-          width={512}
-          height={512}
-          className="size-9 select-none rounded-none object-cover [image-rendering:pixelated]"
-          draggable={false}
-        />
+        <div className="size-9 overflow-hidden">
+          <img
+            src="/images/cashu-logo.png"
+            alt="Cashu"
+            width={512}
+            height={512}
+            className="size-full scale-[1.6] select-none rounded-none object-cover [image-rendering:pixelated]"
+            draggable={false}
+          />
+        </div>
       ) : (
         <div className="flex size-9 items-center justify-center border border-foreground/20 bg-foreground/[0.04]">
           <Landmark className="size-5 text-foreground/70" strokeWidth={1.75} />

@@ -30,9 +30,7 @@ export function BrowserBadge({ href, className }: BrowserBadgeProps) {
         <span className="type-button text-[10px] text-white/80">
           No install
         </span>
-        <span className="mt-1 type-button text-[16px]">
-          Open in Browser
-        </span>
+        <span className="mt-1 type-button text-[16px]">Browser</span>
       </span>
     </a>
   );
