@@ -1,12 +1,13 @@
 "use client";
 
+import { Icons } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { MobileDrawer } from "@/components/mobile-drawer";
-import { buttonVariants } from "@/components/ui/button";
 import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useAnimation, useReducedMotion } from "framer-motion";
+import { Globe } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -16,8 +17,15 @@ const NAV_LINKS = [
   { label: "Docs", href: siteConfig.links.docs, external: true },
 ];
 
+const NAV_ICONS = [
+  { label: "View source on GitHub", href: siteConfig.links.repo, icon: Icons.github },
+  { label: "Get the iOS app", href: "#", icon: Icons.apple },
+  { label: "Get the Android app", href: "#", icon: Icons.android },
+  { label: "Open in browser", href: siteConfig.links.wallet, icon: Globe },
+];
+
 const navLinkClass = cn(
-  "relative inline-block pb-1 type-label text-muted-foreground transition-colors hover:text-foreground",
+  "relative inline-block pb-1 font-sans text-base text-muted-foreground transition-colors hover:text-foreground",
   "after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0",
   "after:bg-primary after:transition-transform after:duration-300 after:ease-out",
   "hover:after:scale-x-100"
@@ -123,17 +131,24 @@ export function Header() {
               )}
             </nav>
 
-            <a
-              href={siteConfig.links.wallet}
-              target="_blank"
-              rel="noreferrer noopener"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "sm" }),
-                "hidden lg:inline-flex"
-              )}
-            >
-              {siteConfig.cta}
-            </a>
+            <div className="hidden items-center gap-5 lg:flex">
+              {NAV_ICONS.map(({ label, href, icon: Icon }) => {
+                const isPlaceholder = href === "#";
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target={isPlaceholder ? undefined : "_blank"}
+                    rel={isPlaceholder ? undefined : "noreferrer noopener"}
+                    aria-label={label}
+                    title={label}
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Icon className="size-5" aria-hidden="true" />
+                  </a>
+                );
+              })}
+            </div>
 
             <div className="block lg:hidden">
               <MobileDrawer />
