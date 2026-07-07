@@ -105,11 +105,6 @@ export const siteConfig = {
       answer:
         "Two ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
     },
-    {
-      question: "Where can I read the protocol?",
-      answer:
-        "The spec lives at github.com/cashubtc/nuts. It is a set of NUTs (Notation, Usage, Terminology) that any mint or wallet implements. cashu.me is one wallet among many possible.",
-    },
   ] as { question: string; answer: ReactNode }[],
   footer: {
     tagline: "Bearer cash for the web.",
