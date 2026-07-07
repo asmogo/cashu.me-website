@@ -1,20 +1,28 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { ApkBadge } from "@/components/ui/apk-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { BrowserBadge } from "@/components/ui/browser-badge";
-import { easeInOutCubic, easeOutCubic, easeOutQuart } from "@/lib/animation";
+import {
+  easeInOutCubic,
+  easeOutCubic,
+  easeOutQuart,
+  REVEAL_DURATION_LG,
+  REVEAL_DURATION_MD,
+  REVEAL_DURATION_SM,
+  REVEAL_STAGGER,
+} from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 
 const PHONES = [
   {
     src: "/images/screen-mints.png",
     alt: "cashu.me mints list",
     rotate: -8,
-    delay: 1.0,
+    delay: 0.34,
     y: [0, -14, 0],
     dur: 5.5,
   },
@@ -22,7 +30,7 @@ const PHONES = [
     src: "/images/screen-wallet.png",
     alt: "cashu.me wallet home",
     rotate: 0,
-    delay: 0.8,
+    delay: 0.28,
     y: [0, -20, 0],
     dur: 5.0,
   },
@@ -30,7 +38,7 @@ const PHONES = [
     src: "/images/screen-receive.png",
     alt: "cashu.me receive flow",
     rotate: 8,
-    delay: 1.0,
+    delay: 0.34,
     y: [0, -14, 0],
     dur: 6.0,
   },
@@ -79,13 +87,17 @@ export function Hero() {
       </div>
 
       <div className="container-page relative px-6 pt-[var(--section-y-wide)] pb-0 text-center lg:px-10">
+        {/* Opacity stays at 1 throughout: this is the LCP candidate, and an
+            opacity-0 initial state would keep it unpainted (and CWV-invisible)
+            until the delayed fade resolves. Blur+rise still reads as a reveal
+            without gating the first paint. */}
         <motion.h1
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={reduceMotion ? false : { filter: "blur(10px)" }}
+          animate={{ filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { duration: 0.32, ease: easeOutQuart, delay: 0.18 }
+              : { duration: REVEAL_DURATION_LG, ease: easeOutQuart, delay: 0 }
           }
           className="type-display-1 text-foreground"
         >
@@ -93,12 +105,12 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={reduceMotion ? false : { y: 16, filter: "blur(8px)" }}
+          animate={{ y: 0, filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { duration: 0.8, ease: easeOutCubic, delay: 0.3 }
+              : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER }
           }
           className="mx-auto mt-10 max-w-[50ch] type-lead text-foreground/75"
         >
@@ -106,12 +118,16 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={reduceMotion ? false : { y: 16, filter: "blur(8px)" }}
+          animate={{ y: 0, filter: "blur(0px)" }}
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { duration: 0.8, ease: easeOutCubic, delay: 0.5 }
+              : {
+                  duration: REVEAL_DURATION_SM,
+                  ease: easeOutCubic,
+                  delay: REVEAL_STAGGER * 2,
+                }
           }
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
@@ -126,15 +142,12 @@ export function Hero() {
             <motion.div
               key={i}
               initial={
-                reduceMotion
-                  ? false
-                  : { opacity: 0, y: 80, rotate: phone.rotate * 0.5 }
+                reduceMotion ? false : { y: 80, rotate: phone.rotate * 0.5 }
               }
               animate={
                 reduceMotion
-                  ? { opacity: 1, y: 0, rotate: phone.rotate }
+                  ? { y: 0, rotate: phone.rotate }
                   : {
-                      opacity: 1,
                       y: phone.y,
                       rotate: phone.rotate,
                     }
@@ -143,7 +156,6 @@ export function Hero() {
                 reduceMotion
                   ? { duration: 0 }
                   : {
-                      opacity: { duration: 0.8, delay: phone.delay, ease: easeOutCubic },
                       rotate: { duration: 0.8, delay: phone.delay, ease: easeOutCubic },
                       y: {
                         duration: phone.dur,
@@ -160,11 +172,18 @@ export function Hero() {
                   : "w-32 sm:w-48 md:w-56 xl:w-64 opacity-90"
               )}
             >
-              <img
+              <Image
                 src={phone.src}
                 alt={phone.alt}
                 width={921}
                 height={2000}
+                loading="eager"
+                preload={i === 1}
+                sizes={
+                  i === 1
+                    ? "(min-width: 1280px) 320px, (min-width: 768px) 288px, (min-width: 640px) 240px, 176px"
+                    : "(min-width: 1280px) 256px, (min-width: 768px) 224px, (min-width: 640px) 192px, 128px"
+                }
                 className="h-auto w-full select-none"
                 draggable={false}
               />

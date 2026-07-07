@@ -1,11 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Section } from "@/components/section";
 import { siteConfig } from "@/lib/config";
-import { easeOutCubic } from "@/lib/animation";
+import { easeOutCubic, REVEAL_DURATION_LG, REVEAL_DURATION_SM } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface FeatureLayout {
@@ -53,7 +53,7 @@ function Feature({
       y: 0,
       filter: "blur(0px)",
       transition: {
-        duration: 0.5,
+        duration: REVEAL_DURATION_LG,
         ease: easeOutCubic,
         staggerChildren: 0.12,
       },
@@ -66,7 +66,7 @@ function Feature({
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.3, ease: easeOutCubic },
+      transition: { duration: REVEAL_DURATION_SM, ease: easeOutCubic },
     },
   };
 
@@ -111,11 +111,12 @@ function Feature({
           >
             <div className="size-[520px] rounded-full bg-foreground/[0.08] blur-[140px]" />
           </div>
-          <img
+          <Image
             src={imageSrc}
             alt={title}
             width={921}
             height={2000}
+            sizes="300px"
             className="relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
           />
         </div>
@@ -143,17 +144,18 @@ export function FeatureHighlight({
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
-      const { top, bottom } = container.getBoundingClientRect();
-      const middleOfScreen = window.innerHeight / 2;
-      setIsActive(top <= middleOfScreen && bottom >= middleOfScreen);
-    };
+    const container = containerRef.current;
+    if (!container) return;
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    // A zero-height root at the vertical center of the viewport: the callback
+    // fires exactly when the section's bounds straddle that line, replicating
+    // the old top<=middle<=bottom check without a scroll-linked layout read.
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsActive(entry.isIntersecting),
+      { rootMargin: "-50% 0px -50% 0px" }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
   }, []);
 
   return (

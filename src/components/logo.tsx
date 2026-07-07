@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -7,11 +7,11 @@ interface LogoProps {
 
 export function Logo({ className }: LogoProps) {
   return (
-    <img
+    <Image
       src="/images/cashu-logo.png"
       alt="cashu.me"
-      width={512}
-      height={512}
+      width={64}
+      height={64}
       className={cn(
         "size-8 select-none rounded-none object-cover",
         "[image-rendering:pixelated]",

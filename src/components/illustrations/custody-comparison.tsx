@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
@@ -10,6 +9,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { Eye, Landmark } from "lucide-react";
+import Image from "next/image";
 import { useRef } from "react";
 
 const CUSTODIAL_FIELDS = [
@@ -57,11 +57,11 @@ function Lane({
       {/* Left identifier */}
       {variant === "mint" ? (
         <div className="size-9 overflow-hidden">
-          <img
+          <Image
             src="/images/cashu-logo.png"
             alt="Cashu"
-            width={512}
-            height={512}
+            width={64}
+            height={64}
             className="size-full scale-[1.6] select-none rounded-none object-cover [image-rendering:pixelated]"
             draggable={false}
           />

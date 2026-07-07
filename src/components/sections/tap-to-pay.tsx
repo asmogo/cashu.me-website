@@ -1,13 +1,25 @@
 "use client";
 
 import { Section } from "@/components/section";
-import { easeOutCubic, easeOutQuart } from "@/lib/animation";
+import {
+  easeOutCubic,
+  easeOutQuart,
+  REVEAL_DURATION_LG,
+  REVEAL_DURATION_MD,
+  REVEAL_STAGGER,
+} from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 
 export function TapToPay() {
   const reduceMotion = useReducedMotion() ?? false;
   const { title, description, videoSrc } = siteConfig.tapToPay;
+  // The 2MB clip sits below the fold; without this it starts downloading
+  // immediately on page load (muted autoplay is allowed to fetch off-screen)
+  // and competes with the hero's LCP images. Defer the src until the section
+  // is about to scroll into view, reusing the reveal animation's own trigger.
+  const [videoInView, setVideoInView] = useState(false);
 
   return (
     <Section
@@ -25,7 +37,7 @@ export function TapToPay() {
             transition={
               reduceMotion
                 ? { duration: 0 }
-                : { duration: 0.6, ease: easeOutCubic }
+                : { duration: REVEAL_DURATION_LG, ease: easeOutCubic }
             }
             className="type-display-2 text-foreground"
           >
@@ -39,7 +51,7 @@ export function TapToPay() {
             transition={
               reduceMotion
                 ? { duration: 0 }
-                : { duration: 0.6, ease: easeOutCubic, delay: 0.1 }
+                : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER }
             }
             className="mt-6 max-w-[42ch] type-lead text-foreground/75"
           >
@@ -52,10 +64,15 @@ export function TapToPay() {
             initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-100px" }}
+            onViewportEnter={() => setVideoInView(true)}
             transition={
               reduceMotion
                 ? { duration: 0 }
-                : { duration: 0.7, ease: easeOutCubic, delay: 0.2 }
+                : {
+                    duration: REVEAL_DURATION_LG,
+                    ease: easeOutCubic,
+                    delay: REVEAL_STAGGER * 2,
+                  }
             }
             className="relative w-fit"
           >
@@ -83,7 +100,8 @@ export function TapToPay() {
               </div>
             )}
             <video
-              src={videoSrc}
+              src={videoInView ? videoSrc : undefined}
+              preload="none"
               width={406}
               height={720}
               autoPlay={!reduceMotion}
