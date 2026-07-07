@@ -2,8 +2,8 @@
 "use client";
 
 import { Section } from "@/components/section";
-import { easeOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
+import { easeOutCubic } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,6 @@ import { useEffect, useRef, useState } from "react";
 interface FeatureLayout {
   textClass: string;
   imageClass: string;
-  spacingClass: string;
   imageAlignClass: string;
 }
 
@@ -19,19 +18,11 @@ const LAYOUTS: FeatureLayout[] = [
   {
     textClass: "lg:col-span-5 lg:col-start-1",
     imageClass: "lg:col-span-6 lg:col-start-7",
-    spacingClass: "pb-24 lg:pb-40",
     imageAlignClass: "lg:justify-end",
-  },
-  {
-    textClass: "lg:col-span-5 lg:col-start-8 lg:row-start-1",
-    imageClass: "lg:col-span-6 lg:col-start-1 lg:row-start-1",
-    spacingClass: "pb-16 lg:pb-32",
-    imageAlignClass: "lg:justify-start",
   },
   {
     textClass: "lg:col-span-6 lg:col-start-1",
     imageClass: "lg:col-span-5 lg:col-start-8",
-    spacingClass: "pb-0",
     imageAlignClass: "lg:justify-end",
   },
 ];
@@ -80,12 +71,7 @@ function Feature({
   const animateState = reduceMotion || isActive ? "visible" : "hidden";
 
   return (
-    <div
-      className={cn(
-        "grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10",
-        layout.spacingClass
-      )}
-    >
+    <div className="grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10">
       <motion.div
         className={cn("col-span-12", layout.textClass)}
         initial={reduceMotion ? "visible" : "hidden"}
@@ -136,10 +122,22 @@ function Feature({
   );
 }
 
-export function FeatureHighlight() {
-  const features = siteConfig.featureHighlight;
+interface FeatureHighlightProps {
+  feature: (typeof siteConfig.featureHighlight)[number];
+  layoutIndex: number;
+  className?: string;
+  id?: string;
+}
+
+export function FeatureHighlight({
+  feature,
+  layoutIndex,
+  className,
+  id,
+}: FeatureHighlightProps) {
+  const layout = LAYOUTS[layoutIndex] ?? LAYOUTS[LAYOUTS.length - 1];
   const reduceMotion = useReducedMotion() ?? false;
-  const [activeFeature, setActiveFeature] = useState(-1);
+  const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -148,37 +146,33 @@ export function FeatureHighlight() {
       if (!container) return;
       const { top, bottom } = container.getBoundingClientRect();
       const middleOfScreen = window.innerHeight / 2;
-      const featureHeight = (bottom - top) / features.length;
-      const activeIndex = Math.floor((middleOfScreen - top) / featureHeight);
-      setActiveFeature(
-        Math.max(-1, Math.min(features.length - 1, activeIndex))
-      );
+      setIsActive(top <= middleOfScreen && bottom >= middleOfScreen);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [features.length]);
+  }, []);
 
   return (
     <Section
-      id="features"
+      id={id}
       variant="editorial"
       hideHeader
-      className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-wide)] lg:px-10"
+      className={cn(
+        "container mx-auto max-w-[var(--max-container-width)] px-6 lg:px-10",
+        className
+      )}
       ref={containerRef}
     >
-      {features.map((feature, index) => (
-        <Feature
-          key={index}
-          isActive={activeFeature === index}
-          layout={LAYOUTS[index] ?? LAYOUTS[LAYOUTS.length - 1]}
-          title={feature.title}
-          description={feature.description}
-          imageSrc={feature.imageSrc}
-          reduceMotion={reduceMotion}
-        />
-      ))}
+      <Feature
+        isActive={isActive}
+        layout={layout}
+        title={feature.title}
+        description={feature.description}
+        imageSrc={feature.imageSrc}
+        reduceMotion={reduceMotion}
+      />
     </Section>
   );
 }

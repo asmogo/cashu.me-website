@@ -2,6 +2,7 @@
 "use client";
 
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
+import { BrowserBadge } from "@/components/ui/browser-badge";
 import { PlayStoreBadge } from "@/components/ui/play-store-badge";
 import { easeInOutCubic, easeOutCubic, easeOutQuart } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
@@ -116,47 +117,7 @@ export function Hero() {
         >
           <AppStoreBadge href={siteConfig.links.testflight} />
           <PlayStoreBadge />
-        </motion.div>
-
-        <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={
-            reduceMotion
-              ? { duration: 0 }
-              : { duration: 0.8, ease: easeOutCubic, delay: 0.6 }
-          }
-          className="mt-5 type-label text-muted-foreground"
-        >
-          iOS in public beta on TestFlight · Android coming soon
-        </motion.p>
-
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={
-            reduceMotion
-              ? { duration: 0 }
-              : { duration: 0.8, ease: easeOutCubic, delay: 0.7 }
-          }
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 type-label text-muted-foreground"
-        >
-          <a
-            href={siteConfig.links.repo}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-block py-2 transition-colors hover:text-foreground"
-          >
-            → View source on GitHub
-          </a>
-          <a
-            href={siteConfig.links.spec}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-block py-2 transition-colors hover:text-foreground"
-          >
-            → Read the spec
-          </a>
+          <BrowserBadge href={siteConfig.links.wallet} />
         </motion.div>
 
         {/* Floating phones */}

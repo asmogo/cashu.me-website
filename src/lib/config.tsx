@@ -40,13 +40,6 @@ export const siteConfig = {
       direction: "ltr" as const,
     },
     {
-      title: "Tap to pay.",
-      description:
-        "Hold your phone near the receiver. The ecash token transfers over NFC in seconds. No card network, no settlement window.",
-      imageSrc: "/images/screen-tap-to-pay.png",
-      direction: "rtl" as const,
-    },
-    {
       title: "Lose the phone, keep the cash.",
       description:
         "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware: it's tied to words.",
@@ -54,6 +47,12 @@ export const siteConfig = {
       direction: "ltr" as const,
     },
   ],
+  tapToPay: {
+    title: "Tap to pay.",
+    description:
+      "Hold your phone near the receiver. The ecash token transfers over NFC in seconds. No card network, no settlement window.",
+    videoSrc: "/videos/tap-to-pay.mp4",
+  },
   bento: [
     {
       id: "custody-comparison",
