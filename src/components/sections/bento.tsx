@@ -56,9 +56,11 @@ export function BentoGrid() {
       id="bento"
       variant="editorial"
       hideHeader
-      className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-base)] lg:px-10"
+      className="container-page px-6 py-[var(--section-y-base)] lg:px-10"
       ref={ref}
     >
+      {/* md collapse: multi-item grids (this, footer) break at md;
+          two-panel text+media sections break at lg. */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {siteConfig.bento.map((item, index) => {
           const shape = CARD_SHAPES[index] ?? CARD_SHAPES[CARD_SHAPES.length - 1];

@@ -39,7 +39,7 @@ export function Header() {
           : "bg-transparent backdrop-blur-none"
       )}
     >
-      <div className="container relative mx-auto flex max-w-[var(--max-container-width)] items-center justify-between gap-6 px-6 py-4 lg:px-10">
+      <div className="container-page relative flex items-center justify-between gap-6 px-6 py-4 lg:px-10">
         <Link
           href="/"
           title="cashu.me"

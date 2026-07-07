@@ -52,11 +52,10 @@ rounded:
 spacing:
   gutter-sm: "1.5rem"
   gutter-md: "2.5rem"
-  section-y-sm: "6rem"
-  section-y-md: "8rem"
-  section-y-lg: "10rem"
-  section-y-xl: "13rem"
-  container-max: "1400px"
+  section-y-tight: "clamp(4rem, 8vw, 6rem)"
+  section-y-base: "clamp(6rem, 12vw, 10rem)"
+  section-y-wide: "clamp(8rem, 16vw, 14rem)"
+  container-max: "1200px"
 components:
   pill-cta:
     backgroundColor: "{colors.paper}"

@@ -78,7 +78,7 @@ export function Hero() {
         />
       </div>
 
-      <main className="relative mx-auto max-w-[var(--max-container-width)] px-6 pt-32 text-center sm:pt-40 md:pt-48 lg:px-10">
+      <div className="container-page relative px-6 pt-[var(--section-y-wide)] pb-0 text-center lg:px-10">
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -171,7 +171,7 @@ export function Hero() {
             </motion.div>
           ))}
         </div>
-      </main>
+      </div>
     </section>
   );
 }

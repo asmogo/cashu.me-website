@@ -15,6 +15,14 @@
   animation: cashu-loading 1.4s ease-in-out infinite;
 }
 
+/* Container — shared page-width wrapper. Horizontal padding (px-6 lg:px-10)
+   stays a plain Tailwind utility at each call site; only the invariant,
+   copy-pasted part (centering + max-width) is extracted here. */
+@utility container-page {
+  margin-inline: auto;
+  max-width: var(--max-container-width);
+}
+
 /* Type ramp — DESIGN.md specimen scale.
    Single source of truth for the editorial type system.
    See /PRODUCT.md and /DESIGN.md for the brand spec. */

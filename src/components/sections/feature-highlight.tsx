@@ -14,6 +14,8 @@ interface FeatureLayout {
   imageAlignClass: string;
 }
 
+// lg collapse: two-panel text+media sections (this, tap-to-pay) break at lg;
+// multi-item grids (bento, footer) break at md.
 const LAYOUTS: FeatureLayout[] = [
   {
     textClass: "lg:col-span-5 lg:col-start-1",
@@ -21,9 +23,9 @@ const LAYOUTS: FeatureLayout[] = [
     imageAlignClass: "lg:justify-end",
   },
   {
-    textClass: "lg:col-span-6 lg:col-start-1",
-    imageClass: "lg:col-span-5 lg:col-start-8",
-    imageAlignClass: "lg:justify-end",
+    textClass: "lg:col-span-6 lg:col-start-7",
+    imageClass: "lg:col-span-5 lg:col-start-1",
+    imageAlignClass: "lg:justify-start",
   },
 ];
 
@@ -73,7 +75,7 @@ function Feature({
   return (
     <div className="grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10">
       <motion.div
-        className={cn("col-span-12", layout.textClass)}
+        className={cn("col-span-12 lg:row-start-1", layout.textClass)}
         initial={reduceMotion ? "visible" : "hidden"}
         animate={animateState}
         variants={textVariants}
@@ -96,7 +98,7 @@ function Feature({
 
       <div
         className={cn(
-          "col-span-12 flex justify-center",
+          "col-span-12 flex justify-center lg:row-start-1",
           layout.imageClass,
           layout.imageAlignClass
         )}
@@ -159,10 +161,7 @@ export function FeatureHighlight({
       id={id}
       variant="editorial"
       hideHeader
-      className={cn(
-        "container mx-auto max-w-[var(--max-container-width)] px-6 lg:px-10",
-        className
-      )}
+      className={cn("container-page px-6 lg:px-10", className)}
       ref={containerRef}
     >
       <Feature
