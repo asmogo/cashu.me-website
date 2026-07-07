@@ -13,35 +13,35 @@ colors:
   cashu-lilac-deep: "#7a66e8"
 typography:
   display-1:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(3.5rem, 10vw, 10.5rem)"
     fontWeight: 500
     lineHeight: 0.94
     letterSpacing: "-0.035em"
   display-2:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6.2vw, 6.25rem)"
     fontWeight: 500
     lineHeight: 0.94
     letterSpacing: "-0.035em"
   display-3:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 3vw, 3rem)"
     fontWeight: 500
     lineHeight: 0.94
     letterSpacing: "-0.035em"
   lead:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)"
     fontWeight: 400
     lineHeight: 1.4
   body:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.55
   label:
-    fontFamily: "JetBrains Mono, ui-monospace, Menlo, monospace"
+    fontFamily: "Azeret Mono, ui-monospace, Menlo, monospace"
     fontSize: "0.75rem"
     fontWeight: 400
     lineHeight: 1
@@ -133,21 +133,21 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 ## 3. Typography
 
-**Display Font:** Articulat CF (self-hosted from `/public/fonts`, weights 400/500/600/700/800/900). Fallback: `ui-sans-serif, system-ui, -apple-system`.
-**Body Font:** Articulat CF. Same family carries display and body; weight and size do the hierarchy work.
-**Label/Mono Font:** JetBrains Mono (loaded via `next/font/google`). Fallback: `ui-monospace, Menlo, monospace`.
+**Display Font:** The Future (self-hosted from `/public/fonts`, weights 400/500/700). Fallback: `ui-sans-serif, system-ui, -apple-system`.
+**Body Font:** Geist Sans (loaded via `geist/font/sans`). Distinct from the display face; weight and size still do the hierarchy work within it.
+**Label/Mono Font:** Azeret Mono (loaded via `next/font/google`). Fallback: `ui-monospace, Menlo, monospace`.
 
-**Character:** Articulat CF is a refined modern grotesque with a slight humanist warmth in the lowercase. It carries an editorial / specimen voice at large sizes (display) and stays readable at small sizes (body) without feeling sterile. Chosen over Satoshi, Geist, and Inter because those have become training-data defaults; Articulat CF is the deliberate detour. JetBrains Mono carries the protocol register without competing with Articulat CF.
+**Character:** The Future is a mono-grotesque display face with a technical, engineered edge. It carries an editorial / specimen voice at large sizes without softening into a friendly consumer-app register. Chosen over Satoshi, Geist, and Inter because those have become training-data defaults. Geist Sans carries body copy for its neutrality and readability at small sizes. Azeret Mono carries the protocol register without competing with either.
 
 ### Hierarchy
 
-- **Display 1** (Articulat CF 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most.
-- **Display 2** (Articulat CF 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
-- **Display 3** (Articulat CF 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
-- **Lead** (Articulat CF 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
-- **Body** (Articulat CF 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
-- **Label** (JetBrains Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Eyebrows like `[001] CASHU PROTOCOL`, pill-tag chips, and the lower rail of the hero.
-- **Button** (Geist Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
+- **Display 1** (The Future 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most.
+- **Display 2** (The Future 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
+- **Display 3** (The Future 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
+- **Lead** (Geist Sans 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
+- **Body** (Geist Sans 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
+- **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Eyebrows like `[001] CASHU PROTOCOL`, pill-tag chips, and the lower rail of the hero.
+- **Button** (Azeret Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
 
 ### Named Rules
 
@@ -159,7 +159,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.
 
-**The Button-Label Rule.** Geist Mono carries every button label on the page: the header CTA, the closing CTA, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows). It is the only place Geist appears; it does not appear on display, body, or label runs.
+**The Button-Label Rule.** Azeret Mono carries every button label on the page: the header CTA, the closing CTA, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows), at weight 500 versus the label rule's 400.
 
 ## 4. Elevation
 
@@ -201,7 +201,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains a translucent backdrop-blur surface that adapts to the section currently sitting behind it (via `IntersectionObserver` watching `[data-theme]` sections). The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in Satoshi 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill is always present.
+Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains a translucent backdrop-blur surface that adapts to the section currently sitting behind it (via `IntersectionObserver` watching `[data-theme]` sections). The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in The Future 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill is always present.
 
 ### Browser Chrome (signature component)
 
@@ -231,7 +231,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 
 - **Do** keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.
 - **Do** invert surfaces between sections (dark → light → dark) the way a printed monograph alternates plates and text.
-- **Do** carry `[N]` index marks in JetBrains Mono on every section that enumerates (pillars, built-for columns, footer rail).
+- **Do** carry `[N]` index marks in Azeret Mono on every section that enumerates (pillars, built-for columns, footer rail).
 - **Do** use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.
 - **Do** cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.
 - **Do** use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.
@@ -246,7 +246,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards.
 - **Don't** use em dashes (`—` or `--`) in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.
 - **Don't** use `background-clip: text` gradient text, decorative glassmorphism, or border-left side stripes.
-- **Don't** use display fonts other than Articulat CF. No Switzer, no Satoshi, no Inter for display or body. Geist Mono is permitted only as the button-label face per the Button-Label Rule, never on display, body, or label runs.
+- **Don't** use display fonts other than The Future. No Switzer, no Satoshi, no Inter for display. Geist Sans is the body face; it does not appear on display or label runs. Azeret Mono is permitted only on labels and button labels, never on display or body.
 - **Don't** use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.
 - **Don't** apply ambient shadows to flat surfaces. The only sanctioned exceptions are phones and banknote-style mockups (objects depicting physical things), used at most once per section.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.

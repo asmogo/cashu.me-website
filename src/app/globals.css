@@ -94,46 +94,25 @@
   text-transform: uppercase;
 }
 
-/* Articulat CF — self-hosted from /public/fonts. Used for display headings. */
+/* The Future — self-hosted from /public/fonts. Used for display headings. */
 @font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Regular.woff2") format("woff2");
+  font-family: "The Future";
+  src: url("/fonts/TheFuture-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Medium.woff2") format("woff2");
+  font-family: "The Future";
+  src: url("/fonts/TheFuture-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-DemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Bold.woff2") format("woff2");
+  font-family: "The Future";
+  src: url("/fonts/TheFuture-Bold.woff2") format("woff2");
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-ExtraBold.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Heavy.woff2") format("woff2");
-  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
@@ -198,13 +177,13 @@
   --color-scan: var(--scan);
 
   --font-display:
-    "Articulat CF", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "The Future", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   --font-sans:
-    var(--font-geist-sans), "Articulat CF", ui-sans-serif, system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono:
-    var(--font-geist-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    var(--font-azeret-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
     monospace;
 
   --max-container-width: 1200px;
