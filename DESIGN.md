@@ -16,19 +16,19 @@ typography:
     fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(3.5rem, 10vw, 10.5rem)"
     fontWeight: 500
-    lineHeight: 0.94
+    lineHeight: 1
     letterSpacing: "-0.035em"
   display-2:
     fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6.2vw, 6.25rem)"
     fontWeight: 500
-    lineHeight: 0.94
+    lineHeight: 1
     letterSpacing: "-0.035em"
   display-3:
     fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 3vw, 3rem)"
     fontWeight: 500
-    lineHeight: 0.94
+    lineHeight: 1
     letterSpacing: "-0.035em"
   lead:
     fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"

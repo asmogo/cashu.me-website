@@ -22,7 +22,7 @@ export default function Error({
         [ERR]
       </span>
       <h1 className="mt-6 type-display-2 text-foreground">
-        Mint unreachable.
+        Something went wrong.
       </h1>
       <p className="mt-6 max-w-[50ch] type-lead text-foreground/75">
         Something failed on this page. The wallet and protocol are unaffected.

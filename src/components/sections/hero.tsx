@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { ApkBadge } from "@/components/ui/apk-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { BrowserBadge } from "@/components/ui/browser-badge";
-import { PlayStoreBadge } from "@/components/ui/play-store-badge";
 import { easeInOutCubic, easeOutCubic, easeOutQuart } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -116,7 +116,7 @@ export function Hero() {
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
           <AppStoreBadge href={siteConfig.links.testflight} />
-          <PlayStoreBadge />
+          <ApkBadge href={siteConfig.links.androidApk} />
           <BrowserBadge href={siteConfig.links.wallet} />
         </motion.div>
 

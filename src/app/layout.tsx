@@ -3,7 +3,6 @@ import { GeistSans } from "geist/font/sans";
 import { Azeret_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConsoleGreeting } from "@/components/console-greeting";
-import { TabFlutter } from "@/components/tab-flutter";
 import { siteConfig } from "@/lib/config";
 import "./globals.css";
 
@@ -65,7 +64,6 @@ export default function RootLayout({
         >
           {children}
           <ConsoleGreeting />
-          <TabFlutter />
         </ThemeProvider>
       </body>
     </html>

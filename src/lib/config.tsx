@@ -10,8 +10,10 @@ const links = {
   twitter: "https://x.com/CashuBTC",
   opencash: "http://opencash.dev/",
   // iOS ships via TestFlight (public beta); the Android native build is still in
-  // closed beta, so there is no Play Store listing yet.
+  // closed beta, so there is no Play Store listing yet. It ships as a direct
+  // APK download instead — placeholder link until the build is hosted.
   testflight: "https://testflight.apple.com/join/Wz4jWRxn",
+  androidApk: "#",
 };
 
 export const siteConfig = {
