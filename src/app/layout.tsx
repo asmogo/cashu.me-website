@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Azeret_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConsoleGreeting } from "@/components/console-greeting";
-import { TabFlutter } from "@/components/tab-flutter";
 import { siteConfig } from "@/lib/config";
 import "./globals.css";
+
+const azeretMono = Azeret_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-azeret-mono",
+  display: "swap",
+});
 
 const title = `${siteConfig.name} · ${siteConfig.description}`;
 
@@ -46,7 +52,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${azeretMono.variable}`}
       suppressHydrationWarning
     >
       <body>
@@ -58,7 +64,6 @@ export default function RootLayout({
         >
           {children}
           <ConsoleGreeting />
-          <TabFlutter />
         </ThemeProvider>
       </body>
     </html>

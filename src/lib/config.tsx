@@ -3,22 +3,24 @@ import type { ReactNode } from "react";
 const links = {
   wallet: "https://wallet.cashu.me",
   spec: "https://github.com/cashubtc/nuts",
-  repo: "https://github.com/cashubtc/cashu.me",
+  repo: "https://github.com/asmogo/wallet",
   docs: "https://docs.cashu.space",
   nostr:
     "https://primal.net/p/nprofile1qqs0y3tvskgs9gpgxxu5ahgz3fmms3rzmxt504qceqtz4a6pdgfwlkghwl6j8",
   twitter: "https://x.com/CashuBTC",
   opencash: "http://opencash.dev/",
   // iOS ships via TestFlight (public beta); the Android native build is still in
-  // closed beta, so there is no Play Store listing yet.
+  // closed beta, so there is no Play Store listing yet. It ships as a direct
+  // APK download instead — placeholder link until the build is hosted.
   testflight: "https://testflight.apple.com/join/Wz4jWRxn",
+  androidApk: "#",
 };
 
 export const siteConfig = {
   name: "cashu.me",
   description: "A Cashu Wallet.",
   tagline:
-    "cashu.me is the first Cashu ecash wallet. The iPhone app is in public beta on TestFlight, the Android app is in closed beta, and the wallet runs in any browser today. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
+    "cashu.me is the first Cashu ecash wallet. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
   url: "https://cashu.me",
   cta: "Open wallet",
   keywords: [
@@ -35,16 +37,9 @@ export const siteConfig = {
     {
       title: "Bearer ecash, in your pocket.",
       description:
-        "Your ecash lives on your device. No account, no login, no balance tied to your name.",
+        "Your ecash lives on your device. No account, no login, no balance tied to your name. The mint holds the underlying bitcoin, same as any custodian, but you hold ecash that redeems to any Lightning address, any time, no permission needed.",
       imageSrc: "/images/screen-receive-ecash.png",
       direction: "ltr" as const,
-    },
-    {
-      title: "Tap to pay.",
-      description:
-        "Hold your phone near the receiver. The ecash token transfers over NFC in seconds. No card network, no settlement window.",
-      imageSrc: "/images/screen-tap-to-pay.png",
-      direction: "rtl" as const,
     },
     {
       title: "Lose the phone, keep the cash.",
@@ -54,6 +49,12 @@ export const siteConfig = {
       direction: "ltr" as const,
     },
   ],
+  tapToPay: {
+    title: "Tap to pay.",
+    description:
+      "Hold your phone near the receiver. The ecash token transfers over NFC in seconds. No card network, no settlement window.",
+    videoSrc: "/videos/tap-to-pay.mp4",
+  },
   bento: [
     {
       id: "custody-comparison",
@@ -104,11 +105,6 @@ export const siteConfig = {
       answer:
         "Two ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
     },
-    {
-      question: "Where can I read the protocol?",
-      answer:
-        "The spec lives at github.com/cashubtc/nuts. It is a set of NUTs (Notation, Usage, Terminology) that any mint or wallet implements. cashu.me is one wallet among many possible.",
-    },
   ] as { question: string; answer: ReactNode }[],
   footer: {
     tagline: "Bearer cash for the web.",
@@ -118,8 +114,9 @@ export const siteConfig = {
       {
         label: "Wallet",
         links: [
-          { label: "Open cashu.me", href: links.wallet },
           { label: "iOS (TestFlight)", href: links.testflight },
+          { label: "Android", href: links.androidApk },
+          { label: "Browser", href: links.wallet },
         ],
       },
       {

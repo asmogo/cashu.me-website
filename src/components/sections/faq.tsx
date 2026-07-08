@@ -8,9 +8,10 @@ export function FAQ() {
       id="faq"
       variant="editorial"
       hideHeader
-      className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-base)] lg:px-10"
+      className="container-page px-6 py-[var(--section-y-tight)] lg:px-10"
     >
       <div className="mx-auto max-w-3xl">
+        <h2 className="mb-10 type-display-2 text-foreground">FAQs</h2>
         {siteConfig.faqs.map((faq, index) => (
           <AccordionItem
             key={index}

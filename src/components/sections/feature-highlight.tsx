@@ -1,38 +1,31 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Section } from "@/components/section";
-import { easeOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
+import { easeOutCubic, REVEAL_DURATION_LG, REVEAL_DURATION_SM } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface FeatureLayout {
   textClass: string;
   imageClass: string;
-  spacingClass: string;
   imageAlignClass: string;
 }
 
+// lg collapse: two-panel text+media sections (this, tap-to-pay) break at lg;
+// multi-item grids (bento, footer) break at md.
 const LAYOUTS: FeatureLayout[] = [
   {
     textClass: "lg:col-span-5 lg:col-start-1",
     imageClass: "lg:col-span-6 lg:col-start-7",
-    spacingClass: "pb-24 lg:pb-40",
     imageAlignClass: "lg:justify-end",
   },
   {
-    textClass: "lg:col-span-5 lg:col-start-8 lg:row-start-1",
-    imageClass: "lg:col-span-6 lg:col-start-1 lg:row-start-1",
-    spacingClass: "pb-16 lg:pb-32",
+    textClass: "lg:col-span-6 lg:col-start-7",
+    imageClass: "lg:col-span-5 lg:col-start-1",
     imageAlignClass: "lg:justify-start",
-  },
-  {
-    textClass: "lg:col-span-6 lg:col-start-1",
-    imageClass: "lg:col-span-5 lg:col-start-8",
-    spacingClass: "pb-0",
-    imageAlignClass: "lg:justify-end",
   },
 ];
 
@@ -60,7 +53,7 @@ function Feature({
       y: 0,
       filter: "blur(0px)",
       transition: {
-        duration: 0.5,
+        duration: REVEAL_DURATION_LG,
         ease: easeOutCubic,
         staggerChildren: 0.12,
       },
@@ -73,32 +66,27 @@ function Feature({
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.3, ease: easeOutCubic },
+      transition: { duration: REVEAL_DURATION_SM, ease: easeOutCubic },
     },
   };
 
   const animateState = reduceMotion || isActive ? "visible" : "hidden";
 
   return (
-    <div
-      className={cn(
-        "grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10",
-        layout.spacingClass
-      )}
-    >
+    <div className="grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10">
       <motion.div
-        className={cn("col-span-12", layout.textClass)}
+        className={cn("col-span-12 lg:row-start-1", layout.textClass)}
         initial={reduceMotion ? "visible" : "hidden"}
         animate={animateState}
         variants={textVariants}
       >
         <div className="flex max-w-xl flex-col gap-6">
-          <motion.h3
+          <motion.h2
             className="type-display-2 text-foreground"
             variants={itemVariants}
           >
             {title}
-          </motion.h3>
+          </motion.h2>
           <motion.p
             className="type-lead text-foreground/75 max-w-[50ch]"
             variants={itemVariants}
@@ -110,7 +98,7 @@ function Feature({
 
       <div
         className={cn(
-          "col-span-12 flex justify-center",
+          "col-span-12 flex justify-center lg:row-start-1",
           layout.imageClass,
           layout.imageAlignClass
         )}
@@ -123,11 +111,12 @@ function Feature({
           >
             <div className="size-[520px] rounded-full bg-foreground/[0.08] blur-[140px]" />
           </div>
-          <img
+          <Image
             src={imageSrc}
             alt={title}
             width={921}
             height={2000}
+            sizes="300px"
             className="relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
           />
         </div>
@@ -136,49 +125,55 @@ function Feature({
   );
 }
 
-export function FeatureHighlight() {
-  const features = siteConfig.featureHighlight;
+interface FeatureHighlightProps {
+  feature: (typeof siteConfig.featureHighlight)[number];
+  layoutIndex: number;
+  className?: string;
+  id?: string;
+}
+
+export function FeatureHighlight({
+  feature,
+  layoutIndex,
+  className,
+  id,
+}: FeatureHighlightProps) {
+  const layout = LAYOUTS[layoutIndex] ?? LAYOUTS[LAYOUTS.length - 1];
   const reduceMotion = useReducedMotion() ?? false;
-  const [activeFeature, setActiveFeature] = useState(-1);
+  const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
-      const { top, bottom } = container.getBoundingClientRect();
-      const middleOfScreen = window.innerHeight / 2;
-      const featureHeight = (bottom - top) / features.length;
-      const activeIndex = Math.floor((middleOfScreen - top) / featureHeight);
-      setActiveFeature(
-        Math.max(-1, Math.min(features.length - 1, activeIndex))
-      );
-    };
+    const container = containerRef.current;
+    if (!container) return;
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [features.length]);
+    // A zero-height root at the vertical center of the viewport: the callback
+    // fires exactly when the section's bounds straddle that line, replicating
+    // the old top<=middle<=bottom check without a scroll-linked layout read.
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsActive(entry.isIntersecting),
+      { rootMargin: "-50% 0px -50% 0px" }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <Section
-      id="features"
+      id={id}
       variant="editorial"
       hideHeader
-      className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-wide)] lg:px-10"
+      className={cn("container-page px-6 lg:px-10", className)}
       ref={containerRef}
     >
-      {features.map((feature, index) => (
-        <Feature
-          key={index}
-          isActive={activeFeature === index}
-          layout={LAYOUTS[index] ?? LAYOUTS[LAYOUTS.length - 1]}
-          title={feature.title}
-          description={feature.description}
-          imageSrc={feature.imageSrc}
-          reduceMotion={reduceMotion}
-        />
-      ))}
+      <Feature
+        isActive={isActive}
+        layout={layout}
+        title={feature.title}
+        description={feature.description}
+        imageSrc={feature.imageSrc}
+        reduceMotion={reduceMotion}
+      />
     </Section>
   );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
@@ -10,6 +9,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { Eye, Landmark } from "lucide-react";
+import Image from "next/image";
 import { useRef } from "react";
 
 const CUSTODIAL_FIELDS = [
@@ -56,14 +56,16 @@ function Lane({
     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-6">
       {/* Left identifier */}
       {variant === "mint" ? (
-        <img
-          src="/images/cashu-logo.png"
-          alt="Cashu"
-          width={512}
-          height={512}
-          className="size-9 select-none rounded-none object-cover [image-rendering:pixelated]"
-          draggable={false}
-        />
+        <div className="size-9 overflow-hidden">
+          <Image
+            src="/images/cashu-logo.png"
+            alt="Cashu"
+            width={64}
+            height={64}
+            className="size-full scale-[1.6] select-none rounded-none object-cover [image-rendering:pixelated]"
+            draggable={false}
+          />
+        </div>
       ) : (
         <div className="flex size-9 items-center justify-center border border-foreground/20 bg-foreground/[0.04]">
           <Landmark className="size-5 text-foreground/70" strokeWidth={1.75} />
@@ -310,8 +312,8 @@ export function CustodyComparison() {
   return (
     <div
       ref={ref}
-      className="w-full max-w-[640px] py-2 sm:py-4"
-      aria-label="How custodial wallets see your transactions vs how Cashu mints don't."
+      className="w-full max-w-[640px] pt-2 pb-8 sm:pt-4 sm:pb-10"
+      aria-label="Comparison: a custodial wallet sees every detail of your transactions. A Cashu mint only verifies the ecash is valid, nothing else."
     >
       <div className="flex flex-col gap-10 sm:gap-14">
         {/* Ecash lane */}

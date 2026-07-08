@@ -4,9 +4,10 @@ import { siteConfig } from "@/lib/config";
 export function Footer() {
   return (
     <footer className="border-t border-border/60">
-      <div className="container mx-auto flex max-w-[var(--max-container-width)] flex-col px-6 pt-16 pb-10 lg:px-10 lg:pt-20">
-        {/* Utility columns */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8 lg:gap-12">
+      <div className="container-page flex flex-col px-6 pt-[var(--section-y-tight)] pb-10 lg:px-10">
+        {/* Utility columns. md collapse: multi-item grids (bento, this) break at md;
+            two-panel text+media sections break at lg. */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
           {siteConfig.footer.columns.map((col) => (
             <div key={col.label} className="flex flex-col gap-4">
               <span className="type-label text-muted-foreground">

@@ -46,7 +46,7 @@ export default async function OpengraphImage() {
               border: `1px solid ${LILAC}`,
             }}
           />
-          [001] CASHU.ME
+          CASHU.ME
         </div>
 
         <div

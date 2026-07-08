@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { CustodyComparison } from "@/components/illustrations/custody-comparison";
@@ -7,6 +6,7 @@ import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 
 const CARD_SHAPES = [
@@ -56,9 +56,11 @@ export function BentoGrid() {
       id="bento"
       variant="editorial"
       hideHeader
-      className="container mx-auto max-w-[var(--max-container-width)] px-6 py-[var(--section-y-base)] lg:px-10"
+      className="container-page px-6 py-[var(--section-y-base)] lg:px-10"
       ref={ref}
     >
+      {/* md collapse: multi-item grids (this, footer) break at md;
+          two-panel text+media sections break at lg. */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {siteConfig.bento.map((item, index) => {
           const shape = CARD_SHAPES[index] ?? CARD_SHAPES[CARD_SHAPES.length - 1];
@@ -86,32 +88,35 @@ export function BentoGrid() {
                   <CustodyComparison />
                 ) : item.id === "imessage-chat" ? (
                   <div className="aspect-[585/422] w-full overflow-hidden rounded-[2rem] border border-white/10 [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)] [mask-image:linear-gradient(to_bottom,black_55%,transparent)]">
-                    <img
+                    <Image
                       src={item.imageSrc}
                       alt={item.imageAlt}
                       width={585}
                       height={1266}
+                      sizes="(min-width: 768px) 50vw, 100vw"
                       className="h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2"
                       draggable={false}
                     />
                   </div>
                 ) : item.id === "lightning-address" ? (
                   <div className="w-full max-w-[340px] self-end">
-                    <img
+                    <Image
                       src={item.imageSrc}
                       alt={item.imageAlt}
                       width={1287}
                       height={1504}
+                      sizes="340px"
                       className="block h-auto w-full select-none transition-transform duration-500 group-hover:-translate-y-1"
                       draggable={false}
                     />
                   </div>
                 ) : (
-                  <img
+                  <Image
                     src={item.imageSrc}
                     alt={item.imageAlt}
                     width={900}
                     height={1840}
+                    sizes="200px"
                     className={cn(
                       "h-64 w-auto select-none object-contain object-top transition-transform duration-500 group-hover:-translate-y-2 sm:h-80",
                       item.fullWidth && "sm:h-96"

@@ -52,7 +52,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       ease: easeInOutCubic,
     });
 
-    const hasHeaderContent = !!(title || subtitle || description || headerSlot);
+    const hasHeaderContent = !!(index || title || subtitle || description || headerSlot);
 
     const renderEyebrow = () =>
       (index || title) && (

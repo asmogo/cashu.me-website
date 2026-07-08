@@ -13,35 +13,35 @@ colors:
   cashu-lilac-deep: "#7a66e8"
 typography:
   display-1:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(3.5rem, 10vw, 10.5rem)"
     fontWeight: 500
-    lineHeight: 0.94
+    lineHeight: 1
     letterSpacing: "-0.035em"
   display-2:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6.2vw, 6.25rem)"
     fontWeight: 500
-    lineHeight: 0.94
+    lineHeight: 1
     letterSpacing: "-0.035em"
   display-3:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 3vw, 3rem)"
     fontWeight: 500
-    lineHeight: 0.94
+    lineHeight: 1
     letterSpacing: "-0.035em"
   lead:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)"
     fontWeight: 400
     lineHeight: 1.4
   body:
-    fontFamily: "Articulat CF, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.55
   label:
-    fontFamily: "JetBrains Mono, ui-monospace, Menlo, monospace"
+    fontFamily: "Azeret Mono, ui-monospace, Menlo, monospace"
     fontSize: "0.75rem"
     fontWeight: 400
     lineHeight: 1
@@ -52,11 +52,10 @@ rounded:
 spacing:
   gutter-sm: "1.5rem"
   gutter-md: "2.5rem"
-  section-y-sm: "6rem"
-  section-y-md: "8rem"
-  section-y-lg: "10rem"
-  section-y-xl: "13rem"
-  container-max: "1400px"
+  section-y-tight: "clamp(4rem, 8vw, 6rem)"
+  section-y-base: "clamp(6rem, 12vw, 10rem)"
+  section-y-wide: "clamp(8rem, 16vw, 14rem)"
+  container-max: "1200px"
 components:
   pill-cta:
     backgroundColor: "{colors.paper}"
@@ -94,15 +93,17 @@ components:
 
 cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. Sections alternate between a black inkwell and a white specimen cream, the way a printed monograph alternates between facing plates and explanatory text. The visitor moves down the page the way you move down a printed broadsheet, not the way you scroll a feed.
 
-The aesthetic is editorial and committed, not enterprise. Restraint is the voice — generous whitespace, oversize display, mono labels and bracketed `[N]` marks that read as protocol citations rather than UI noise. The single chromatic note is a soft lilac that sits between purple and periwinkle, reserved for emphasis. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not pastel, not navy-and-gold.
+The aesthetic is editorial and committed, not enterprise. Restraint is the voice — generous whitespace, oversize display, mono labels for structural chrome. The single chromatic note is a soft lilac that sits between purple and periwinkle, reserved for emphasis. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not pastel, not navy-and-gold.
 
 **Key Characteristics:**
 
 - Editorial scale (hero up to ~10rem at large viewports), tight tracking (`-0.035em`), short leading (0.94).
 - Section-scoped dark/light theming via `[data-theme]` — themes alternate, not chosen.
-- Lilac accent used sparingly: `[N]` marks, CTA hover, `::selection`. Never large fields.
+- Lilac accent used sparingly: CTA hover, link underlines, `::selection`. Never large fields.
 - Native `<details>` accordion, native `<a>` rectangular buttons. No bespoke widgets where the platform suffices.
 - Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome.
+
+> **Drift note:** an earlier draft of this system specified bracketed `[N]` index marks as protocol-citation eyebrows on every enumerating section. They were never shipped — `Section.tsx` supports an `index` prop but no live section passes one. Treat their absence as the current, intended state, not a gap to fill; see the retired-devices note in §5 before reintroducing them.
 
 ## 2. Colors
 
@@ -110,7 +111,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 ### Primary
 
-- **Cashu Lilac** (`#b4a7f5`): The single chromatic voice. Reserved for `[N]` index marks, link underlines, CTA hover, and `::selection`. Never used as a large color field. Permitted on dark surfaces where it passes WCAG AA against `#0a0a0a`.
+- **Cashu Lilac** (`#b4a7f5`): The single chromatic voice. Reserved for link underlines, CTA hover, and `::selection`. Never used as a large color field. Permitted on dark surfaces where it passes WCAG AA against `#0a0a0a`.
 - **Cashu Lilac Deep** (`#7a66e8`): The light-surface variant. The lighter shade fails WCAG AA against `#ffffff` for text, so the deeper variant takes over on white. Same role: emphasis, not surface.
 
 ### Neutral
@@ -133,25 +134,25 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 ## 3. Typography
 
-**Display Font:** Articulat CF (self-hosted from `/public/fonts`, weights 400/500/600/700/800/900). Fallback: `ui-sans-serif, system-ui, -apple-system`.
-**Body Font:** Articulat CF. Same family carries display and body; weight and size do the hierarchy work.
-**Label/Mono Font:** JetBrains Mono (loaded via `next/font/google`). Fallback: `ui-monospace, Menlo, monospace`.
+**Display Font:** The Future (self-hosted from `/public/fonts`, weights 400/500/700). Fallback: `ui-sans-serif, system-ui, -apple-system`.
+**Body Font:** Geist Sans (loaded via `geist/font/sans`). Distinct from the display face; weight and size still do the hierarchy work within it.
+**Label/Mono Font:** Azeret Mono (loaded via `next/font/google`). Fallback: `ui-monospace, Menlo, monospace`.
 
-**Character:** Articulat CF is a refined modern grotesque with a slight humanist warmth in the lowercase. It carries an editorial / specimen voice at large sizes (display) and stays readable at small sizes (body) without feeling sterile. Chosen over Satoshi, Geist, and Inter because those have become training-data defaults; Articulat CF is the deliberate detour. JetBrains Mono carries the protocol register without competing with Articulat CF.
+**Character:** The Future is a mono-grotesque display face with a technical, engineered edge. It carries an editorial / specimen voice at large sizes without softening into a friendly consumer-app register. Chosen over Satoshi, Geist, and Inter because those have become training-data defaults. Geist Sans carries body copy for its neutrality and readability at small sizes. Azeret Mono carries the protocol register without competing with either.
 
 ### Hierarchy
 
-- **Display 1** (Articulat CF 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most.
-- **Display 2** (Articulat CF 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
-- **Display 3** (Articulat CF 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
-- **Lead** (Articulat CF 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
-- **Body** (Articulat CF 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
-- **Label** (JetBrains Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Eyebrows like `[001] CASHU PROTOCOL`, pill-tag chips, and the lower rail of the hero.
-- **Button** (Geist Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
+- **Display 1** (The Future 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most.
+- **Display 2** (The Future 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
+- **Display 3** (The Future 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
+- **Lead** (Geist Sans 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
+- **Body** (Geist Sans 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
+- **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Structural labels — footer column headers (WALLET / PROTOCOL / COMMUNITY), the footer copyright line, and pill-tag chips where they appear.
+- **Button** (Azeret Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
 
 ### Named Rules
 
-**The Specimen Scale Rule.** Display 1 is reserved for the page's two apex moments: the opening hero ("Bearer cash for the web.") and the closing CTA ("Take it with you."). Together they bookend the page. No element in the body of the page ever reaches that size.
+**The Specimen Scale Rule.** Display 1 is reserved for the page's apex moment: the opening hero (currently "A Cashu Wallet.", `siteConfig.description`). No element in the body of the page ever reaches that size. *Drift note: an earlier draft reserved a second Display-1 moment for a closing CTA ("Take it with you.") to bookend the hero. The shipped page has no separate closing-CTA section — the footer goes straight from utility links to the wordmark sign-off. Revisit this rule if a closing CTA section is added; until then, Display 1 is single-use.*
 
 **The Wordmark Tier.** A single scale step exists above Display 1 — `type-wordmark` (`clamp(4rem, 18vw, 14rem)`, weight 600, tracking -0.05em). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere. The Specimen Scale Rule is unchanged: Display 1 remains exclusive to the hero and closing CTA; the wordmark is a brand mark, not a heading, and operates outside that hierarchy.
 
@@ -159,7 +160,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.
 
-**The Button-Label Rule.** Geist Mono carries every button label on the page: the header CTA, the closing CTA, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows). It is the only place Geist appears; it does not appear on display, body, or label runs.
+**The Button-Label Rule.** Azeret Mono carries every button label on the page: the header CTA, the closing CTA, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows), at weight 500 versus the label rule's 400.
 
 ## 4. Elevation
 
@@ -183,7 +184,7 @@ Sharp rectangles (`border-radius: 0`). The editorial register prefers severity t
 
 Touch target: 44px minimum height on every button (`h-11`). Padding varies by size.
 
-**The Hero Badge Exception.** A single glass-pill badge sits above the hero headline, carrying the wordmark `cashu.me` as an eyebrow. It is the only sanctioned pill on the page (`rounded-full`), and the only sanctioned glassmorphic moment. Treatment: `bg-foreground/[0.06]`, `backdrop-blur-xl`, hairline border at `border-foreground/25`, `type-label` text. Inert (no anchor wrapper, the header lockup already routes home). Never duplicated.
+**The Hero Badge Exception (retired, not currently shipped).** An earlier draft called for a single glass-pill badge above the hero headline, carrying the wordmark `cashu.me` as an eyebrow — the one sanctioned pill and one sanctioned glassmorphic moment on the page. `hero.tsx` does not implement this badge today. Treat it as retired rather than a gap to fill; if a glass badge is reintroduced later, update this note deliberately instead of resurrecting it to match old documentation.
 
 ### Chips
 
@@ -191,7 +192,7 @@ Tag chips are cosmetic enumerations, never state-bearing. They share the rectang
 
 ### Cards / Containers
 
-The system avoids cards. Section bodies are not cards. Pillar items are not cards. They are vertical compositions separated by 1px hairline rules and the `[N]` index mark in the top-left.
+The system avoids cards. Section bodies are not cards. Pillar items are not cards. They are vertical compositions separated by 1px hairline rules.
 
 If a card-like container ever becomes necessary, it MUST be flat, hairline-bordered, and never nested.
 
@@ -201,7 +202,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains a translucent backdrop-blur surface that adapts to the section currently sitting behind it (via `IntersectionObserver` watching `[data-theme]` sections). The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in Satoshi 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill is always present.
+Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains a translucent backdrop-blur surface that adapts to the section currently sitting behind it (via `IntersectionObserver` watching `[data-theme]` sections). The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in The Future 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill is always present.
 
 ### Browser Chrome (signature component)
 
@@ -215,11 +216,9 @@ Official Apple "Download on the App Store" SVG and Google "Get it on Google Play
 
 Do not recolor, restyle, or stretch the artwork. Do not place on top of imagery. Do not rotate.
 
-### Specimen Blocks
+### Specimen Blocks (not currently shipped)
 
-Each pillar in the "What's different" section is paired with a specimen: a small typographic exhibit that demonstrates the property rather than illustrating it. Examples: a wrapped serialization of blinded ecash, a stylized Lightning invoice fragment, a redemption arrow to a Lightning address. Mono, hairline-bordered, flat, with a `[N]` index mark in the top-left corner.
-
-Specimen blocks are not cards. They are exhibits.
+An earlier draft called for pairing each "What's different" pillar with a small typographic exhibit (a wrapped serialization of blinded ecash, a stylized Lightning invoice fragment) instead of a photo. The shipped page (`feature-highlight.tsx`) uses real wallet screenshots instead. Treat specimen blocks as a design idea not yet built, not a current convention new work needs to match.
 
 ### Accordion
 
@@ -231,7 +230,6 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 
 - **Do** keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.
 - **Do** invert surfaces between sections (dark → light → dark) the way a printed monograph alternates plates and text.
-- **Do** carry `[N]` index marks in JetBrains Mono on every section that enumerates (pillars, built-for columns, footer rail).
 - **Do** use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.
 - **Do** cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.
 - **Do** use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.
@@ -246,7 +244,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards.
 - **Don't** use em dashes (`—` or `--`) in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.
 - **Don't** use `background-clip: text` gradient text, decorative glassmorphism, or border-left side stripes.
-- **Don't** use display fonts other than Articulat CF. No Switzer, no Satoshi, no Inter for display or body. Geist Mono is permitted only as the button-label face per the Button-Label Rule, never on display, body, or label runs.
+- **Don't** use display fonts other than The Future. No Switzer, no Satoshi, no Inter for display. Geist Sans is the body face; it does not appear on display or label runs. Azeret Mono is permitted only on labels and button labels, never on display or body.
 - **Don't** use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.
 - **Don't** apply ambient shadows to flat surfaces. The only sanctioned exceptions are phones and banknote-style mockups (objects depicting physical things), used at most once per section.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.

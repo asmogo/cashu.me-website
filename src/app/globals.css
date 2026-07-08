@@ -15,6 +15,14 @@
   animation: cashu-loading 1.4s ease-in-out infinite;
 }
 
+/* Container — shared page-width wrapper. Horizontal padding (px-6 lg:px-10)
+   stays a plain Tailwind utility at each call site; only the invariant,
+   copy-pasted part (centering + max-width) is extracted here. */
+@utility container-page {
+  margin-inline: auto;
+  max-width: var(--max-container-width);
+}
+
 /* Type ramp — DESIGN.md specimen scale.
    Single source of truth for the editorial type system.
    See /PRODUCT.md and /DESIGN.md for the brand spec. */
@@ -32,7 +40,10 @@
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 10vw, 10.5rem);
   font-weight: 500;
-  line-height: 0.94;
+  /* Light text on dark backgrounds needs more line-height breathing room
+     (DESIGN.md Typography > Scale); 0.94 let descenders/ascenders across
+     wrapped lines collide (e.g. "phone," over "keep"). */
+  line-height: 1;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
@@ -41,7 +52,7 @@
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6.2vw, 6.25rem);
   font-weight: 500;
-  line-height: 0.94;
+  line-height: 1;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
@@ -50,7 +61,7 @@
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 3rem);
   font-weight: 500;
-  line-height: 0.96;
+  line-height: 1;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
@@ -94,46 +105,25 @@
   text-transform: uppercase;
 }
 
-/* Articulat CF — self-hosted from /public/fonts. Used for display headings. */
+/* The Future — self-hosted from /public/fonts. Used for display headings. */
 @font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Regular.woff2") format("woff2");
+  font-family: "The Future";
+  src: url("/fonts/TheFuture-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Medium.woff2") format("woff2");
+  font-family: "The Future";
+  src: url("/fonts/TheFuture-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-DemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Bold.woff2") format("woff2");
+  font-family: "The Future";
+  src: url("/fonts/TheFuture-Bold.woff2") format("woff2");
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-ExtraBold.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Articulat CF";
-  src: url("/fonts/ArticulatCF-Heavy.woff2") format("woff2");
-  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
@@ -198,13 +188,13 @@
   --color-scan: var(--scan);
 
   --font-display:
-    "Articulat CF", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "The Future", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   --font-sans:
-    var(--font-geist-sans), "Articulat CF", ui-sans-serif, system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono:
-    var(--font-geist-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    var(--font-azeret-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
     monospace;
 
   --max-container-width: 1200px;
@@ -212,6 +202,8 @@
   --section-y-tight: clamp(4rem, 8vw, 6rem);
   --section-y-base: clamp(6rem, 12vw, 10rem);
   --section-y-wide: clamp(8rem, 16vw, 14rem);
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 html {

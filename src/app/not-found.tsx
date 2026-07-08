@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { siteConfig } from "@/lib/config";
 
 export const metadata = {
-  title: "Not in circulation · cashu.me",
+  title: "Page not found · cashu.me",
 };
 
 export default function NotFound() {
@@ -11,10 +12,10 @@ export default function NotFound() {
         [404]
       </span>
       <h1 className="mt-6 type-display-2 text-foreground">
-        Not in circulation.
+        Page not found.
       </h1>
       <p className="mt-6 max-w-[50ch] type-lead text-foreground/75">
-        The page you asked for is not minted on this site. The wallet, the spec,
+        The page you asked for doesn't exist on this site. The wallet, the spec,
         and everything else still lives at the addresses below.
       </p>
       <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 type-label text-muted-foreground">
@@ -25,7 +26,7 @@ export default function NotFound() {
           → Back to cashu.me
         </Link>
         <a
-          href="https://github.com/cashubtc/cashu.me"
+          href={siteConfig.links.repo}
           target="_blank"
           rel="noreferrer noopener"
           className="transition-colors hover:text-foreground"

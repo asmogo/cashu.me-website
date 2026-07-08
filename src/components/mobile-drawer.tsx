@@ -6,8 +6,10 @@ import { buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { siteConfig } from "@/lib/config";
@@ -31,6 +33,10 @@ export function MobileDrawer() {
         <Menu className="size-6" />
       </DrawerTrigger>
       <DrawerContent>
+        <DrawerTitle className="sr-only">Menu</DrawerTitle>
+        <DrawerDescription className="sr-only">
+          Navigation links and wallet access
+        </DrawerDescription>
         <DrawerHeader className="px-6">
           <Link
             href="/"
