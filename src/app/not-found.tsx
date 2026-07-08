@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteConfig } from "@/lib/config";
 
 export const metadata = {
   title: "Page not found · cashu.me",
@@ -25,7 +26,7 @@ export default function NotFound() {
           → Back to cashu.me
         </Link>
         <a
-          href="https://github.com/cashubtc/cashu.me"
+          href={siteConfig.links.repo}
           target="_blank"
           rel="noreferrer noopener"
           className="transition-colors hover:text-foreground"
