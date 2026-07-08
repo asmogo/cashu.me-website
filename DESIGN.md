@@ -93,15 +93,17 @@ components:
 
 cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. Sections alternate between a black inkwell and a white specimen cream, the way a printed monograph alternates between facing plates and explanatory text. The visitor moves down the page the way you move down a printed broadsheet, not the way you scroll a feed.
 
-The aesthetic is editorial and committed, not enterprise. Restraint is the voice — generous whitespace, oversize display, mono labels and bracketed `[N]` marks that read as protocol citations rather than UI noise. The single chromatic note is a soft lilac that sits between purple and periwinkle, reserved for emphasis. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not pastel, not navy-and-gold.
+The aesthetic is editorial and committed, not enterprise. Restraint is the voice — generous whitespace, oversize display, mono labels for structural chrome. The single chromatic note is a soft lilac that sits between purple and periwinkle, reserved for emphasis. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not pastel, not navy-and-gold.
 
 **Key Characteristics:**
 
 - Editorial scale (hero up to ~10rem at large viewports), tight tracking (`-0.035em`), short leading (0.94).
 - Section-scoped dark/light theming via `[data-theme]` — themes alternate, not chosen.
-- Lilac accent used sparingly: `[N]` marks, CTA hover, `::selection`. Never large fields.
+- Lilac accent used sparingly: CTA hover, link underlines, `::selection`. Never large fields.
 - Native `<details>` accordion, native `<a>` rectangular buttons. No bespoke widgets where the platform suffices.
 - Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome.
+
+> **Drift note:** an earlier draft of this system specified bracketed `[N]` index marks as protocol-citation eyebrows on every enumerating section. They were never shipped — `Section.tsx` supports an `index` prop but no live section passes one. Treat their absence as the current, intended state, not a gap to fill; see the retired-devices note in §5 before reintroducing them.
 
 ## 2. Colors
 
@@ -109,7 +111,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 ### Primary
 
-- **Cashu Lilac** (`#b4a7f5`): The single chromatic voice. Reserved for `[N]` index marks, link underlines, CTA hover, and `::selection`. Never used as a large color field. Permitted on dark surfaces where it passes WCAG AA against `#0a0a0a`.
+- **Cashu Lilac** (`#b4a7f5`): The single chromatic voice. Reserved for link underlines, CTA hover, and `::selection`. Never used as a large color field. Permitted on dark surfaces where it passes WCAG AA against `#0a0a0a`.
 - **Cashu Lilac Deep** (`#7a66e8`): The light-surface variant. The lighter shade fails WCAG AA against `#ffffff` for text, so the deeper variant takes over on white. Same role: emphasis, not surface.
 
 ### Neutral
@@ -145,12 +147,12 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 - **Display 3** (The Future 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
 - **Lead** (Geist Sans 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
 - **Body** (Geist Sans 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
-- **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Eyebrows like `[001] CASHU PROTOCOL`, pill-tag chips, and the lower rail of the hero.
+- **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Structural labels — footer column headers (WALLET / PROTOCOL / COMMUNITY), the footer copyright line, and pill-tag chips where they appear.
 - **Button** (Azeret Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
 
 ### Named Rules
 
-**The Specimen Scale Rule.** Display 1 is reserved for the page's two apex moments: the opening hero ("Bearer cash for the web.") and the closing CTA ("Take it with you."). Together they bookend the page. No element in the body of the page ever reaches that size.
+**The Specimen Scale Rule.** Display 1 is reserved for the page's apex moment: the opening hero (currently "A Cashu Wallet.", `siteConfig.description`). No element in the body of the page ever reaches that size. *Drift note: an earlier draft reserved a second Display-1 moment for a closing CTA ("Take it with you.") to bookend the hero. The shipped page has no separate closing-CTA section — the footer goes straight from utility links to the wordmark sign-off. Revisit this rule if a closing CTA section is added; until then, Display 1 is single-use.*
 
 **The Wordmark Tier.** A single scale step exists above Display 1 — `type-wordmark` (`clamp(4rem, 18vw, 14rem)`, weight 600, tracking -0.05em). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere. The Specimen Scale Rule is unchanged: Display 1 remains exclusive to the hero and closing CTA; the wordmark is a brand mark, not a heading, and operates outside that hierarchy.
 
@@ -182,7 +184,7 @@ Sharp rectangles (`border-radius: 0`). The editorial register prefers severity t
 
 Touch target: 44px minimum height on every button (`h-11`). Padding varies by size.
 
-**The Hero Badge Exception.** A single glass-pill badge sits above the hero headline, carrying the wordmark `cashu.me` as an eyebrow. It is the only sanctioned pill on the page (`rounded-full`), and the only sanctioned glassmorphic moment. Treatment: `bg-foreground/[0.06]`, `backdrop-blur-xl`, hairline border at `border-foreground/25`, `type-label` text. Inert (no anchor wrapper, the header lockup already routes home). Never duplicated.
+**The Hero Badge Exception (retired, not currently shipped).** An earlier draft called for a single glass-pill badge above the hero headline, carrying the wordmark `cashu.me` as an eyebrow — the one sanctioned pill and one sanctioned glassmorphic moment on the page. `hero.tsx` does not implement this badge today. Treat it as retired rather than a gap to fill; if a glass badge is reintroduced later, update this note deliberately instead of resurrecting it to match old documentation.
 
 ### Chips
 
@@ -190,7 +192,7 @@ Tag chips are cosmetic enumerations, never state-bearing. They share the rectang
 
 ### Cards / Containers
 
-The system avoids cards. Section bodies are not cards. Pillar items are not cards. They are vertical compositions separated by 1px hairline rules and the `[N]` index mark in the top-left.
+The system avoids cards. Section bodies are not cards. Pillar items are not cards. They are vertical compositions separated by 1px hairline rules.
 
 If a card-like container ever becomes necessary, it MUST be flat, hairline-bordered, and never nested.
 
@@ -214,11 +216,9 @@ Official Apple "Download on the App Store" SVG and Google "Get it on Google Play
 
 Do not recolor, restyle, or stretch the artwork. Do not place on top of imagery. Do not rotate.
 
-### Specimen Blocks
+### Specimen Blocks (not currently shipped)
 
-Each pillar in the "What's different" section is paired with a specimen: a small typographic exhibit that demonstrates the property rather than illustrating it. Examples: a wrapped serialization of blinded ecash, a stylized Lightning invoice fragment, a redemption arrow to a Lightning address. Mono, hairline-bordered, flat, with a `[N]` index mark in the top-left corner.
-
-Specimen blocks are not cards. They are exhibits.
+An earlier draft called for pairing each "What's different" pillar with a small typographic exhibit (a wrapped serialization of blinded ecash, a stylized Lightning invoice fragment) instead of a photo. The shipped page (`feature-highlight.tsx`) uses real wallet screenshots instead. Treat specimen blocks as a design idea not yet built, not a current convention new work needs to match.
 
 ### Accordion
 
@@ -230,7 +230,6 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 
 - **Do** keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.
 - **Do** invert surfaces between sections (dark → light → dark) the way a printed monograph alternates plates and text.
-- **Do** carry `[N]` index marks in Azeret Mono on every section that enumerates (pillars, built-for columns, footer rail).
 - **Do** use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.
 - **Do** cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.
 - **Do** use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.

@@ -81,12 +81,12 @@ function Feature({
         variants={textVariants}
       >
         <div className="flex max-w-xl flex-col gap-6">
-          <motion.h3
+          <motion.h2
             className="type-display-2 text-foreground"
             variants={itemVariants}
           >
             {title}
-          </motion.h3>
+          </motion.h2>
           <motion.p
             className="type-lead text-foreground/75 max-w-[50ch]"
             variants={itemVariants}

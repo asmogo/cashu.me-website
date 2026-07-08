@@ -30,7 +30,7 @@ export function TapToPay() {
     >
       <div className="grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10">
         <div className="col-span-12 lg:col-span-4 lg:col-start-1">
-          <motion.h3
+          <motion.h2
             initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-100px" }}
@@ -42,7 +42,7 @@ export function TapToPay() {
             className="type-display-2 text-foreground"
           >
             {title}
-          </motion.h3>
+          </motion.h2>
 
           <motion.p
             initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
