@@ -1,6 +1,6 @@
 "use client";
 
-import { CLOUD_ASSETS, DRIFT_RANGE, TIERS } from "@/lib/clouds";
+import { CLOUD_ASSETS, DRIFT_RANGE, RISE_RANGE, TIERS } from "@/lib/clouds";
 import type { CloudPlacement, SectionClouds } from "@/lib/clouds";
 import { cn } from "@/lib/utils";
 import { motion, useTransform, type MotionValue } from "framer-motion";
@@ -23,26 +23,42 @@ function CloudInstance({ placement, anchor, progress, drift }: CloudInstanceProp
     progress,
     (p) => (p - anchor) * DRIFT_RANGE * tier.depth
   );
+  // Rises up from below into its resting spot as scroll approaches the
+  // section's anchor, then keeps rising up and out past it — the "clouds
+  // come in as you scroll" parallax entrance.
+  const y = useTransform(
+    progress,
+    (p) => -(p - anchor) * RISE_RANGE * tier.depth
+  );
+
+  const mobileWidth = placement.mobileWidth ?? placement.width;
 
   return (
     <motion.div
-      className={cn("absolute", !placement.mobile && "hidden md:block")}
-      style={{
-        top: placement.top,
-        left: placement.left,
-        right: placement.right,
-        width: placement.width,
-        opacity: tier.opacity,
-        filter: tier.blur ? `blur(${tier.blur}px)` : undefined,
-        x: drift ? x : 0,
-      }}
+      className={cn(
+        "absolute w-[var(--cloud-w-mobile)] md:w-[var(--cloud-w)]",
+        !placement.mobile && "hidden md:block"
+      )}
+      style={
+        {
+          top: placement.top,
+          left: placement.left,
+          right: placement.right,
+          "--cloud-w": `${placement.width}px`,
+          "--cloud-w-mobile": `${mobileWidth}px`,
+          opacity: tier.opacity,
+          filter: tier.blur ? `blur(${tier.blur}px)` : undefined,
+          x: drift ? x : 0,
+          y: drift ? y : 0,
+        } as React.CSSProperties
+      }
     >
       <Image
         src={asset.src}
         alt=""
         width={asset.w}
         height={asset.h}
-        sizes={`${placement.width}px`}
+        unoptimized
         className={cn("h-auto w-full select-none", placement.flip && "-scale-x-100")}
         draggable={false}
       />
