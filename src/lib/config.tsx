@@ -12,7 +12,7 @@ const links = {
   // iOS ships via TestFlight (public beta); the Android native build is still in
   // closed beta, so there is no Play Store listing yet. It ships as a direct
   // APK download instead — placeholder link until the build is hosted.
-  testflight: "https://testflight.apple.com/join/Wz4jWRxn",
+  testflight: "https://testflight.apple.com/join/DT1xF1y4",
   androidApk: "#",
 };
 

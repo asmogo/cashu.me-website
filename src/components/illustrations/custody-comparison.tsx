@@ -80,9 +80,9 @@ function Lane({
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-foreground/15" />
 
         {/* Checkpoint band (vertically centered, ~38% across) */}
-        <div className="absolute left-[34%] top-0 flex h-full w-[18%] items-center justify-center sm:w-[14%]">
-          <div className="absolute inset-y-0 left-0 w-px bg-foreground/25" />
-          <div className="absolute inset-y-0 right-0 w-px bg-foreground/25" />
+        <div className="absolute left-[34%] top-0 flex h-full w-[18%] items-center justify-center bg-foreground/[0.05] sm:w-[14%]">
+          <div className="absolute inset-y-0 left-0 w-px bg-foreground/35" />
+          <div className="absolute inset-y-0 right-0 w-px bg-foreground/35" />
           <span className="absolute -top-5 type-label text-muted-foreground">
             {checkpoint}
           </span>
@@ -229,7 +229,7 @@ function Lane({
       </div>
 
       {/* Output zone */}
-      <div className="min-w-[160px] sm:min-w-[200px]">{children}</div>
+      <div className="w-[132px] sm:w-auto sm:min-w-[200px]">{children}</div>
     </div>
   );
 }
@@ -324,7 +324,7 @@ export function CustodyComparison() {
           packetDelay={packetDelay}
           variant="mint"
         >
-          <div className="flex flex-col items-start gap-2">
+          <div className="flex flex-col items-end gap-2 sm:items-start">
             <ExtractingChip
               active={inView}
               reduceMotion={reduceMotion}
@@ -340,7 +340,7 @@ export function CustodyComparison() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               variants={captionVariants}
-              className="type-label text-muted-foreground"
+              className="type-label text-right text-muted-foreground sm:text-left"
             >
               Mint sees nothing else.
             </motion.span>
@@ -358,7 +358,7 @@ export function CustodyComparison() {
           packetDelay={packetDelay}
           variant="bank"
         >
-          <div className="flex flex-col items-start gap-1.5">
+          <div className="flex flex-col items-end gap-1.5 sm:items-start">
             {CUSTODIAL_FIELDS.map((field, i) => (
               <ExtractingChip
                 key={field}
@@ -375,7 +375,7 @@ export function CustodyComparison() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               variants={captionVariants}
-              className="mt-1 type-label text-foreground/55"
+              className="mt-1 type-label text-right text-foreground/55 sm:text-left"
             >
               Custodian sees all of it.
             </motion.span>

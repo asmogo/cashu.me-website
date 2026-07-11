@@ -22,7 +22,7 @@ export default function Home() {
         <TapToPay />
         <FeatureHighlight
           feature={siteConfig.featureHighlight[1]}
-          layoutIndex={1}
+          layoutIndex={0}
           className="pt-0 pb-0"
         />
         <BentoGrid />
