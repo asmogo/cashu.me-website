@@ -12,6 +12,7 @@ export function Logo({ className }: LogoProps) {
       alt="cashu.me"
       width={64}
       height={64}
+      unoptimized
       className={cn(
         "size-8 select-none rounded-none object-cover",
         "[image-rendering:pixelated]",

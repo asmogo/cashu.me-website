@@ -86,9 +86,9 @@ export const siteConfig = {
   ],
   faqs: [
     {
-      question: "Is this custodial?",
+      question: "How private is this?",
       answer:
-        "Yes. The mint holds the underlying bitcoin. What you hold is bearer ecash redeemable to any Lightning address at any time. The mint cannot freeze your withdrawal address, but it can go offline. Treat every mint the way you would treat a custodian.",
+        "Cashu uses Chaumian blind signatures: the mint signs your ecash without ever seeing the token it's signing, so it can't link what you withdraw to what you later spend. Peer-to-peer sends, over iMessage, NFC, any chat, never touch the mint at all, so there's no transaction graph to trace the way there is on-chain or across Lightning nodes. The mint still sees amounts and timing when you mint or melt to Lightning, so it isn't a total blind spot, but it makes Cashu one of the most private ways to hold and move bitcoin today.",
     },
     {
       question: "What if a mint disappears?",
@@ -103,7 +103,7 @@ export const siteConfig = {
     {
       question: "Can I back it up?",
       answer:
-        "Two ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
+        "Three ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. There's also an experimental iCloud backup that syncs an encrypted copy automatically; it's new and unproven, so don't rely on it alone yet. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
     },
   ] as { question: string; answer: ReactNode }[],
   footer: {

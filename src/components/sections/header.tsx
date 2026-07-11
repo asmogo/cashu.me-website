@@ -32,15 +32,13 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-[background-color,backdrop-filter] duration-500 ease-out-quart",
-        isScrolled
-          ? "bg-background/70 backdrop-blur-xl"
-          : "bg-transparent backdrop-blur-none"
-      )}
-    >
-      <div className="container-page relative flex flex-nowrap items-center justify-between gap-6 px-6 py-4 lg:px-10">
+    <header className="sticky top-4 z-50 flex justify-center px-4 lg:px-6">
+      <div
+        className={cn(
+          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-full border border-white/50 bg-background/55 px-6 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
+          isScrolled && "border-white/70 bg-background/75"
+        )}
+      >
         <Link
           href="/"
           title="cashu.me"
@@ -85,13 +83,6 @@ export function Header() {
           <MobileDrawer />
         </div>
       </div>
-      <div
-        aria-hidden
-        className={cn(
-          "absolute inset-x-0 bottom-0 h-px bg-border transition-opacity duration-200",
-          isScrolled ? "opacity-100" : "opacity-0"
-        )}
-      />
     </header>
   );
 }

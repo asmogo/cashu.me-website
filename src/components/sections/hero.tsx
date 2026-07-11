@@ -67,7 +67,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: REVEAL_DURATION_LG, ease: easeOutQuart, delay: 0 }
           }
-          className="type-display-1 text-foreground"
+          className="type-display-1 uppercase tracking-[-0.01em] text-foreground"
         >
           {siteConfig.description}
         </motion.h1>
