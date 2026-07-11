@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
-import { Azeret_Mono } from "next/font/google";
+import { Azeret_Mono, Manrope } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SkyProvider } from "@/components/sky/sky-provider";
 import { ConsoleGreeting } from "@/components/console-greeting";
@@ -11,6 +11,13 @@ const azeretMono = Azeret_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-azeret-mono",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -53,7 +60,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="light"
-      className={`${GeistSans.variable} ${azeretMono.variable}`}
+      className={`${GeistSans.variable} ${azeretMono.variable} ${manrope.variable}`}
       suppressHydrationWarning
     >
       <body>

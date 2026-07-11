@@ -18,19 +18,19 @@ colors:
   cashu-lilac-deep: "#7a66e8"
 typography:
   display-1:
-    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Manrope, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(3.5rem, 10vw, 10.5rem)"
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "-0.035em"
   display-2:
-    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Manrope, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6.2vw, 6.25rem)"
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "-0.035em"
   display-3:
-    fontFamily: "The Future, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Manrope, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 3vw, 3rem)"
     fontWeight: 500
     lineHeight: 1
@@ -123,7 +123,7 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 - **Ink** (`oklch(16% 0.015 260)` ≈ `#14181f`): foreground type on sky. 15.9:1 on Sky Bottom, 14.8:1 on Sky Top (AAA).
 - Muted text: `oklch(42% 0.03 255)` ≥6.5:1 on sky (AA+). Hairlines/borders: `oklch(78% 0.035 240)`.
 
-**The Ambient Sky Rule.** The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes), extracted from a single-light-direction library (`/public/images/clouds`, placements in `src/lib/clouds.ts`), instanced small (~40–180px; one ~230px signature in the hero). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift; reduced-motion renders them static (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads "cloudy," the rule is broken.
+**The Ambient Sky Rule.** The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes) — currently a 7-shape library sourced from Resource Boy's cloud textures (`/public/images/clouds`, placements in `src/lib/clouds.ts`), instanced small (~40–180px; one ~230px signature in the hero). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift; reduced-motion renders them static (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads "cloudy," the rule is broken.
 
 ### Primary
 
@@ -151,17 +151,17 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 
 ## 3. Typography
 
-**Display Font:** The Future (self-hosted from `/public/fonts`, weights 400/500/700). Fallback: `ui-sans-serif, system-ui, -apple-system`.
+**Display Font:** Manrope (Google Fonts, self-hosted at build time via `next/font/google`, weights 500/600). Fallback: `ui-sans-serif, system-ui, -apple-system`.
 **Body Font:** Geist Sans (loaded via `geist/font/sans`). Distinct from the display face; weight and size still do the hierarchy work within it.
 **Label/Mono Font:** Azeret Mono (loaded via `next/font/google`). Fallback: `ui-monospace, Menlo, monospace`.
 
-**Character:** The Future is a mono-grotesque display face with a technical, engineered edge. It carries an editorial / specimen voice at large sizes without softening into a friendly consumer-app register. Chosen over Satoshi, Geist, and Inter because those have become training-data defaults. Geist Sans carries body copy for its neutrality and readability at small sizes. Azeret Mono carries the protocol register without competing with either.
+**Character:** Manrope is a geometric sans with a clean, slightly rounded grotesque structure — legible and current without tipping into a technical or novelty register. It carries the editorial / specimen voice at large sizes through scale and tight tracking rather than an unusual letterform. Geist Sans carries body copy for its neutrality and readability at small sizes. Azeret Mono carries the protocol register without competing with either.
 
 ### Hierarchy
 
-- **Display 1** (The Future 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most.
-- **Display 2** (The Future 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
-- **Display 3** (The Future 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
+- **Display 1** (Manrope 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most.
+- **Display 2** (Manrope 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
+- **Display 3** (Manrope 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
 - **Lead** (Geist Sans 400, `clamp(1.125rem, 1.1vw + 0.6rem, 1.375rem)`, line-height 1.4): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
 - **Body** (Geist Sans 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
 - **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Structural labels — footer column headers (WALLET / PROTOCOL / COMMUNITY), the footer copyright line, and pill-tag chips where they appear.
@@ -183,7 +183,9 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 
 Flat by default. The system does not use ambient shadows on surfaces, cards, or buttons. Depth is communicated by surface inversion (dark vs light section) and by 1px hairline rules, never by elevation.
 
-The sole sanctioned exceptions are phones and banknote-style mockups: objects depicting physical things in the world. The hero phone trio carries a deep ambient shadow against the inkwell because they are not UI surfaces, they are objects. Used at most once per section.
+The sole sanctioned exceptions are phones and banknote-style mockups: objects depicting physical things in the world. The hero device carries a deep ambient shadow against the inkwell because it is not a UI surface, it is an object. Used at most once per section.
+
+> **Hero photograph (2026-07-11, deliberate).** The hero's three floating phone-screenshot mockups were replaced with a single photograph: a hand holding the phone, wallet balance on screen. Still inside the phones/objects exception above, just spent on one photographic subject instead of three abstracted screenshots. The signature hero cloud (`src/lib/clouds.ts`, `SECTION_CLOUDS.hero`) now tucks behind this photograph's lower-right edge rather than the old three-wide row.
 
 ### Named Rules
 
@@ -219,7 +221,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains a translucent backdrop-blur surface that adapts to the section currently sitting behind it (via `IntersectionObserver` watching `[data-theme]` sections). The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in The Future 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill is always present.
+Fixed header, 64px tall, transparent at top of page. Past 20px of scroll, gains a translucent backdrop-blur surface that adapts to the section currently sitting behind it (via `IntersectionObserver` watching `[data-theme]` sections). The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in Manrope 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill is always present.
 
 ### Browser Chrome (signature component)
 
@@ -261,7 +263,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards.
 - **Don't** use em dashes (`—` or `--`) in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.
 - **Don't** use `background-clip: text` gradient text, decorative glassmorphism, or border-left side stripes.
-- **Don't** use display fonts other than The Future. No Switzer, no Satoshi, no Inter for display. Geist Sans is the body face; it does not appear on display or label runs. Azeret Mono is permitted only on labels and button labels, never on display or body.
+- **Don't** use display fonts other than Manrope. No Switzer, no Satoshi, no Inter for display. Geist Sans is the body face; it does not appear on display or label runs. Azeret Mono is permitted only on labels and button labels, never on display or body.
 - **Don't** use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.
 - **Don't** apply ambient shadows to flat surfaces. The only sanctioned exceptions are phones and banknote-style mockups (objects depicting physical things), used at most once per section.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.

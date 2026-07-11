@@ -40,20 +40,20 @@ export function Header() {
           : "bg-transparent backdrop-blur-none"
       )}
     >
-      <div className="container-page relative flex items-center justify-between gap-6 px-6 py-4 lg:px-10">
+      <div className="container-page relative flex flex-nowrap items-center justify-between gap-6 px-6 py-4 lg:px-10">
         <Link
           href="/"
           title="cashu.me"
-          className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
+          className="flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-90"
         >
-          <Logo className="size-7" />
-          <span className="font-display text-sm font-semibold uppercase tracking-[0.14em]">
+          <Logo className="size-7 shrink-0" />
+          <span className="whitespace-nowrap font-display text-sm font-semibold uppercase tracking-[0.14em]">
             {siteConfig.name}
           </span>
         </Link>
 
-        <div className="hidden items-center gap-6 lg:flex">
-          <div className="flex items-center gap-5">
+        <div className="hidden shrink-0 items-center gap-6 lg:flex">
+          <div className="flex shrink-0 items-center gap-5">
             {NAV_ICONS.map(({ label, href, icon: Icon }) => {
               const isPlaceholder = href === "#";
               return (

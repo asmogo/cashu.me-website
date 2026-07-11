@@ -20,10 +20,12 @@
 
 export type CloudVariant =
   | "cloud-01"
+  | "cloud-02"
   | "cloud-03"
   | "cloud-04"
-  | "cloud-07"
-  | "cloud-08";
+  | "cloud-05"
+  | "cloud-06"
+  | "cloud-07";
 
 export type CloudTier = "far" | "mid" | "near";
 
@@ -51,11 +53,13 @@ export const CLOUD_ASSETS: Record<
   CloudVariant,
   { src: string; w: number; h: number }
 > = {
-  "cloud-01": { src: "/images/clouds/cloud-01.png", w: 800, h: 651 },
-  "cloud-03": { src: "/images/clouds/cloud-03.png", w: 495, h: 563 },
-  "cloud-04": { src: "/images/clouds/cloud-04.png", w: 330, h: 222 },
-  "cloud-07": { src: "/images/clouds/cloud-07.png", w: 800, h: 419 },
-  "cloud-08": { src: "/images/clouds/cloud-08.png", w: 800, h: 311 },
+  "cloud-01": { src: "/images/clouds/cloud-01.png", w: 800, h: 498 },
+  "cloud-02": { src: "/images/clouds/cloud-02.png", w: 800, h: 379 },
+  "cloud-03": { src: "/images/clouds/cloud-03.png", w: 800, h: 445 },
+  "cloud-04": { src: "/images/clouds/cloud-04.png", w: 800, h: 455 },
+  "cloud-05": { src: "/images/clouds/cloud-05.png", w: 800, h: 426 },
+  "cloud-06": { src: "/images/clouds/cloud-06.png", w: 800, h: 519 },
+  "cloud-07": { src: "/images/clouds/cloud-07.png", w: 800, h: 597 },
 };
 
 /** total X travel (px) of a depth-1 cloud across the full page scroll */
@@ -75,27 +79,27 @@ export const SECTION_CLOUDS: Record<string, SectionClouds> = {
   hero: {
     anchor: 0.02,
     clouds: [
-      { variant: "cloud-08", top: "4%", left: "34%", width: 200, tier: "far", mobile: true },
-      { variant: "cloud-07", top: "9%", right: "10%", width: 64, tier: "far", mobile: true },
-      { variant: "cloud-01", top: "11%", left: "3%", width: 150, tier: "mid" },
+      { variant: "cloud-06", top: "4%", left: "34%", width: 200, tier: "far", mobile: true },
+      { variant: "cloud-05", top: "9%", right: "10%", width: 64, tier: "far", mobile: true },
+      { variant: "cloud-03", top: "11%", left: "3%", width: 150, tier: "mid" },
       { variant: "cloud-04", top: "31%", right: "5%", width: 90, tier: "mid" },
-      { variant: "cloud-03", top: "48%", left: "3%", width: 78, tier: "mid" },
-      // the signature: larger, tucked partially behind the phone trio
-      { variant: "cloud-01", top: "58%", right: "13%", width: 230, tier: "near", flip: true },
+      { variant: "cloud-02", top: "48%", left: "3%", width: 78, tier: "mid" },
+      // the signature: larger, tucked partially behind the hand+phone photo
+      { variant: "cloud-01", top: "48%", right: "22%", width: 220, tier: "near", flip: true },
     ],
   },
   features: {
     anchor: 0.28,
     clouds: [
-      { variant: "cloud-07", top: "10%", left: "2%", width: 90, tier: "far", flip: true },
+      { variant: "cloud-05", top: "10%", left: "2%", width: 90, tier: "far", flip: true },
       { variant: "cloud-04", top: "-4%", right: "18%", width: 52, tier: "far" },
-      { variant: "cloud-03", top: "68%", right: "3%", width: 72, tier: "mid", mobile: true },
+      { variant: "cloud-06", top: "68%", right: "3%", width: 72, tier: "mid", mobile: true },
     ],
   },
   "tap-to-pay": {
     anchor: 0.45,
     clouds: [
-      { variant: "cloud-07", top: "4%", left: "10%", width: 120, tier: "far" },
+      { variant: "cloud-02", top: "4%", left: "10%", width: 120, tier: "far" },
       { variant: "cloud-01", top: "60%", left: "2%", width: 110, tier: "mid", flip: true, mobile: true },
     ],
   },
@@ -103,27 +107,27 @@ export const SECTION_CLOUDS: Record<string, SectionClouds> = {
     anchor: 0.60,
     clouds: [
       { variant: "cloud-03", top: "-3%", left: "3%", width: 80, tier: "mid", flip: true, mobile: true },
-      { variant: "cloud-07", top: "66%", right: "2%", width: 100, tier: "far" },
+      { variant: "cloud-06", top: "66%", right: "2%", width: 100, tier: "far" },
     ],
   },
   bento: {
     anchor: 0.75,
     clouds: [
-      { variant: "cloud-01", top: "-3%", right: "6%", width: 130, tier: "mid", mobile: true },
-      { variant: "cloud-04", top: "55%", left: "1.5%", width: 56, tier: "far" },
+      { variant: "cloud-07", top: "-3%", right: "6%", width: 130, tier: "mid", mobile: true },
+      { variant: "cloud-05", top: "55%", left: "1.5%", width: 56, tier: "far" },
     ],
   },
   faq: {
     anchor: 0.92,
     clouds: [
-      { variant: "cloud-07", top: "5%", right: "6%", width: 84, tier: "far", flip: true },
-      { variant: "cloud-04", top: "70%", left: "8%", width: 48, tier: "far" },
+      { variant: "cloud-04", top: "5%", right: "6%", width: 84, tier: "far", flip: true },
+      { variant: "cloud-06", top: "70%", left: "8%", width: 48, tier: "far" },
     ],
   },
   footer: {
     anchor: 1.0,
     clouds: [
-      { variant: "cloud-03", top: "10%", right: "10%", width: 68, tier: "far" },
+      { variant: "cloud-02", top: "10%", right: "10%", width: 68, tier: "far" },
       { variant: "cloud-01", top: "42%", left: "6%", width: 120, tier: "mid", mobile: true },
     ],
   },
