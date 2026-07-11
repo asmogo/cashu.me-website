@@ -7,6 +7,7 @@ colors:
   sky-mid: "#cfe5f7"
   ink: "#14181f"
   cashu-lilac-cta: "#5b46d4"
+  scan: "#16a34a"
   inkwell: "#0a0a0a"
   specimen-cream: "#ffffff"
   paper: "#fafafa"
@@ -34,7 +35,7 @@ typography:
     fontSize: "clamp(1.75rem, 3vw, 3rem)"
     fontWeight: 500
     lineHeight: 1
-    letterSpacing: "-0.035em"
+    letterSpacing: "-0.03em"
   lead:
     fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.25rem, 1.3vw + 0.7rem, 1.625rem)"
@@ -52,8 +53,14 @@ typography:
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "0.1em"
+  button:
+    fontFamily: "Azeret Mono, ui-monospace, Menlo, monospace"
+    fontSize: "0.875rem"
+    fontWeight: 500
+    letterSpacing: "0.06em"
 rounded:
   none: "0"
+  md: "8px"
   pill: "9999px"
 spacing:
   gutter-sm: "1.5rem"
@@ -63,32 +70,34 @@ spacing:
   section-y-wide: "clamp(8rem, 16vw, 14rem)"
   container-max: "1200px"
 components:
-  pill-cta:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.inkwell}"
-    rounded: "{rounded.pill}"
-    padding: "0.5rem 1rem"
-    typography: "{typography.body}"
-  pill-cta-hover:
-    backgroundColor: "{colors.cashu-lilac}"
-    textColor: "{colors.inkwell}"
-  pill-outline:
+  button-primary:
+    backgroundColor: "{colors.sky-mid}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "0 20px"
+    typography: "{typography.button}"
+  button-outline:
     backgroundColor: "transparent"
-    textColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "0 20px"
+    typography: "{typography.button}"
+  nav-pill:
+    backgroundColor: "{colors.sky-mid}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.pill}"
-    padding: "0.5rem 1rem"
-  pill-tag:
-    backgroundColor: "transparent"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.pill}"
-    padding: "0.375rem 0.75rem"
+    padding: "12px 24px"
+  bento-card:
+    backgroundColor: "{colors.sky-mid}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "32px 32px 0"
+  chip:
+    backgroundColor: "{colors.sky-mid}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "4px 8px"
     typography: "{typography.label}"
-  section-dark:
-    backgroundColor: "{colors.inkwell}"
-    textColor: "{colors.paper}"
-  section-light:
-    backgroundColor: "{colors.specimen-cream}"
-    textColor: "{colors.inkwell}"
 ---
 
 # Design System: cashu.me
@@ -99,56 +108,52 @@ components:
 
 cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. The visitor moves down the page the way you move down a printed broadsheet, not the way you scroll a feed.
 
-> **Daylight Sky revision (2026-07-11, deliberate).** The page's surface is no longer the alternating inkwell/cream of the original spec: the whole page now sits on a single continuous daylight-sky surface — a near-flat blue gradient (`sky-top` → `sky-bottom`, deeper at the top of the page, palest behind the FAQ/footer) with a small library of photographic cloud cutouts instanced at small sizes as ambient decoration. The specimen posture is unchanged: type is still the artifact, ink on sky. The sky is ambient, not the subject — see The Ambient Sky Rule in §2. The dark inkwell token set remains defined but dormant.
+The surface is a single continuous daylight sky: a near-flat blue gradient (`sky-top` → `sky-bottom`, deeper at the top of the page, palest behind the FAQ/footer) with a small library of photographic cloud cutouts instanced at small sizes as ambient decoration. Interactive surfaces — buttons, the nav, a handful of named illustration and card elements — carry a soft frosted-glass material: translucent, blurred, hairline-bordered. Everything else stays flat: type on sky, hairline rules, no ambient shadows. The specimen posture holds throughout: ink on sky, glass reserved for things you touch.
 
-The aesthetic is editorial and committed, not enterprise. Restraint is the voice — generous whitespace, oversize display, mono labels for structural chrome. The single chromatic note is a soft lilac that sits between purple and periwinkle, reserved for emphasis. The page rejects every dominant crypto-site reflex: it is not neon, not chart-heavy, not pastel, not navy-and-gold. *Glassmorphism note (2026-07-11): the blanket "not glassmorphic" stance is retired. Frosted glass is now a named, deliberate surface treatment — scoped to buttons, the nav pill, the custody-comparison checkpoint/chips, and the bento cards (see §5 Components) — not the ambient Web3-dashboard glassmorphism PRODUCT.md's anti-references still correctly reject. The distinction is scope and restraint (four named surfaces, one shared recipe) versus the rejected reflex (glass everywhere, decorative, uncommitted).*
+The aesthetic is editorial and committed, not enterprise. Restraint is the voice: generous whitespace, oversize display, mono labels for structural chrome. The single chromatic note is a soft lilac reserved for emphasis. The page rejects the dominant crypto-site reflexes: no neon-on-black, no chart-heavy dashboards, no consumer-fintech pastels, no bank navy-and-gold. Its one material departure from a flat, glassmorphism-free web is the frosted-glass recipe below, which is scoped to four named surfaces, not applied ambiently.
 
 **Key Characteristics:**
 
-- Editorial scale (hero up to ~10rem at large viewports), tight tracking (`-0.035em`), short leading (0.94).
-- One continuous daylight-sky surface page-wide (since the Daylight Sky revision); the earlier alternating `[data-theme]` plates are retired but the token architecture is kept.
+- Editorial scale (hero up to ~10.5rem at large viewports), tight tracking (`-0.035em` in mixed case), short leading (1 on Display 1).
+- One continuous daylight-sky surface page-wide; clouds are photographic cutouts, small, ambient, never the subject.
 - Lilac accent used sparingly: CTA hover, link underlines, `::selection`. Never large fields.
+- One shared frosted-glass recipe (§5 Buttons), reused verbatim on buttons, the nav pill, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe, not four inventions.
 - Native `<details>` accordion, native `<a>` rectangular buttons. No bespoke widgets where the platform suffices.
 - Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome.
 
-> **Drift note:** an earlier draft of this system specified bracketed `[N]` index marks as protocol-citation eyebrows on every enumerating section. They were never shipped — `Section.tsx` supports an `index` prop but no live section passes one. Treat their absence as the current, intended state, not a gap to fill; see the retired-devices note in §5 before reintroducing them.
+**Retired ideas, not gaps to fill:** an earlier draft called for `[N]` bracketed index marks as protocol-citation eyebrows on every enumerating section, and a separate single glass-pill badge above the hero headline carrying the wordmark as an eyebrow. Neither shipped, and neither should be resurrected — see The No-Eyebrows Rule (§3) and Navigation (§5) for what actually ships in their place.
 
 ## 2. Colors
 
-A single sky surface anchored by ink type and one chromatic accent. The palette is dispassionate, the lilac is the one place voice enters.
+A single sky surface anchored by ink type and one chromatic accent. The palette is dispassionate; the lilac and the frosted-glass fills are the only places voice enters.
 
-### The Sky Surface (Daylight Sky revision)
+### The Sky Surface
 
 - **Sky Top** (`#c9e2f5`) → **Sky Bottom** (`#dcedf9`): the page background is one near-flat vertical gradient across the whole document, deeper at the top (zenith) and palest at the bottom (horizon, behind the dense FAQ/footer). No photographic backdrop, no tiling imagery: the sky surface is a flat color field; the photography lives only in the small cloud cutouts.
-- **Sky Mid** (`#cfe5f7`): the `--background` token — used for translucent fills (header glass) and anywhere a single solid surface color is needed.
+- **Sky Mid** (`#cfe5f7`): the `--background` token — the fill color inside every frosted-glass surface (at partial opacity plus blur), and anywhere a single solid surface color is needed.
 - **Ink** (`oklch(16% 0.015 260)` ≈ `#14181f`): foreground type on sky. 15.9:1 on Sky Bottom, 14.8:1 on Sky Top (AAA).
 - Muted text: `oklch(42% 0.03 255)` ≥6.5:1 on sky (AA+). Hairlines/borders: `oklch(78% 0.035 240)`.
 
-**The Ambient Sky Rule.** The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes) — a 7-shape library sourced *only* from Resource Boy's cloud textures (`/public/images/clouds`, placements in `src/lib/clouds.ts`; served `unoptimized` — next/image's AVIF/WebP re-encoding visibly destroys soft alpha edges at these sizes). Sized larger on desktop (~80–380px) than on the small mobile subset (~50–200px, via each placement's `mobileWidth`). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift and Y parallax (clouds rise into their resting spot as their section's anchor approaches, then rise on past it); reduced-motion renders them static at their resting position (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads "cloudy," the rule is broken.
+**The Ambient Sky Rule.** The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes) — a 7-shape library sourced *only* from Resource Boy's cloud textures (`/public/images/clouds`, placements in `src/lib/clouds.ts`; served `unoptimized` — next/image's AVIF/WebP re-encoding visibly destroys soft alpha edges at these sizes, the same reason the logo is served `unoptimized` too, see §5 Navigation). Sized larger on desktop (~80–380px) than on the small mobile subset (~50–200px, via each placement's `mobileWidth`). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift and Y parallax; reduced-motion renders them static at their resting position (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads "cloudy," the rule is broken.
 
 ### Primary
 
-- **Cashu Lilac CTA** (`#5b46d4`): the accent for small text and interactive emphasis on the sky surface — ≥4.5:1 (AA) against both gradient ends. Takes over the roles Cashu Lilac Deep held on light surfaces.
+- **Cashu Lilac CTA** (`#5b46d4`): the accent for small text and interactive emphasis on the sky surface — ≥4.5:1 (AA) against both gradient ends.
 - **Cashu Lilac Deep** (`#7a66e8`): 3.45:1 on sky — display-scale/graphic use only (≥24px), never small text on sky.
 - **Cashu Lilac** (`#b4a7f5`): the dark-surface voice; dormant with the inkwell set. Reserved for link underlines, CTA hover, and `::selection` on dark. Never used as a large color field.
 
 ### Neutral
 
-- **Inkwell** (`#0a0a0a`): The dark surface. Background of the hero, wallet showcase, final CTA, and footer. Reads as printed matte ink, not as "dark mode."
-- **Specimen Cream** (`#ffffff`): The light surface. Background of the middle sections. *Note: this is currently pure white; the system's intended posture is a barely-tinted off-white (chroma 0.005 toward lilac). Migrate when typesetting tonal ramps.*
-- **Paper** (`#fafafa`): Foreground text on Inkwell. The same off-white principle applies — favor `oklch(98% 0.003 280)` over pure `#fafafa` on next pass.
-- **Ash Light** (`#8a8a93`): Muted text on Inkwell. Tag chips, captions, and supporting prose.
-- **Ash Dark** (`#6b6b73`): Muted text on Specimen Cream.
-- **Rule Dark** (`#1f1f22`): Hairline rules and section dividers on Inkwell. Always 1px.
-- **Rule Light** (`#e5e5e5`): Hairlines on Specimen Cream.
+- **Inkwell** (`#0a0a0a`): dormant dark-theme background, kept for a future toggle.
+- **Specimen Cream** (`#ffffff`) / **Paper** (`#fafafa`) / **Ash Light** (`#8a8a93`) / **Ash Dark** (`#6b6b73`) / **Rule Dark** (`#1f1f22`) / **Rule Light** (`#e5e5e5`): dormant dark-theme neutrals, kept for documentation reference alongside the token architecture.
 
 ### Named Rules
 
-**The One Voice Rule.** Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point. If a section reads "colorful," the rule is broken.
+**The One Voice Rule.** Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point.
 
-**The Scan Color Exemption.** The `--scan` token (green, `#86efac` on dark / `#16a34a` on light) is the sole sanctioned non-lilac chromatic, scoped to `custody-comparison.tsx` where it carries the surveillance metaphor (the bank lane "sees" a green packet; the mint lane blurs it). It must not appear elsewhere on the page.
+**The Scan Color Exemption.** The `--scan` token (`#16a34a` on light / `#86efac` on dark) is the sole sanctioned non-lilac chromatic, scoped to `custody-comparison.tsx` where it carries the surveillance metaphor (the custodian lane "sees" a green packet; the mint lane blurs it). It must not appear elsewhere on the page.
 
-**The No-Pure-Black, No-Pure-White Rule.** Every surface and neutral tints toward a hue. Since the Daylight Sky revision the reference hue for neutrals is the sky's (~240–260): ink is `oklch(16% 0.015 260)`, muted/borders sit at hue 240–255. The dormant dark set keeps its lilac-tinted values (`oklch(13% 0.003 280)` etc.). Legacy spec values `#0a0a0a` and `#ffffff` are kept above only for documentation reference.
+**The No-Pure-Black, No-Pure-White Rule.** Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240–260): ink is `oklch(16% 0.015 260)`, muted/borders sit at hue 240–255. The dormant dark set keeps its lilac-tinted values (`oklch(13% 0.003 280)` etc.).
 
 ## 3. Typography
 
@@ -160,61 +165,66 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 
 ### Hierarchy
 
-- **Display 1** (Manrope 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 0.94, tracking -0.035em): Hero statements and the final CTA. One per section, at most. **Hero headline exception (2026-07-11):** the hero `<h1>` sets uppercase with loosened tracking (`-0.01em`, up from `-0.035em` — all-caps needs breathing room the mixed-case tracking doesn't give it). This is a one-off override at the call site, not a change to the shared Display 1 tier; other Display 1 usages stay mixed-case at the tighter tracking.
-- **Display 2** (Manrope 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 0.94, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
-- **Display 3** (Manrope 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 0.94, tracking -0.035em): Sub-section / smaller display moments.
-- **Lead** (Geist Sans 400, `clamp(1.25rem, 1.3vw + 0.7rem, 1.625rem)`, line-height 1.5, tracking -0.008em): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch. Sized up from an earlier, tighter clamp (2026-07-11) — the smaller scale read thin against Display 1 at large viewport widths.
+- **Display 1** (Manrope 500, `clamp(3.5rem, 10vw, 10.5rem)`, line-height 1, tracking -0.035em): Hero statements. One per page. The hero `<h1>` runs uppercase with loosened tracking (`-0.01em`) — a one-off override at that call site, not a change to the shared tier; if Display 1 is ever used elsewhere it stays mixed-case at the tighter tracking.
+- **Display 2** (Manrope 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 1, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
+- **Display 3** (Manrope 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 1, tracking -0.03em): Sub-section / smaller display moments, including bento card titles.
+- **Lead** (Geist Sans 400, `clamp(1.25rem, 1.3vw + 0.7rem, 1.625rem)`, line-height 1.5, tracking -0.008em): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
 - **Body** (Geist Sans 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
-- **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Structural labels — footer column headers (WALLET / PROTOCOL / COMMUNITY), the footer copyright line, and pill-tag chips where they appear.
-- **Button** (Azeret Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store badges. Sized by the consuming component, not by the utility.
+- **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Structural labels — footer column headers (WALLET / PROTOCOL / COMMUNITY), the footer copyright line, and chip/badge text.
+- **Button** (Azeret Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store / Browser badges. Sized by the consuming component, not by the utility.
 
 ### Named Rules
 
-**The Specimen Scale Rule.** Display 1 is reserved for the page's apex moment: the opening hero (currently "A Cashu Wallet.", `siteConfig.description`). No element in the body of the page ever reaches that size. *Drift note: an earlier draft reserved a second Display-1 moment for a closing CTA ("Take it with you.") to bookend the hero. The shipped page has no separate closing-CTA section — the footer goes straight from utility links to the wordmark sign-off. Revisit this rule if a closing CTA section is added; until then, Display 1 is single-use.*
+**The Specimen Scale Rule.** Display 1 is reserved for the page's apex moment: the opening hero (currently "A Cashu Wallet.", `siteConfig.description`). No element in the body of the page ever reaches that size.
 
-**The Wordmark Tier.** A single scale step exists above Display 1 — `type-wordmark` (`clamp(4rem, 18vw, 14rem)`, weight 600, tracking -0.05em). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere. The Specimen Scale Rule is unchanged: Display 1 remains exclusive to the hero and closing CTA; the wordmark is a brand mark, not a heading, and operates outside that hierarchy.
+**The Wordmark Tier.** A single scale step exists above Display 1 — `type-wordmark` (`clamp(4rem, 18vw, 14rem)`, weight 600, tracking -0.05em). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere; it's a brand mark, not a heading, and operates outside the Display hierarchy.
 
 **The Balanced Wrap Rule.** All headings carry `text-wrap: balance`. All long-form prose carries `text-wrap: pretty`. The page never ships a heading with an orphaned single word on the last line if the browser can prevent it.
 
-**The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on `[N]` index marks, pill-tag chips, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.
+**The Mono-as-Structure Rule.** Mono is structural, not decorative. It appears on chip labels, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.
 
-**The Button-Label Rule.** Azeret Mono carries every button label on the page: the header CTA, the closing CTA, the mobile-drawer wallet link, and the App Store / Play Store badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows), at weight 500 versus the label rule's 400.
+**The Button-Label Rule.** Azeret Mono carries every button label on the page: the header CTA, the mobile-drawer wallet link, and the App Store / Play Store / Browser badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows), at weight 500 versus the label rule's 400.
+
+**The No-Eyebrows Rule.** No `[N]` bracketed index marks, and no tiny uppercase tracked kicker above every section. `Section.tsx` supports an `index` prop for exactly this pattern; no live section passes one. This is a settled preference, not an oversight — do not add index marks or eyebrows to "finish" a section that doesn't have one.
 
 ## 4. Elevation
 
-Flat by default. The system does not use ambient shadows on surfaces, cards, or buttons. Depth is communicated by surface inversion (dark vs light section) and by 1px hairline rules, never by elevation.
+Two elevation languages coexist deliberately: flat-by-default for structural surfaces, and one shared frosted-glass recipe for interactive/illustrative ones.
 
-The sole sanctioned exceptions are phones and banknote-style mockups: objects depicting physical things in the world. The hero device carries a deep ambient shadow against the inkwell because it is not a UI surface, it is an object. Used at most once per section.
+**Flat surfaces**: sections, prose, hairline rules — no shadow, no blur. Depth comes from surface inversion (dark vs light section, where used) and 1px hairline rules, never from ambient shadow.
 
-> **Hero photograph (2026-07-11, deliberate).** The hero's three floating phone-screenshot mockups were replaced with a single photograph: a hand holding the phone, wallet balance on screen. Still inside the phones/objects exception above, just spent on one photographic subject instead of three abstracted screenshots. The signature hero cloud (`src/lib/clouds.ts`, `SECTION_CLOUDS.hero`) now tucks behind this photograph's lower-right edge rather than the old three-wide row.
+**Glass surfaces**: buttons, the nav pill, custody-comparison's checkpoint band and chips, and the bento cards. See §5 Buttons for the exact recipe. This is the one sanctioned elevation exception beyond physical-object mockups.
+
+**Physical-object surfaces**: the hero photograph (a hand holding the phone) carries a deep ambient shadow because it depicts a physical object, not a UI surface. Used at most once per section.
 
 ### Named Rules
 
-**The Flat-by-Default Rule.** Cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones, banknote-style mockups) and for the button system's frosted-glass treatment (see below). Never decorative elsewhere, never on other UI surfaces.
+**The Flat-by-Default Rule.** Sections, prose, and hairline rules are flat at rest. Shadows are reserved for the frosted-glass recipe (interactive/illustrative surfaces) and for physical-object depictions (phones, banknote-style mockups). Never decorative elsewhere.
 
 ## 5. Components
 
 ### Buttons
 
-**Frosted glass (2026-07-11, deliberate).** Buttons carry a soft, slightly-rounded (`rounded-lg`) frosted-glass surface — a deliberate departure from this doc's earlier "sharp rectangle, flat" stance, chosen to echo the cloud/sky motif rather than the old dark-theme's severe ink-block buttons. Recipe: translucent `background/55` fill, `backdrop-blur-lg`, a soft white hairline border (`border-white/50`), an inset top highlight plus a diffuse sky-blue-tinted drop shadow (`shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)]`), `--foreground` text. Hover deepens the fill (`background/75`) and brightens the border (`white/70`). Three roles, distinguished by surface treatment, not shape. This is now the site's one shared glass recipe: the header nav pill (below), the custody-comparison checkpoint/chips (see Chips), and the bento cards (see Cards / Containers) reuse it verbatim rather than inventing their own translucency.
+Buttons carry a soft, slightly-rounded (`rounded-lg`, 8px) frosted-glass surface: translucent `background/55` fill, `backdrop-blur-lg` (16px), a soft white hairline border (`border-white/50`), an inset top highlight plus a diffuse sky-blue-tinted drop shadow (`shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)]`), `--foreground` text. Hover deepens the fill (`background/75`) and brightens the border (`white/70`). Three roles, distinguished by surface treatment, not shape:
 
 - **CTA (primary)**: The frosted-glass treatment above. Used at most once per section for the primary action (header nav CTA, mobile drawer CTA).
 - **Outline**: Transparent fill, hairline border in `--border`, hover lifts border to `foreground/40` and tints background to `foreground/5`. Used adjacent to CTAs for secondary actions ("View source").
 - **Ghost / Link**: Text-only affordances. Ghost picks up a subtle background tint on hover; Link underlines.
 
-Touch target: 44px minimum height on every button (`h-11`). Padding varies by size.
+Touch target: 44px minimum height on every button (`h-11`); the App Store / APK / Browser badges run taller at `h-16` since they carry a two-line label. Padding varies by size.
 
-**The Hero Badge Exception (superseded, 2026-07-11).** An earlier draft called for a single glass-pill badge above the hero headline, carrying the wordmark `cashu.me` as an eyebrow — at the time, described as "the one sanctioned pill and one sanctioned glassmorphic moment on the page." That specific badge is still not shipped, but the premise (one pill, one glass moment) is superseded: the header nav is now itself a persistent glass pill (see Navigation), so pill/glass is no longer scarce-by-design. Don't resurrect the hero eyebrow badge to chase the old "one moment" framing — if it returns, it returns on its own merits.
+This is the site's one shared glass recipe — reused verbatim, not reinvented per surface, by:
+- The header nav pill (see Navigation).
+- Custody-comparison's checkpoint band and chips (see Chips).
+- The three bento cards (see Cards / Containers).
 
 ### Chips
 
-Tag chips are cosmetic enumerations, never state-bearing. They share the rectangular geometry of buttons by default. **Custody-comparison exception (2026-07-11, deliberate):** the checkpoint band and field chips in `custody-comparison.tsx` carry the full button frosted-glass recipe (`rounded-lg`, `border-white/50`, `bg-background/55`, `backdrop-blur-lg`, inset+drop shadow) instead of their old flat hairline treatment, so the illustration's "boxes" read as the same physical material as the rest of the UI's glass surfaces. The `--scan` green tint (Scan Color Exemption) is layered on top of this recipe on the VALID chip only — the glass change is container styling, not a color-system change. Treat this as a deliberate one-off, not a precedent for giving every chip a glass treatment.
+Tag chips are cosmetic enumerations, never state-bearing. The custody-comparison checkpoint band and its field chips (`ID 0x…`, `TO @alice`, amount, timestamp, and the `VALID` chip) carry the full button frosted-glass recipe (`rounded-lg`, `border-white/50`, `bg-background/55`, `backdrop-blur-lg`, inset+drop shadow) rather than a flat hairline box — the illustration's "boxes" read as the same physical material as the rest of the UI's glass surfaces. The `--scan` green tint (Scan Color Exemption) layers on top of this recipe on the `VALID` chip only; the glass treatment is container styling, not a color-system change. This chip-glass treatment is scoped to custody-comparison — it is not a general chip pattern.
 
 ### Cards / Containers
 
-The system avoids cards. Section bodies are not cards. Pillar items are not cards. They are vertical compositions separated by 1px hairline rules.
-
-If a card-like container ever becomes necessary, it MUST be flat, hairline-bordered, and never nested. **Bento grid exception (2026-07-11, deliberate):** the three bento cards (`bento.tsx`) are the one card-like container the system does use, and they now carry the same frosted-glass recipe as buttons/nav/chips (`rounded-lg`, `border-white/50`, `bg-background/55`, `backdrop-blur-lg`, inset+drop shadow) instead of the flat `bg-muted`/hairline-border treatment. This makes four surfaces sharing the one glass recipe, not three; update the "three named surfaces" language in §1 Overview and §5 Buttons together if this count changes again.
+The system otherwise avoids cards: section bodies are not cards, pillar items are not cards, they're vertical compositions separated by 1px hairline rules. The one card-like container the system does use is the bento grid's three cards (`bento.tsx`), which carry the same frosted-glass recipe as buttons/nav/chips (`rounded-lg`, `border-white/50`, `bg-background/55`, `backdrop-blur-lg`, inset+drop shadow). Any new card-like container beyond the bento grid must be flat, hairline-bordered, and never nested — the glass treatment does not extend past this one named exception.
 
 ### Inputs
 
@@ -222,7 +232,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-**Floating glass pill (2026-07-11, deliberate).** The header is no longer an edge-to-edge bar. It's a `rounded-full` capsule, inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the same frosted-glass recipe as buttons (see Buttons: Frosted glass) — always present from first paint, not scroll-gated. Past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `white/50`→`/70`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 24px monogram square next to the wordmark "cashu.me" in Manrope 500. Links are foreground/70%, hover full foreground. The right-aligned CTA pill sits inside the nav pill at all times.
+The header is a floating, `rounded-full` glass capsule, not an edge-to-edge bar: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `white/50`→`/70`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger.
 
 ### Browser Chrome (signature component)
 
@@ -232,11 +242,7 @@ Used at most once on the page, with a single composed mock interior. Never repea
 
 ### Store Badges
 
-Custom icon + two-line-label chips (`<AppStoreBadge>`, `<ApkBadge>`, `<BrowserBadge>`) rather than official platform artwork. Reserved for the hero, where they signal native install (plus the in-browser path). Same frosted-glass recipe as the button system (see Buttons above), with `--muted-foreground` for the small eyebrow line. Hover brightens the border, deepens the fill, and nudges the badge up (`-translate-y-0.5`).
-
-### Specimen Blocks (not currently shipped)
-
-An earlier draft called for pairing each "What's different" pillar with a small typographic exhibit (a wrapped serialization of blinded ecash, a stylized Lightning invoice fragment) instead of a photo. The shipped page (`feature-highlight.tsx`) uses real wallet screenshots instead. Treat specimen blocks as a design idea not yet built, not a current convention new work needs to match.
+Custom icon + two-line-label chips (`<AppStoreBadge>`, `<ApkBadge>`, `<BrowserBadge>`) rather than official platform artwork. Reserved for the hero, where they signal native install (plus the in-browser path). Same frosted-glass recipe as the button system (see Buttons above), sized at `h-16` with a `size-8` icon and an 18px label for a bigger, easier tap target than a standard button. Hover brightens the border, deepens the fill, and nudges the badge up (`-translate-y-0.5`).
 
 ### Accordion
 
@@ -247,24 +253,26 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 ### Do
 
 - **Do** keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.
-- **Do** invert surfaces between sections (dark → light → dark) the way a printed monograph alternates plates and text.
+- **Do** keep the frosted-glass recipe to its four named surfaces (buttons, nav pill, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component.
 - **Do** use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.
 - **Do** cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.
 - **Do** use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.
 - **Do** keep the navbar a floating glass pill (see §5 Navigation) inset from the viewport edges, not an edge-to-edge bar.
+- **Do** serve any transparent pixel-art or soft-alpha PNG (logo, clouds) via next/image with `unoptimized` — its optimizer flattens alpha to black otherwise.
 
 ### Don't
 
-- **Don't** use neon-on-black crypto colors. No electric green/blue/orange neon, no 3D rendered logos, no futurist UI. This is the dominant crypto-site reflex and the brand explicitly rejects it.
-- **Don't** use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut. Reads as custodial app and undermines bearer positioning. *Sanctioned exception (Daylight Sky revision): the single page-wide sky gradient and its photographic cloud cutouts. The exception covers exactly that surface — no additional pastel fields, no illustrated/cartoon clouds, no further gradients.*
+- **Don't** use neon-on-black crypto colors. No electric green/blue/orange neon, no 3D rendered logos, no futurist UI.
+- **Don't** use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut. The single page-wide sky gradient and its photographic cloud cutouts are the one sanctioned pastel-field exception — no additional pastel fields, no illustrated/cartoon clouds, no further gradients.
 - **Don't** lean on bank navy + gold institutional gravitas. Wrong register entirely.
-- **Don't** use Web3 / DeFi maximalism — rainbow accents, dashboard-heavy charts, chart-driven hero treatments, or glass used decoratively/everywhere. *Sanctioned exception (2026-07-11): the one shared frosted-glass recipe (§5 Buttons) on buttons, the nav pill, custody-comparison's checkpoint/chips, and the bento cards only — four named surfaces, not an ambient dashboard treatment.*
-- **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards.
+- **Don't** use Web3 / DeFi maximalism: rainbow accents, dashboard-heavy charts, chart-driven hero treatments, or glass used decoratively/everywhere. The one shared frosted-glass recipe on its four named surfaces is the scoped exception, not license for ambient glass.
+- **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards; the bento grid is the one named exception.
 - **Don't** use em dashes (`—` or `--`) in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.
-- **Don't** use `background-clip: text` gradient text, decorative glassmorphism, or border-left side stripes.
+- **Don't** use `background-clip: text` gradient text or border-left side stripes.
 - **Don't** use display fonts other than Manrope. No Switzer, no Satoshi, no Inter for display. Geist Sans is the body face; it does not appear on display or label runs. Azeret Mono is permitted only on labels and button labels, never on display or body.
 - **Don't** use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.
-- **Don't** apply ambient shadows to flat surfaces. The only sanctioned exceptions are phones and banknote-style mockups (objects depicting physical things), used at most once per section.
+- **Don't** apply ambient shadows to flat surfaces. The only sanctioned exceptions are the frosted-glass recipe and physical-object mockups (phones, banknote-style), used at most once per section for the latter.
 - **Don't** ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.
 - **Don't** redefine tokens at the call site. New utilities go through the `@theme inline` block in `globals.css`.
-- **Don't** claim "self-custodial" or "no custodian." Cashu is custodial: mints hold the underlying Bitcoin. The accurate framing is bearer ecash plus unconditional withdrawal to any Lightning address. Candor is the brand; overclaiming corrodes it.
+- **Don't** add `[N]` index marks or a tiny uppercase kicker above a section to "finish" it. See The No-Eyebrows Rule (§3) — their absence is deliberate.
+- **Don't** claim "self-custodial" or "no custodian." Cashu is custodial: mints hold the underlying bitcoin. The accurate framing is bearer ecash plus unconditional withdrawal to any Lightning address. Candor is the brand; overclaiming corrodes it.
