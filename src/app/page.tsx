@@ -23,7 +23,7 @@ export default function Home() {
         <FeatureHighlight
           id="feature-2"
           feature={siteConfig.featureHighlight[1]}
-          layoutIndex={0}
+          layoutIndex={1}
           className="pt-0 pb-0"
         />
         <BentoGrid />
