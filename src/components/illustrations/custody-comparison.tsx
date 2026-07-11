@@ -63,7 +63,7 @@ function Lane({
             width={64}
             height={64}
             unoptimized
-            className="size-full scale-[1.6] select-none rounded-none object-cover [image-rendering:pixelated]"
+            className="size-full select-none rounded-none object-cover [image-rendering:pixelated]"
             draggable={false}
           />
         </div>
