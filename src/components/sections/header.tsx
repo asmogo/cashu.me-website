@@ -3,6 +3,7 @@
 import { Icons } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { MobileDrawer } from "@/components/mobile-drawer";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -35,8 +36,8 @@ export function Header() {
     <header className="sticky top-4 z-50 flex justify-center px-4 lg:px-6">
       <div
         className={cn(
-          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-full border border-white/50 bg-background/55 px-6 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
-          isScrolled && "border-white/70 bg-background/75"
+          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-full border border-glass-border bg-background/55 px-6 py-3 shadow-[var(--glass-shadow)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
+          isScrolled && "border-glass-border-strong bg-background/75"
         )}
       >
         <Link
@@ -68,6 +69,7 @@ export function Header() {
                 </a>
               );
             })}
+            <ThemeToggle />
           </div>
           <a
             href={siteConfig.links.wallet}
@@ -79,7 +81,8 @@ export function Header() {
           </a>
         </div>
 
-        <div className="block lg:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle className="inline-flex h-11 w-11 items-center justify-center" />
           <MobileDrawer />
         </div>
       </div>

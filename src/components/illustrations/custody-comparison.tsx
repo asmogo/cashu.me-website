@@ -81,7 +81,7 @@ function Lane({
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-foreground/15" />
 
         {/* Checkpoint band (vertically centered, ~38% across) */}
-        <div className="absolute left-[34%] top-0 flex h-full w-[18%] items-center justify-center rounded-lg border border-white/50 bg-background/55 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] backdrop-blur-lg sm:w-[14%]">
+        <div className="absolute left-[34%] top-0 flex h-full w-[18%] items-center justify-center rounded-lg border border-glass-border bg-background/55 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:w-[14%]">
           <span className="absolute -top-5 type-label text-muted-foreground">
             {checkpoint}
           </span>
@@ -330,7 +330,7 @@ export function CustodyComparison() {
               packetDelay={packetDelay}
               tIn={BEAT.scanDone}
               className={cn(
-                "inline-flex items-center rounded-lg border border-[color-mix(in_oklab,var(--scan)_40%,transparent)] bg-[color-mix(in_oklab,var(--scan)_8%,transparent)] px-2 py-1 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] backdrop-blur-lg type-label text-[color:var(--scan)]"
+                "inline-flex items-center rounded-lg border border-[color-mix(in_oklab,var(--scan)_40%,transparent)] bg-[color-mix(in_oklab,var(--scan)_8%,transparent)] px-2 py-1 shadow-[var(--glass-shadow)] backdrop-blur-lg type-label text-[color:var(--scan)]"
               )}
             >
               ✓ VALID
@@ -365,7 +365,7 @@ export function CustodyComparison() {
                 reduceMotion={reduceMotion}
                 packetDelay={packetDelay}
                 tIn={BEAT.boxCenter + i * chipStep}
-                className="inline-flex items-center rounded-lg border border-white/50 bg-background/55 px-2 py-1 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] backdrop-blur-lg type-label text-foreground/80"
+                className="inline-flex items-center rounded-lg border border-glass-border bg-background/55 px-2 py-1 shadow-[var(--glass-shadow)] backdrop-blur-lg type-label text-foreground/80"
               >
                 {field}
               </ExtractingChip>

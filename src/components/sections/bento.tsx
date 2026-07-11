@@ -69,7 +69,7 @@ export function BentoGrid() {
               key={index}
               style={motions[index]}
               className={cn(
-                "group relative grid grid-rows-[auto_1fr] overflow-hidden border border-white/50 bg-background/55 p-6 pb-0 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] backdrop-blur-lg sm:p-8",
+                "group relative grid grid-rows-[auto_1fr] overflow-hidden border border-glass-border bg-background/55 p-6 pb-0 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:p-8",
                 shape.rounded,
                 shape.minHeight,
                 item.fullWidth && "md:col-span-2"

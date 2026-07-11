@@ -113,9 +113,18 @@
    primary #5b46d4 ≥4.5:1 (small text OK). #7a66e8 is display-scale only. */
 :root,
 [data-theme="light"] {
+  color-scheme: light;
   --sky-top: #c9e2f5;
   --sky-bottom: #dcedf9;
   --background: #cfe5f7;
+  /* Clouds are pure white + alpha; daylight shows them untouched. */
+  --cloud-filter: none;
+  /* Frosted-glass chrome: hairline, hover hairline, inset highlight + drop. */
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-border-strong: rgba(255, 255, 255, 0.7);
+  --glass-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.55),
+    0 8px 24px -12px rgba(30, 64, 120, 0.28);
   --foreground: oklch(16% 0.015 260);
   --muted: oklch(94% 0.02 240);
   --muted-foreground: oklch(42% 0.03 255);
@@ -135,11 +144,23 @@
   --scan: #16a34a;
 }
 
-/* Dormant since the daylight-sky redesign; kept for a future theme toggle. */
+/* Night theme, driven by system preference (next-themes) with a manual
+   override in the nav. The sky collapses to a flat near-black (#070708);
+   the same white-alpha cloud PNGs are dimmed to moonlit gray via
+   --cloud-filter. Contrast on night sky (WCAG): foreground 19.0:1 ·
+   muted-foreground 7.5:1 · primary #b4a7f5 9.4:1 · foreground over the
+   densest cloud core 5.4:1 at brightness(0.42) — do not raise past 0.45. */
 [data-theme="dark"] {
+  color-scheme: dark;
   --sky-top: oklch(13% 0.003 280);
   --sky-bottom: oklch(13% 0.003 280);
   --background: oklch(13% 0.003 280);
+  --cloud-filter: brightness(0.42);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-strong: rgba(255, 255, 255, 0.22);
+  --glass-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    0 8px 24px -12px rgba(0, 0, 0, 0.6);
   --foreground: oklch(98% 0.003 280);
   --muted: oklch(20% 0.003 280);
   --muted-foreground: oklch(70% 0.01 280);
@@ -178,6 +199,8 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-scan: var(--scan);
+  --color-glass-border: var(--glass-border);
+  --color-glass-border-strong: var(--glass-border-strong);
 
   --font-display:
     var(--font-manrope), ui-sans-serif, system-ui, -apple-system,

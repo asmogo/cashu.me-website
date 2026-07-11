@@ -104,6 +104,11 @@
         "displayName": "Sky Mid",
         "canonical": "#cfe5f7"
       },
+      "night-sky": {
+        "role": "surface",
+        "displayName": "Night Sky",
+        "canonical": "oklch(13% 0.003 280)"
+      },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
@@ -218,6 +223,7 @@
     "keyCharacteristics": [
       "Editorial scale (hero up to ~10rem at large viewports), tight tracking (-0.035em), short leading (0.94).",
       "One continuous daylight-sky surface page-wide; the earlier alternating [data-theme] plates are retired but the token architecture is kept.",
+      "A full night theme (2026-07-11) follows the system preference with a persistent manual override: the sky collapses to a flat near-black oklch(13% 0.003 280) and the same white-alpha cloud cutouts dim to moonlit gray via --cloud-filter: brightness(0.42).",
       "Lilac accent used sparingly: [N] marks, CTA hover, ::selection. Never large fields.",
       "Native <details> accordion, native <a> pill buttons. No bespoke widgets where the platform suffices.",
       "Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome."

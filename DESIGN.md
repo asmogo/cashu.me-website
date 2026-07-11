@@ -136,16 +136,18 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 
 **The Ambient Sky Rule.** The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes) — a 7-shape library sourced *only* from Resource Boy's cloud textures (`/public/images/clouds`, placements in `src/lib/clouds.ts`; served `unoptimized` — next/image's AVIF/WebP re-encoding visibly destroys soft alpha edges at these sizes, the same reason the logo is served `unoptimized` too, see §5 Navigation). Sized larger on desktop (~80–380px) than on the small mobile subset (~50–200px, via each placement's `mobileWidth`). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift and Y parallax; reduced-motion renders them static at their resting position (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads "cloudy," the rule is broken.
 
+**The Night Sky.** The dark theme follows the system preference (next-themes on `data-theme`, pre-paint script, no flash of the wrong theme) with a persistent manual override; nothing stored always means follow the OS. At night the sky collapses to one flat near-black field: `--sky-top` = `--sky-bottom` = `--background` = `oklch(13% 0.003 280)` (≈ `#070708`, lilac-tinted per the No-Pure-Black rule). The cloud library is theme-invariant: the cutouts are pure white + alpha, so the same PNGs serve both skies, dimmed to moonlit gray via `--cloud-filter: brightness(0.42)`. That value is a contrast ceiling, not taste: foreground over the densest cloud core (max alpha 242/255) is 5.4:1 at 0.42 and falls to 4.05:1 at 0.5 — never raise it past 0.45. On the night field: foreground 19.0:1, muted 7.5:1, Cashu Lilac 9.4:1, scan green 14.3:1. Theme switching flips CSS custom properties only — same image assets, no layout, no network.
+
 ### Primary
 
 - **Cashu Lilac CTA** (`#5b46d4`): the accent for small text and interactive emphasis on the sky surface — ≥4.5:1 (AA) against both gradient ends.
 - **Cashu Lilac Deep** (`#7a66e8`): 3.45:1 on sky — display-scale/graphic use only (≥24px), never small text on sky.
-- **Cashu Lilac** (`#b4a7f5`): the dark-surface voice; dormant with the inkwell set. Reserved for link underlines, CTA hover, and `::selection` on dark. Never used as a large color field.
+- **Cashu Lilac** (`#b4a7f5`): the dark-surface voice; the night theme's `--primary`/`--ring` (9.4:1 on the night field). Reserved for link underlines, CTA hover, and `::selection` on dark. Never used as a large color field.
 
 ### Neutral
 
-- **Inkwell** (`#0a0a0a`): dormant dark-theme background, kept for a future toggle.
-- **Specimen Cream** (`#ffffff`) / **Paper** (`#fafafa`) / **Ash Light** (`#8a8a93`) / **Ash Dark** (`#6b6b73`) / **Rule Dark** (`#1f1f22`) / **Rule Light** (`#e5e5e5`): dormant dark-theme neutrals, kept for documentation reference alongside the token architecture.
+- **Inkwell** (`#0a0a0a`): legacy dark-theme background from before the sky redesign, kept for documentation reference. The live night theme uses the lilac-tinted `oklch(13% 0.003 280)` set in `globals.css` (see The Night Sky).
+- **Specimen Cream** (`#ffffff`) / **Paper** (`#fafafa`) / **Ash Light** (`#8a8a93`) / **Ash Dark** (`#6b6b73`) / **Rule Dark** (`#1f1f22`) / **Rule Light** (`#e5e5e5`): legacy dark-theme neutrals, kept for documentation reference alongside the token architecture.
 
 ### Named Rules
 
@@ -153,7 +155,7 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 
 **The Scan Color Exemption.** The `--scan` token (`#16a34a` on light / `#86efac` on dark) is the sole sanctioned non-lilac chromatic, scoped to `custody-comparison.tsx` where it carries the surveillance metaphor (the custodian lane "sees" a green packet; the mint lane blurs it). It must not appear elsewhere on the page.
 
-**The No-Pure-Black, No-Pure-White Rule.** Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240–260): ink is `oklch(16% 0.015 260)`, muted/borders sit at hue 240–255. The dormant dark set keeps its lilac-tinted values (`oklch(13% 0.003 280)` etc.).
+**The No-Pure-Black, No-Pure-White Rule.** Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240–260): ink is `oklch(16% 0.015 260)`, muted/borders sit at hue 240–255. The dark set keeps its lilac-tinted values (`oklch(13% 0.003 280)` etc.).
 
 ## 3. Typography
 
@@ -205,7 +207,7 @@ Two elevation languages coexist deliberately: flat-by-default for structural sur
 
 ### Buttons
 
-Buttons carry a soft, slightly-rounded (`rounded-lg`, 8px) frosted-glass surface: translucent `background/55` fill, `backdrop-blur-lg` (16px), a soft white hairline border (`border-white/50`), an inset top highlight plus a diffuse sky-blue-tinted drop shadow (`shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)]`), `--foreground` text. Hover deepens the fill (`background/75`) and brightens the border (`white/70`). Three roles, distinguished by surface treatment, not shape:
+Buttons carry a soft, slightly-rounded (`rounded-lg`, 8px) frosted-glass surface: translucent `background/55` fill, `backdrop-blur-lg` (16px), a soft hairline border (`border-glass-border`: white/50 on daylight, white/14 on night), an inset top highlight plus a diffuse drop shadow (`shadow-[var(--glass-shadow)]`: sky-blue-tinted on daylight, black on night), `--foreground` text. Hover deepens the fill (`background/75`) and brightens the border (`glass-border-strong`: white/70 daylight, white/22 night). Three roles, distinguished by surface treatment, not shape:
 
 - **CTA (primary)**: The frosted-glass treatment above. Used at most once per section for the primary action (header nav CTA, mobile drawer CTA).
 - **Outline**: Transparent fill, hairline border in `--border`, hover lifts border to `foreground/40` and tints background to `foreground/5`. Used adjacent to CTAs for secondary actions ("View source").
@@ -220,11 +222,11 @@ This is the site's one shared glass recipe — reused verbatim, not reinvented p
 
 ### Chips
 
-Tag chips are cosmetic enumerations, never state-bearing. The custody-comparison checkpoint band and its field chips (`ID 0x…`, `TO @alice`, amount, timestamp, and the `VALID` chip) carry the full button frosted-glass recipe (`rounded-lg`, `border-white/50`, `bg-background/55`, `backdrop-blur-lg`, inset+drop shadow) rather than a flat hairline box — the illustration's "boxes" read as the same physical material as the rest of the UI's glass surfaces. The `--scan` green tint (Scan Color Exemption) layers on top of this recipe on the `VALID` chip only; the glass treatment is container styling, not a color-system change. This chip-glass treatment is scoped to custody-comparison — it is not a general chip pattern.
+Tag chips are cosmetic enumerations, never state-bearing. The custody-comparison checkpoint band and its field chips (`ID 0x…`, `TO @alice`, amount, timestamp, and the `VALID` chip) carry the full button frosted-glass recipe (`rounded-lg`, `border-glass-border`, `bg-background/55`, `backdrop-blur-lg`, `shadow-[var(--glass-shadow)]`) rather than a flat hairline box — the illustration's "boxes" read as the same physical material as the rest of the UI's glass surfaces. The `--scan` green tint (Scan Color Exemption) layers on top of this recipe on the `VALID` chip only; the glass treatment is container styling, not a color-system change. This chip-glass treatment is scoped to custody-comparison — it is not a general chip pattern.
 
 ### Cards / Containers
 
-The system otherwise avoids cards: section bodies are not cards, pillar items are not cards, they're vertical compositions separated by 1px hairline rules. The one card-like container the system does use is the bento grid's three cards (`bento.tsx`), which carry the same frosted-glass recipe as buttons/nav/chips (`rounded-lg`, `border-white/50`, `bg-background/55`, `backdrop-blur-lg`, inset+drop shadow). Any new card-like container beyond the bento grid must be flat, hairline-bordered, and never nested — the glass treatment does not extend past this one named exception.
+The system otherwise avoids cards: section bodies are not cards, pillar items are not cards, they're vertical compositions separated by 1px hairline rules. The one card-like container the system does use is the bento grid's three cards (`bento.tsx`), which carry the same frosted-glass recipe as buttons/nav/chips (`rounded-lg`, `border-glass-border`, `bg-background/55`, `backdrop-blur-lg`, `shadow-[var(--glass-shadow)]`). Any new card-like container beyond the bento grid must be flat, hairline-bordered, and never nested — the glass treatment does not extend past this one named exception.
 
 ### Inputs
 
@@ -232,7 +234,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-The header is a floating, `rounded-full` glass capsule, not an edge-to-edge bar: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `white/50`→`/70`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger.
+The header is a floating, `rounded-full` glass capsule, not an edge-to-edge bar: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `glass-border`→`glass-border-strong`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger. The theme toggle (a sun/moon icon button switching light ↔ dark, see The Night Sky) sits with the external icon links on desktop and beside the drawer trigger below `lg`; until first use the site follows the system preference.
 
 ### Browser Chrome (signature component)
 

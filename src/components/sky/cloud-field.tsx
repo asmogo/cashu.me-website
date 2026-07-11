@@ -59,7 +59,12 @@ function CloudInstance({ placement, anchor, progress, drift }: CloudInstanceProp
         width={asset.w}
         height={asset.h}
         unoptimized
-        className={cn("h-auto w-full select-none", placement.flip && "-scale-x-100")}
+        // The one theme-aware cloud style: the same white-alpha PNG serves
+        // both skies, dimmed to moonlit gray at night via --cloud-filter.
+        className={cn(
+          "h-auto w-full select-none [filter:var(--cloud-filter)]",
+          placement.flip && "-scale-x-100"
+        )}
         draggable={false}
       />
     </motion.div>

@@ -46,7 +46,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#c9e2f5",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#c9e2f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#070708" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -59,16 +62,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="light"
       className={`${GeistSans.variable} ${azeretMono.variable} ${manrope.variable}`}
       suppressHydrationWarning
     >
       <body>
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="light"
-          forcedTheme="light"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem
         >
           <SkyProvider>{children}</SkyProvider>
           <ConsoleGreeting />

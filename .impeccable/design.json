@@ -1,12 +1,13 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-11T00:00:00Z",
+  "generatedAt": "2026-07-11T18:00:00Z",
   "title": "Design System: cashu.me",
   "extensions": {
     "colorMeta": {
       "sky-top": { "role": "background", "displayName": "Sky Top", "canonical": "#c9e2f5" },
       "sky-bottom": { "role": "background", "displayName": "Sky Bottom", "canonical": "#dcedf9" },
       "sky-mid": { "role": "surface", "displayName": "Sky Mid", "canonical": "#cfe5f7" },
+      "night-sky": { "role": "background", "displayName": "Night Sky", "canonical": "oklch(13% 0.003 280)" },
       "ink": { "role": "foreground", "displayName": "Ink", "canonical": "oklch(16% 0.015 260)" },
       "cashu-lilac-cta": { "role": "accent", "displayName": "Cashu Lilac CTA", "canonical": "#5b46d4" },
       "scan": { "role": "accent-exempt", "displayName": "Scan Green", "canonical": "#16a34a" },
@@ -32,8 +33,8 @@
     "shadows": [
       {
         "name": "glass-frost",
-        "value": "inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28)",
-        "purpose": "The one shared frosted-glass surface: buttons, the nav pill, custody-comparison's checkpoint band/chips, and the bento cards."
+        "value": "var(--glass-shadow)",
+        "purpose": "The one shared frosted-glass surface: buttons, the nav pill, custody-comparison's checkpoint band/chips, and the bento cards. Theme-aware token: light = inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); dark = inset 0 1px 0 0 rgba(255,255,255,0.08), 0 8px 24px -12px rgba(0,0,0,0.6). Borders come from --glass-border (white/50 light, white/14 dark) and --glass-border-strong on hover/scroll (white/70 light, white/22 dark)."
       }
     ],
     "motion": [
@@ -104,6 +105,7 @@
     "keyCharacteristics": [
       "Editorial scale (hero up to ~10.5rem at large viewports), tight tracking (-0.035em in mixed case), short leading (1 on Display 1).",
       "One continuous daylight-sky surface page-wide; clouds are photographic cutouts, small, ambient, never the subject.",
+      "A full night theme follows the system preference (next-themes, data-theme attribute, pre-paint script) with a persistent sun/moon toggle in the nav: the sky collapses to a flat near-black oklch(13% 0.003 280) and the same white-alpha cloud PNGs dim to moonlit gray via --cloud-filter: brightness(0.42).",
       "Lilac accent used sparingly: CTA hover, link underlines, ::selection. Never large fields.",
       "One shared frosted-glass recipe, reused verbatim on buttons, the nav pill, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe.",
       "Native <details> accordion, native <a> rectangular buttons. No bespoke widgets where the platform suffices.",
@@ -111,6 +113,7 @@
     ],
     "rules": [
       { "name": "The Ambient Sky Rule", "body": "The sky is ambient, not the subject. Clouds are photographic cutouts only, sized larger on desktop than mobile, at most ~3 visible per viewport-height, never behind running text or interactive targets.", "section": "colors" },
+      { "name": "The Night Sky", "body": "Dark theme follows prefers-color-scheme by default (nothing stored), with a persistent light/dark override. The night field is flat oklch(13% 0.003 280); the same cloud PNGs are dimmed via --cloud-filter: brightness(0.42), a contrast ceiling (foreground over the densest cloud core is 5.4:1 at 0.42; never raise past 0.45). Theme switching flips CSS custom properties only: no asset swap, no layout.", "section": "colors" },
       { "name": "The One Voice Rule", "body": "Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point.", "section": "colors" },
       { "name": "The Scan Color Exemption", "body": "The --scan token (green) is the sole sanctioned non-lilac chromatic, scoped to custody-comparison.tsx where it carries the surveillance metaphor. It must not appear elsewhere on the page.", "section": "colors" },
       { "name": "The No-Pure-Black, No-Pure-White Rule", "body": "Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240-260).", "section": "colors" },
@@ -129,7 +132,8 @@
       "Do cap body lines at 65ch using max-w-[65ch]. Cap lead lines at 48-55ch.",
       "Do use text-wrap: balance on headings and text-wrap: pretty on prose.",
       "Do keep the navbar a floating glass pill inset from the viewport edges, not an edge-to-edge bar.",
-      "Do serve any transparent pixel-art or soft-alpha PNG via next/image with unoptimized — its optimizer flattens alpha to black otherwise."
+      "Do serve any transparent pixel-art or soft-alpha PNG via next/image with unoptimized — its optimizer flattens alpha to black otherwise.",
+      "Do route theme-dependent glass values through the --glass-border / --glass-border-strong / --glass-shadow tokens and cloud dimming through --cloud-filter; never hardcode white borders or light-assuming shadows at a call site."
     ],
     "donts": [
       "Don't use neon-on-black crypto colors. No electric green/blue/orange neon, no 3D rendered logos, no futurist UI.",
