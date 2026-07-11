@@ -21,6 +21,7 @@ export default function Home() {
         />
         <TapToPay />
         <FeatureHighlight
+          id="feature-2"
           feature={siteConfig.featureHighlight[1]}
           layoutIndex={0}
           className="pt-0 pb-0"

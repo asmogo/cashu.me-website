@@ -1,5 +1,6 @@
 "use client";
 
+import { CloudField } from "@/components/sky/cloud-field";
 import { ApkBadge } from "@/components/ui/apk-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { BrowserBadge } from "@/components/ui/browser-badge";
@@ -12,6 +13,7 @@ import {
   REVEAL_DURATION_SM,
   REVEAL_STAGGER,
 } from "@/lib/animation";
+import { SECTION_CLOUDS } from "@/lib/clouds";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
@@ -52,8 +54,11 @@ export function Hero() {
       id="hero"
       className="relative min-h-[100vh] w-full overflow-hidden"
     >
-      {/* Soft halos behind the phone trio, lifts them off the inkwell. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 flex h-[60%] items-center justify-center">
+      <CloudField section={SECTION_CLOUDS.hero} />
+
+      {/* Bright haze behind the phone trio — sun-through-cloud, lifts them
+          off the sky. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex h-[60%] items-center justify-center">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -62,7 +67,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.3 }
           }
-          className="absolute size-[820px] rounded-full bg-foreground/[0.04] blur-[160px]"
+          className="absolute size-[820px] rounded-full bg-white/40 blur-[160px]"
         />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
@@ -72,7 +77,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.5 }
           }
-          className="absolute size-[460px] -translate-x-[260px] rounded-full bg-foreground/[0.06] blur-[110px]"
+          className="absolute size-[460px] -translate-x-[260px] rounded-full bg-white/50 blur-[110px]"
         />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
@@ -82,11 +87,11 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.5 }
           }
-          className="absolute size-[460px] translate-x-[260px] rounded-full bg-foreground/[0.06] blur-[110px]"
+          className="absolute size-[460px] translate-x-[260px] rounded-full bg-white/50 blur-[110px]"
         />
       </div>
 
-      <div className="container-page relative px-6 pt-[var(--section-y-wide)] pb-0 text-center lg:px-10">
+      <div className="container-page relative z-10 px-6 pt-[var(--section-y-wide)] pb-0 text-center lg:px-10">
         {/* Opacity stays at 1 throughout: this is the LCP candidate, and an
             opacity-0 initial state would keep it unpainted (and CWV-invisible)
             until the delayed fade resolves. Blur+rise still reads as a reveal

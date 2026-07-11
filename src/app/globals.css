@@ -128,8 +128,40 @@
   font-display: swap;
 }
 
+/* Daylight sky theme (default). The page background IS the sky: a near-flat
+   vertical gradient from --sky-top (page top, deeper — zenith) to --sky-bottom
+   (page bottom, paler — horizon). Every neutral is blue-tinted per the
+   No-Pure-Black/White rule; hue sits at ~240 to match the sky.
+   Contrast on sky (WCAG): foreground 15.9:1 · muted-foreground 6.6:1 ·
+   primary #5b46d4 ≥4.5:1 (small text OK). #7a66e8 is display-scale only. */
 :root,
+[data-theme="light"] {
+  --sky-top: #c9e2f5;
+  --sky-bottom: #dcedf9;
+  --background: #cfe5f7;
+  --foreground: oklch(16% 0.015 260);
+  --muted: oklch(94% 0.02 240);
+  --muted-foreground: oklch(42% 0.03 255);
+  --border: oklch(78% 0.035 240);
+  --input: oklch(78% 0.035 240);
+  --ring: #5b46d4;
+  --primary: #5b46d4;
+  --primary-foreground: oklch(98% 0.005 260);
+  --secondary: oklch(87% 0.035 240);
+  --secondary-foreground: oklch(16% 0.015 260);
+  --accent: oklch(87% 0.035 240);
+  --accent-foreground: oklch(16% 0.015 260);
+  --destructive: oklch(50% 0.19 29.6);
+  --destructive-foreground: oklch(98% 0.005 260);
+  --card: oklch(94% 0.02 240);
+  --card-foreground: oklch(16% 0.015 260);
+  --scan: #16a34a;
+}
+
+/* Dormant since the daylight-sky redesign; kept for a future theme toggle. */
 [data-theme="dark"] {
+  --sky-top: oklch(13% 0.003 280);
+  --sky-bottom: oklch(13% 0.003 280);
   --background: oklch(13% 0.003 280);
   --foreground: oklch(98% 0.003 280);
   --muted: oklch(20% 0.003 280);
@@ -148,23 +180,6 @@
   --card: oklch(15% 0.003 280);
   --card-foreground: oklch(98% 0.003 280);
   --scan: #86efac;
-}
-
-[data-theme="light"] {
-  --background: oklch(99% 0.003 280);
-  --foreground: oklch(13% 0.003 280);
-  --muted: oklch(96% 0.003 280);
-  --muted-foreground: oklch(45% 0.01 280);
-  --border: oklch(90% 0.005 280);
-  --input: oklch(90% 0.005 280);
-  --ring: #7a66e8;
-  --primary: #7a66e8;
-  --primary-foreground: oklch(99% 0.003 280);
-  --secondary: oklch(95% 0.005 280);
-  --secondary-foreground: oklch(13% 0.003 280);
-  --accent: oklch(95% 0.005 280);
-  --accent-foreground: oklch(13% 0.003 280);
-  --scan: #16a34a;
 }
 
 @theme inline {
@@ -208,12 +223,18 @@
 
 html {
   scroll-behavior: smooth;
+  /* overscroll/rubber-band areas match the page top */
+  background: var(--sky-top);
 }
 
 body {
   position: relative;
-  background: var(--background);
+  /* The sky: one near-flat gradient across the whole document, deeper at the
+     top (zenith) and palest behind the dense FAQ/footer (horizon). */
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom));
   color: var(--foreground);
+  /* drifting decorative clouds must never create a horizontal scrollbar */
+  overflow-x: clip;
   font-family: var(--font-sans);
   font-feature-settings: "kern", "ss01";
   font-kerning: normal;
@@ -222,19 +243,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle grain — matte printed ink texture across the whole page. */
+/* Subtle grain — matte printed ink texture across the whole page. Kept over
+   the sky at reduced strength: it keeps the pale gradient from reading as a
+   stock fintech backdrop and dithers away any gradient banding. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 100;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.045;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* Faint vignette so edges fall away from the content. */
+/* Faint vignette so edges fall away from the content — blue-gray and much
+   lighter than the dark theme's: heavy black corners on a pale sky read as
+   storm-light. */
 body::after {
   content: "";
   position: fixed;
@@ -243,15 +268,15 @@ body::after {
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.35) 100%
+    transparent 60%,
+    rgba(58, 90, 132, 0.12) 100%
   );
 }
 
 @media (prefers-reduced-motion: no-preference) {
   @media (min-width: 768px) {
     body::before {
-      opacity: 0.05;
+      opacity: 0.04;
     }
   }
 }

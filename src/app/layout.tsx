@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { Azeret_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SkyProvider } from "@/components/sky/sky-provider";
 import { ConsoleGreeting } from "@/components/console-greeting";
 import { siteConfig } from "@/lib/config";
 import "./globals.css";
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#c9e2f5",
   width: "device-width",
   initialScale: 1,
 };
@@ -51,18 +52,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="dark"
+      data-theme="light"
       className={`${GeistSans.variable} ${azeretMono.variable}`}
       suppressHydrationWarning
     >
       <body>
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="dark"
-          forcedTheme="dark"
+          defaultTheme="light"
+          forcedTheme="light"
           enableSystem={false}
         >
-          {children}
+          <SkyProvider>{children}</SkyProvider>
           <ConsoleGreeting />
         </ThemeProvider>
       </body>

@@ -88,6 +88,31 @@
         "role": "neutral",
         "displayName": "Rule Light",
         "canonical": "oklch(92% 0.003 285)"
+      },
+      "sky-top": {
+        "role": "surface",
+        "displayName": "Sky Top",
+        "canonical": "#c9e2f5"
+      },
+      "sky-bottom": {
+        "role": "surface",
+        "displayName": "Sky Bottom",
+        "canonical": "#dcedf9"
+      },
+      "sky-mid": {
+        "role": "surface",
+        "displayName": "Sky Mid",
+        "canonical": "#cfe5f7"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(16% 0.015 260)"
+      },
+      "cashu-lilac-cta": {
+        "role": "primary",
+        "displayName": "Cashu Lilac CTA",
+        "canonical": "#5b46d4"
       }
     },
     "typographyMeta": {
@@ -189,10 +214,10 @@
   ],
   "narrative": {
     "northStar": "The Bearer Specimen",
-    "overview": "cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. Sections alternate between a black inkwell and a white specimen cream, the way a printed monograph alternates between facing plates and explanatory text. The aesthetic is editorial and committed, not enterprise. Restraint is the voice. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not pastel, not navy-and-gold.",
+    "overview": "cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. Since the Daylight Sky revision (2026-07-11) the whole page sits on a single continuous daylight-sky surface: a near-flat blue gradient with small photographic cloud cutouts as ambient decoration. The aesthetic is editorial and committed, not enterprise. Restraint is the voice. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not navy-and-gold; the sky gradient is the one sanctioned soft color field.",
     "keyCharacteristics": [
       "Editorial scale (hero up to ~10rem at large viewports), tight tracking (-0.035em), short leading (0.94).",
-      "Section-scoped dark/light theming via [data-theme] — themes alternate, not chosen.",
+      "One continuous daylight-sky surface page-wide; the earlier alternating [data-theme] plates are retired but the token architecture is kept.",
       "Lilac accent used sparingly: [N] marks, CTA hover, ::selection. Never large fields.",
       "Native <details> accordion, native <a> pill buttons. No bespoke widgets where the platform suffices.",
       "Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome."
@@ -203,7 +228,8 @@
       { "name": "The Specimen Scale Rule", "body": "The hero owns Display 1. No other element on the page reaches that size. Hierarchy is enforced by giving the apex one place to live.", "section": "typography" },
       { "name": "The Balanced Wrap Rule", "body": "All headings carry text-wrap: balance. All long-form prose carries text-wrap: pretty.", "section": "typography" },
       { "name": "The Mono-as-Structure Rule", "body": "Mono is structural, not decorative. It appears on [N] marks, pill tags, eyebrow labels, and the version stamp. Decorative mono is costume.", "section": "typography" },
-      { "name": "The Flat-by-Default Rule", "body": "Buttons, cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones).", "section": "elevation" }
+      { "name": "The Flat-by-Default Rule", "body": "Buttons, cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones).", "section": "elevation" },
+      { "name": "The Ambient Sky Rule", "body": "The sky is ambient, not the subject. Clouds are small photographic cutouts (never cartoon shapes), at most ~3 visible per viewport, placed in gutters and section seams, aria-hidden and pointer-events none. Motion is one global scroll-progress value driving transform-only drift; reduced-motion renders them static. If a section reads cloudy, the rule is broken.", "section": "colors" }
     ],
     "dos": [
       "Do keep Cashu Lilac at ≤5% of any screen.",
@@ -216,7 +242,7 @@
     ],
     "donts": [
       "Don't use neon-on-black crypto colors. No electric neon, no 3D logos, no futurist UI.",
-      "Don't use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut.",
+      "Don't use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut. Sanctioned exception: the single page-wide daylight-sky gradient and its photographic cloud cutouts, and nothing beyond them.",
       "Don't lean on bank navy + gold institutional gravitas.",
       "Don't use Web3 / DeFi maximalism: glassmorphism, rainbow accents, chart-driven heros.",
       "Don't use card grids with icon + heading + subtitle templates.",

@@ -104,12 +104,12 @@ function Feature({
         )}
       >
         <div className="relative">
-          {/* Soft halo lifts the phone off the inkwell, matching the hero. */}
+          {/* Bright haze lifts the phone off the sky, matching the hero. */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 flex items-center justify-center"
           >
-            <div className="size-[520px] rounded-full bg-foreground/[0.08] blur-[140px]" />
+            <div className="size-[520px] rounded-full bg-white/50 blur-[140px]" />
           </div>
           <Image
             src={imageSrc}

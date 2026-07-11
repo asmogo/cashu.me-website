@@ -1,10 +1,13 @@
 import { FooterWordmark } from "@/components/footer-wordmark";
+import { CloudField } from "@/components/sky/cloud-field";
+import { SECTION_CLOUDS } from "@/lib/clouds";
 import { siteConfig } from "@/lib/config";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/60">
-      <div className="container-page flex flex-col px-6 pt-[var(--section-y-tight)] pb-10 lg:px-10">
+    <footer className="relative border-t border-border/60">
+      <CloudField section={SECTION_CLOUDS.footer} />
+      <div className="container-page relative z-10 flex flex-col px-6 pt-[var(--section-y-tight)] pb-10 lg:px-10">
         {/* Utility columns. md collapse: multi-item grids (bento, this) break at md;
             two-panel text+media sections break at lg. */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">

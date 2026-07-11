@@ -2,6 +2,11 @@
 name: cashu.me
 description: Bearer cash for the web — an open-source ecash wallet marketing site.
 colors:
+  sky-top: "#c9e2f5"
+  sky-bottom: "#dcedf9"
+  sky-mid: "#cfe5f7"
+  ink: "#14181f"
+  cashu-lilac-cta: "#5b46d4"
   inkwell: "#0a0a0a"
   specimen-cream: "#ffffff"
   paper: "#fafafa"
@@ -91,14 +96,16 @@ components:
 
 **Creative North Star: "The Bearer Specimen"**
 
-cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. Sections alternate between a black inkwell and a white specimen cream, the way a printed monograph alternates between facing plates and explanatory text. The visitor moves down the page the way you move down a printed broadsheet, not the way you scroll a feed.
+cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. The visitor moves down the page the way you move down a printed broadsheet, not the way you scroll a feed.
+
+> **Daylight Sky revision (2026-07-11, deliberate).** The page's surface is no longer the alternating inkwell/cream of the original spec: the whole page now sits on a single continuous daylight-sky surface — a near-flat blue gradient (`sky-top` → `sky-bottom`, deeper at the top of the page, palest behind the FAQ/footer) with a small library of photographic cloud cutouts instanced at small sizes as ambient decoration. The specimen posture is unchanged: type is still the artifact, ink on sky. The sky is ambient, not the subject — see The Ambient Sky Rule in §2. The dark inkwell token set remains defined but dormant.
 
 The aesthetic is editorial and committed, not enterprise. Restraint is the voice — generous whitespace, oversize display, mono labels for structural chrome. The single chromatic note is a soft lilac that sits between purple and periwinkle, reserved for emphasis. The page rejects every dominant crypto-site reflex: it is not neon, not glassmorphic, not chart-heavy, not pastel, not navy-and-gold.
 
 **Key Characteristics:**
 
 - Editorial scale (hero up to ~10rem at large viewports), tight tracking (`-0.035em`), short leading (0.94).
-- Section-scoped dark/light theming via `[data-theme]` — themes alternate, not chosen.
+- One continuous daylight-sky surface page-wide (since the Daylight Sky revision); the earlier alternating `[data-theme]` plates are retired but the token architecture is kept.
 - Lilac accent used sparingly: CTA hover, link underlines, `::selection`. Never large fields.
 - Native `<details>` accordion, native `<a>` rectangular buttons. No bespoke widgets where the platform suffices.
 - Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome.
@@ -107,12 +114,22 @@ The aesthetic is editorial and committed, not enterprise. Restraint is the voice
 
 ## 2. Colors
 
-A two-surface monochrome system anchored by a single chromatic accent. The palette is dispassionate, the lilac is the one place voice enters.
+A single sky surface anchored by ink type and one chromatic accent. The palette is dispassionate, the lilac is the one place voice enters.
+
+### The Sky Surface (Daylight Sky revision)
+
+- **Sky Top** (`#c9e2f5`) → **Sky Bottom** (`#dcedf9`): the page background is one near-flat vertical gradient across the whole document, deeper at the top (zenith) and palest at the bottom (horizon, behind the dense FAQ/footer). No photographic backdrop, no tiling imagery: the sky surface is a flat color field; the photography lives only in the small cloud cutouts.
+- **Sky Mid** (`#cfe5f7`): the `--background` token — used for translucent fills (header glass) and anywhere a single solid surface color is needed.
+- **Ink** (`oklch(16% 0.015 260)` ≈ `#14181f`): foreground type on sky. 15.9:1 on Sky Bottom, 14.8:1 on Sky Top (AAA).
+- Muted text: `oklch(42% 0.03 255)` ≥6.5:1 on sky (AA+). Hairlines/borders: `oklch(78% 0.035 240)`.
+
+**The Ambient Sky Rule.** The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes), extracted from a single-light-direction library (`/public/images/clouds`, placements in `src/lib/clouds.ts`), instanced small (~40–180px; one ~230px signature in the hero). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift; reduced-motion renders them static (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads "cloudy," the rule is broken.
 
 ### Primary
 
-- **Cashu Lilac** (`#b4a7f5`): The single chromatic voice. Reserved for link underlines, CTA hover, and `::selection`. Never used as a large color field. Permitted on dark surfaces where it passes WCAG AA against `#0a0a0a`.
-- **Cashu Lilac Deep** (`#7a66e8`): The light-surface variant. The lighter shade fails WCAG AA against `#ffffff` for text, so the deeper variant takes over on white. Same role: emphasis, not surface.
+- **Cashu Lilac CTA** (`#5b46d4`): the accent for small text and interactive emphasis on the sky surface — ≥4.5:1 (AA) against both gradient ends. Takes over the roles Cashu Lilac Deep held on light surfaces.
+- **Cashu Lilac Deep** (`#7a66e8`): 3.45:1 on sky — display-scale/graphic use only (≥24px), never small text on sky.
+- **Cashu Lilac** (`#b4a7f5`): the dark-surface voice; dormant with the inkwell set. Reserved for link underlines, CTA hover, and `::selection` on dark. Never used as a large color field.
 
 ### Neutral
 
@@ -130,7 +147,7 @@ A two-surface monochrome system anchored by a single chromatic accent. The palet
 
 **The Scan Color Exemption.** The `--scan` token (green, `#86efac` on dark / `#16a34a` on light) is the sole sanctioned non-lilac chromatic, scoped to `custody-comparison.tsx` where it carries the surveillance metaphor (the bank lane "sees" a green packet; the mint lane blurs it). It must not appear elsewhere on the page.
 
-**The No-Pure-Black, No-Pure-White Rule.** Every surface tints toward the brand hue at chroma 0.005–0.01. Inkwell renders as `oklch(13% 0.003 280)` and Specimen Cream as `oklch(99% 0.003 280)` (a near-imperceptible lilac warmth that prevents the surfaces from reading as raw RGB). Legacy spec values `#0a0a0a` and `#ffffff` are kept above only for documentation reference.
+**The No-Pure-Black, No-Pure-White Rule.** Every surface and neutral tints toward a hue. Since the Daylight Sky revision the reference hue for neutrals is the sky's (~240–260): ink is `oklch(16% 0.015 260)`, muted/borders sit at hue 240–255. The dormant dark set keeps its lilac-tinted values (`oklch(13% 0.003 280)` etc.). Legacy spec values `#0a0a0a` and `#ffffff` are kept above only for documentation reference.
 
 ## 3. Typography
 
@@ -238,7 +255,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 ### Don't
 
 - **Don't** use neon-on-black crypto colors. No electric green/blue/orange neon, no 3D rendered logos, no futurist UI. This is the dominant crypto-site reflex and the brand explicitly rejects it.
-- **Don't** use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut. Reads as custodial app and undermines bearer positioning.
+- **Don't** use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut. Reads as custodial app and undermines bearer positioning. *Sanctioned exception (Daylight Sky revision): the single page-wide sky gradient and its photographic cloud cutouts. The exception covers exactly that surface — no additional pastel fields, no illustrated/cartoon clouds, no further gradients.*
 - **Don't** lean on bank navy + gold institutional gravitas. Wrong register entirely.
 - **Don't** use Web3 / DeFi maximalism — glassmorphism, rainbow accents, dashboard-heavy charts, chart-driven hero treatments.
 - **Don't** use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards.
