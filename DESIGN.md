@@ -189,15 +189,15 @@ The sole sanctioned exceptions are phones and banknote-style mockups: objects de
 
 ### Named Rules
 
-**The Flat-by-Default Rule.** Buttons, cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones, banknote-style mockups). Never decorative, never on UI surfaces.
+**The Flat-by-Default Rule.** Cards, inputs, sections, and chips are flat at rest. Shadows are reserved for objects depicting physical things (phones, banknote-style mockups) and for the button system's frosted-glass treatment (see below). Never decorative elsewhere, never on other UI surfaces.
 
 ## 5. Components
 
 ### Buttons
 
-Sharp rectangles (`border-radius: 0`). The editorial register prefers severity to softness; the absence of a curve signals broadsheet, not consumer app. Three roles, distinguished by surface treatment, not shape.
+**Frosted glass (2026-07-11, deliberate).** Buttons carry a soft, slightly-rounded (`rounded-lg`) frosted-glass surface — a deliberate departure from this doc's earlier "sharp rectangle, flat" stance, chosen to echo the cloud/sky motif rather than the old dark-theme's severe ink-block buttons. Recipe: translucent `background/55` fill, `backdrop-blur-lg`, a soft white hairline border (`border-white/50`), an inset top highlight plus a diffuse sky-blue-tinted drop shadow (`shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)]`), `--foreground` text. Hover deepens the fill (`background/75`) and brightens the border (`white/70`). Three roles, distinguished by surface treatment, not shape.
 
-- **CTA (default fill)**: Inverse-surface fill. On dark sections: paper background, inkwell text. On light sections: inkwell background, paper text. Hover lightens to `foreground/90`. Used at most once per section for the primary action.
+- **CTA (primary)**: The frosted-glass treatment above. Used at most once per section for the primary action (header nav CTA, mobile drawer CTA).
 - **Outline**: Transparent fill, hairline border in `--border`, hover lifts border to `foreground/40` and tints background to `foreground/5`. Used adjacent to CTAs for secondary actions ("View source").
 - **Ghost / Link**: Text-only affordances. Ghost picks up a subtle background tint on hover; Link underlines.
 
@@ -231,9 +231,7 @@ Used at most once on the page, with a single composed mock interior. Never repea
 
 ### Store Badges
 
-Official Apple "Download on the App Store" SVG and Google "Get it on Google Play" artwork, used verbatim from each platform's marketing-resources kit. Reserved for the hero, where they signal native install. Sized so both share a 48px (mobile) / 56px (desktop) baseline height, anchored on a shared baseline grid so the artwork inside each badge aligns optically. These are the one place where third-party brand assets are allowed to override the Bearer Specimen aesthetic: recognition is the conversion driver, the aesthetic concession is one-time and confined to the hero.
-
-Do not recolor, restyle, or stretch the artwork. Do not place on top of imagery. Do not rotate.
+Custom icon + two-line-label chips (`<AppStoreBadge>`, `<ApkBadge>`, `<BrowserBadge>`) rather than official platform artwork. Reserved for the hero, where they signal native install (plus the in-browser path). Same frosted-glass recipe as the button system (see Buttons above), with `--muted-foreground` for the small eyebrow line. Hover brightens the border, deepens the fill, and nudges the badge up (`-translate-y-0.5`).
 
 ### Specimen Blocks (not currently shipped)
 

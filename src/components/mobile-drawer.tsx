@@ -70,7 +70,7 @@ export function MobileDrawer() {
             href={siteConfig.links.wallet}
             target="_blank"
             rel="noreferrer noopener"
-            className={cn(buttonVariants({ variant: "default", size: "lg" }))}
+            className={cn(buttonVariants({ variant: "primary", size: "lg" }))}
           >
             {siteConfig.cta}
           </a>

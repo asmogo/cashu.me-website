@@ -74,10 +74,10 @@ export const CLOUD_ASSETS: Record<
 };
 
 /** total X travel (px) of a depth-1 cloud across the full page scroll */
-export const DRIFT_RANGE = 420;
+export const DRIFT_RANGE = 560;
 
 /** total Y travel (px) of a depth-1 cloud per unit of scroll-progress delta */
-export const RISE_RANGE = 900;
+export const RISE_RANGE = 1200;
 
 export const TIERS: Record<
   CloudTier,

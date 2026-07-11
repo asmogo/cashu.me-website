@@ -75,7 +75,7 @@ export function Header() {
             href={siteConfig.links.wallet}
             target="_blank"
             rel="noreferrer noopener"
-            className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+            className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
           >
             {siteConfig.cta}
           </a>

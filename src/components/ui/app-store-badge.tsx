@@ -16,7 +16,7 @@ export function AppStoreBadge({ href, className }: AppStoreBadgeProps) {
       rel="noreferrer noopener"
       aria-label="Download the cashu.me beta on TestFlight"
       className={cn(
-        "group inline-flex h-14 items-center gap-3 rounded-none border border-white/15 bg-black px-4 text-white transition-[border-color,transform] duration-200 hover:border-white/30 hover:-translate-y-0.5 active:scale-[0.98] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100",
+        "group inline-flex h-14 items-center gap-3 rounded-lg border border-white/50 bg-background/55 backdrop-blur-lg px-4 text-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.55),0_8px_24px_-12px_rgba(30,64,120,0.28)] transition-[border-color,background-color,transform] duration-200 hover:border-white/70 hover:bg-background/75 hover:-translate-y-0.5 active:scale-[0.98] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100",
         className
       )}
     >
@@ -25,7 +25,7 @@ export function AppStoreBadge({ href, className }: AppStoreBadgeProps) {
         aria-hidden="true"
       />
       <span className="flex flex-col items-start leading-none">
-        <span className="type-button text-[10px] text-white/80">
+        <span className="type-button text-[10px] text-muted-foreground">
           Download Beta on
         </span>
         <span className="mt-1 type-button text-[16px]">
