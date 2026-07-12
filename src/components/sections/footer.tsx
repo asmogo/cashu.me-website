@@ -35,7 +35,10 @@ export function Footer() {
         </div>
 
         {/* The brand sign-off */}
-        <div className="py-12 md:py-20">
+        <div className="flex flex-col gap-2 py-12 md:py-20">
+          <p className="type-subhead text-muted-foreground">
+            {siteConfig.footer.tagline}
+          </p>
           <FooterWordmark text={siteConfig.name} />
         </div>
 

@@ -44,7 +44,7 @@ export const siteConfig = {
     {
       title: "Lose the phone, keep the cash.",
       description:
-        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware: it's tied to words.",
+        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time.",
       imageSrc: "/images/screen-backup.png",
       direction: "ltr" as const,
     },
@@ -76,9 +76,9 @@ export const siteConfig = {
     },
     {
       id: "lightning-address",
-      title: "On-chain, BOLT12, Lightning address.",
+      title: "Bitcoin address, BOLT12, Lightning address.",
       content:
-        "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline. Open the wallet and they mint into ecash.",
+        "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline.",
       imageSrc: "/images/screen-lightning-address.png",
       imageAlt: "Bottom sheet showing a Lightning Address QR code with Copy and Share actions",
       fullWidth: false,
@@ -96,7 +96,7 @@ export const siteConfig = {
         "You lose the ecash minted there. The protocol does not solve this. Mitigate by choosing mints with known operators, holding small amounts per mint, and redeeming regularly to a Lightning wallet you control.",
     },
     {
-      question: "How is this different from a custodial wallet?",
+      question: "How is this different from an account-based (custodial) wallet?",
       answer:
         "Account-based wallets hold a balance in a database tied to your identity and can rate-limit, suspend, or geofence you. A Cashu mint also holds bitcoin, but it issues you blinded bearer ecash instead of an account balance. You can swap to another mint, send ecash peer-to-peer, or withdraw to any Lightning address, without permission.",
     },
