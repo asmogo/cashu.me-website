@@ -74,8 +74,10 @@ export const siteConfig = {
       title: "iMessage, SMS, Bluetooth, your group chat.",
       content:
         "Ecash is just text. Anywhere you can paste a string (a chat, an SMS, a Bluetooth share), you can send money. No app to install on their end.",
-      imageSrc: "/images/screen-imessage.png",
-      imageAlt: "iMessage chat where a long Cashu token is sent in reply to '$5 for lunch'",
+      imageSrc: "/images/screen-imessage-light.png",
+      imageSrcDark: "/images/screen-imessage-dark.png",
+      imageAlt:
+        "iMessage thread: a long Cashu token pasted in reply to 'dinner last night was $38 each'",
       fullWidth: false,
     },
     {

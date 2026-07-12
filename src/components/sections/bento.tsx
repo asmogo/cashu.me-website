@@ -94,9 +94,23 @@ export function BentoGrid() {
                       width={585}
                       height={1266}
                       sizes="(min-width: 768px) 50vw, 100vw"
-                      className="h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2"
+                      className={cn(
+                        "h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2",
+                        "imageSrcDark" in item && item.imageSrcDark && "dark:hidden"
+                      )}
                       draggable={false}
                     />
+                    {"imageSrcDark" in item && item.imageSrcDark && (
+                      <Image
+                        src={item.imageSrcDark}
+                        alt={item.imageAlt}
+                        width={585}
+                        height={1266}
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="hidden h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2 dark:block"
+                        draggable={false}
+                      />
+                    )}
                   </div>
                 ) : item.id === "lightning-address" ? (
                   <div className="w-full max-w-[340px] self-end">
