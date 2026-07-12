@@ -103,12 +103,26 @@ export function BentoGrid() {
                     <Image
                       src={item.imageSrc}
                       alt={item.imageAlt}
-                      width={1287}
-                      height={1504}
+                      width={585}
+                      height={686}
                       sizes="340px"
-                      className="block h-auto w-full select-none transition-transform duration-500 group-hover:-translate-y-1"
+                      className={cn(
+                        "block h-auto w-full select-none rounded-[1.75rem] border border-foreground/10 transition-transform duration-500 group-hover:-translate-y-1",
+                        "imageSrcDark" in item && item.imageSrcDark && "dark:hidden"
+                      )}
                       draggable={false}
                     />
+                    {"imageSrcDark" in item && item.imageSrcDark && (
+                      <Image
+                        src={item.imageSrcDark}
+                        alt={item.imageAlt}
+                        width={585}
+                        height={686}
+                        sizes="340px"
+                        className="hidden h-auto w-full select-none rounded-[1.75rem] border border-foreground/10 transition-transform duration-500 group-hover:-translate-y-1 dark:block"
+                        draggable={false}
+                      />
+                    )}
                   </div>
                 ) : (
                   <Image

@@ -46,7 +46,10 @@ export const siteConfig = {
       title: "Lose the phone, keep the cash.",
       description:
         "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time.",
-      imageSrc: "/images/screen-backup.png",
+      videoSrc: "/videos/seedphrase-light.mp4",
+      videoSrcDark: "/videos/seedphrase-dark.mp4",
+      posterSrc: "/images/seedphrase-light-poster.jpg",
+      posterSrcDark: "/images/seedphrase-dark-poster.jpg",
       direction: "ltr" as const,
     },
   ],
@@ -80,7 +83,8 @@ export const siteConfig = {
       title: "Bitcoin address, BOLT12, Lightning address.",
       content:
         "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline.",
-      imageSrc: "/images/screen-lightning-address.png",
+      imageSrc: "/images/screen-lightning-address-light.png",
+      imageSrcDark: "/images/screen-lightning-address-dark.png",
       imageAlt: "Bottom sheet showing a Lightning Address QR code with Copy and Share actions",
       fullWidth: false,
     },

@@ -29,11 +29,19 @@ const LAYOUTS: FeatureLayout[] = [
   },
 ];
 
+// Shared "phone screen" card styling for both the still-image and video media.
+const MEDIA_CLASS =
+  "relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl";
+
 interface FeatureProps {
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc?: string;
   imageSrcDark?: string;
+  videoSrc?: string;
+  videoSrcDark?: string;
+  posterSrc?: string;
+  posterSrcDark?: string;
   isActive: boolean;
   layout: FeatureLayout;
   reduceMotion: boolean;
@@ -44,6 +52,10 @@ function Feature({
   description,
   imageSrc,
   imageSrcDark,
+  videoSrc,
+  videoSrcDark,
+  posterSrc,
+  posterSrcDark,
   isActive,
   layout,
   reduceMotion,
@@ -113,27 +125,59 @@ function Feature({
           >
             <div className="size-[520px] rounded-full bg-white/50 blur-[140px]" />
           </div>
-          <Image
-            src={imageSrc}
-            alt={title}
-            width={924}
-            height={2000}
-            sizes="300px"
-            className={cn(
-              "relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl",
-              imageSrcDark && "dark:hidden"
-            )}
-          />
-          {imageSrcDark && (
-            <Image
-              src={imageSrcDark}
-              alt={title}
-              width={924}
-              height={2000}
-              sizes="300px"
-              className="relative hidden h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl dark:block"
-            />
-          )}
+          {videoSrc ? (
+            <>
+              <video
+                src={videoSrc}
+                poster={posterSrc}
+                preload="none"
+                width={720}
+                height={1558}
+                autoPlay={!reduceMotion}
+                loop={!reduceMotion}
+                muted
+                playsInline
+                aria-hidden="true"
+                className={cn(MEDIA_CLASS, videoSrcDark && "dark:hidden")}
+              />
+              {videoSrcDark && (
+                <video
+                  src={videoSrcDark}
+                  poster={posterSrcDark}
+                  preload="none"
+                  width={720}
+                  height={1558}
+                  autoPlay={!reduceMotion}
+                  loop={!reduceMotion}
+                  muted
+                  playsInline
+                  aria-hidden="true"
+                  className={cn(MEDIA_CLASS, "hidden dark:block")}
+                />
+              )}
+            </>
+          ) : imageSrc ? (
+            <>
+              <Image
+                src={imageSrc}
+                alt={title}
+                width={924}
+                height={2000}
+                sizes="300px"
+                className={cn(MEDIA_CLASS, imageSrcDark && "dark:hidden")}
+              />
+              {imageSrcDark && (
+                <Image
+                  src={imageSrcDark}
+                  alt={title}
+                  width={924}
+                  height={2000}
+                  sizes="300px"
+                  className={cn(MEDIA_CLASS, "hidden dark:block")}
+                />
+              )}
+            </>
+          ) : null}
         </div>
       </div>
     </div>
@@ -186,9 +230,17 @@ export function FeatureHighlight({
         layout={layout}
         title={feature.title}
         description={feature.description}
-        imageSrc={feature.imageSrc}
+        imageSrc={"imageSrc" in feature ? feature.imageSrc : undefined}
         imageSrcDark={
           "imageSrcDark" in feature ? feature.imageSrcDark : undefined
+        }
+        videoSrc={"videoSrc" in feature ? feature.videoSrc : undefined}
+        videoSrcDark={
+          "videoSrcDark" in feature ? feature.videoSrcDark : undefined
+        }
+        posterSrc={"posterSrc" in feature ? feature.posterSrc : undefined}
+        posterSrcDark={
+          "posterSrcDark" in feature ? feature.posterSrcDark : undefined
         }
         reduceMotion={reduceMotion}
       />
