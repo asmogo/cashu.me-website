@@ -34,7 +34,7 @@
       {
         "name": "glass-frost",
         "value": "var(--glass-shadow)",
-        "purpose": "The one shared frosted-glass surface: buttons, the nav pill, custody-comparison's checkpoint band/chips, and the bento cards. Theme-aware token: light = inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); dark = inset 0 1px 0 0 rgba(255,255,255,0.08), 0 8px 24px -12px rgba(0,0,0,0.6). Borders come from --glass-border (white/50 light, white/14 dark) and --glass-border-strong on hover/scroll (white/70 light, white/22 dark)."
+        "purpose": "The one shared frosted-glass surface: buttons, the nav bar, custody-comparison's checkpoint band/chips, and the bento cards. Theme-aware token: light = inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); dark = inset 0 1px 0 0 rgba(255,255,255,0.08), 0 8px 24px -12px rgba(0,0,0,0.6). Borders come from --glass-border (white/50 light, white/14 dark) and --glass-border-strong on hover/scroll (white/70 light, white/22 dark)."
       }
     ],
     "motion": [
@@ -67,12 +67,12 @@
       "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border-radius: 8px; font-family: \"Azeret Mono\", ui-monospace, monospace; font-weight: 500; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(16% 0.015 260); background: transparent; border: 1px solid oklch(78% 0.035 240); transition: border-color 150ms, background-color 150ms; } .ds-btn-outline:hover { border-color: rgba(20,24,31,0.4); background: rgba(20,24,31,0.05); } .ds-btn-outline:focus-visible { outline: 2px solid #5b46d4; outline-offset: 4px; }"
     },
     {
-      "name": "Nav Pill",
+      "name": "Nav Bar",
       "kind": "nav",
-      "refersTo": "nav-pill",
-      "description": "Floating glass-pill header. Persistent from first paint (not scroll-gated), insets from the top/sides, intensifies slightly past 20px of scroll.",
-      "html": "<header class=\"ds-nav-shell\"><div class=\"ds-nav-pill\"><span class=\"ds-nav-brand\">cashu.me</span><a href=\"#\" class=\"ds-btn-primary\">Open Wallet</a></div></header>",
-      "css": ".ds-nav-shell { display: flex; justify-content: center; padding: 0 16px; } .ds-nav-pill { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; max-width: 1024px; padding: 12px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.5); background: rgba(207,229,247,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); transition: background-color 500ms, border-color 500ms; } .ds-nav-brand { font-family: \"Manrope\", sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(16% 0.015 260); }"
+      "refersTo": "nav-bar",
+      "description": "Floating glass header, rounded to match the button radius. Persistent from first paint (not scroll-gated), insets from the top/sides, intensifies slightly past 20px of scroll.",
+      "html": "<header class=\"ds-nav-shell\"><div class=\"ds-nav-bar\"><span class=\"ds-nav-brand\">cashu.me</span><a href=\"#\" class=\"ds-btn-primary\">Open Wallet</a></div></header>",
+      "css": ".ds-nav-shell { display: flex; justify-content: center; padding: 0 16px; } .ds-nav-bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; max-width: 1024px; padding: 12px 24px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.5); background: rgba(207,229,247,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); transition: background-color 500ms, border-color 500ms; } .ds-nav-brand { font-family: \"Manrope\", sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(16% 0.015 260); }"
     },
     {
       "name": "Bento Card",
@@ -107,7 +107,7 @@
       "One continuous daylight-sky surface page-wide; clouds are photographic cutouts, small, ambient, never the subject.",
       "A full night theme follows the system preference (next-themes, data-theme attribute, pre-paint script) with a persistent sun/moon toggle in the nav: the sky collapses to a flat near-black oklch(13% 0.003 280) and the same white-alpha cloud PNGs dim to moonlit gray via --cloud-filter: brightness(0.42).",
       "Lilac accent used sparingly: CTA hover, link underlines, ::selection. Never large fields.",
-      "One shared frosted-glass recipe, reused verbatim on buttons, the nav pill, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe.",
+      "One shared frosted-glass recipe, reused verbatim on buttons, the nav bar, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe.",
       "Native <details> accordion, native <a> rectangular buttons. No bespoke widgets where the platform suffices.",
       "Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome."
     ],
@@ -127,7 +127,7 @@
     ],
     "dos": [
       "Do keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.",
-      "Do keep the frosted-glass recipe to its four named surfaces (buttons, nav pill, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component.",
+      "Do keep the frosted-glass recipe to its four named surfaces (buttons, nav bar, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component.",
       "Do use native <details> for accordions, <a> for buttons, <section data-theme> for theme scope. Lean on the platform.",
       "Do cap body lines at 65ch using max-w-[65ch]. Cap lead lines at 48-55ch.",
       "Do use text-wrap: balance on headings and text-wrap: pretty on prose.",

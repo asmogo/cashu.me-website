@@ -9,11 +9,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import Image from "next/image";
 import { useRef } from "react";
 
-const CARD_SHAPES = [
-  { rounded: "rounded-lg", minHeight: "min-h-[460px]" },
-  { rounded: "rounded-lg", minHeight: "min-h-[360px]" },
-  { rounded: "rounded-lg", minHeight: "min-h-[420px]" },
-];
+const CARD_MIN_HEIGHTS = ["min-h-[460px]", "min-h-[360px]", "min-h-[420px]"];
 
 export function BentoGrid() {
   const ref = useRef<HTMLElement>(null);
@@ -63,15 +59,15 @@ export function BentoGrid() {
           two-panel text+media sections break at lg. */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {siteConfig.bento.map((item, index) => {
-          const shape = CARD_SHAPES[index] ?? CARD_SHAPES[CARD_SHAPES.length - 1];
+          const minHeight =
+            CARD_MIN_HEIGHTS[index] ?? CARD_MIN_HEIGHTS[CARD_MIN_HEIGHTS.length - 1];
           return (
             <motion.div
               key={index}
               style={motions[index]}
               className={cn(
-                "group relative grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden border border-glass-border bg-background/55 p-6 pb-0 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:p-8",
-                shape.rounded,
-                shape.minHeight,
+                "group relative grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-lg border border-glass-border bg-background/55 p-6 pb-0 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:p-8",
+                minHeight,
                 item.fullWidth && "md:col-span-2"
               )}
             >

@@ -22,6 +22,10 @@ const manrope = Manrope({
 });
 
 const title = "Cashu Me";
+const ogImageAlt = "Cashu Me — Privacy of a $20 bill. The speed of a tap.";
+const ogImages = [
+  { url: "/images/og-cashu-me.png", width: 1200, height: 640, alt: ogImageAlt },
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -36,12 +40,14 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
+    images: ogImages,
   },
   twitter: {
     card: "summary_large_image",
     title,
     description: siteConfig.tagline,
     creator: "@CashuBTC",
+    images: ogImages,
   },
 };
 

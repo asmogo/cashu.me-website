@@ -36,7 +36,7 @@ export function Header() {
     <header className="sticky top-4 z-50 flex justify-center px-4 lg:px-6">
       <div
         className={cn(
-          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-full border border-glass-border bg-background/55 px-6 py-3 shadow-[var(--glass-shadow)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
+          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-lg border border-glass-border bg-background/55 px-6 py-3 shadow-[var(--glass-shadow)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
           isScrolled && "border-glass-border-strong bg-background/75"
         )}
       >
