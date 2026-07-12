@@ -38,7 +38,8 @@ export const siteConfig = {
       title: "Bearer ecash, in your pocket.",
       description:
         "Your ecash lives on your device. No account, no login, no balance tied to your name. The mint holds the underlying bitcoin, same as any custodian, but you hold ecash that redeems to any Lightning address, any time, no permission needed.",
-      imageSrc: "/images/screen-receive-ecash.png",
+      imageSrc: "/images/screen-receive-ecash-light.png",
+      imageSrcDark: "/images/screen-receive-ecash-dark.png",
       direction: "ltr" as const,
     },
     {

@@ -33,6 +33,7 @@ interface FeatureProps {
   title: string;
   description: string;
   imageSrc: string;
+  imageSrcDark?: string;
   isActive: boolean;
   layout: FeatureLayout;
   reduceMotion: boolean;
@@ -42,6 +43,7 @@ function Feature({
   title,
   description,
   imageSrc,
+  imageSrcDark,
   isActive,
   layout,
   reduceMotion,
@@ -114,11 +116,24 @@ function Feature({
           <Image
             src={imageSrc}
             alt={title}
-            width={921}
+            width={924}
             height={2000}
             sizes="300px"
-            className="relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
+            className={cn(
+              "relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl",
+              imageSrcDark && "dark:hidden"
+            )}
           />
+          {imageSrcDark && (
+            <Image
+              src={imageSrcDark}
+              alt={title}
+              width={924}
+              height={2000}
+              sizes="300px"
+              className="relative hidden h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl dark:block"
+            />
+          )}
         </div>
       </div>
     </div>
@@ -172,6 +187,9 @@ export function FeatureHighlight({
         title={feature.title}
         description={feature.description}
         imageSrc={feature.imageSrc}
+        imageSrcDark={
+          "imageSrcDark" in feature ? feature.imageSrcDark : undefined
+        }
         reduceMotion={reduceMotion}
       />
     </Section>
