@@ -13,7 +13,8 @@ const links = {
   // closed beta, so there is no Play Store listing yet. It ships as a direct
   // APK download instead, via GitHub releases.
   testflight: "https://testflight.apple.com/join/DT1xF1y4",
-  androidApk: "https://github.com/asmogo/wallet/releases",
+  androidApk:
+    "https://github.com/cashubtc/wallet/releases/download/v0.1.0/cashu-wallet-android-v0.1.0.apk",
 };
 
 export const siteConfig = {
