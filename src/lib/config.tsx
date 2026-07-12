@@ -11,16 +11,16 @@ const links = {
   opencash: "http://opencash.dev/",
   // iOS ships via TestFlight (public beta); the Android native build is still in
   // closed beta, so there is no Play Store listing yet. It ships as a direct
-  // APK download instead — placeholder link until the build is hosted.
+  // APK download instead, via GitHub releases.
   testflight: "https://testflight.apple.com/join/DT1xF1y4",
-  androidApk: "#",
+  androidApk: "https://github.com/asmogo/wallet/releases",
 };
 
 export const siteConfig = {
   name: "cashu.me",
   description: "A Cashu Wallet.",
   tagline:
-    "cashu.me is the first Cashu ecash wallet. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
+    "A native wallet for iPhone and Android. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
   url: "https://cashu.me",
   cta: "Open wallet",
   keywords: [
@@ -38,14 +38,18 @@ export const siteConfig = {
       title: "Bearer ecash, in your pocket.",
       description:
         "Your ecash lives on your device. No account, no login, no balance tied to your name. The mint holds the underlying bitcoin, same as any custodian, but you hold ecash that redeems to any Lightning address, any time, no permission needed.",
-      imageSrc: "/images/screen-receive-ecash.png",
+      imageSrc: "/images/screen-receive-ecash-light.png",
+      imageSrcDark: "/images/screen-receive-ecash-dark.png",
       direction: "ltr" as const,
     },
     {
       title: "Lose the phone, keep the cash.",
       description:
-        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time. Your ecash isn't tied to hardware: it's tied to words.",
-      imageSrc: "/images/screen-backup.png",
+        "Twelve words back up your whole wallet, the same way Bitcoin does. Restore on any device, any time.",
+      videoSrc: "/videos/seedphrase-light.mp4",
+      videoSrcDark: "/videos/seedphrase-dark.mp4",
+      posterSrc: "/images/seedphrase-light-poster.jpg",
+      posterSrcDark: "/images/seedphrase-dark-poster.jpg",
       direction: "ltr" as const,
     },
   ],
@@ -70,25 +74,28 @@ export const siteConfig = {
       title: "iMessage, SMS, Bluetooth, your group chat.",
       content:
         "Ecash is just text. Anywhere you can paste a string (a chat, an SMS, a Bluetooth share), you can send money. No app to install on their end.",
-      imageSrc: "/images/screen-imessage.png",
-      imageAlt: "iMessage chat where a long Cashu token is sent in reply to '$5 for lunch'",
+      imageSrc: "/images/screen-imessage-light.png",
+      imageSrcDark: "/images/screen-imessage-dark.png",
+      imageAlt:
+        "iMessage thread: a long Cashu token pasted in reply to 'dinner last night was $38 each'",
       fullWidth: false,
     },
     {
       id: "lightning-address",
-      title: "On-chain, BOLT12, Lightning address.",
+      title: "Bitcoin address, BOLT12, Lightning address.",
       content:
-        "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline. Open the wallet and they mint into ecash.",
-      imageSrc: "/images/screen-lightning-address.png",
+        "Hand out a Bitcoin address, a BOLT12 offer, or a Lightning address. Sats arrive while you're offline.",
+      imageSrc: "/images/screen-lightning-address-light.png",
+      imageSrcDark: "/images/screen-lightning-address-dark.png",
       imageAlt: "Bottom sheet showing a Lightning Address QR code with Copy and Share actions",
       fullWidth: false,
     },
   ],
   faqs: [
     {
-      question: "Is this custodial?",
+      question: "How private is this?",
       answer:
-        "Yes. The mint holds the underlying bitcoin. What you hold is bearer ecash redeemable to any Lightning address at any time. The mint cannot freeze your withdrawal address, but it can go offline. Treat every mint the way you would treat a custodian.",
+        "Cashu uses Chaumian blind signatures: the mint signs your ecash without ever seeing the token it's signing, so it can't link what you withdraw to what you later spend. Peer-to-peer sends, over iMessage, NFC, any chat, never touch the mint at all, so there's no transaction graph to trace the way there is on-chain or across Lightning nodes. The mint still sees amounts and timing when you mint or melt to Lightning, so it isn't a total blind spot, but it makes Cashu one of the most private ways to hold and move bitcoin today.",
     },
     {
       question: "What if a mint disappears?",
@@ -96,14 +103,14 @@ export const siteConfig = {
         "You lose the ecash minted there. The protocol does not solve this. Mitigate by choosing mints with known operators, holding small amounts per mint, and redeeming regularly to a Lightning wallet you control.",
     },
     {
-      question: "How is this different from a custodial wallet?",
+      question: "How is this different from an account-based (custodial) wallet?",
       answer:
         "Account-based wallets hold a balance in a database tied to your identity and can rate-limit, suspend, or geofence you. A Cashu mint also holds bitcoin, but it issues you blinded bearer ecash instead of an account balance. You can swap to another mint, send ecash peer-to-peer, or withdraw to any Lightning address, without permission.",
     },
     {
       question: "Can I back it up?",
       answer:
-        "Two ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
+        "Three ways. cashu.me derives ecash from a 12-word BIP39 seed, the same kind Bitcoin wallets use. Mint URLs and settings export as an encrypted file. Either restores on any device. There's also an experimental iCloud backup that syncs an encrypted copy automatically; it's new and unproven, so don't rely on it alone yet. Ecash is a bearer instrument: possession of the backup means possession of the funds. Store accordingly.",
     },
   ] as { question: string; answer: ReactNode }[],
   footer: {

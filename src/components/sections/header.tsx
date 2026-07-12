@@ -3,6 +3,7 @@
 import { Icons } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { MobileDrawer } from "@/components/mobile-drawer";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -32,28 +33,26 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-[background-color,backdrop-filter] duration-500 ease-out-quart",
-        isScrolled
-          ? "bg-background/70 backdrop-blur-xl"
-          : "bg-transparent backdrop-blur-none"
-      )}
-    >
-      <div className="container-page relative flex items-center justify-between gap-6 px-6 py-4 lg:px-10">
+    <header className="sticky top-4 z-50 flex justify-center px-4 lg:px-6">
+      <div
+        className={cn(
+          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-full border border-glass-border bg-background/55 px-6 py-3 shadow-[var(--glass-shadow)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
+          isScrolled && "border-glass-border-strong bg-background/75"
+        )}
+      >
         <Link
           href="/"
           title="cashu.me"
-          className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
+          className="flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-90"
         >
-          <Logo className="size-7" />
-          <span className="font-display text-sm font-semibold uppercase tracking-[0.14em]">
+          <Logo className="size-7 shrink-0" />
+          <span className="whitespace-nowrap font-display text-sm font-bold uppercase tracking-[0.14em]">
             {siteConfig.name}
           </span>
         </Link>
 
-        <div className="hidden items-center gap-6 lg:flex">
-          <div className="flex items-center gap-5">
+        <div className="hidden shrink-0 items-center gap-6 lg:flex">
+          <div className="flex shrink-0 items-center gap-5">
             {NAV_ICONS.map(({ label, href, icon: Icon }) => {
               const isPlaceholder = href === "#";
               return (
@@ -64,34 +63,29 @@ export function Header() {
                   rel={isPlaceholder ? undefined : "noreferrer noopener"}
                   aria-label={label}
                   title={label}
-                  className="text-foreground/70 transition-colors hover:text-foreground"
+                  className="-m-2.5 inline-flex items-center justify-center p-2.5 text-foreground/70 transition-colors hover:text-foreground"
                 >
                   <Icon className="size-6" aria-hidden="true" />
                 </a>
               );
             })}
+            <ThemeToggle className="-m-2.5 inline-flex items-center justify-center p-2.5" />
           </div>
           <a
             href={siteConfig.links.wallet}
             target="_blank"
             rel="noreferrer noopener"
-            className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+            className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
           >
             {siteConfig.cta}
           </a>
         </div>
 
-        <div className="block lg:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle className="inline-flex h-11 w-11 items-center justify-center" />
           <MobileDrawer />
         </div>
       </div>
-      <div
-        aria-hidden
-        className={cn(
-          "absolute inset-x-0 bottom-0 h-px bg-border transition-opacity duration-200",
-          isScrolled ? "opacity-100" : "opacity-0"
-        )}
-      />
     </header>
   );
 }

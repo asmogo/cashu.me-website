@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-11T18:00:00Z",
+  "title": "Design System: cashu.me",
+  "extensions": {
+    "colorMeta": {
+      "sky-top": { "role": "background", "displayName": "Sky Top", "canonical": "#c9e2f5" },
+      "sky-bottom": { "role": "background", "displayName": "Sky Bottom", "canonical": "#dcedf9" },
+      "sky-mid": { "role": "surface", "displayName": "Sky Mid", "canonical": "#cfe5f7" },
+      "night-sky": { "role": "background", "displayName": "Night Sky", "canonical": "oklch(13% 0.003 280)" },
+      "ink": { "role": "foreground", "displayName": "Ink", "canonical": "oklch(16% 0.015 260)" },
+      "cashu-lilac-cta": { "role": "accent", "displayName": "Cashu Lilac CTA", "canonical": "#5b46d4" },
+      "scan": { "role": "accent-exempt", "displayName": "Scan Green", "canonical": "#16a34a" },
+      "inkwell": { "role": "neutral-dark", "displayName": "Inkwell", "canonical": "#0a0a0a" },
+      "specimen-cream": { "role": "neutral-light", "displayName": "Specimen Cream", "canonical": "#ffffff" },
+      "paper": { "role": "neutral-light", "displayName": "Paper", "canonical": "#fafafa" },
+      "ash-light": { "role": "neutral", "displayName": "Ash Light", "canonical": "#8a8a93" },
+      "ash-dark": { "role": "neutral", "displayName": "Ash Dark", "canonical": "#6b6b73" },
+      "rule-dark": { "role": "border", "displayName": "Rule Dark", "canonical": "#1f1f22" },
+      "rule-light": { "role": "border", "displayName": "Rule Light", "canonical": "#e5e5e5" },
+      "cashu-lilac": { "role": "accent-dark", "displayName": "Cashu Lilac", "canonical": "#b4a7f5" },
+      "cashu-lilac-deep": { "role": "accent-graphic", "displayName": "Cashu Lilac Deep", "canonical": "#7a66e8" }
+    },
+    "typographyMeta": {
+      "display-1": { "displayName": "Display 1", "purpose": "Hero statement. One per page. The hero <h1> carries a one-off uppercase + loosened-tracking override; other Display 1 usages stay mixed-case." },
+      "display-2": { "displayName": "Display 2", "purpose": "Section headings (\"What's different.\", \"Who holds the bitcoin.\")." },
+      "display-3": { "displayName": "Display 3", "purpose": "Sub-section / smaller display moments, including bento card titles." },
+      "lead": { "displayName": "Lead", "purpose": "Standalone introductory paragraphs following a Display heading. Capped at 48-55ch." },
+      "body": { "displayName": "Body", "purpose": "Pillar / column / accordion prose. Capped at 65ch." },
+      "label": { "displayName": "Label", "purpose": "Structural labels: footer column headers, footer copyright line, chip/badge text." },
+      "button": { "displayName": "Button", "purpose": "Every CTA, outline button, and store-badge label. Sized by the consuming component, not the utility." }
+    },
+    "shadows": [
+      {
+        "name": "glass-frost",
+        "value": "var(--glass-shadow)",
+        "purpose": "The one shared frosted-glass surface: buttons, the nav pill, custody-comparison's checkpoint band/chips, and the bento cards. Theme-aware token: light = inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); dark = inset 0 1px 0 0 rgba(255,255,255,0.08), 0 8px 24px -12px rgba(0,0,0,0.6). Borders come from --glass-border (white/50 light, white/14 dark) and --glass-border-strong on hover/scroll (white/70 light, white/22 dark)."
+      }
+    ],
+    "motion": [
+      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Primary reveal easing (hero headline/media blur-in)." },
+      { "name": "ease-out-cubic", "value": "cubic-bezier(0, 0, 0.58, 1)", "purpose": "Supporting-element reveal easing (paragraphs, badges)." },
+      { "name": "ease-in-out-cubic", "value": "cubic-bezier(0.645, 0.045, 0.355, 1)", "purpose": "Symmetric transitions (custody-comparison packet/scan choreography)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The frosted-glass CTA. Used at most once per section (header nav CTA, mobile drawer CTA). Source recipe for every other glass surface on the page.",
+      "html": "<a href=\"#\" class=\"ds-btn-primary\">Open Wallet</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; height: 44px; padding: 0 20px; border-radius: 8px; font-family: \"Azeret Mono\", ui-monospace, monospace; font-weight: 500; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(16% 0.015 260); border: 1px solid rgba(255,255,255,0.5); background: rgba(207,229,247,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); transition: background-color 150ms, border-color 150ms, transform 150ms, box-shadow 150ms; } .ds-btn-primary:hover { border-color: rgba(255,255,255,0.7); background: rgba(207,229,247,0.75); } .ds-btn-primary:focus-visible { outline: 2px solid #5b46d4; outline-offset: 4px; } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action adjacent to a primary CTA (\"View source\").",
+      "html": "<a href=\"#\" class=\"ds-btn-outline\">View Source</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 20px; border-radius: 8px; font-family: \"Azeret Mono\", ui-monospace, monospace; font-weight: 500; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(16% 0.015 260); background: transparent; border: 1px solid oklch(78% 0.035 240); transition: border-color 150ms, background-color 150ms; } .ds-btn-outline:hover { border-color: rgba(20,24,31,0.4); background: rgba(20,24,31,0.05); } .ds-btn-outline:focus-visible { outline: 2px solid #5b46d4; outline-offset: 4px; }"
+    },
+    {
+      "name": "Nav Pill",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Floating glass-pill header. Persistent from first paint (not scroll-gated), insets from the top/sides, intensifies slightly past 20px of scroll.",
+      "html": "<header class=\"ds-nav-shell\"><div class=\"ds-nav-pill\"><span class=\"ds-nav-brand\">cashu.me</span><a href=\"#\" class=\"ds-btn-primary\">Open Wallet</a></div></header>",
+      "css": ".ds-nav-shell { display: flex; justify-content: center; padding: 0 16px; } .ds-nav-pill { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; max-width: 1024px; padding: 12px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.5); background: rgba(207,229,247,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); transition: background-color 500ms, border-color 500ms; } .ds-nav-brand { font-family: \"Manrope\", sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(16% 0.015 260); }"
+    },
+    {
+      "name": "Bento Card",
+      "kind": "card",
+      "refersTo": "bento-card",
+      "description": "The one card-like container the system uses. Carries the button glass recipe instead of a flat bg-muted/hairline-border treatment.",
+      "html": "<div class=\"ds-bento-card\"><h3>Account wallets see everything.</h3><p>Every send, every receive, every contact, tied to a single account in someone else's database.</p></div>",
+      "css": ".ds-bento-card { position: relative; overflow: hidden; padding: 32px 32px 0; border-radius: 8px; border: 1px solid rgba(255,255,255,0.5); background: rgba(207,229,247,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); } .ds-bento-card h3 { font-family: \"Manrope\", sans-serif; font-weight: 500; font-size: clamp(28px, 3vw, 48px); color: oklch(16% 0.015 260); } .ds-bento-card p { margin-top: 16px; font-family: \"Geist Sans\", sans-serif; font-size: 17px; line-height: 1.6; color: rgba(20,24,31,0.7); }"
+    },
+    {
+      "name": "Custodial Field Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Custody-comparison's field chips (ID, TO, amount, timestamp) and checkpoint band carry the button glass recipe rather than a flat hairline border. Scoped to this illustration, not a general chip pattern.",
+      "html": "<span class=\"ds-chip-custodial\">TO @alice</span>",
+      "css": ".ds-chip-custodial { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 8px; font-family: \"Azeret Mono\", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(20,24,31,0.8); border: 1px solid rgba(255,255,255,0.5); background: rgba(207,229,247,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); }"
+    },
+    {
+      "name": "Valid Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Mint-lane \"VALID\" chip. Same glass recipe as the custodial field chip, with the Scan Color Exemption's green tint layered on top (container styling only, color system unchanged).",
+      "html": "<span class=\"ds-chip-valid\">&#10003; Valid</span>",
+      "css": ".ds-chip-valid { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 8px; font-family: \"Azeret Mono\", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #16a34a; border: 1px solid color-mix(in oklab, #16a34a 40%, transparent); background: color-mix(in oklab, #16a34a 8%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bearer Specimen",
+    "overview": "cashu.me is a specimen page for a piece of digital cash. Type is the artifact. The page reads like a museum caption: dispassionate, precise, large, asking the viewer to look without selling them anything. The visitor moves down the page the way you move down a printed broadsheet, not the way you scroll a feed. The surface is a single continuous daylight sky: a near-flat blue gradient with a small library of photographic cloud cutouts as ambient decoration. Interactive surfaces (buttons, the nav, a handful of named illustration and card elements) carry a soft frosted-glass material: translucent, blurred, hairline-bordered. Everything else stays flat: type on sky, hairline rules, no ambient shadows. The aesthetic is editorial and committed, not enterprise; restraint is the voice. The single chromatic note is a soft lilac reserved for emphasis. The page rejects the dominant crypto-site reflexes (neon-on-black, chart-heavy dashboards, consumer-fintech pastels, bank navy-and-gold); its one material departure from a flat, glassmorphism-free web is the frosted-glass recipe, scoped to four named surfaces, not applied ambiently.",
+    "keyCharacteristics": [
+      "Editorial scale (hero up to ~10.5rem at large viewports), tight tracking (-0.035em in mixed case), short leading (1 on Display 1).",
+      "One continuous daylight-sky surface page-wide; clouds are photographic cutouts, small, ambient, never the subject.",
+      "A full night theme follows the system preference (next-themes, data-theme attribute, pre-paint script) with a persistent sun/moon toggle in the nav: the sky collapses to a flat near-black oklch(13% 0.003 280) and the same white-alpha cloud PNGs dim to moonlit gray via --cloud-filter: brightness(0.42).",
+      "Lilac accent used sparingly: CTA hover, link underlines, ::selection. Never large fields.",
+      "One shared frosted-glass recipe, reused verbatim on buttons, the nav pill, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe.",
+      "Native <details> accordion, native <a> rectangular buttons. No bespoke widgets where the platform suffices.",
+      "Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome."
+    ],
+    "rules": [
+      { "name": "The Ambient Sky Rule", "body": "The sky is ambient, not the subject. Clouds are photographic cutouts only, sized larger on desktop than mobile, at most ~3 visible per viewport-height, never behind running text or interactive targets.", "section": "colors" },
+      { "name": "The Night Sky", "body": "Dark theme follows prefers-color-scheme by default (nothing stored), with a persistent light/dark override. The night field is flat oklch(13% 0.003 280); the same cloud PNGs are dimmed via --cloud-filter: brightness(0.42), a contrast ceiling (foreground over the densest cloud core is 5.4:1 at 0.42; never raise past 0.45). Theme switching flips CSS custom properties only: no asset swap, no layout.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point.", "section": "colors" },
+      { "name": "The Scan Color Exemption", "body": "The --scan token (green) is the sole sanctioned non-lilac chromatic, scoped to custody-comparison.tsx where it carries the surveillance metaphor. It must not appear elsewhere on the page.", "section": "colors" },
+      { "name": "The No-Pure-Black, No-Pure-White Rule", "body": "Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240-260).", "section": "colors" },
+      { "name": "The Specimen Scale Rule", "body": "Display 1 is reserved for the page's apex moment: the opening hero. No element in the body of the page ever reaches that size.", "section": "typography" },
+      { "name": "The Wordmark Tier", "body": "A single scale step exists above Display 1 (type-wordmark), reserved for the footer brand sign-off and never appearing elsewhere.", "section": "typography" },
+      { "name": "The Balanced Wrap Rule", "body": "All headings carry text-wrap: balance. All long-form prose carries text-wrap: pretty.", "section": "typography" },
+      { "name": "The Mono-as-Structure Rule", "body": "Mono is structural, not decorative. It appears on chip labels, eyebrow labels, button labels, and the footer version stamp. It does not appear on body prose or headings.", "section": "typography" },
+      { "name": "The Button-Label Rule", "body": "Azeret Mono carries every button label on the page, tracking 0.06em at weight 500.", "section": "typography" },
+      { "name": "The No-Eyebrows Rule", "body": "No [N] bracketed index marks, and no tiny uppercase tracked kicker above every section. Section.tsx supports an index prop for this; no live section passes one. Settled preference, not an oversight.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Sections, prose, and hairline rules are flat at rest. Shadows are reserved for the frosted-glass recipe and physical-object depictions. Never decorative elsewhere.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.",
+      "Do keep the frosted-glass recipe to its four named surfaces (buttons, nav pill, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component.",
+      "Do use native <details> for accordions, <a> for buttons, <section data-theme> for theme scope. Lean on the platform.",
+      "Do cap body lines at 65ch using max-w-[65ch]. Cap lead lines at 48-55ch.",
+      "Do use text-wrap: balance on headings and text-wrap: pretty on prose.",
+      "Do keep the navbar a floating glass pill inset from the viewport edges, not an edge-to-edge bar.",
+      "Do serve any transparent pixel-art or soft-alpha PNG via next/image with unoptimized — its optimizer flattens alpha to black otherwise.",
+      "Do route theme-dependent glass values through the --glass-border / --glass-border-strong / --glass-shadow tokens and cloud dimming through --cloud-filter; never hardcode white borders or light-assuming shadows at a call site."
+    ],
+    "donts": [
+      "Don't use neon-on-black crypto colors. No electric green/blue/orange neon, no 3D rendered logos, no futurist UI.",
+      "Don't use consumer-fintech pastels, friendly mascots, or gradient illustrations. Sanctioned exception: the single page-wide sky gradient and its photographic cloud cutouts.",
+      "Don't lean on bank navy + gold institutional gravitas. Wrong register entirely.",
+      "Don't use Web3 / DeFi maximalism: rainbow accents, dashboard-heavy charts, chart-driven hero treatments, or glass used decoratively/everywhere. The one shared frosted-glass recipe on its four named surfaces is the scoped exception, not license for ambient glass.",
+      "Don't use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards; the bento grid is the one named exception.",
+      "Don't use em dashes in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.",
+      "Don't use background-clip: text gradient text or border-left side stripes.",
+      "Don't use display fonts other than Manrope. Geist Sans is body-only; Azeret Mono is labels/buttons only.",
+      "Don't use Cashu Lilac for text on white; switch to Cashu Lilac Deep on Specimen Cream.",
+      "Don't apply ambient shadows to flat surfaces beyond the frosted-glass recipe and physical-object mockups.",
+      "Don't ship a heading without text-wrap: balance or prose without text-wrap: pretty.",
+      "Don't redefine tokens at the call site. New utilities go through the @theme inline block in globals.css.",
+      "Don't add [N] index marks or a tiny uppercase kicker above a section to 'finish' it. Their absence is deliberate.",
+      "Don't claim 'self-custodial' or 'no custodian.' Cashu is custodial; the accurate framing is bearer ecash plus unconditional withdrawal."
+    ]
+  }
+}

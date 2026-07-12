@@ -2,6 +2,8 @@
 
 import { Icons } from "@/components/icons";
 import { Logo } from "@/components/logo";
+import { ApkBadge } from "@/components/ui/apk-badge";
+import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
@@ -44,7 +46,7 @@ export function MobileDrawer() {
             className="relative mr-6 flex items-center gap-2.5"
           >
             <Logo className="size-8" />
-            <span className="font-display text-base font-semibold uppercase tracking-[0.14em]">
+            <span className="font-display text-base font-bold uppercase tracking-[0.14em]">
               {siteConfig.name}
             </span>
           </Link>
@@ -65,12 +67,20 @@ export function MobileDrawer() {
             </a>
           ))}
         </nav>
-        <DrawerFooter>
+        <DrawerFooter className="gap-3">
+          <AppStoreBadge
+            href={siteConfig.links.testflight}
+            className="w-full justify-center"
+          />
+          <ApkBadge
+            href={siteConfig.links.androidApk}
+            className="w-full justify-center"
+          />
           <a
             href={siteConfig.links.wallet}
             target="_blank"
             rel="noreferrer noopener"
-            className={cn(buttonVariants({ variant: "default", size: "lg" }))}
+            className={cn(buttonVariants({ variant: "primary", size: "lg" }))}
           >
             {siteConfig.cta}
           </a>

@@ -33,7 +33,7 @@ What cashu.me must NOT look or feel like:
 1. **Neon-on-black crypto aesthetic** — electric neon on pitch black, 3D rendered logos, futurist UI. The training-data crypto reflex. Reads as memecoin or DeFi project, not as bearer cash.
 2. **Consumer-fintech pastels** — Cash App, Venmo, Revolut. Soft pastels, friendly illustrations, gradient mascots. Reads as custodial app, undermines the bearer positioning.
 3. **Bank navy + gold institutional gravitas** — exactly the financial architecture Cashu is designed to route around. Wrong register entirely.
-4. **Web3 / DeFi maximalism** — dashboard-heavy, charts, glassmorphism, rainbow accents. Reads as speculation platform, not currency.
+4. **Web3 / DeFi maximalism** — dashboard-heavy charts, rainbow accents, chart-driven hero treatments, or glass used decoratively/everywhere. Reads as speculation platform, not currency. (DESIGN.md's one shared frosted-glass recipe, scoped to four named surfaces — buttons, nav, custody-comparison chips, bento cards — is a deliberate, restrained exception, not a reversal of this.)
 
 ## Design Principles
 

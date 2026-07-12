@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/config";
 import { easeOutCubic, REVEAL_DURATION_LG, REVEAL_DURATION_SM } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -29,11 +30,21 @@ const LAYOUTS: FeatureLayout[] = [
   },
 ];
 
+// Shared "phone screen" card styling for both the still-image and video media.
+const MEDIA_CLASS =
+  "relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl";
+
 interface FeatureProps {
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc?: string;
+  imageSrcDark?: string;
+  videoSrc?: string;
+  videoSrcDark?: string;
+  posterSrc?: string;
+  posterSrcDark?: string;
   isActive: boolean;
+  mediaShouldLoad: boolean;
   layout: FeatureLayout;
   reduceMotion: boolean;
 }
@@ -42,10 +53,25 @@ function Feature({
   title,
   description,
   imageSrc,
+  imageSrcDark,
+  videoSrc,
+  videoSrcDark,
+  posterSrc,
+  posterSrcDark,
   isActive,
+  mediaShouldLoad,
   layout,
   reduceMotion,
 }: FeatureProps) {
+  // Resolve one theme variant instead of rendering both: the hidden `dark:*`
+  // <video> still autoplays and downloads (unlike next/image's lazy <img>), so
+  // two elements = two full video + poster fetches, one always wasted. Safe to
+  // read `resolvedTheme` without a mounted guard because src/poster only attach
+  // once `mediaShouldLoad` flips (a client-only observer, post-hydration).
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const activeVideo = isDark && videoSrcDark ? videoSrcDark : videoSrc;
+  const activePoster = isDark && posterSrcDark ? posterSrcDark : posterSrc;
   const textVariants = {
     hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
     visible: {
@@ -104,21 +130,54 @@ function Feature({
         )}
       >
         <div className="relative">
-          {/* Soft halo lifts the phone off the inkwell, matching the hero. */}
+          {/* Bright haze lifts the phone off the sky, matching the hero. */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 flex items-center justify-center"
           >
-            <div className="size-[520px] rounded-full bg-foreground/[0.08] blur-[140px]" />
+            <div className="size-[520px] rounded-full bg-white/50 blur-[140px]" />
           </div>
-          <Image
-            src={imageSrc}
-            alt={title}
-            width={921}
-            height={2000}
-            sizes="300px"
-            className="relative h-auto w-full max-w-[300px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
-          />
+          {videoSrc ? (
+            // Below-fold decorative loop: defer the src until the section is
+            // near view (same rationale as tap-to-pay's 2MB clip) so it never
+            // competes with the hero's LCP fetch. One theme-resolved element,
+            // not two, so only the visible variant downloads.
+            <video
+              key={activeVideo}
+              src={mediaShouldLoad ? activeVideo : undefined}
+              poster={mediaShouldLoad ? activePoster : undefined}
+              preload="none"
+              width={720}
+              height={1558}
+              autoPlay={!reduceMotion}
+              loop={!reduceMotion}
+              muted
+              playsInline
+              aria-hidden="true"
+              className={MEDIA_CLASS}
+            />
+          ) : imageSrc ? (
+            <>
+              <Image
+                src={imageSrc}
+                alt={title}
+                width={924}
+                height={2000}
+                sizes="300px"
+                className={cn(MEDIA_CLASS, imageSrcDark && "dark:hidden")}
+              />
+              {imageSrcDark && (
+                <Image
+                  src={imageSrcDark}
+                  alt={title}
+                  width={924}
+                  height={2000}
+                  sizes="300px"
+                  className={cn(MEDIA_CLASS, "hidden dark:block")}
+                />
+              )}
+            </>
+          ) : null}
         </div>
       </div>
     </div>
@@ -141,6 +200,9 @@ export function FeatureHighlight({
   const layout = LAYOUTS[layoutIndex] ?? LAYOUTS[LAYOUTS.length - 1];
   const reduceMotion = useReducedMotion() ?? false;
   const [isActive, setIsActive] = useState(false);
+  // Latches true once the section nears the viewport; gates video/poster
+  // download so below-fold media never competes with the hero LCP fetch.
+  const [mediaShouldLoad, setMediaShouldLoad] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -155,7 +217,23 @@ export function FeatureHighlight({
       { rootMargin: "-50% 0px -50% 0px" }
     );
     observer.observe(container);
-    return () => observer.disconnect();
+
+    // Start the media fetch ~one viewport early, then stop observing.
+    const preload = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMediaShouldLoad(true);
+          preload.disconnect();
+        }
+      },
+      { rootMargin: "100% 0px 100% 0px" }
+    );
+    preload.observe(container);
+
+    return () => {
+      observer.disconnect();
+      preload.disconnect();
+    };
   }, []);
 
   return (
@@ -168,10 +246,22 @@ export function FeatureHighlight({
     >
       <Feature
         isActive={isActive}
+        mediaShouldLoad={mediaShouldLoad}
         layout={layout}
         title={feature.title}
         description={feature.description}
-        imageSrc={feature.imageSrc}
+        imageSrc={"imageSrc" in feature ? feature.imageSrc : undefined}
+        imageSrcDark={
+          "imageSrcDark" in feature ? feature.imageSrcDark : undefined
+        }
+        videoSrc={"videoSrc" in feature ? feature.videoSrc : undefined}
+        videoSrcDark={
+          "videoSrcDark" in feature ? feature.videoSrcDark : undefined
+        }
+        posterSrc={"posterSrc" in feature ? feature.posterSrc : undefined}
+        posterSrcDark={
+          "posterSrcDark" in feature ? feature.posterSrcDark : undefined
+        }
         reduceMotion={reduceMotion}
       />
     </Section>

@@ -26,93 +26,88 @@ export function TapToPay() {
       id="tap-to-pay"
       variant="editorial"
       hideHeader
-      className="container-page px-6 py-[var(--section-y-tight)] lg:px-10"
+      className="container-page px-6 py-[var(--section-y-base)] lg:px-10"
     >
-      <div className="grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10">
-        <div className="col-span-12 lg:col-span-4 lg:col-start-1">
-          <motion.h2
-            initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { duration: REVEAL_DURATION_LG, ease: easeOutCubic }
-            }
-            className="type-display-2 text-foreground"
+      {/* Centered "specimen plate": the video is the only motion asset of the
+          three value props, so it earns the middle of the trio as a deliberate
+          breakout. The artifact reveals first, its caption settles in beneath. */}
+      <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          onViewportEnter={() => setVideoInView(true)}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: REVEAL_DURATION_LG, ease: easeOutCubic }
+          }
+          className="relative w-fit"
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex items-center justify-center"
           >
-            {title}
-          </motion.h2>
-
-          <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER }
-            }
-            className="mt-6 max-w-[42ch] type-lead text-foreground/75"
-          >
-            {description}
-          </motion.p>
-        </div>
-
-        <div className="col-span-12 flex justify-center lg:col-span-7 lg:col-start-6 lg:justify-end">
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-100px" }}
-            onViewportEnter={() => setVideoInView(true)}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : {
-                    duration: REVEAL_DURATION_LG,
-                    ease: easeOutCubic,
-                    delay: REVEAL_STAGGER * 2,
-                  }
-            }
-            className="relative w-fit"
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center"
-            >
-              <div className="size-[480px] rounded-full bg-primary/[0.08] blur-[140px]" />
+            <div className="size-[520px] rounded-full bg-primary/[0.08] blur-[150px]" />
+          </div>
+          {!reduceMotion && (
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              {[0, 1].map((i) => (
+                <motion.span
+                  key={i}
+                  className="absolute inset-0 rounded-[2rem] border border-primary/25"
+                  animate={{ scale: [1, 1.1], opacity: [0.6, 0] }}
+                  transition={{
+                    duration: 2.6,
+                    repeat: Infinity,
+                    ease: easeOutQuart,
+                    delay: i * 1.3,
+                  }}
+                />
+              ))}
             </div>
-            {!reduceMotion && (
-              <div aria-hidden className="pointer-events-none absolute inset-0">
-                {[0, 1].map((i) => (
-                  <motion.span
-                    key={i}
-                    className="absolute inset-0 rounded-[2rem] border border-primary/25"
-                    animate={{ scale: [1, 1.1], opacity: [0.6, 0] }}
-                    transition={{
-                      duration: 2.6,
-                      repeat: Infinity,
-                      ease: easeOutQuart,
-                      delay: i * 1.3,
-                    }}
-                  />
-                ))}
-              </div>
-            )}
-            <video
-              src={videoInView ? videoSrc : undefined}
-              preload="none"
-              width={406}
-              height={720}
-              autoPlay={!reduceMotion}
-              loop={!reduceMotion}
-              muted
-              playsInline
-              aria-hidden="true"
-              className="relative h-auto w-full max-w-[340px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl"
-            />
-          </motion.div>
-        </div>
+          )}
+          <video
+            src={videoInView ? videoSrc : undefined}
+            preload="none"
+            width={406}
+            height={720}
+            autoPlay={!reduceMotion}
+            loop={!reduceMotion}
+            muted
+            playsInline
+            aria-hidden="true"
+            className="relative h-auto w-full max-w-[380px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl sm:max-w-[400px]"
+          />
+        </motion.div>
+
+        <motion.h2
+          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER }
+          }
+          className="mt-10 type-display-2 text-balance text-foreground"
+        >
+          {title}
+        </motion.h2>
+
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER * 2 }
+          }
+          className="mt-5 max-w-[42ch] type-lead text-balance text-foreground/75"
+        >
+          {description}
+        </motion.p>
       </div>
     </Section>
   );

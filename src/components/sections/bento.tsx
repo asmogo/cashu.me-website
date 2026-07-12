@@ -10,9 +10,9 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const CARD_SHAPES = [
-  { rounded: "rounded-none", minHeight: "min-h-[460px]" },
-  { rounded: "rounded-none", minHeight: "min-h-[360px]" },
-  { rounded: "rounded-none", minHeight: "min-h-[420px]" },
+  { rounded: "rounded-lg", minHeight: "min-h-[460px]" },
+  { rounded: "rounded-lg", minHeight: "min-h-[360px]" },
+  { rounded: "rounded-lg", minHeight: "min-h-[420px]" },
 ];
 
 export function BentoGrid() {
@@ -69,17 +69,17 @@ export function BentoGrid() {
               key={index}
               style={motions[index]}
               className={cn(
-                "group relative grid grid-rows-[auto_1fr] overflow-hidden border border-border/60 bg-muted p-6 pb-0 sm:p-8",
+                "group relative grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden border border-glass-border bg-background/55 p-6 pb-0 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:p-8",
                 shape.rounded,
                 shape.minHeight,
                 item.fullWidth && "md:col-span-2"
               )}
             >
-              <div className="flex flex-col">
+              <div className="flex min-w-0 flex-col">
                 <h3 className="type-display-3 text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-4 max-w-prose type-body-lg text-foreground/70">
+                <p className="mt-4 max-w-[52ch] type-body-lg text-foreground/70">
                   {item.content}
                 </p>
               </div>
@@ -94,21 +94,49 @@ export function BentoGrid() {
                       width={585}
                       height={1266}
                       sizes="(min-width: 768px) 50vw, 100vw"
-                      className="h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2"
+                      className={cn(
+                        "h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2",
+                        "imageSrcDark" in item && item.imageSrcDark && "dark:hidden"
+                      )}
                       draggable={false}
                     />
+                    {"imageSrcDark" in item && item.imageSrcDark && (
+                      <Image
+                        src={item.imageSrcDark}
+                        alt={item.imageAlt}
+                        width={585}
+                        height={1266}
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="hidden h-full w-full select-none object-cover object-top transition-transform duration-500 group-hover:-translate-y-2 dark:block"
+                        draggable={false}
+                      />
+                    )}
                   </div>
                 ) : item.id === "lightning-address" ? (
                   <div className="w-full max-w-[340px] self-end">
                     <Image
                       src={item.imageSrc}
                       alt={item.imageAlt}
-                      width={1287}
-                      height={1504}
+                      width={585}
+                      height={686}
                       sizes="340px"
-                      className="block h-auto w-full select-none transition-transform duration-500 group-hover:-translate-y-1"
+                      className={cn(
+                        "block h-auto w-full select-none rounded-[1.75rem] border border-foreground/10 transition-transform duration-500 group-hover:-translate-y-1",
+                        "imageSrcDark" in item && item.imageSrcDark && "dark:hidden"
+                      )}
                       draggable={false}
                     />
+                    {"imageSrcDark" in item && item.imageSrcDark && (
+                      <Image
+                        src={item.imageSrcDark}
+                        alt={item.imageAlt}
+                        width={585}
+                        height={686}
+                        sizes="340px"
+                        className="hidden h-auto w-full select-none rounded-[1.75rem] border border-foreground/10 transition-transform duration-500 group-hover:-translate-y-1 dark:block"
+                        draggable={false}
+                      />
+                    )}
                   </div>
                 ) : (
                   <Image

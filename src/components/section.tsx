@@ -1,6 +1,8 @@
 "use client";
 
+import { CloudField } from "@/components/sky/cloud-field";
 import { easeInOutCubic } from "@/lib/animation";
+import { SECTION_CLOUDS } from "@/lib/clouds";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { forwardRef, useRef } from "react";
@@ -8,7 +10,6 @@ import type { ReactNode, RefObject } from "react";
 
 interface SectionProps {
   id?: string;
-  index?: string;
   variant?: "centered" | "editorial";
   title?: string;
   subtitle?: string;
@@ -24,7 +25,6 @@ const Section = forwardRef<HTMLElement, SectionProps>(
   (
     {
       id,
-      index,
       variant = "centered",
       title,
       subtitle,
@@ -52,16 +52,15 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       ease: easeInOutCubic,
     });
 
-    const hasHeaderContent = !!(index || title || subtitle || description || headerSlot);
+    const hasHeaderContent = !!(title || subtitle || description || headerSlot);
 
     const renderEyebrow = () =>
-      (index || title) && (
+      title && (
         <motion.div
-          className="flex items-baseline gap-3 type-label text-muted-foreground"
+          className="flex items-baseline gap-3 type-label text-primary"
           style={{ opacity, y }}
         >
-          {index && <span aria-hidden>[{index}]</span>}
-          {title && <span className="text-primary">{title}</span>}
+          <span>{title}</span>
         </motion.div>
       );
 
@@ -93,8 +92,9 @@ const Section = forwardRef<HTMLElement, SectionProps>(
           : "text-center";
 
     return (
-      <section id={id} ref={ref}>
-        <div className={cn(className)}>
+      <section id={id} ref={ref} className="relative">
+        {id && <CloudField section={SECTION_CLOUDS[id]} />}
+        <div className={cn("relative z-10", className)}>
           {!hideHeader && hasHeaderContent && variant === "centered" && (
             <div className={cn(centeredAlignment, "space-y-4 pb-10 mx-auto")}>
               {renderEyebrow()}

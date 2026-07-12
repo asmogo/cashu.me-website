@@ -62,7 +62,8 @@ function Lane({
             alt="Cashu"
             width={64}
             height={64}
-            className="size-full scale-[1.6] select-none rounded-none object-cover [image-rendering:pixelated]"
+            unoptimized
+            className="size-full select-none rounded-none object-cover [image-rendering:pixelated]"
             draggable={false}
           />
         </div>
@@ -80,9 +81,7 @@ function Lane({
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-foreground/15" />
 
         {/* Checkpoint band (vertically centered, ~38% across) */}
-        <div className="absolute left-[34%] top-0 flex h-full w-[18%] items-center justify-center bg-foreground/[0.05] sm:w-[14%]">
-          <div className="absolute inset-y-0 left-0 w-px bg-foreground/35" />
-          <div className="absolute inset-y-0 right-0 w-px bg-foreground/35" />
+        <div className="absolute left-[34%] top-0 flex h-full w-[18%] items-center justify-center rounded-lg border border-glass-border bg-background/55 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:w-[14%]">
           <span className="absolute -top-5 type-label text-muted-foreground">
             {checkpoint}
           </span>
@@ -143,19 +142,8 @@ function Lane({
           }
         />
 
-        {/* Mint variant: a frosted overlay sits above the dot and blurs it
-            as it passes behind. Editorially: the mint verifies the packet
-            but doesn't see its contents — the dot blurs into the box. */}
-        {variant === "mint" && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] bg-foreground/[0.06] backdrop-blur-[10px] sm:w-[14%]"
-          />
-        )}
-
         {/* Laser scan line — clipped to the checkpoint band, sweeps top→bottom
-            during the packet's hold beat. Rendered AFTER the mint overlay so
-            it stays sharp on top while the dot beneath gets blurred. */}
+            during the packet's hold beat. */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] overflow-hidden sm:w-[14%]"
@@ -331,7 +319,7 @@ export function CustodyComparison() {
               packetDelay={packetDelay}
               tIn={BEAT.scanDone}
               className={cn(
-                "inline-flex items-center border border-[color-mix(in_oklab,var(--scan)_40%,transparent)] bg-[color-mix(in_oklab,var(--scan)_8%,transparent)] px-2 py-1 type-label text-[color:var(--scan)]"
+                "inline-flex items-center rounded-lg border border-[color-mix(in_oklab,var(--scan)_40%,transparent)] bg-[color-mix(in_oklab,var(--scan)_8%,transparent)] px-2 py-1 shadow-[var(--glass-shadow)] backdrop-blur-lg type-label text-[color:var(--scan)]"
               )}
             >
               ✓ VALID
@@ -366,7 +354,7 @@ export function CustodyComparison() {
                 reduceMotion={reduceMotion}
                 packetDelay={packetDelay}
                 tIn={BEAT.boxCenter + i * chipStep}
-                className="inline-flex items-center border border-foreground/20 bg-foreground/[0.03] px-2 py-1 type-label text-foreground/80"
+                className="inline-flex items-center rounded-lg border border-glass-border bg-background/55 px-2 py-1 shadow-[var(--glass-shadow)] backdrop-blur-lg type-label text-foreground/80"
               >
                 {field}
               </ExtractingChip>
