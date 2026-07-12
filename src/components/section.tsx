@@ -10,7 +10,6 @@ import type { ReactNode, RefObject } from "react";
 
 interface SectionProps {
   id?: string;
-  index?: string;
   variant?: "centered" | "editorial";
   title?: string;
   subtitle?: string;
@@ -26,7 +25,6 @@ const Section = forwardRef<HTMLElement, SectionProps>(
   (
     {
       id,
-      index,
       variant = "centered",
       title,
       subtitle,
@@ -54,16 +52,15 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       ease: easeInOutCubic,
     });
 
-    const hasHeaderContent = !!(index || title || subtitle || description || headerSlot);
+    const hasHeaderContent = !!(title || subtitle || description || headerSlot);
 
     const renderEyebrow = () =>
-      (index || title) && (
+      title && (
         <motion.div
-          className="flex items-baseline gap-3 type-label text-muted-foreground"
+          className="flex items-baseline gap-3 type-label text-primary"
           style={{ opacity, y }}
         >
-          {index && <span aria-hidden>[{index}]</span>}
-          {title && <span className="text-primary">{title}</span>}
+          <span>{title}</span>
         </motion.div>
       );
 

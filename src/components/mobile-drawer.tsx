@@ -2,6 +2,8 @@
 
 import { Icons } from "@/components/icons";
 import { Logo } from "@/components/logo";
+import { ApkBadge } from "@/components/ui/apk-badge";
+import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
@@ -65,7 +67,15 @@ export function MobileDrawer() {
             </a>
           ))}
         </nav>
-        <DrawerFooter>
+        <DrawerFooter className="gap-3">
+          <AppStoreBadge
+            href={siteConfig.links.testflight}
+            className="w-full justify-center"
+          />
+          <ApkBadge
+            href={siteConfig.links.androidApk}
+            className="w-full justify-center"
+          />
           <a
             href={siteConfig.links.wallet}
             target="_blank"

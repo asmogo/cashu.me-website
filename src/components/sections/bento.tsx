@@ -79,7 +79,7 @@ export function BentoGrid() {
                 <h3 className="type-display-3 text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-4 max-w-prose type-body-lg text-foreground/70">
+                <p className="mt-4 max-w-[52ch] type-body-lg text-foreground/70">
                   {item.content}
                 </p>
               </div>

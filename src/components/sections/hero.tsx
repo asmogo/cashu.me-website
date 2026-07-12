@@ -164,11 +164,20 @@ export function Hero() {
                   delay: REVEAL_STAGGER * 3,
                 }
           }
-          className="mt-12 flex flex-wrap items-center justify-center gap-4"
+          className="mx-auto mt-12 flex w-full max-w-xs flex-col items-stretch gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
         >
-          <AppStoreBadge href={siteConfig.links.testflight} />
-          <ApkBadge href={siteConfig.links.androidApk} />
-          <BrowserBadge href={siteConfig.links.wallet} />
+          <AppStoreBadge
+            href={siteConfig.links.testflight}
+            className="w-full justify-center sm:w-auto"
+          />
+          <ApkBadge
+            href={siteConfig.links.androidApk}
+            className="w-full justify-center sm:w-auto"
+          />
+          <BrowserBadge
+            href={siteConfig.links.wallet}
+            className="w-full justify-center sm:w-auto"
+          />
         </motion.div>
       </div>
     </section>
