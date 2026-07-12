@@ -108,17 +108,24 @@ export function Hero() {
             }
             className="relative w-64 flex-shrink-0 sm:w-80 md:w-[440px] xl:w-[600px]"
           >
-            {/* Theme-swapped hero image: no `preload`/`loading="eager"` here —
-                per node_modules/next/dist/docs .../image.md "Theme detection",
-                that would fetch both variants. `fetchPriority="high"` plus
-                the default lazy behavior lets the browser skip the
-                `dark:hidden`/`hidden dark:block` variant that never gets a
-                layout box. */}
+            {/* Theme-swapped hero image and the page's LCP element. Both
+                variants are `priority` (eager + preload) so the browser
+                discovers the image at HTML-parse time instead of after the
+                client JS parses and an observer fires — the difference between
+                a ~4.7s and a ~1.5s mobile LCP. next/image's docs steer theme
+                pairs toward lazy to load only one variant, but here the
+                variants are near-identical in weight (~25KB AVIF each) and the
+                manual `data-theme` override (a white vs. pure-black phone
+                screen) must stay authoritative, so preloading the ~25KB hidden
+                variant is the right trade for a correct, fast hero. The
+                `dark:hidden`/`hidden dark:block` pair still paints only the
+                active theme. */}
             <Image
               src="/images/hand-wallet-light-v2.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
               width={745}
               height={806}
+              priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
               className="h-auto w-full select-none dark:hidden"
@@ -130,6 +137,7 @@ export function Hero() {
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
               width={745}
               height={806}
+              priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
               className="hidden h-auto w-full select-none dark:block"

@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/config";
 import { easeOutCubic, REVEAL_DURATION_LG, REVEAL_DURATION_SM } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -43,6 +44,7 @@ interface FeatureProps {
   posterSrc?: string;
   posterSrcDark?: string;
   isActive: boolean;
+  mediaShouldLoad: boolean;
   layout: FeatureLayout;
   reduceMotion: boolean;
 }
@@ -57,9 +59,19 @@ function Feature({
   posterSrc,
   posterSrcDark,
   isActive,
+  mediaShouldLoad,
   layout,
   reduceMotion,
 }: FeatureProps) {
+  // Resolve one theme variant instead of rendering both: the hidden `dark:*`
+  // <video> still autoplays and downloads (unlike next/image's lazy <img>), so
+  // two elements = two full video + poster fetches, one always wasted. Safe to
+  // read `resolvedTheme` without a mounted guard because src/poster only attach
+  // once `mediaShouldLoad` flips (a client-only observer, post-hydration).
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const activeVideo = isDark && videoSrcDark ? videoSrcDark : videoSrc;
+  const activePoster = isDark && posterSrcDark ? posterSrcDark : posterSrc;
   const textVariants = {
     hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
     visible: {
@@ -126,36 +138,24 @@ function Feature({
             <div className="size-[520px] rounded-full bg-white/50 blur-[140px]" />
           </div>
           {videoSrc ? (
-            <>
-              <video
-                src={videoSrc}
-                poster={posterSrc}
-                preload="none"
-                width={720}
-                height={1558}
-                autoPlay={!reduceMotion}
-                loop={!reduceMotion}
-                muted
-                playsInline
-                aria-hidden="true"
-                className={cn(MEDIA_CLASS, videoSrcDark && "dark:hidden")}
-              />
-              {videoSrcDark && (
-                <video
-                  src={videoSrcDark}
-                  poster={posterSrcDark}
-                  preload="none"
-                  width={720}
-                  height={1558}
-                  autoPlay={!reduceMotion}
-                  loop={!reduceMotion}
-                  muted
-                  playsInline
-                  aria-hidden="true"
-                  className={cn(MEDIA_CLASS, "hidden dark:block")}
-                />
-              )}
-            </>
+            // Below-fold decorative loop: defer the src until the section is
+            // near view (same rationale as tap-to-pay's 2MB clip) so it never
+            // competes with the hero's LCP fetch. One theme-resolved element,
+            // not two, so only the visible variant downloads.
+            <video
+              key={activeVideo}
+              src={mediaShouldLoad ? activeVideo : undefined}
+              poster={mediaShouldLoad ? activePoster : undefined}
+              preload="none"
+              width={720}
+              height={1558}
+              autoPlay={!reduceMotion}
+              loop={!reduceMotion}
+              muted
+              playsInline
+              aria-hidden="true"
+              className={MEDIA_CLASS}
+            />
           ) : imageSrc ? (
             <>
               <Image
@@ -200,6 +200,9 @@ export function FeatureHighlight({
   const layout = LAYOUTS[layoutIndex] ?? LAYOUTS[LAYOUTS.length - 1];
   const reduceMotion = useReducedMotion() ?? false;
   const [isActive, setIsActive] = useState(false);
+  // Latches true once the section nears the viewport; gates video/poster
+  // download so below-fold media never competes with the hero LCP fetch.
+  const [mediaShouldLoad, setMediaShouldLoad] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -214,7 +217,23 @@ export function FeatureHighlight({
       { rootMargin: "-50% 0px -50% 0px" }
     );
     observer.observe(container);
-    return () => observer.disconnect();
+
+    // Start the media fetch ~one viewport early, then stop observing.
+    const preload = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMediaShouldLoad(true);
+          preload.disconnect();
+        }
+      },
+      { rootMargin: "100% 0px 100% 0px" }
+    );
+    preload.observe(container);
+
+    return () => {
+      observer.disconnect();
+      preload.disconnect();
+    };
   }, []);
 
   return (
@@ -227,6 +246,7 @@ export function FeatureHighlight({
     >
       <Feature
         isActive={isActive}
+        mediaShouldLoad={mediaShouldLoad}
         layout={layout}
         title={feature.title}
         description={feature.description}

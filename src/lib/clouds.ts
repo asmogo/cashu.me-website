@@ -64,13 +64,16 @@ export const CLOUD_ASSETS: Record<
   CloudVariant,
   { src: string; w: number; h: number }
 > = {
-  "cloud-01": { src: "/images/clouds/cloud-01.png", w: 800, h: 498 },
-  "cloud-02": { src: "/images/clouds/cloud-02.png", w: 800, h: 379 },
-  "cloud-03": { src: "/images/clouds/cloud-03.png", w: 800, h: 445 },
-  "cloud-04": { src: "/images/clouds/cloud-04.png", w: 800, h: 455 },
-  "cloud-05": { src: "/images/clouds/cloud-05.png", w: 800, h: 426 },
-  "cloud-06": { src: "/images/clouds/cloud-06.png", w: 800, h: 519 },
-  "cloud-07": { src: "/images/clouds/cloud-07.png", w: 800, h: 597 },
+  // Source PNGs are pre-sized to ~2x each variant's largest on-page display
+  // width (see public/images/clouds) and palette-quantized; kept `unoptimized`
+  // so next/image's lossy AVIF/WebP transcode never touches the soft alpha.
+  "cloud-01": { src: "/images/clouds/cloud-01.png", w: 760, h: 473 },
+  "cloud-02": { src: "/images/clouds/cloud-02.png", w: 410, h: 194 },
+  "cloud-03": { src: "/images/clouds/cloud-03.png", w: 520, h: 289 },
+  "cloud-04": { src: "/images/clouds/cloud-04.png", w: 320, h: 182 },
+  "cloud-05": { src: "/images/clouds/cloud-05.png", w: 320, h: 170 },
+  "cloud-06": { src: "/images/clouds/cloud-06.png", w: 680, h: 441 },
+  "cloud-07": { src: "/images/clouds/cloud-07.png", w: 440, h: 328 },
 };
 
 /** total X travel (px) of a depth-1 cloud across the full page scroll */
