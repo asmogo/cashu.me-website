@@ -20,7 +20,7 @@ export const siteConfig = {
   name: "cashu.me",
   description: "A Cashu Wallet.",
   tagline:
-    "cashu.me is the first Cashu ecash wallet. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
+    "A native wallet for iPhone and Android. Hold bearer ecash on your device, send with a tap, redeem to any Lightning address. No account.",
   url: "https://cashu.me",
   cta: "Open wallet",
   keywords: [

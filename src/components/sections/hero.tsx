@@ -40,7 +40,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.3 }
           }
-          className="absolute size-[620px] translate-x-[70px] -translate-y-[60px] rounded-full bg-white/45 blur-[150px]"
+          className="absolute size-[620px] translate-x-[70px] -translate-y-[60px] rounded-full bg-white/45 blur-[150px] dark:bg-white/15"
         />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
@@ -50,7 +50,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.5 }
           }
-          className="absolute size-[360px] translate-x-[10px] translate-y-[120px] rounded-full bg-white/40 blur-[100px]"
+          className="absolute size-[360px] translate-x-[10px] translate-y-[120px] rounded-full bg-white/40 blur-[100px] dark:bg-white/12"
         />
       </div>
 
@@ -92,15 +92,30 @@ export function Hero() {
             }
             className="relative w-64 flex-shrink-0 sm:w-80 md:w-[440px] xl:w-[600px]"
           >
+            {/* Theme-swapped hero image: no `preload`/`loading="eager"` here —
+                per node_modules/next/dist/docs .../image.md "Theme detection",
+                that would fetch both variants. `fetchPriority="high"` plus
+                the default lazy behavior lets the browser skip the
+                `dark:hidden`/`hidden dark:block` variant that never gets a
+                layout box. */}
             <Image
-              src="/images/hand-wallet.png"
+              src="/images/hand-wallet-light.png"
+              alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
+              width={704}
+              height={755}
+              fetchPriority="high"
+              sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
+              className="h-auto w-full select-none [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] dark:hidden"
+              draggable={false}
+            />
+            <Image
+              src="/images/hand-wallet-dark.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
               width={629}
               height={741}
-              loading="eager"
-              preload
+              fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
-              className="h-auto w-full select-none [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)]"
+              className="hidden h-auto w-full select-none [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] dark:block"
               draggable={false}
             />
           </motion.div>
