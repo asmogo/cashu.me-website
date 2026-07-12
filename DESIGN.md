@@ -82,10 +82,10 @@ components:
     rounded: "{rounded.md}"
     padding: "0 20px"
     typography: "{typography.button}"
-  nav-pill:
+  nav-bar:
     backgroundColor: "{colors.sky-mid}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.md}"
     padding: "12px 24px"
   bento-card:
     backgroundColor: "{colors.sky-mid}"
@@ -117,7 +117,7 @@ The aesthetic is editorial and committed, not enterprise. Restraint is the voice
 - Editorial scale (hero up to ~10.5rem at large viewports), tight tracking (`-0.035em` in mixed case), short leading (1 on Display 1).
 - One continuous daylight-sky surface page-wide; clouds are photographic cutouts, small, ambient, never the subject.
 - Lilac accent used sparingly: CTA hover, link underlines, `::selection`. Never large fields.
-- One shared frosted-glass recipe (§5 Buttons), reused verbatim on buttons, the nav pill, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe, not four inventions.
+- One shared frosted-glass recipe (§5 Buttons), reused verbatim on buttons, the nav bar, custody-comparison's checkpoint/chips, and the bento cards — four named surfaces, one recipe, not four inventions.
 - Native `<details>` accordion, native `<a>` rectangular buttons. No bespoke widgets where the platform suffices.
 - Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome.
 
@@ -195,7 +195,7 @@ Two elevation languages coexist deliberately: flat-by-default for structural sur
 
 **Flat surfaces**: sections, prose, hairline rules — no shadow, no blur. Depth comes from surface inversion (dark vs light section, where used) and 1px hairline rules, never from ambient shadow.
 
-**Glass surfaces**: buttons, the nav pill, custody-comparison's checkpoint band and chips, and the bento cards. See §5 Buttons for the exact recipe. This is the one sanctioned elevation exception beyond physical-object mockups.
+**Glass surfaces**: buttons, the nav bar, custody-comparison's checkpoint band and chips, and the bento cards. See §5 Buttons for the exact recipe. This is the one sanctioned elevation exception beyond physical-object mockups.
 
 **Physical-object surfaces**: the hero photograph (a hand holding the phone) carries a deep ambient shadow because it depicts a physical object, not a UI surface. Used at most once per section.
 
@@ -216,7 +216,7 @@ Buttons carry a soft, slightly-rounded (`rounded-lg`, 8px) frosted-glass surface
 Touch target: 44px minimum height on every button (`h-11`); the App Store / APK / Browser badges run taller at `h-16` since they carry a two-line label. Padding varies by size.
 
 This is the site's one shared glass recipe — reused verbatim, not reinvented per surface, by:
-- The header nav pill (see Navigation).
+- The header nav bar (see Navigation).
 - Custody-comparison's checkpoint band and chips (see Chips).
 - The three bento cards (see Cards / Containers).
 
@@ -234,7 +234,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-The header is a floating, `rounded-full` glass capsule, not an edge-to-edge bar: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `glass-border`→`glass-border-strong`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger. The theme toggle (a sun/moon icon button switching light ↔ dark, see The Night Sky) sits with the external icon links on desktop and beside the drawer trigger below `lg`; until first use the site follows the system preference.
+The header is a floating glass bar, `rounded-lg` to match the button radius, not an edge-to-edge strip: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `glass-border`→`glass-border-strong`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger. The theme toggle (a sun/moon icon button switching light ↔ dark, see The Night Sky) sits with the external icon links on desktop and beside the drawer trigger below `lg`; until first use the site follows the system preference.
 
 ### Browser Chrome (signature component)
 
@@ -259,7 +259,7 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 - **Do** use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.
 - **Do** cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.
 - **Do** use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.
-- **Do** keep the navbar a floating glass pill (see §5 Navigation) inset from the viewport edges, not an edge-to-edge bar.
+- **Do** keep the navbar a floating glass bar (see §5 Navigation), rounded to match the button radius, inset from the viewport edges, not edge-to-edge.
 - **Do** serve any transparent pixel-art or soft-alpha PNG (logo, clouds) via next/image with `unoptimized` — its optimizer flattens alpha to black otherwise.
 
 ### Don't

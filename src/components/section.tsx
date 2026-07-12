@@ -11,7 +11,6 @@ import type { ReactNode, RefObject } from "react";
 interface SectionProps {
   id?: string;
   variant?: "centered" | "editorial";
-  title?: string;
   subtitle?: string;
   description?: string;
   children?: ReactNode;
@@ -26,7 +25,6 @@ const Section = forwardRef<HTMLElement, SectionProps>(
     {
       id,
       variant = "centered",
-      title,
       subtitle,
       description,
       children,
@@ -52,17 +50,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       ease: easeInOutCubic,
     });
 
-    const hasHeaderContent = !!(title || subtitle || description || headerSlot);
-
-    const renderEyebrow = () =>
-      title && (
-        <motion.div
-          className="flex items-baseline gap-3 type-label text-primary"
-          style={{ opacity, y }}
-        >
-          <span>{title}</span>
-        </motion.div>
-      );
+    const hasHeaderContent = !!(subtitle || description || headerSlot);
 
     const renderSubtitle = (extra?: string) =>
       subtitle && (
@@ -97,7 +85,6 @@ const Section = forwardRef<HTMLElement, SectionProps>(
         <div className={cn("relative z-10", className)}>
           {!hideHeader && hasHeaderContent && variant === "centered" && (
             <div className={cn(centeredAlignment, "space-y-4 pb-10 mx-auto")}>
-              {renderEyebrow()}
               {renderSubtitle(
                 cn(
                   "mt-4 max-w-lg sm:max-w-none",
@@ -121,9 +108,6 @@ const Section = forwardRef<HTMLElement, SectionProps>(
                 headerSlot
               ) : (
                 <div className="grid grid-cols-12 gap-x-6 gap-y-6 lg:gap-x-10">
-                  <div className="col-span-12 lg:col-span-4">
-                    {renderEyebrow()}
-                  </div>
                   {subtitle && (
                     <div className="col-span-12 lg:col-span-9 lg:col-start-1">
                       {renderSubtitle()}

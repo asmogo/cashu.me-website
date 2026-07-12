@@ -95,7 +95,7 @@ export const siteConfig = {
     {
       question: "How private is this?",
       answer:
-        "Cashu uses Chaumian blind signatures: the mint signs your ecash without ever seeing the token it's signing, so it can't link what you withdraw to what you later spend. Peer-to-peer sends, over iMessage, NFC, any chat, never touch the mint at all, so there's no transaction graph to trace the way there is on-chain or across Lightning nodes. The mint still sees amounts and timing when you mint or melt to Lightning, so it isn't a total blind spot, but it makes Cashu one of the most private ways to hold and move bitcoin today.",
+        "The mint signs your ecash blind, without seeing what it's signing, so it can't link your withdrawal to your later spend. Peer-to-peer sends, over iMessage, NFC, or any chat, never touch the mint, leaving no transaction graph to trace. Minting or melting to Lightning does reveal amount and timing.",
     },
     {
       question: "What if a mint disappears?",
