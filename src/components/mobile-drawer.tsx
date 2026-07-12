@@ -44,7 +44,7 @@ export function MobileDrawer() {
             className="relative mr-6 flex items-center gap-2.5"
           >
             <Logo className="size-8" />
-            <span className="font-display text-base font-semibold uppercase tracking-[0.14em]">
+            <span className="font-display text-base font-bold uppercase tracking-[0.14em]">
               {siteConfig.name}
             </span>
           </Link>

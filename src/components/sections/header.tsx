@@ -46,7 +46,7 @@ export function Header() {
           className="flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-90"
         >
           <Logo className="size-7 shrink-0" />
-          <span className="whitespace-nowrap font-display text-sm font-semibold uppercase tracking-[0.14em]">
+          <span className="whitespace-nowrap font-display text-sm font-bold uppercase tracking-[0.14em]">
             {siteConfig.name}
           </span>
         </Link>

@@ -16,7 +16,7 @@ const azeretMono = Azeret_Mono({
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["500", "600", "700"],
   variable: "--font-manrope",
   display: "swap",
 });
