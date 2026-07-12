@@ -63,13 +63,13 @@ export function Header() {
                   rel={isPlaceholder ? undefined : "noreferrer noopener"}
                   aria-label={label}
                   title={label}
-                  className="text-foreground/70 transition-colors hover:text-foreground"
+                  className="-m-2.5 inline-flex items-center justify-center p-2.5 text-foreground/70 transition-colors hover:text-foreground"
                 >
                   <Icon className="size-6" aria-hidden="true" />
                 </a>
               );
             })}
-            <ThemeToggle />
+            <ThemeToggle className="-m-2.5 inline-flex items-center justify-center p-2.5" />
           </div>
           <a
             href={siteConfig.links.wallet}

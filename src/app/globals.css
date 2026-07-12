@@ -29,7 +29,10 @@
 
 @utility type-wordmark {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 18vw, 14rem);
+  /* 18vw alone would need viewports >= ~356px to clear the 4rem floor;
+     below that "cashu.me" (one unbreakable word) overflows its container.
+     3.25rem keeps it inside the narrowest supported viewport (320px). */
+  font-size: clamp(3.25rem, 18vw, 14rem);
   font-weight: 600;
   line-height: 0.85;
   letter-spacing: -0.05em;

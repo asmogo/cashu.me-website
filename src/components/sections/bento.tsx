@@ -69,13 +69,13 @@ export function BentoGrid() {
               key={index}
               style={motions[index]}
               className={cn(
-                "group relative grid grid-rows-[auto_1fr] overflow-hidden border border-glass-border bg-background/55 p-6 pb-0 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:p-8",
+                "group relative grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden border border-glass-border bg-background/55 p-6 pb-0 shadow-[var(--glass-shadow)] backdrop-blur-lg sm:p-8",
                 shape.rounded,
                 shape.minHeight,
                 item.fullWidth && "md:col-span-2"
               )}
             >
-              <div className="flex flex-col">
+              <div className="flex min-w-0 flex-col">
                 <h3 className="type-display-3 text-foreground">
                   {item.title}
                 </h3>

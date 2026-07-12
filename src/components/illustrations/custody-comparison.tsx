@@ -142,19 +142,8 @@ function Lane({
           }
         />
 
-        {/* Mint variant: a frosted overlay sits above the dot and blurs it
-            as it passes behind. Editorially: the mint verifies the packet
-            but doesn't see its contents — the dot blurs into the box. */}
-        {variant === "mint" && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] rounded-lg bg-foreground/[0.06] backdrop-blur-lg sm:w-[14%]"
-          />
-        )}
-
         {/* Laser scan line — clipped to the checkpoint band, sweeps top→bottom
-            during the packet's hold beat. Rendered AFTER the mint overlay so
-            it stays sharp on top while the dot beneath gets blurred. */}
+            during the packet's hold beat. */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] overflow-hidden sm:w-[14%]"
