@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 const links = {
   wallet: "https://wallet.cashu.me",
   spec: "https://github.com/cashubtc/nuts",
-  repo: "https://github.com/asmogo/wallet",
+  repo: "https://github.com/cashubtc/wallet",
   docs: "https://docs.cashu.space",
   nostr:
     "https://primal.net/p/nprofile1qqs0y3tvskgs9gpgxxu5ahgz3fmms3rzmxt504qceqtz4a6pdgfwlkghwl6j8",
@@ -13,8 +13,7 @@ const links = {
   // closed beta, so there is no Play Store listing yet. It ships as a direct
   // APK download instead, via GitHub releases.
   testflight: "https://testflight.apple.com/join/DT1xF1y4",
-  androidApk:
-    "https://github.com/cashubtc/wallet/releases/download/v0.1.0/cashu-wallet-android-v0.1.0.apk",
+  androidApk: "https://github.com/cashubtc/wallet/releases",
 };
 
 export const siteConfig = {
