@@ -26,7 +26,7 @@ export function ApkBadge({ href, className }: ApkBadgeProps) {
       />
       <span className="flex flex-col items-start leading-none">
         <span className="type-button text-[11px] text-muted-foreground">
-          Download
+          Download Beta
         </span>
         <span className="mt-1 type-button text-[18px]">APK</span>
       </span>

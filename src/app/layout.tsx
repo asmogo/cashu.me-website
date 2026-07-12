@@ -21,7 +21,7 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const title = `${siteConfig.name} · ${siteConfig.description}`;
+const title = "Cashu Me";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

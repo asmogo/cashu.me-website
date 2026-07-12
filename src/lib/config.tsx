@@ -11,9 +11,9 @@ const links = {
   opencash: "http://opencash.dev/",
   // iOS ships via TestFlight (public beta); the Android native build is still in
   // closed beta, so there is no Play Store listing yet. It ships as a direct
-  // APK download instead — placeholder link until the build is hosted.
+  // APK download instead, via GitHub releases.
   testflight: "https://testflight.apple.com/join/DT1xF1y4",
-  androidApk: "#",
+  androidApk: "https://github.com/asmogo/wallet/releases",
 };
 
 export const siteConfig = {
