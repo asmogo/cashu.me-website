@@ -17,6 +17,22 @@ import { SECTION_CLOUDS } from "@/lib/clouds";
 import { siteConfig } from "@/lib/config";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import type { CSSProperties } from "react";
+
+// Dissolve the hero photo into the sky on two edges at once: the bottom fade
+// melts the forearm, and the right fade removes the hard vertical line where the
+// source render was clipped at its right frame edge (the forearm reaches x=100%
+// only in the bottom ~10%; the phone/fingers stay left of ~76%, so they're
+// untouched). Two alpha-gradient layers combined with `intersect` — a pixel is
+// shown only where BOTH keep it, so the bottom-right corner melts away.
+const HERO_IMAGE_MASK = {
+  maskImage:
+    "linear-gradient(to bottom, black 0%, black 78%, transparent 100%), linear-gradient(to right, black 0%, black 80%, transparent 100%)",
+  WebkitMaskImage:
+    "linear-gradient(to bottom, black 0%, black 78%, transparent 100%), linear-gradient(to right, black 0%, black 80%, transparent 100%)",
+  maskComposite: "intersect",
+  WebkitMaskComposite: "source-in",
+} as CSSProperties;
 
 export function Hero() {
   const reduceMotion = useReducedMotion() ?? false;
@@ -99,23 +115,25 @@ export function Hero() {
                 `dark:hidden`/`hidden dark:block` variant that never gets a
                 layout box. */}
             <Image
-              src="/images/hand-wallet-light.png"
+              src="/images/hand-wallet-light-v2.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
-              width={704}
-              height={755}
+              width={745}
+              height={806}
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
-              className="h-auto w-full select-none [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] dark:hidden"
+              className="h-auto w-full select-none dark:hidden"
+              style={HERO_IMAGE_MASK}
               draggable={false}
             />
             <Image
-              src="/images/hand-wallet-dark.png"
+              src="/images/hand-wallet-dark-v2.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
-              width={629}
-              height={741}
+              width={745}
+              height={806}
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
-              className="hidden h-auto w-full select-none [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] dark:block"
+              className="hidden h-auto w-full select-none dark:block"
+              style={HERO_IMAGE_MASK}
               draggable={false}
             />
           </motion.div>
