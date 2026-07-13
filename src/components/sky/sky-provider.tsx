@@ -30,6 +30,19 @@ export function SkyProvider({ children }: { children: ReactNode }) {
     return () => mq.removeEventListener("change", update);
   }, []);
 
+  // useScroll() with no target tracks document.documentElement, which
+  // framer-motion never re-measures via ResizeObserver — only on scroll/
+  // resize events. If page height changes after mount (font swap, async
+  // content), scrollYProgress goes stale and then jumps on the next scroll
+  // event. Force a re-measure as soon as height changes so it stays current.
+  useEffect(() => {
+    const ro = new ResizeObserver(() => {
+      window.dispatchEvent(new Event("scroll"));
+    });
+    ro.observe(document.body);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <SkyContext.Provider
       value={{ progress: scrollYProgress, drift: isDesktop && !reduceMotion }}
