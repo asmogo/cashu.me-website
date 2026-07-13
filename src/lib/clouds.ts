@@ -101,6 +101,10 @@ export const SECTION_CLOUDS: Record<string, SectionClouds> = {
       { variant: "cloud-03", top: "9%", left: "1%", width: 260, tier: "mid" },
       { variant: "cloud-04", top: "29%", right: "2%", width: 155, tier: "mid" },
       { variant: "cloud-02", top: "47%", left: "0.5%", width: 135, tier: "mid" },
+      // fill the bare lower-left band beside the phone: cloud-07 is the only
+      // variant not otherwise used in the hero, plus a small far wisp for depth
+      { variant: "cloud-07", top: "63%", left: "3%", width: 215, tier: "mid" },
+      { variant: "cloud-04", top: "83%", left: "17%", width: 95, tier: "far", flip: true },
       // the signature: larger, tucked partially behind the hand+phone photo
       { variant: "cloud-01", top: "45%", right: "16%", width: 380, tier: "near", flip: true },
     ],
