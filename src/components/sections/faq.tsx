@@ -16,7 +16,6 @@ export function FAQ() {
           <AccordionItem
             key={index}
             question={faq.question}
-            defaultOpen={index === 0}
           >
             {faq.answer}
           </AccordionItem>

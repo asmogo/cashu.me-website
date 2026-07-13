@@ -216,7 +216,7 @@ Buttons carry a soft, slightly-rounded (`rounded-lg`, 8px) frosted-glass surface
 Touch target: 44px minimum height on every button (`h-11`); the App Store / APK / Browser badges run taller at `h-16` since they carry a two-line label. Padding varies by size.
 
 This is the site's one shared glass recipe — reused verbatim, not reinvented per surface, by:
-- The header nav bar (see Navigation).
+- The header nav bar (see Navigation) — the one surface that extends it, with a full-pill radius and a navbar-only `--glass-sheen` highlight.
 - Custody-comparison's checkpoint band and chips (see Chips).
 - The three bento cards (see Cards / Containers).
 
@@ -234,7 +234,7 @@ No input components exist yet. When they arrive: stroke-only (hairline border), 
 
 ### Navigation
 
-The header is a floating glass bar, `rounded-lg` to match the button radius, not an edge-to-edge strip: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `glass-border`→`glass-border-strong`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger. The theme toggle (a sun/moon icon button switching light ↔ dark, see The Night Sky) sits with the external icon links on desktop and beside the drawer trigger below `lg`; until first use the site follows the system preference.
+The header is a floating glass bar, a fully-round pill (`rounded-full`), not an edge-to-edge strip: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above **plus** a navbar-only glossy sheen. The sheen is a fixed diagonal light band (`--glass-sheen`, defined per theme in `globals.css`) drawn over the frosted surface via a `::before` overlay, so more of the frosting reads — brighter on daylight, subtler on the night surface. This is the one place the shared recipe is intentionally extended: the navbar is the distinguished chrome. The sheen stays navbar-only — do not spread it to buttons, badges, cards, or chips. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `glass-border`→`glass-border-strong`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger. The theme toggle (a sun/moon icon button switching light ↔ dark, see The Night Sky) sits with the external icon links on desktop and beside the drawer trigger below `lg`; until first use the site follows the system preference.
 
 ### Browser Chrome (signature component)
 
@@ -255,11 +255,11 @@ Native `<details>` / `<summary>`. Each item is separated by a 1px top hairline. 
 ### Do
 
 - **Do** keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.
-- **Do** keep the frosted-glass recipe to its four named surfaces (buttons, nav pill, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component.
+- **Do** keep the frosted-glass recipe to its four named surfaces (buttons, nav pill, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component. The lone sanctioned extension is the nav pill: fully-round plus a navbar-only `--glass-sheen` highlight (see §5 Navigation). The other three surfaces stay plain.
 - **Do** use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.
 - **Do** cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.
 - **Do** use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.
-- **Do** keep the navbar a floating glass bar (see §5 Navigation), rounded to match the button radius, inset from the viewport edges, not edge-to-edge.
+- **Do** keep the navbar a floating glass bar (see §5 Navigation), a fully-round pill carrying the shared recipe plus its own `--glass-sheen` highlight, inset from the viewport edges, not edge-to-edge.
 - **Do** serve any transparent pixel-art or soft-alpha PNG (logo, clouds) via next/image with `unoptimized` — its optimizer flattens alpha to black otherwise.
 
 ### Don't

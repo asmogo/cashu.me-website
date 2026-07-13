@@ -36,14 +36,14 @@ export function Header() {
     <header className="sticky top-4 z-50 flex justify-center px-4 lg:px-6">
       <div
         className={cn(
-          "flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-lg border border-glass-border bg-background/55 px-6 py-3 shadow-[var(--glass-shadow)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart lg:px-8",
+          "relative flex w-full max-w-5xl flex-nowrap items-center justify-between gap-6 rounded-full border border-glass-border bg-background/55 px-6 py-3 shadow-[var(--glass-shadow)] backdrop-blur-lg transition-[background-color,border-color] duration-500 ease-out-quart before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:content-[''] before:[background:var(--glass-sheen)] lg:px-8",
           isScrolled && "border-glass-border-strong bg-background/75"
         )}
       >
         <Link
           href="/"
           title="cashu.me"
-          className="flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-90"
+          className="relative flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-90"
         >
           <Logo className="size-7 shrink-0" />
           <span className="whitespace-nowrap font-display text-sm font-bold uppercase tracking-[0.14em]">
@@ -51,7 +51,7 @@ export function Header() {
           </span>
         </Link>
 
-        <div className="hidden shrink-0 items-center gap-6 lg:flex">
+        <div className="relative hidden shrink-0 items-center gap-6 lg:flex">
           <div className="flex shrink-0 items-center gap-5">
             {NAV_ICONS.map(({ label, href, icon: Icon }) => {
               const isPlaceholder = href === "#";
@@ -81,7 +81,7 @@ export function Header() {
           </a>
         </div>
 
-        <div className="flex items-center gap-1 lg:hidden">
+        <div className="relative flex items-center gap-1 lg:hidden">
           <ThemeToggle className="inline-flex h-11 w-11 items-center justify-center" />
           <MobileDrawer />
         </div>
