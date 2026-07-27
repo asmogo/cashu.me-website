@@ -4,7 +4,7 @@ import { CloudField } from "@/components/sky/cloud-field";
 import { easeInOutCubic } from "@/lib/animation";
 import { SECTION_CLOUDS } from "@/lib/clouds";
 import { cn } from "@/lib/utils";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { forwardRef, useRef } from "react";
 import type { ReactNode, RefObject } from "react";
 
@@ -54,22 +54,22 @@ const Section = forwardRef<HTMLElement, SectionProps>(
 
     const renderSubtitle = (extra?: string) =>
       subtitle && (
-        <motion.h2
+        <m.h2
           className={cn("type-display-2 text-foreground", extra)}
           style={{ opacity, y }}
         >
           {subtitle}
-        </motion.h2>
+        </m.h2>
       );
 
     const renderDescription = (extra?: string) =>
       description && (
-        <motion.p
+        <m.p
           className={cn("type-lead text-foreground/75", extra)}
           style={{ opacity, y }}
         >
           {description}
-        </motion.p>
+        </m.p>
       );
 
     const centeredAlignment =

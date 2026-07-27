@@ -1,7 +1,7 @@
 "use client";
 
 import { CloudField } from "@/components/sky/cloud-field";
-import { ApkBadge } from "@/components/ui/apk-badge";
+import { ZapstoreBadge } from "@/components/ui/zapstore-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { BrowserBadge } from "@/components/ui/browser-badge";
 import {
@@ -15,7 +15,7 @@ import {
 } from "@/lib/animation";
 import { SECTION_CLOUDS } from "@/lib/clouds";
 import { siteConfig } from "@/lib/config";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
@@ -48,7 +48,7 @@ export function Hero() {
           device off the sky. Offset up-right of center: the hand+phone
           photo's own visual weight sits there, arm sweeping down-left. */}
       <div className="pointer-events-none absolute inset-x-0 top-[18%] z-0 flex h-[55%] items-center justify-center">
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={
@@ -58,7 +58,7 @@ export function Hero() {
           }
           className="absolute size-[620px] translate-x-[70px] -translate-y-[60px] rounded-full bg-white/45 blur-[150px] dark:bg-white/15"
         />
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={
@@ -75,7 +75,7 @@ export function Hero() {
             opacity-0 initial state would keep it unpainted (and CWV-invisible)
             until the delayed fade resolves. Blur+rise still reads as a reveal
             without gating the first paint. */}
-        <motion.h1
+        <m.h1
           initial={reduceMotion ? false : { filter: "blur(10px)" }}
           animate={{ filter: "blur(0px)" }}
           transition={
@@ -86,7 +86,7 @@ export function Hero() {
           className="type-display-1 uppercase tracking-[-0.01em] text-foreground"
         >
           {siteConfig.description}
-        </motion.h1>
+        </m.h1>
 
         {/* Hero device: a hand holding the wallet, not an abstracted
             screenshot — the phones/objects exception in DESIGN.md, spent on
@@ -94,7 +94,7 @@ export function Hero() {
             Directly under the headline: the hero's focal visual, not an
             afterthought below the CTAs. */}
         <div className="relative mt-8 flex justify-center sm:mt-10 md:mt-12">
-          <motion.div
+          <m.div
             initial={reduceMotion ? false : { y: 16, filter: "blur(8px)" }}
             animate={{ y: 0, filter: "blur(0px)" }}
             transition={
@@ -144,10 +144,10 @@ export function Hero() {
               style={HERO_IMAGE_MASK}
               draggable={false}
             />
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.p
+        <m.p
           initial={reduceMotion ? false : { y: 16, filter: "blur(8px)" }}
           animate={{ y: 0, filter: "blur(0px)" }}
           transition={
@@ -158,9 +158,9 @@ export function Hero() {
           className="mx-auto mt-12 max-w-[50ch] type-lead text-foreground/75"
         >
           {siteConfig.tagline}
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { y: 16, filter: "blur(8px)" }}
           animate={{ y: 0, filter: "blur(0px)" }}
           transition={
@@ -178,15 +178,15 @@ export function Hero() {
             href={siteConfig.links.testflight}
             className="w-full justify-center sm:w-auto"
           />
-          <ApkBadge
-            href={siteConfig.links.androidApk}
+          <ZapstoreBadge
+            href={siteConfig.links.zapstore}
             className="w-full justify-center sm:w-auto"
           />
           <BrowserBadge
             href={siteConfig.links.wallet}
             className="w-full justify-center sm:w-auto"
           />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

@@ -2,12 +2,7 @@
 
 import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
 import { cn } from "@/lib/utils";
-import {
-  motion,
-  useInView,
-  useReducedMotion,
-  type Variants,
-} from "framer-motion";
+import { m, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { Eye, Landmark } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -91,7 +86,7 @@ function Lane({
             box, then departs. Mint vanishes the dot during the hold (mint can't
             see the data) and re-emits after; bank stays bright throughout
             (custodian sees everything). */}
-        <motion.div
+        <m.div
           aria-hidden
           className="absolute top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--scan)]"
           initial={{ left: PACKET_ORIGIN, opacity: 0 }}
@@ -148,7 +143,7 @@ function Lane({
           aria-hidden
           className="pointer-events-none absolute left-[34%] top-0 h-full w-[18%] overflow-hidden sm:w-[14%]"
         >
-          <motion.div
+          <m.div
             className="absolute inset-x-0 h-px bg-[var(--scan)] shadow-[0_0_6px_var(--scan)]"
             initial={{ top: "0%", opacity: 0 }}
             animate={
@@ -177,7 +172,7 @@ function Lane({
         {/* Bank variant: eye fades in under the box as the packet enters,
             holds during the scan, fades out as the packet exits. */}
         {variant === "bank" && (
-          <motion.div
+          <m.div
             aria-hidden
             className="absolute top-full mt-2 left-[34%] flex w-[18%] items-center justify-center sm:w-[14%]"
             initial={{ opacity: 0, y: 4 }}
@@ -212,7 +207,7 @@ function Lane({
             }
           >
             <Eye className="size-4 text-foreground" />
-          </motion.div>
+          </m.div>
         )}
       </div>
 
@@ -240,7 +235,7 @@ function ExtractingChip({
   children,
 }: ExtractingChipProps) {
   return (
-    <motion.span
+    <m.span
       className={className}
       initial={{ opacity: 0, x: CHIP_TRAVEL_PX }}
       animate={
@@ -273,7 +268,7 @@ function ExtractingChip({
       }
     >
       {children}
-    </motion.span>
+    </m.span>
   );
 }
 
@@ -324,14 +319,14 @@ export function CustodyComparison() {
             >
               ✓ VALID
             </ExtractingChip>
-            <motion.span
+            <m.span
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               variants={captionVariants}
               className="type-label text-right text-muted-foreground sm:text-left"
             >
               Mint sees nothing else.
-            </motion.span>
+            </m.span>
           </div>
         </Lane>
 
@@ -359,14 +354,14 @@ export function CustodyComparison() {
                 {field}
               </ExtractingChip>
             ))}
-            <motion.span
+            <m.span
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
               variants={captionVariants}
               className="mt-1 type-label text-right text-foreground/55 sm:text-left"
             >
               Custodian sees all of it.
-            </motion.span>
+            </m.span>
           </div>
         </Lane>
       </div>

@@ -9,7 +9,7 @@ import {
   REVEAL_STAGGER,
 } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 
 export function TapToPay() {
@@ -32,7 +32,7 @@ export function TapToPay() {
           three value props, so it earns the middle of the trio as a deliberate
           breakout. The artifact reveals first, its caption settles in beneath. */}
       <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-        <motion.div
+        <m.div
           initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
@@ -53,7 +53,7 @@ export function TapToPay() {
           {!reduceMotion && (
             <div aria-hidden className="pointer-events-none absolute inset-0">
               {[0, 1].map((i) => (
-                <motion.span
+                <m.span
                   key={i}
                   className="absolute inset-0 rounded-[2rem] border border-primary/25"
                   animate={{ scale: [1, 1.1], opacity: [0.6, 0] }}
@@ -79,9 +79,9 @@ export function TapToPay() {
             aria-hidden="true"
             className="relative h-auto w-full max-w-[380px] rounded-[2rem] border border-foreground/15 drop-shadow-2xl sm:max-w-[400px]"
           />
-        </motion.div>
+        </m.div>
 
-        <motion.h2
+        <m.h2
           initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
@@ -93,9 +93,9 @@ export function TapToPay() {
           className="mt-10 type-display-2 text-balance text-foreground"
         >
           {title}
-        </motion.h2>
+        </m.h2>
 
-        <motion.p
+        <m.p
           initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
@@ -107,7 +107,7 @@ export function TapToPay() {
           className="mt-5 max-w-[42ch] type-lead text-balance text-foreground/75"
         >
           {description}
-        </motion.p>
+        </m.p>
       </div>
     </Section>
   );

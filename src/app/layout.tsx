@@ -1,11 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { Azeret_Mono, Manrope } from "next/font/google";
+import { Azeret_Mono, Geist, Manrope } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SkyProvider } from "@/components/sky/sky-provider";
 import { ConsoleGreeting } from "@/components/console-greeting";
 import { siteConfig } from "@/lib/config";
 import "./globals.css";
+
+// Geist comes from next/font/google, not the `geist` package: the package ships
+// one unsubset variable woff2 (69.7KB, Cyrillic and Vietnamese included) and
+// preloads it on the render path. The Google latin subset is 29.3KB for the
+// same glyphs this site actually draws.
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
 
 const azeretMono = Azeret_Mono({
   subsets: ["latin"],
@@ -24,7 +33,7 @@ const manrope = Manrope({
 const title = "Cashu Me";
 const ogImageAlt = "Cashu Me — Privacy of a $20 bill. The speed of a tap.";
 const ogImages = [
-  { url: "/images/og-cashu-me.png", width: 1200, height: 640, alt: ogImageAlt },
+  { url: "/images/og-cashu-me.jpg", width: 1200, height: 640, alt: ogImageAlt },
 ];
 
 export const metadata: Metadata = {
@@ -68,7 +77,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${azeretMono.variable} ${manrope.variable}`}
+      className={`${geistSans.variable} ${azeretMono.variable} ${manrope.variable}`}
       suppressHydrationWarning
     >
       <body>

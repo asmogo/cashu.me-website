@@ -4,7 +4,7 @@ import { Section } from "@/components/section";
 import { siteConfig } from "@/lib/config";
 import { easeOutCubic, REVEAL_DURATION_LG, REVEAL_DURATION_SM } from "@/lib/animation";
 import { cn } from "@/lib/utils";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -100,27 +100,27 @@ function Feature({
 
   return (
     <div className="grid grid-cols-12 items-center gap-x-6 gap-y-10 lg:gap-x-10">
-      <motion.div
+      <m.div
         className={cn("col-span-12 lg:row-start-1", layout.textClass)}
         initial={reduceMotion ? "visible" : "hidden"}
         animate={animateState}
         variants={textVariants}
       >
         <div className="flex max-w-xl flex-col gap-6">
-          <motion.h2
+          <m.h2
             className="type-display-2 text-foreground"
             variants={itemVariants}
           >
             {title}
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             className="type-lead text-foreground/75 max-w-[50ch]"
             variants={itemVariants}
           >
             {description}
-          </motion.p>
+          </m.p>
         </div>
-      </motion.div>
+      </m.div>
 
       <div
         className={cn(

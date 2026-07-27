@@ -1,5 +1,22 @@
 import type { ReactNode } from "react";
 
+// Discriminated on `id` so bento.tsx narrows: the custody-comparison card
+// renders the <CustodyComparison /> illustration and carries no image, the
+// other two carry a theme-swapped pair.
+type BentoItem = {
+  title: string;
+  content: string;
+  fullWidth: boolean;
+} & (
+  | { id: "custody-comparison" }
+  | {
+      id: "imessage-chat" | "lightning-address";
+      imageSrc: string;
+      imageSrcDark?: string;
+      imageAlt: string;
+    }
+);
+
 const links = {
   wallet: "https://wallet.cashu.me",
   spec: "https://github.com/cashubtc/nuts",
@@ -9,11 +26,10 @@ const links = {
     "https://primal.net/p/nprofile1qqs0y3tvskgs9gpgxxu5ahgz3fmms3rzmxt504qceqtz4a6pdgfwlkghwl6j8",
   twitter: "https://x.com/CashuBTC",
   opencash: "http://opencash.dev/",
-  // iOS ships via TestFlight (public beta); the Android native build is still in
-  // closed beta, so there is no Play Store listing yet. It ships as a direct
-  // APK download instead, via GitHub releases.
+  // Both native builds are in public beta ahead of a store listing: iOS ships
+  // via TestFlight, Android via Zapstore rather than Google Play.
   testflight: "https://testflight.apple.com/join/DT1xF1y4",
-  androidApk: "https://github.com/cashubtc/wallet/releases",
+  zapstore: "https://zapstore.dev/apps/com.cashu.me",
 };
 
 export const siteConfig = {
@@ -65,8 +81,8 @@ export const siteConfig = {
       title: "Account wallets see everything.",
       content:
         "Every send, every receive, every contact, tied to a single account in someone else's database. A change of policy is a change of access.",
-      imageSrc: "/images/iphone-placeholder.png",
-      imageAlt: "Cluttered wallet UI showing transaction history",
+      // No imageSrc: bento.tsx renders <CustodyComparison /> for this id and
+      // never reads one.
       fullWidth: true,
     },
     {
@@ -90,7 +106,7 @@ export const siteConfig = {
       imageAlt: "Bottom sheet showing a Lightning Address QR code with Copy and Share actions",
       fullWidth: false,
     },
-  ],
+  ] as BentoItem[],
   faqs: [
     {
       question: "How private is this?",
@@ -122,7 +138,7 @@ export const siteConfig = {
         label: "Wallet",
         links: [
           { label: "iOS (TestFlight)", href: links.testflight },
-          { label: "Android", href: links.androidApk },
+          { label: "Android (Zapstore)", href: links.zapstore },
           { label: "Browser", href: links.wallet },
         ],
       },

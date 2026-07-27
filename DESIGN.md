@@ -18,6 +18,12 @@ colors:
   cashu-lilac: "#b4a7f5"
   cashu-lilac-deep: "#7a66e8"
 typography:
+  wordmark:
+    fontFamily: "Manrope, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(3.25rem, 18vw, 14rem)"
+    fontWeight: 600
+    lineHeight: 0.85
+    letterSpacing: "-0.05em"
   display-1:
     fontFamily: "Manrope, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(3.5rem, 10vw, 10.5rem)"
@@ -36,6 +42,12 @@ typography:
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "-0.03em"
+  subhead:
+    fontFamily: "Manrope, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.125rem, 1.4vw + 0.5rem, 1.5rem)"
+    fontWeight: 500
+    lineHeight: 1.3
+    letterSpacing: "-0.015em"
   lead:
     fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.25rem, 1.3vw + 0.7rem, 1.625rem)"
@@ -44,9 +56,9 @@ typography:
     letterSpacing: "-0.008em"
   body:
     fontFamily: "Geist Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1rem"
+    fontSize: "1.0625rem"
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
   label:
     fontFamily: "Azeret Mono, ui-monospace, Menlo, monospace"
     fontSize: "0.75rem"
@@ -58,8 +70,14 @@ typography:
     fontSize: "0.875rem"
     fontWeight: 500
     letterSpacing: "0.06em"
+  badge-kicker:
+    fontFamily: "Azeret Mono, ui-monospace, Menlo, monospace"
+    fontSize: "11px"
+    fontWeight: 500
+    letterSpacing: "0.06em"
 rounded:
   none: "0"
+  focus: "2px"
   md: "8px"
   pill: "9999px"
 spacing:
@@ -171,7 +189,8 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 - **Display 2** (Manrope 500, `clamp(2.5rem, 6.2vw, 6.25rem)`, line-height 1, tracking -0.035em): Section headings ("What's different.", "Who holds the bitcoin.").
 - **Display 3** (Manrope 500, `clamp(1.75rem, 3vw, 3rem)`, line-height 1, tracking -0.03em): Sub-section / smaller display moments, including bento card titles.
 - **Lead** (Geist Sans 400, `clamp(1.25rem, 1.3vw + 0.7rem, 1.625rem)`, line-height 1.5, tracking -0.008em): Standalone introductory paragraphs after a Display heading. Capped at 48-55ch.
-- **Body** (Geist Sans 400, 1.0625rem, line-height 1.55 on light / 1.6 on dark): Pillar / column / accordion prose. Capped at 65ch.
+- **Subhead** (Manrope 500, `clamp(1.125rem, 1.4vw + 0.5rem, 1.5rem)`, line-height 1.3, tracking -0.015em): The one display-face step below Display 3 — section sub-headings that need Manrope's voice at body-adjacent scale.
+- **Body** (Geist Sans 400, 1.0625rem, line-height 1.6): Pillar / column / accordion prose. Capped at 65ch. Shipped as `type-body-lg`.
 - **Label** (Azeret Mono 400, 0.75rem, letter-spacing 0.1em, uppercase): Structural labels — footer column headers (WALLET / PROTOCOL / COMMUNITY), the footer copyright line, and chip/badge text.
 - **Button** (Azeret Mono 500, letter-spacing 0.06em, uppercase): The label face for every CTA, outline button, and the two label rows inside the App Store / Play Store / Browser badges. Sized by the consuming component, not by the utility.
 
@@ -179,7 +198,7 @@ A single sky surface anchored by ink type and one chromatic accent. The palette 
 
 **The Specimen Scale Rule.** Display 1 is reserved for the page's apex moment: the opening hero (currently "A Cashu Wallet.", `siteConfig.description`). No element in the body of the page ever reaches that size.
 
-**The Wordmark Tier.** A single scale step exists above Display 1 — `type-wordmark` (`clamp(4rem, 18vw, 14rem)`, weight 600, tracking -0.05em). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere; it's a brand mark, not a heading, and operates outside the Display hierarchy.
+**The Wordmark Tier.** A single scale step exists above Display 1 — `type-wordmark` (`clamp(3.25rem, 18vw, 14rem)`, weight 600, tracking -0.05em). The 3.25rem floor is load-bearing, not a round number: 18vw alone would need a viewport ≥ ~356px to clear a 4rem floor, and below that "cashu.me" (one unbreakable word) overflows its container at the narrowest supported width (320px). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere; it's a brand mark, not a heading, and operates outside the Display hierarchy.
 
 **The Balanced Wrap Rule.** All headings carry `text-wrap: balance`. All long-form prose carries `text-wrap: pretty`. The page never ships a heading with an orphaned single word on the last line if the browser can prevent it.
 
@@ -232,6 +251,10 @@ The system otherwise avoids cards: section bodies are not cards, pillar items ar
 
 No input components exist yet. When they arrive: stroke-only (hairline border), no fill, focus state inverts the stroke to Cashu Lilac.
 
+### Focus
+
+One uniform keyboard-focus treatment across every interactive element (`a`, `button`, `[role="button"]`, `summary`, Radix collection items): a 2px `--ring` outline at `outline-offset: 4px`, with a 2px corner radius (`rounded.focus`) so the ring reads as a rounded rectangle rather than a hard box. The 2px radius is deliberate and sits outside the surface radius scale — it belongs to the ring, not to any surface. Keyboard users never see a browser-blue default.
+
 ### Navigation
 
 The header is a floating glass bar, a fully-round pill (`rounded-full`), not an edge-to-edge strip: inset from the top and sides (`top-4`, capped at `max-w-5xl`, centered), carrying the frosted-glass recipe from Buttons above **plus** a navbar-only glossy sheen. The sheen is a fixed diagonal light band (`--glass-sheen`, defined per theme in `globals.css`) drawn over the frosted surface via a `::before` overlay, so more of the frosting reads — brighter on daylight, subtler on the night surface. This is the one place the shared recipe is intentionally extended: the navbar is the distinguished chrome. The sheen stays navbar-only — do not spread it to buttons, badges, cards, or chips. It's present from first paint — not scroll-gated — and past 20px of scroll it intensifies slightly (`background/55`→`/75`, border `glass-border`→`glass-border-strong`), reusing the button's own hover tokens rather than inventing new ones. The brand lockup is a 28px monogram square (the transparent pixel-art Cashu mark, served `unoptimized` via next/image — see The Ambient Sky Rule) next to the wordmark "cashu.me" in Manrope 500, uppercase, tracking `0.14em`. Links are foreground/70%, hover full foreground. The right-aligned CTA sits inside the nav pill at all times; below `lg` it collapses to a `MobileDrawer` trigger. The theme toggle (a sun/moon icon button switching light ↔ dark, see The Night Sky) sits with the external icon links on desktop and beside the drawer trigger below `lg`; until first use the site follows the system preference.
@@ -244,7 +267,9 @@ Used at most once on the page, with a single composed mock interior. Never repea
 
 ### Store Badges
 
-Custom icon + two-line-label chips (`<AppStoreBadge>`, `<ApkBadge>`, `<BrowserBadge>`) rather than official platform artwork. Reserved for the hero, where they signal native install (plus the in-browser path). Same frosted-glass recipe as the button system (see Buttons above), sized at `h-16` with a `size-8` icon and an 18px label for a bigger, easier tap target than a standard button. Hover brightens the border, deepens the fill, and nudges the badge up (`-translate-y-0.5`).
+Custom icon + two-line-label chips (`<AppStoreBadge>`, `<ZapstoreBadge>`, `<BrowserBadge>`) rather than official platform artwork. Reserved for the hero and the mobile drawer, where they signal native install (plus the in-browser path). Same frosted-glass recipe as the button system (see Buttons above), sized at `h-16` with a `size-8` icon for a bigger, easier tap target than a standard button. Hover brightens the border, deepens the fill, and nudges the badge up (`-translate-y-0.5`).
+
+The two label rows are a fixed pair, identical across all three badges: an 11px muted kicker (`badge-kicker`) over an 18px store name, both Azeret Mono 500 at `0.06em`, both uppercased by `type-button`. The kicker names the action and the second row names the destination — "DOWNLOAD BETA ON / TESTFLIGHT", "DOWNLOAD BETA ON / ZAPSTORE", "NO INSTALL / BROWSER". Neither size is on the display type ramp; they belong to this component. Both native builds ship as public betas ahead of any store listing, so the badges carry the platform mark (Apple, Android) with the actual distribution channel underneath rather than official App Store or Google Play artwork.
 
 ### Accordion
 

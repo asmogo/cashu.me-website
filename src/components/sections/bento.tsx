@@ -5,7 +5,7 @@ import { Section } from "@/components/section";
 import { easeInOutCubic } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
@@ -62,7 +62,7 @@ export function BentoGrid() {
           const minHeight =
             CARD_MIN_HEIGHTS[index] ?? CARD_MIN_HEIGHTS[CARD_MIN_HEIGHTS.length - 1];
           return (
-            <motion.div
+            <m.div
               key={index}
               style={motions[index]}
               className={cn(
@@ -149,7 +149,7 @@ export function BentoGrid() {
                   />
                 )}
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

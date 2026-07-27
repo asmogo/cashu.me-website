@@ -1,6 +1,11 @@
 "use client";
 
-import { useScroll, useReducedMotion, type MotionValue } from "framer-motion";
+import {
+  LazyMotion,
+  useScroll,
+  useReducedMotion,
+  type MotionValue,
+} from "framer-motion";
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
@@ -10,6 +15,8 @@ interface SkyContextValue {
   /** false → clouds render static (reduced motion, or below md) */
   drift: boolean;
 }
+
+const loadMotionFeatures = () => import("./motion-features").then((m) => m.default);
 
 const SkyContext = createContext<SkyContextValue | null>(null);
 
@@ -43,11 +50,20 @@ export function SkyProvider({ children }: { children: ReactNode }) {
     return () => ro.disconnect();
   }, []);
 
+  // Every animated element on the page uses `m.*` + this one LazyMotion
+  // boundary rather than `motion.*`, so the feature bundle loads as a separate
+  // chunk instead of riding in the initial JS. `domAnimation` is the whole
+  // surface this site needs: animate/variants/exit plus whileInView. Nothing
+  // drags and nothing uses layout animations, so `domMax` would be dead weight.
+  // `strict` makes a stray `motion.*` throw instead of silently reintroducing
+  // the eager bundle.
   return (
-    <SkyContext.Provider
-      value={{ progress: scrollYProgress, drift: isDesktop && !reduceMotion }}
-    >
-      {children}
-    </SkyContext.Provider>
+    <LazyMotion features={loadMotionFeatures} strict>
+      <SkyContext.Provider
+        value={{ progress: scrollYProgress, drift: isDesktop && !reduceMotion }}
+      >
+        {children}
+      </SkyContext.Provider>
+    </LazyMotion>
   );
 }

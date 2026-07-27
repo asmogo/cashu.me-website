@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 const NAV_ICONS = [
   { label: "View source on GitHub", href: siteConfig.links.repo, icon: Icons.github },
   { label: "Get the iOS app", href: siteConfig.links.testflight, icon: Icons.apple },
-  { label: "Get the Android app", href: siteConfig.links.androidApk, icon: Icons.android },
+  { label: "Get the Android app", href: siteConfig.links.zapstore, icon: Icons.android },
   { label: "Open in browser", href: siteConfig.links.wallet, icon: Globe },
 ];
 

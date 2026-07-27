@@ -3,7 +3,7 @@
 import { CLOUD_ASSETS, DRIFT_RANGE, RISE_RANGE, TIERS } from "@/lib/clouds";
 import type { CloudPlacement, SectionClouds } from "@/lib/clouds";
 import { cn } from "@/lib/utils";
-import { motion, useTransform, type MotionValue } from "framer-motion";
+import { m, useTransform, type MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useSky } from "./sky-provider";
 
@@ -34,7 +34,7 @@ function CloudInstance({ placement, anchor, progress, drift }: CloudInstanceProp
   const mobileWidth = placement.mobileWidth ?? placement.width;
 
   return (
-    <motion.div
+    <m.div
       className={cn(
         "absolute w-[var(--cloud-w-mobile)] md:w-[var(--cloud-w)]",
         !placement.mobile && "hidden md:block"
@@ -67,7 +67,7 @@ function CloudInstance({ placement, anchor, progress, drift }: CloudInstanceProp
         )}
         draggable={false}
       />
-    </motion.div>
+    </m.div>
   );
 }
 

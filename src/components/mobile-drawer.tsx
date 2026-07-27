@@ -1,8 +1,7 @@
 "use client";
 
-import { Icons } from "@/components/icons";
 import { Logo } from "@/components/logo";
-import { ApkBadge } from "@/components/ui/apk-badge";
+import { ZapstoreBadge } from "@/components/ui/zapstore-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -58,12 +57,9 @@ export function MobileDrawer() {
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noreferrer noopener" : undefined}
-              className="flex items-center justify-between rounded-none py-3 text-base text-foreground/90 transition-colors hover:text-foreground"
+              className="flex items-center rounded-none py-3 text-base text-foreground/90 transition-colors hover:text-foreground"
             >
               <span>{link.label}</span>
-              {link.label === "GitHub" && (
-                <Icons.github className="size-4 text-muted-foreground" />
-              )}
             </a>
           ))}
         </nav>
@@ -72,8 +68,8 @@ export function MobileDrawer() {
             href={siteConfig.links.testflight}
             className="w-full justify-center"
           />
-          <ApkBadge
-            href={siteConfig.links.androidApk}
+          <ZapstoreBadge
+            href={siteConfig.links.zapstore}
             className="w-full justify-center"
           />
           <a

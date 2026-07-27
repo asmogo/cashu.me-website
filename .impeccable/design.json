@@ -1,34 +1,130 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-11T18:00:00Z",
   "title": "Design System: cashu.me",
   "extensions": {
     "colorMeta": {
-      "sky-top": { "role": "background", "displayName": "Sky Top", "canonical": "#c9e2f5" },
-      "sky-bottom": { "role": "background", "displayName": "Sky Bottom", "canonical": "#dcedf9" },
-      "sky-mid": { "role": "surface", "displayName": "Sky Mid", "canonical": "#cfe5f7" },
-      "night-sky": { "role": "background", "displayName": "Night Sky", "canonical": "oklch(13% 0.003 280)" },
-      "ink": { "role": "foreground", "displayName": "Ink", "canonical": "oklch(16% 0.015 260)" },
-      "cashu-lilac-cta": { "role": "accent", "displayName": "Cashu Lilac CTA", "canonical": "#5b46d4" },
-      "scan": { "role": "accent-exempt", "displayName": "Scan Green", "canonical": "#16a34a" },
-      "inkwell": { "role": "neutral-dark", "displayName": "Inkwell", "canonical": "#0a0a0a" },
-      "specimen-cream": { "role": "neutral-light", "displayName": "Specimen Cream", "canonical": "#ffffff" },
-      "paper": { "role": "neutral-light", "displayName": "Paper", "canonical": "#fafafa" },
-      "ash-light": { "role": "neutral", "displayName": "Ash Light", "canonical": "#8a8a93" },
-      "ash-dark": { "role": "neutral", "displayName": "Ash Dark", "canonical": "#6b6b73" },
-      "rule-dark": { "role": "border", "displayName": "Rule Dark", "canonical": "#1f1f22" },
-      "rule-light": { "role": "border", "displayName": "Rule Light", "canonical": "#e5e5e5" },
-      "cashu-lilac": { "role": "accent-dark", "displayName": "Cashu Lilac", "canonical": "#b4a7f5" },
-      "cashu-lilac-deep": { "role": "accent-graphic", "displayName": "Cashu Lilac Deep", "canonical": "#7a66e8" }
+      "sky-top": {
+        "role": "background",
+        "displayName": "Sky Top",
+        "canonical": "#c9e2f5"
+      },
+      "sky-bottom": {
+        "role": "background",
+        "displayName": "Sky Bottom",
+        "canonical": "#dcedf9"
+      },
+      "sky-mid": {
+        "role": "surface",
+        "displayName": "Sky Mid",
+        "canonical": "#cfe5f7"
+      },
+      "night-sky": {
+        "role": "background",
+        "displayName": "Night Sky",
+        "canonical": "oklch(13% 0.003 280)"
+      },
+      "ink": {
+        "role": "foreground",
+        "displayName": "Ink",
+        "canonical": "oklch(16% 0.015 260)"
+      },
+      "cashu-lilac-cta": {
+        "role": "accent",
+        "displayName": "Cashu Lilac CTA",
+        "canonical": "#5b46d4"
+      },
+      "scan": {
+        "role": "accent-exempt",
+        "displayName": "Scan Green",
+        "canonical": "#16a34a"
+      },
+      "inkwell": {
+        "role": "neutral-dark",
+        "displayName": "Inkwell",
+        "canonical": "#0a0a0a"
+      },
+      "specimen-cream": {
+        "role": "neutral-light",
+        "displayName": "Specimen Cream",
+        "canonical": "#ffffff"
+      },
+      "paper": {
+        "role": "neutral-light",
+        "displayName": "Paper",
+        "canonical": "#fafafa"
+      },
+      "ash-light": {
+        "role": "neutral",
+        "displayName": "Ash Light",
+        "canonical": "#8a8a93"
+      },
+      "ash-dark": {
+        "role": "neutral",
+        "displayName": "Ash Dark",
+        "canonical": "#6b6b73"
+      },
+      "rule-dark": {
+        "role": "border",
+        "displayName": "Rule Dark",
+        "canonical": "#1f1f22"
+      },
+      "rule-light": {
+        "role": "border",
+        "displayName": "Rule Light",
+        "canonical": "#e5e5e5"
+      },
+      "cashu-lilac": {
+        "role": "accent-dark",
+        "displayName": "Cashu Lilac",
+        "canonical": "#b4a7f5"
+      },
+      "cashu-lilac-deep": {
+        "role": "accent-graphic",
+        "displayName": "Cashu Lilac Deep",
+        "canonical": "#7a66e8"
+      }
     },
     "typographyMeta": {
-      "display-1": { "displayName": "Display 1", "purpose": "Hero statement. One per page. The hero <h1> carries a one-off uppercase + loosened-tracking override; other Display 1 usages stay mixed-case." },
-      "display-2": { "displayName": "Display 2", "purpose": "Section headings (\"What's different.\", \"Who holds the bitcoin.\")." },
-      "display-3": { "displayName": "Display 3", "purpose": "Sub-section / smaller display moments, including bento card titles." },
-      "lead": { "displayName": "Lead", "purpose": "Standalone introductory paragraphs following a Display heading. Capped at 48-55ch." },
-      "body": { "displayName": "Body", "purpose": "Pillar / column / accordion prose. Capped at 65ch." },
-      "label": { "displayName": "Label", "purpose": "Structural labels: footer column headers, footer copyright line, chip/badge text." },
-      "button": { "displayName": "Button", "purpose": "Every CTA, outline button, and store-badge label. Sized by the consuming component, not the utility." }
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Footer brand sign-off only (a viewport-spanning CASHU.ME). A brand mark, not a heading; sits outside the Display hierarchy. The 3.25rem floor keeps the unbreakable word inside a 320px viewport."
+      },
+      "display-1": {
+        "displayName": "Display 1",
+        "purpose": "Hero statement. One per page. The hero <h1> carries a one-off uppercase + loosened-tracking override; other Display 1 usages stay mixed-case."
+      },
+      "display-2": {
+        "displayName": "Display 2",
+        "purpose": "Section headings (\"What's different.\", \"Who holds the bitcoin.\")."
+      },
+      "display-3": {
+        "displayName": "Display 3",
+        "purpose": "Sub-section / smaller display moments, including bento card titles."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Standalone introductory paragraphs following a Display heading. Capped at 48-55ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Pillar / column / accordion prose, capped at 65ch. Ships as the type-body-lg utility at 1.0625rem / 1.6."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Structural labels: footer column headers, footer copyright line, chip/badge text."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Every CTA, outline button, and store-badge label. Sized by the consuming component, not the utility."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "The one display-face step below Display 3 — section sub-headings needing Manrope at body-adjacent scale."
+      },
+      "badge-kicker": {
+        "displayName": "Badge Kicker",
+        "purpose": "The 11px muted top row inside store badges (DOWNLOAD BETA ON). Component-scoped, not on the display ramp."
+      }
     },
     "shadows": [
       {
@@ -38,16 +134,46 @@
       }
     ],
     "motion": [
-      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Primary reveal easing (hero headline/media blur-in)." },
-      { "name": "ease-out-cubic", "value": "cubic-bezier(0, 0, 0.58, 1)", "purpose": "Supporting-element reveal easing (paragraphs, badges)." },
-      { "name": "ease-in-out-cubic", "value": "cubic-bezier(0.645, 0.045, 0.355, 1)", "purpose": "Symmetric transitions (custody-comparison packet/scan choreography)." }
+      {
+        "name": "ease-out-quart",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Primary reveal easing (hero headline/media blur-in)."
+      },
+      {
+        "name": "ease-out-cubic",
+        "value": "cubic-bezier(0, 0, 0.58, 1)",
+        "purpose": "Supporting-element reveal easing (paragraphs, badges)."
+      },
+      {
+        "name": "ease-in-out-cubic",
+        "value": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+        "purpose": "Symmetric transitions (custody-comparison packet/scan choreography)."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "xl", "value": "1280px" }
-    ]
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ],
+    "focusRing": {
+      "outline": "2px solid var(--ring)",
+      "outlineOffset": "4px",
+      "borderRadius": "2px",
+      "purpose": "Uniform keyboard focus across a, button, [role=button], summary, and Radix collection items. The 2px radius belongs to the ring, not to any surface."
+    }
   },
   "components": [
     {
@@ -97,6 +223,14 @@
       "description": "Mint-lane \"VALID\" chip. Same glass recipe as the custodial field chip, with the Scan Color Exemption's green tint layered on top (container styling only, color system unchanged).",
       "html": "<span class=\"ds-chip-valid\">&#10003; Valid</span>",
       "css": ".ds-chip-valid { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 8px; font-family: \"Azeret Mono\", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #16a34a; border: 1px solid color-mix(in oklab, #16a34a 40%, transparent); background: color-mix(in oklab, #16a34a 8%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.55), 0 8px 24px -12px rgba(30,64,120,0.28); }"
+    },
+    {
+      "name": "Store Badge",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Two-line install chip for the hero and mobile drawer: platform mark plus a DOWNLOAD BETA ON / <store> label. Same frosted-glass recipe as buttons, taller (h-16) for the second line. Ships as AppStoreBadge (Apple/TestFlight), ZapstoreBadge (Android/Zapstore), and BrowserBadge (globe/no-install).",
+      "html": "<a class=\"ds-store-badge\" href=\"#\"><svg class=\"ds-store-badge-icon\" viewBox=\"0 0 576 512\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0L116.18 64.45a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55\"/></svg><span class=\"ds-store-badge-label\"><span class=\"ds-store-badge-kicker\">Download Beta on</span><span class=\"ds-store-badge-store\">Zapstore</span></span></a>",
+      "css": ".ds-store-badge { display: inline-flex; height: 4rem; align-items: center; gap: 0.875rem; border-radius: 8px; border: 1px solid var(--glass-border); background: color-mix(in oklab, var(--background) 55%, transparent); backdrop-filter: blur(16px); padding: 0 1.25rem; color: var(--foreground); text-decoration: none; box-shadow: var(--glass-shadow); transition: border-color 250ms cubic-bezier(0.25,1,0.5,1), background-color 250ms cubic-bezier(0.25,1,0.5,1), translate 250ms cubic-bezier(0.25,1,0.5,1); } .ds-store-badge:hover { border-color: var(--glass-border-strong); background: color-mix(in oklab, var(--background) 75%, transparent); translate: 0 -2px; } .ds-store-badge:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; border-radius: 2px; } .ds-store-badge:active { scale: 0.98; } .ds-store-badge-icon { width: 2rem; height: 2rem; flex-shrink: 0; } .ds-store-badge-label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; } .ds-store-badge-kicker { font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; color: var(--muted-foreground); } .ds-store-badge-store { margin-top: 0.25rem; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 18px; } @media (prefers-reduced-motion: reduce) { .ds-store-badge:hover { translate: none; } .ds-store-badge:active { scale: 1; } }"
     }
   ],
   "narrative": {
@@ -112,44 +246,92 @@
       "Phone placeholders maintain device proportions (9:19.5); no skeuomorphic chrome."
     ],
     "rules": [
-      { "name": "The Ambient Sky Rule", "body": "The sky is ambient, not the subject. Clouds are photographic cutouts only, sized larger on desktop than mobile, at most ~3 visible per viewport-height, never behind running text or interactive targets.", "section": "colors" },
-      { "name": "The Night Sky", "body": "Dark theme follows prefers-color-scheme by default (nothing stored), with a persistent light/dark override. The night field is flat oklch(13% 0.003 280); the same cloud PNGs are dimmed via --cloud-filter: brightness(0.42), a contrast ceiling (foreground over the densest cloud core is 5.4:1 at 0.42; never raise past 0.45). Theme switching flips CSS custom properties only: no asset swap, no layout.", "section": "colors" },
-      { "name": "The One Voice Rule", "body": "Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point.", "section": "colors" },
-      { "name": "The Scan Color Exemption", "body": "The --scan token (green) is the sole sanctioned non-lilac chromatic, scoped to custody-comparison.tsx where it carries the surveillance metaphor. It must not appear elsewhere on the page.", "section": "colors" },
-      { "name": "The No-Pure-Black, No-Pure-White Rule", "body": "Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240-260).", "section": "colors" },
-      { "name": "The Specimen Scale Rule", "body": "Display 1 is reserved for the page's apex moment: the opening hero. No element in the body of the page ever reaches that size.", "section": "typography" },
-      { "name": "The Wordmark Tier", "body": "A single scale step exists above Display 1 (type-wordmark), reserved for the footer brand sign-off and never appearing elsewhere.", "section": "typography" },
-      { "name": "The Balanced Wrap Rule", "body": "All headings carry text-wrap: balance. All long-form prose carries text-wrap: pretty.", "section": "typography" },
-      { "name": "The Mono-as-Structure Rule", "body": "Mono is structural, not decorative. It appears on chip labels, eyebrow labels, button labels, and the footer version stamp. It does not appear on body prose or headings.", "section": "typography" },
-      { "name": "The Button-Label Rule", "body": "Azeret Mono carries every button label on the page, tracking 0.06em at weight 500.", "section": "typography" },
-      { "name": "The No-Eyebrows Rule", "body": "No [N] bracketed index marks, and no tiny uppercase tracked kicker above every section. Section.tsx supports an index prop for this; no live section passes one. Settled preference, not an oversight.", "section": "typography" },
-      { "name": "The Flat-by-Default Rule", "body": "Sections, prose, and hairline rules are flat at rest. Shadows are reserved for the frosted-glass recipe and physical-object depictions. Never decorative elsewhere.", "section": "elevation" }
+      {
+        "name": "The Ambient Sky Rule",
+        "body": "The sky is ambient, not the subject. Clouds are photographic cutouts (never cartoon/illustrated shapes) — a 7-shape library sourced *only* from Resource Boy's cloud textures (`/public/images/clouds`, placements in `src/lib/clouds.ts`; served `unoptimized` — next/image's AVIF/WebP re-encoding visibly destroys soft alpha edges at these sizes, the same reason the logo is served `unoptimized` too, see §5 Navigation). Sized larger on desktop (~80–380px) than on the small mobile subset (~50–200px, via each placement's `mobileWidth`). At most ~3 clouds visible per viewport-height; they live in gutters, beside headings, and at section seams — never behind running text or interactive targets; always `aria-hidden` + `pointer-events: none`. Motion is a single global scroll-progress value driving transform-only X drift and Y parallax; reduced-motion renders them static at their resting position (never removes them); below `md` only a small flagged subset renders, without drift. If a section reads \"cloudy,\" the rule is broken.",
+        "section": "colors"
+      },
+      {
+        "name": "The Night Sky",
+        "body": "The dark theme follows the system preference (next-themes on `data-theme`, pre-paint script, no flash of the wrong theme) with a persistent manual override; nothing stored always means follow the OS. At night the sky collapses to one flat near-black field: `--sky-top` = `--sky-bottom` = `--background` = `oklch(13% 0.003 280)` (≈ `#070708`, lilac-tinted per the No-Pure-Black rule). The cloud library is theme-invariant: the cutouts are pure white + alpha, so the same PNGs serve both skies, dimmed to moonlit gray via `--cloud-filter: brightness(0.42)`. That value is a contrast ceiling, not taste: foreground over the densest cloud core (max alpha 242/255) is 5.4:1 at 0.42 and falls to 4.05:1 at 0.5 — never raise it past 0.45. On the night field: foreground 19.0:1, muted 7.5:1, Cashu Lilac 9.4:1, scan green 14.3:1. Theme switching flips CSS custom properties only — same image assets, no layout, no network.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Voice Rule",
+        "body": "Cashu Lilac is the sole chromatic note in the system. It appears on no more than ~5% of any given screen. Its rarity is the point.",
+        "section": "colors"
+      },
+      {
+        "name": "The Scan Color Exemption",
+        "body": "The `--scan` token (`#16a34a` on light / `#86efac` on dark) is the sole sanctioned non-lilac chromatic, scoped to `custody-comparison.tsx` where it carries the surveillance metaphor (the custodian lane \"sees\" a green packet; the mint lane blurs it). It must not appear elsewhere on the page.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Pure-Black, No-Pure-White Rule",
+        "body": "Every surface and neutral tints toward a hue. The reference hue for neutrals is the sky's (~240–260): ink is `oklch(16% 0.015 260)`, muted/borders sit at hue 240–255. The dark set keeps its lilac-tinted values (`oklch(13% 0.003 280)` etc.).",
+        "section": "colors"
+      },
+      {
+        "name": "The Specimen Scale Rule",
+        "body": "Display 1 is reserved for the page's apex moment: the opening hero (currently \"A Cashu Wallet.\", `siteConfig.description`). No element in the body of the page ever reaches that size.",
+        "section": "typography"
+      },
+      {
+        "name": "The Wordmark Tier",
+        "body": "A single scale step exists above Display 1 — `type-wordmark` (`clamp(3.25rem, 18vw, 14rem)`, weight 600, tracking -0.05em). The 3.25rem floor is load-bearing, not a round number: 18vw alone would need a viewport ≥ ~356px to clear a 4rem floor, and below that \"cashu.me\" (one unbreakable word) overflows its container at the narrowest supported width (320px). It is reserved for the footer brand sign-off (a viewport-spanning `CASHU.ME`) and never appears elsewhere; it's a brand mark, not a heading, and operates outside the Display hierarchy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Balanced Wrap Rule",
+        "body": "All headings carry `text-wrap: balance`. All long-form prose carries `text-wrap: pretty`. The page never ships a heading with an orphaned single word on the last line if the browser can prevent it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono-as-Structure Rule",
+        "body": "Mono is structural, not decorative. It appears on chip labels, eyebrow labels, button labels, and the version stamp in the footer. It does NOT appear on body prose or headings. Decorative mono is costume.",
+        "section": "typography"
+      },
+      {
+        "name": "The Button-Label Rule",
+        "body": "Azeret Mono carries every button label on the page: the header CTA, the mobile-drawer wallet link, and the App Store / Play Store / Browser badges. Tracking is `0.06em` (looser than `type-label`'s `0.1em` so labels feel tappable rather than read as eyebrows), at weight 500 versus the label rule's 400.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Eyebrows Rule",
+        "body": "No `[N]` bracketed index marks, and no tiny uppercase tracked kicker above every section. `Section.tsx` supports an `index` prop for exactly this pattern; no live section passes one. This is a settled preference, not an oversight — do not add index marks or eyebrows to \"finish\" a section that doesn't have one.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-by-Default Rule",
+        "body": "Sections, prose, and hairline rules are flat at rest. Shadows are reserved for the frosted-glass recipe (interactive/illustrative surfaces) and for physical-object depictions (phones, banknote-style mockups). Never decorative elsewhere.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do keep Cashu Lilac at ≤5% of any screen. Its rarity is the point.",
-      "Do keep the frosted-glass recipe to its four named surfaces (buttons, nav bar, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component.",
-      "Do use native <details> for accordions, <a> for buttons, <section data-theme> for theme scope. Lean on the platform.",
-      "Do cap body lines at 65ch using max-w-[65ch]. Cap lead lines at 48-55ch.",
-      "Do use text-wrap: balance on headings and text-wrap: pretty on prose.",
-      "Do keep the navbar a floating glass pill inset from the viewport edges, not an edge-to-edge bar.",
-      "Do serve any transparent pixel-art or soft-alpha PNG via next/image with unoptimized — its optimizer flattens alpha to black otherwise.",
-      "Do route theme-dependent glass values through the --glass-border / --glass-border-strong / --glass-shadow tokens and cloud dimming through --cloud-filter; never hardcode white borders or light-assuming shadows at a call site."
+      "Do keep the frosted-glass recipe to its four named surfaces (buttons, nav pill, custody-comparison chips, bento cards) — one recipe, reused verbatim, not reinvented per component. The lone sanctioned extension is the nav pill: fully-round plus a navbar-only `--glass-sheen` highlight (see §5 Navigation). The other three surfaces stay plain.",
+      "Do use native `<details>` for accordions, `<a>` for buttons, `<section data-theme>` for theme scope. Lean on the platform.",
+      "Do cap body lines at 65ch using `max-w-[65ch]`. Cap lead lines at 48–55ch.",
+      "Do use `text-wrap: balance` on headings and `text-wrap: pretty` on prose.",
+      "Do keep the navbar a floating glass bar (see §5 Navigation), a fully-round pill carrying the shared recipe plus its own `--glass-sheen` highlight, inset from the viewport edges, not edge-to-edge.",
+      "Do serve any transparent pixel-art or soft-alpha PNG (logo, clouds) via next/image with `unoptimized` — its optimizer flattens alpha to black otherwise."
     ],
     "donts": [
       "Don't use neon-on-black crypto colors. No electric green/blue/orange neon, no 3D rendered logos, no futurist UI.",
-      "Don't use consumer-fintech pastels, friendly mascots, or gradient illustrations. Sanctioned exception: the single page-wide sky gradient and its photographic cloud cutouts.",
+      "Don't use consumer-fintech pastels, friendly mascots, or gradient illustrations à la Cash App / Venmo / Revolut. The single page-wide sky gradient and its photographic cloud cutouts are the one sanctioned pastel-field exception — no additional pastel fields, no illustrated/cartoon clouds, no further gradients.",
       "Don't lean on bank navy + gold institutional gravitas. Wrong register entirely.",
       "Don't use Web3 / DeFi maximalism: rainbow accents, dashboard-heavy charts, chart-driven hero treatments, or glass used decoratively/everywhere. The one shared frosted-glass recipe on its four named surfaces is the scoped exception, not license for ambient glass.",
       "Don't use card grids with icon + heading + subtitle templates. Sections are typographic compositions, not cards; the bento grid is the one named exception.",
-      "Don't use em dashes in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.",
-      "Don't use background-clip: text gradient text or border-left side stripes.",
-      "Don't use display fonts other than Manrope. Geist Sans is body-only; Azeret Mono is labels/buttons only.",
-      "Don't use Cashu Lilac for text on white; switch to Cashu Lilac Deep on Specimen Cream.",
-      "Don't apply ambient shadows to flat surfaces beyond the frosted-glass recipe and physical-object mockups.",
-      "Don't ship a heading without text-wrap: balance or prose without text-wrap: pretty.",
-      "Don't redefine tokens at the call site. New utilities go through the @theme inline block in globals.css.",
-      "Don't add [N] index marks or a tiny uppercase kicker above a section to 'finish' it. Their absence is deliberate.",
-      "Don't claim 'self-custodial' or 'no custodian.' Cashu is custodial; the accurate framing is bearer ecash plus unconditional withdrawal."
+      "Don't use em dashes (`—` or `--`) in user-facing copy. Use commas, colons, semicolons, periods, or parentheses.",
+      "Don't use `background-clip: text` gradient text or border-left side stripes.",
+      "Don't use display fonts other than Manrope. No Switzer, no Satoshi, no Inter for display. Geist Sans is the body face; it does not appear on display or label runs. Azeret Mono is permitted only on labels and button labels, never on display or body.",
+      "Don't use Cashu Lilac (`#b4a7f5`) for text on white. Switch to Cashu Lilac Deep (`#7a66e8`) when on Specimen Cream.",
+      "Don't apply ambient shadows to flat surfaces. The only sanctioned exceptions are the frosted-glass recipe and physical-object mockups (phones, banknote-style), used at most once per section for the latter.",
+      "Don't ship a heading without `text-wrap: balance` or prose without `text-wrap: pretty`.",
+      "Don't redefine tokens at the call site. New utilities go through the `@theme inline` block in `globals.css`.",
+      "Don't add `[N]` index marks or a tiny uppercase kicker above a section to \"finish\" it. See The No-Eyebrows Rule (§3) — their absence is deliberate.",
+      "Don't claim \"self-custodial\" or \"no custodian.\" Cashu is custodial: mints hold the underlying bitcoin. The accurate framing is bearer ecash plus unconditional withdrawal to any Lightning address. Candor is the brand; overclaiming corrodes it."
     ]
-  }
+  },
+  "generatedAt": "2026-07-27T12:49:36Z"
 }
