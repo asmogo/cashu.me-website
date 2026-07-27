@@ -1,0 +1,15 @@
+.git
+.github
+.next
+node_modules
+Dockerfile
+.dockerignore
+README.md
+AGENTS.md
+CLAUDE.md
+DESIGN.json
+DESIGN.md
+PRODUCT.md
+.claude
+*.log
+.DS_Store
