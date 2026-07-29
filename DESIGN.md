@@ -267,7 +267,7 @@ Used at most once on the page, with a single composed mock interior. Never repea
 
 ### Store Badges
 
-The hero and mobile drawer use custom icon + two-line-label chips for TestFlight and the browser (`<AppStoreBadge>`, `<BrowserBadge>`) alongside Google’s official `<GooglePlayBadge>` artwork. All three are sized at `h-16` for a generous tap target and nudge up on hover (`-translate-y-0.5`). The two custom chips keep the frosted-glass recipe from the button system (see Buttons above); the Google Play badge preserves the supplied store artwork.
+The hero and mobile drawer use monochrome icon + two-line-label chips for TestFlight, Google Play, and the browser (`<AppStoreBadge>`, `<GooglePlayBadge>`, `<BrowserBadge>`). All three are sized at `h-16`, use the frosted-glass recipe from the button system (see Buttons above), and nudge up on hover (`-translate-y-0.5`).
 
 The custom badges use a fixed label pair: an 11px muted kicker (`badge-kicker`) over an 18px store name, both Azeret Mono 500 at `0.06em`, both uppercased by `type-button`. The kicker names the action and the second row names the destination — "DOWNLOAD BETA ON / TESTFLIGHT" and "NO INSTALL / BROWSER". Neither size is on the display type ramp; they belong to this component. Google Play links to the app listing on mobile devices and the testing opt-in page on the web.
 
