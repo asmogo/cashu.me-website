@@ -1,9 +1,9 @@
 "use client";
 
 import { CloudField } from "@/components/sky/cloud-field";
-import { ZapstoreBadge } from "@/components/ui/zapstore-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { BrowserBadge } from "@/components/ui/browser-badge";
+import { GooglePlayBadge } from "@/components/ui/google-play-badge";
 import {
   easeInOutCubic,
   easeOutCubic,
@@ -178,10 +178,7 @@ export function Hero() {
             href={siteConfig.links.testflight}
             className="w-full justify-center sm:w-auto"
           />
-          <ZapstoreBadge
-            href={siteConfig.links.zapstore}
-            className="w-full justify-center sm:w-auto"
-          />
+          <GooglePlayBadge className="w-full justify-center sm:w-auto" />
           <BrowserBadge
             href={siteConfig.links.wallet}
             className="w-full justify-center sm:w-auto"

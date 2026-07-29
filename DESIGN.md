@@ -267,9 +267,9 @@ Used at most once on the page, with a single composed mock interior. Never repea
 
 ### Store Badges
 
-Custom icon + two-line-label chips (`<AppStoreBadge>`, `<ZapstoreBadge>`, `<BrowserBadge>`) rather than official platform artwork. Reserved for the hero and the mobile drawer, where they signal native install (plus the in-browser path). Same frosted-glass recipe as the button system (see Buttons above), sized at `h-16` with a `size-8` icon for a bigger, easier tap target than a standard button. Hover brightens the border, deepens the fill, and nudges the badge up (`-translate-y-0.5`).
+The hero and mobile drawer use custom icon + two-line-label chips for TestFlight and the browser (`<AppStoreBadge>`, `<BrowserBadge>`) alongside Google’s official `<GooglePlayBadge>` artwork. All three are sized at `h-16` for a generous tap target and nudge up on hover (`-translate-y-0.5`). The two custom chips keep the frosted-glass recipe from the button system (see Buttons above); the Google Play badge preserves the supplied store artwork.
 
-The two label rows are a fixed pair, identical across all three badges: an 11px muted kicker (`badge-kicker`) over an 18px store name, both Azeret Mono 500 at `0.06em`, both uppercased by `type-button`. The kicker names the action and the second row names the destination — "DOWNLOAD BETA ON / TESTFLIGHT", "DOWNLOAD BETA ON / ZAPSTORE", "NO INSTALL / BROWSER". Neither size is on the display type ramp; they belong to this component. Both native builds ship as public betas ahead of any store listing, so the badges carry the platform mark (Apple, Android) with the actual distribution channel underneath rather than official App Store or Google Play artwork.
+The custom badges use a fixed label pair: an 11px muted kicker (`badge-kicker`) over an 18px store name, both Azeret Mono 500 at `0.06em`, both uppercased by `type-button`. The kicker names the action and the second row names the destination — "DOWNLOAD BETA ON / TESTFLIGHT" and "NO INSTALL / BROWSER". Neither size is on the display type ramp; they belong to this component. Google Play links to the app listing on mobile devices and the testing opt-in page on the web.
 
 ### Accordion
 

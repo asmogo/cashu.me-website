@@ -5,6 +5,7 @@ import { Logo } from "@/components/logo";
 import { MobileDrawer } from "@/components/mobile-drawer";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
+import { GooglePlayLink } from "@/components/ui/google-play-link";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { Globe } from "lucide-react";
@@ -14,7 +15,7 @@ import { useEffect, useState } from "react";
 const NAV_ICONS = [
   { label: "View source on GitHub", href: siteConfig.links.repo, icon: Icons.github },
   { label: "Get the iOS app", href: siteConfig.links.testflight, icon: Icons.apple },
-  { label: "Get the Android app", href: siteConfig.links.zapstore, icon: Icons.android },
+  { label: "Get the Android app on Google Play", href: null, icon: Icons.android },
   { label: "Open in browser", href: siteConfig.links.wallet, icon: Globe },
 ];
 
@@ -54,6 +55,19 @@ export function Header() {
         <div className="relative hidden shrink-0 items-center gap-6 lg:flex">
           <div className="flex shrink-0 items-center gap-5">
             {NAV_ICONS.map(({ label, href, icon: Icon }) => {
+              if (href === null) {
+                return (
+                  <GooglePlayLink
+                    key={label}
+                    aria-label={label}
+                    title={label}
+                    className="-m-2.5 inline-flex items-center justify-center p-2.5 text-foreground/70 transition-colors hover:text-foreground"
+                  >
+                    <Icon className="size-6" aria-hidden="true" />
+                  </GooglePlayLink>
+                );
+              }
+
               const isPlaceholder = href === "#";
               return (
                 <a
