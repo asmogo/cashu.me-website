@@ -26,10 +26,12 @@ const links = {
     "https://primal.net/p/nprofile1qqs0y3tvskgs9gpgxxu5ahgz3fmms3rzmxt504qceqtz4a6pdgfwlkghwl6j8",
   twitter: "https://x.com/CashuBTC",
   opencash: "http://opencash.dev/",
-  // Both native builds are in public beta ahead of a store listing: iOS ships
-  // via TestFlight, Android via Zapstore rather than Google Play.
+  // Both native builds are in public beta. Google Play uses its testing page
+  // on the web and the app listing on mobile devices.
   testflight: "https://testflight.apple.com/join/DT1xF1y4",
-  zapstore: "https://zapstore.dev/apps/com.cashu.me",
+  googlePlayMobile:
+    "https://play.google.com/store/apps/details?id=com.cashu.me",
+  googlePlayWeb: "https://play.google.com/apps/testing/com.cashu.me",
 };
 
 export const siteConfig = {
@@ -138,7 +140,11 @@ export const siteConfig = {
         label: "Wallet",
         links: [
           { label: "iOS (TestFlight)", href: links.testflight },
-          { label: "Android (Zapstore)", href: links.zapstore },
+          {
+            label: "Android (Google Play)",
+            href: links.googlePlayWeb,
+            mobileHref: links.googlePlayMobile,
+          },
           { label: "Browser", href: links.wallet },
         ],
       },

@@ -28,9 +28,9 @@ The mechanism sits underneath the chronology as support, not as the lead: blinde
 
 ## Operating Context
 
-The site is a single-page marketing surface, statically rendered, with no accounts, no data collection, and no backend. It is not the product; the wallet is. Every path off the page is an install or an open: TestFlight (iOS beta), Zapstore (Android beta), or `wallet.cashu.me` (browser, no install).
+The site is a single-page marketing surface, statically rendered, with no accounts, no data collection, and no backend. It is not the product; the wallet is. Every path off the page is an install or an open: TestFlight (iOS beta), Google Play testing (Android beta), or `wallet.cashu.me` (browser, no install).
 
-Visitors arrive cold from a link, usually on a phone, often on a mobile connection, and decide in well under a minute. The page has to carry its whole argument before they leave. Both native builds are in public beta ahead of any App Store or Google Play listing, so the install path is inherently one step stranger than a store link, and the page must not pretend otherwise.
+Visitors arrive cold from a link, usually on a phone, often on a mobile connection, and decide in well under a minute. The page has to carry its whole argument before they leave. Both native builds are in public beta: iOS uses TestFlight and Android uses Google Play testing, so the page must present each install path honestly.
 
 ## Capabilities and Constraints
 
@@ -39,7 +39,7 @@ Visitors arrive cold from a link, usually on a phone, often on a mobile connecti
 - **No accounts**: no login, no server-side balance, no identity attached to a holding.
 - **Backups**: a 12-word BIP39 seed (the proven path), an encrypted mint/settings export, and an experimental iCloud sync that is explicitly not yet trustworthy on its own.
 - **Transports**: ecash is text, so it moves over iMessage, SMS, Bluetooth, any chat, or NFC tap-to-pay. Peer-to-peer sends never touch the mint.
-- **Distribution**: iOS via TestFlight, Android via Zapstore, browser at `wallet.cashu.me`. No App Store or Play Store listing yet.
+- **Distribution**: iOS via TestFlight, Android via Google Play testing, browser at `wallet.cashu.me`. The Android link opens the app listing on mobile and the testing opt-in page on the web.
 - Open source, MIT licensed, implementing the Cashu NUTs spec.
 
 ## Brand Commitments
@@ -62,7 +62,7 @@ Visitors arrive cold from a link, usually on a phone, often on a mobile connecti
 Everything the site may currently claim is in this repository or is a matter of public record:
 
 - **Product demonstrations**: real screen recordings and screenshots of the shipped wallet — tap-to-pay over NFC, seed-phrase backup and restore, an iMessage thread carrying a token, a Lightning-address QR sheet, the balance and activity view. These are the proof; the site's argument rests on showing the thing working.
-- **Live install paths**: the TestFlight invite, the Zapstore listing, and `wallet.cashu.me`. All three resolve.
+- **Live install paths**: the TestFlight invite, the Google Play test listing, and `wallet.cashu.me`. All three resolve.
 - **Open source**: MIT-licensed, public repository, implementing the public Cashu NUTs specification. Verifiable by anyone.
 - **The chronology claim**: cashu.me shipped as the first Cashu wallet. This is checkable against the protocol's public history.
 

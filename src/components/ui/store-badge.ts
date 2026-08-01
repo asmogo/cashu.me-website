@@ -1,4 +1,4 @@
-// Shared wrapper styling for the App Store / APK / Browser badges — same
+// Shared wrapper styling for the custom App Store / Browser badges — same
 // frosted-glass recipe as buttonVariants({ variant: "primary" }), sized taller
 // (h-16) for the two-line label. See DESIGN.md §5 Store Badges.
 export const storeBadgeClass =

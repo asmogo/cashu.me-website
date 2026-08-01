@@ -1,5 +1,6 @@
 import { FooterWordmark } from "@/components/footer-wordmark";
 import { CloudField } from "@/components/sky/cloud-field";
+import { GooglePlayLink } from "@/components/ui/google-play-link";
 import { SECTION_CLOUDS } from "@/lib/clouds";
 import { siteConfig } from "@/lib/config";
 
@@ -19,14 +20,24 @@ export function Footer() {
               <ul className="flex flex-col gap-1">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="-mx-1 inline-block px-1 py-1.5 text-base text-foreground/85 transition-colors hover:text-primary"
-                    >
-                      {link.label}
-                    </a>
+                    {"mobileHref" in link ? (
+                      <GooglePlayLink
+                        mobileHref={link.mobileHref}
+                        webHref={link.href}
+                        className="-mx-1 inline-block px-1 py-1.5 text-base text-foreground/85 transition-colors hover:text-primary"
+                      >
+                        {link.label}
+                      </GooglePlayLink>
+                    ) : (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="-mx-1 inline-block px-1 py-1.5 text-base text-foreground/85 transition-colors hover:text-primary"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
