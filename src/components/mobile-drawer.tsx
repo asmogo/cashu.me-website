@@ -1,8 +1,8 @@
 "use client";
 
 import { Logo } from "@/components/logo";
-import { ZapstoreBadge } from "@/components/ui/zapstore-badge";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
+import { GooglePlayBadge } from "@/components/ui/google-play-badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
@@ -68,10 +68,7 @@ export function MobileDrawer() {
             href={siteConfig.links.testflight}
             className="w-full justify-center"
           />
-          <ZapstoreBadge
-            href={siteConfig.links.zapstore}
-            className="w-full justify-center"
-          />
+          <GooglePlayBadge className="w-full justify-center" />
           <a
             href={siteConfig.links.wallet}
             target="_blank"

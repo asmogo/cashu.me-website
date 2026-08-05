@@ -1,22 +1,16 @@
 import { Icons } from "@/components/icons";
+import { GooglePlayLink } from "@/components/ui/google-play-link";
 import { storeBadgeClass } from "@/components/ui/store-badge";
 import { cn } from "@/lib/utils";
 
-interface ZapstoreBadgeProps {
-  href: string;
+interface GooglePlayBadgeProps {
   className?: string;
 }
 
-// The Android build ships via Zapstore (public beta), not Google Play yet — the
-// badge keeps the Android mark but points at the Zapstore listing, mirroring the
-// Apple mark / TestFlight pairing.
-export function ZapstoreBadge({ href, className }: ZapstoreBadgeProps) {
+export function GooglePlayBadge({ className }: GooglePlayBadgeProps) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Download the cashu.me beta on Zapstore"
+    <GooglePlayLink
+      aria-label="Get cashu.me on Google Play"
       className={cn(storeBadgeClass, className)}
     >
       <Icons.android
@@ -27,8 +21,8 @@ export function ZapstoreBadge({ href, className }: ZapstoreBadgeProps) {
         <span className="type-button text-[11px] text-muted-foreground">
           Download Beta on
         </span>
-        <span className="mt-1 type-button text-[18px]">Zapstore</span>
+        <span className="mt-1 type-button text-[18px]">Google Play</span>
       </span>
-    </a>
+    </GooglePlayLink>
   );
 }
