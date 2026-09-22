@@ -15,7 +15,7 @@ export default function NotFound() {
         Page not found.
       </h1>
       <p className="mt-6 max-w-[50ch] type-lead text-foreground/75">
-        The page you asked for doesn't exist on this site. The wallet, the spec,
+        The page you asked for doesn&apos;t exist on this site. The wallet, the spec,
         and everything else still lives at the addresses below.
       </p>
       <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 type-label text-muted-foreground">
