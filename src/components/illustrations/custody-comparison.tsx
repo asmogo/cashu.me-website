@@ -1,8 +1,10 @@
 "use client";
 
+import { useReducedMotion } from "@/lib/use-reduced-motion";
+
 import { easeInOutCubic, easeOutCubic } from "@/lib/animation";
 import { cn } from "@/lib/utils";
-import { m, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { m, useInView, type Variants } from "framer-motion";
 import { Eye, Landmark } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -53,7 +55,7 @@ function Lane({
       {variant === "mint" ? (
         <div className="size-9 overflow-hidden">
           <Image
-            src="/images/cashu-logo.png"
+            src="/images/cashu-logo-108.png"
             alt="Cashu"
             width={64}
             height={64}
@@ -284,7 +286,7 @@ const captionVariants: Variants = {
 export function CustodyComparison() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-15%" });
-  const reduceMotion = useReducedMotion() ?? false;
+  const reduceMotion = useReducedMotion();
 
   const packetDelay = 0.6;
 

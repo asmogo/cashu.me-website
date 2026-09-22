@@ -8,7 +8,7 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
   return (
     <Image
-      src="/images/cashu-logo.png"
+      src="/images/cashu-logo-108.png"
       alt="cashu.me"
       width={64}
       height={64}

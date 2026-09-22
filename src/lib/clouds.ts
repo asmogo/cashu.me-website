@@ -3,11 +3,11 @@
  *
  * Assets are pre-cut cloud PNGs (Resource Boy cloud textures, see
  * public/images/clouds/) — the only source for cloud imagery on this site.
- * Served `unoptimized`: next/image's AVIF/WebP re-encoding visibly destroys
+ * Served as responsive, pre-generated lossless WebP with PNG fallback.
+ * next/image's lossy AVIF/WebP re-encoding visibly destroys
  * the soft alpha edges at these tiny display sizes (confirmed by decoding
  * the actual served AVIF bytes — same speckled-gray artifact users saw).
- * The raw PNGs are small enough on disk that skipping the lossy transcode
- * is the right trade.
+ * Keep the PNG masters; scripts/optimize-images.mjs generates the variants.
  *
  * Placement rules (the restraint that keeps this from becoming noise):
  *  - at most ~3 clouds visible per viewport-height on desktop
