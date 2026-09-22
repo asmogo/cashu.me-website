@@ -161,8 +161,8 @@ function Feature({
               <Image
                 src={imageSrc}
                 alt={title}
-                width={924}
-                height={2000}
+                width={1206}
+                height={2622}
                 sizes="300px"
                 className={cn(MEDIA_CLASS, imageSrcDark && "dark:hidden")}
               />
@@ -170,8 +170,8 @@ function Feature({
                 <Image
                   src={imageSrcDark}
                   alt={title}
-                  width={924}
-                  height={2000}
+                  width={1206}
+                  height={2622}
                   sizes="300px"
                   className={cn(MEDIA_CLASS, "hidden dark:block")}
                 />
