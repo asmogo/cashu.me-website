@@ -114,17 +114,18 @@ export function Hero() {
                 client JS parses and an observer fires — the difference between
                 a ~4.7s and a ~1.5s mobile LCP. next/image's docs steer theme
                 pairs toward lazy to load only one variant, but here the
-                variants are near-identical in weight (~25KB AVIF each) and the
-                manual `data-theme` override (a white vs. pure-black phone
-                screen) must stay authoritative, so preloading the ~25KB hidden
-                variant is the right trade for a correct, fast hero. The
+                variants are near-identical in weight (~19KB AVIF at the 640w
+                mobile variant, ~41KB at 1200w retina) and the manual
+                `data-theme` override (a white vs. pure-black phone screen)
+                must stay authoritative, so preloading the hidden variant is
+                the right trade for a correct, fast hero. The
                 `dark:hidden`/`hidden dark:block` pair still paints only the
                 active theme. */}
             <Image
-              src="/images/hand-wallet-light-v2.png"
+              src="/images/hand-wallet-light-v3.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
-              width={745}
-              height={806}
+              width={1530}
+              height={1612}
               priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
@@ -133,10 +134,10 @@ export function Hero() {
               draggable={false}
             />
             <Image
-              src="/images/hand-wallet-dark-v2.png"
+              src="/images/hand-wallet-dark-v3.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
-              width={745}
-              height={806}
+              width={1530}
+              height={1612}
               priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
