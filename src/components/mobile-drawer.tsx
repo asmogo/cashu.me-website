@@ -1,84 +1,92 @@
 "use client";
 
-import { Logo } from "@/components/logo";
-import { AppStoreBadge } from "@/components/ui/app-store-badge";
-import { GooglePlayBadge } from "@/components/ui/google-play-badge";
-import { buttonVariants } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { siteConfig } from "@/lib/config";
-import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
-import Link from "next/link";
+import { useEffect, useId, useRef, useState } from "react";
+import type { ComponentType } from "react";
+import type { MobileDrawerContentProps } from "./mobile-drawer-content";
 
-const links = [
-  { label: "Spec", href: siteConfig.links.spec, external: true },
-  { label: "Docs", href: siteConfig.links.docs, external: true },
-  { label: "GitHub", href: siteConfig.links.repo, external: true },
-];
+let drawerModule: Promise<typeof import("./mobile-drawer-content")> | undefined;
+
+function loadDrawer() {
+  drawerModule ??= import("./mobile-drawer-content").catch((error) => {
+    drawerModule = undefined;
+    throw error;
+  });
+  return drawerModule;
+}
 
 export function MobileDrawer() {
+  const [Content, setContent] =
+    useState<ComponentType<MobileDrawerContentProps> | null>(null);
+  const [open, setOpen] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
+
+  const prepare = () => {
+    if (Content) return;
+    setFailed(false);
+    void loadDrawer().then(
+      ({ MobileDrawerContent }) => setContent(() => MobileDrawerContent),
+      () => setFailed(true),
+    );
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    // Escape also cancels an opening request while the chunk is in flight.
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onResize = () => {
+      if (desktop.matches) setOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onResize);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onResize);
+    };
+  }, [open]);
+
   return (
-    <Drawer>
-      <DrawerTrigger
+    <>
+      <button
+        ref={trigger}
+        type="button"
         aria-label="Open menu"
+        aria-haspopup="dialog"
+        aria-expanded={open && !!Content}
+        aria-controls={Content ? id : undefined}
+        aria-busy={open && !Content && !failed}
         className="inline-flex h-11 w-11 items-center justify-center -mr-2"
+        onPointerEnter={prepare}
+        onPointerDown={prepare}
+        onFocus={prepare}
+        onClick={() => {
+          setOpen(true);
+          prepare();
+        }}
       >
         <Menu className="size-6" />
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerTitle className="sr-only">Menu</DrawerTitle>
-        <DrawerDescription className="sr-only">
-          Navigation links and wallet access
-        </DrawerDescription>
-        <DrawerHeader className="px-6">
-          <Link
-            href="/"
-            title="cashu.me"
-            className="relative mr-6 flex items-center gap-2.5"
-          >
-            <Logo className="size-8" />
-            <span className="font-display text-base font-bold uppercase tracking-[0.14em]">
-              {siteConfig.name}
-            </span>
-          </Link>
-        </DrawerHeader>
-        <nav className="flex flex-col gap-1 px-6 py-2">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noreferrer noopener" : undefined}
-              className="flex items-center rounded-none py-3 text-base text-foreground/90 transition-colors hover:text-foreground"
-            >
-              <span>{link.label}</span>
-            </a>
-          ))}
-        </nav>
-        <DrawerFooter className="gap-3">
-          <AppStoreBadge
-            href={siteConfig.links.testflight}
-            className="w-full justify-center"
-          />
-          <GooglePlayBadge className="w-full justify-center" />
-          <a
-            href={siteConfig.links.wallet}
-            target="_blank"
-            rel="noreferrer noopener"
-            className={cn(buttonVariants({ variant: "primary", size: "lg" }))}
-          >
-            {siteConfig.cta}
-          </a>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+      </button>
+      {failed && open && (
+        <span role="status" className="sr-only">
+          Menu could not load. Activate Open menu to retry.
+        </span>
+      )}
+      {Content && (
+        <Content
+          id={id}
+          open={open}
+          onOpenChange={setOpen}
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            trigger.current?.focus();
+          }}
+        />
+      )}
+    </>
   );
 }

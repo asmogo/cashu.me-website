@@ -1,5 +1,7 @@
 "use client";
 
+import { useReducedMotion } from "@/lib/use-reduced-motion";
+
 import { Section } from "@/components/section";
 import {
   easeOutCubic,
@@ -9,17 +11,37 @@ import {
   REVEAL_STAGGER,
 } from "@/lib/animation";
 import { siteConfig } from "@/lib/config";
-import { m, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { m, useInView } from "framer-motion";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+
+function subscribeVisibility(notify: () => void) {
+  document.addEventListener("visibilitychange", notify);
+  return () => document.removeEventListener("visibilitychange", notify);
+}
+
+const isPageVisible = () => document.visibilityState === "visible";
+const serverVisible = () => true;
 
 export function TapToPay() {
-  const reduceMotion = useReducedMotion() ?? false;
+  const reduceMotion = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(mediaRef);
+  const pageVisible = useSyncExternalStore(
+    subscribeVisibility,
+    isPageVisible,
+    serverVisible,
+  );
   const { title, description, videoSrc } = siteConfig.tapToPay;
-  // The 2MB clip sits below the fold; without this it starts downloading
+  // The clip sits below the fold; without this it starts downloading
   // immediately on page load (muted autoplay is allowed to fetch off-screen)
   // and competes with the hero's LCP images. Defer the src until the section
   // is about to scroll into view, reusing the reveal animation's own trigger.
   const [videoInView, setVideoInView] = useState(false);
+
+  useEffect(() => {
+    if (reduceMotion) videoRef.current?.pause();
+  }, [reduceMotion]);
 
   return (
     <Section
@@ -33,7 +55,10 @@ export function TapToPay() {
           breakout. The artifact reveals first, its caption settles in beneath. */}
       <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
         <m.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+          ref={mediaRef}
+          initial={
+            reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }
+          }
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
           onViewportEnter={() => setVideoInView(true)}
@@ -42,7 +67,7 @@ export function TapToPay() {
               ? { duration: 0 }
               : { duration: REVEAL_DURATION_LG, ease: easeOutCubic }
           }
-          className="relative w-fit"
+          className="motion-reveal relative w-fit"
         >
           <div
             aria-hidden
@@ -50,7 +75,7 @@ export function TapToPay() {
           >
             <div className="size-[520px] rounded-full bg-primary/[0.08] blur-[150px]" />
           </div>
-          {!reduceMotion && (
+          {!reduceMotion && inView && pageVisible && (
             <div aria-hidden className="pointer-events-none absolute inset-0">
               {[0, 1].map((i) => (
                 <m.span
@@ -68,6 +93,7 @@ export function TapToPay() {
             </div>
           )}
           <video
+            ref={videoRef}
             src={videoInView ? videoSrc : undefined}
             preload="none"
             width={406}
@@ -82,29 +108,41 @@ export function TapToPay() {
         </m.div>
 
         <m.h2
-          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+          initial={
+            reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }
+          }
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER }
+              : {
+                  duration: REVEAL_DURATION_MD,
+                  ease: easeOutCubic,
+                  delay: REVEAL_STAGGER,
+                }
           }
-          className="mt-10 type-display-2 text-balance text-foreground"
+          className="motion-reveal mt-10 type-display-2 text-balance text-foreground"
         >
           {title}
         </m.h2>
 
         <m.p
-          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+          initial={
+            reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(8px)" }
+          }
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER * 2 }
+              : {
+                  duration: REVEAL_DURATION_MD,
+                  ease: easeOutCubic,
+                  delay: REVEAL_STAGGER * 2,
+                }
           }
-          className="mt-5 max-w-[42ch] type-lead text-balance text-foreground/75"
+          className="motion-reveal mt-5 max-w-[42ch] type-lead text-balance text-foreground/75"
         >
           {description}
         </m.p>

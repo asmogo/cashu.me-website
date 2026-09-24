@@ -15,6 +15,16 @@
   animation: cashu-loading 1.4s ease-in-out infinite;
 }
 
+/* Keep server-rendered reveal content readable even before the deferred
+   Motion features attach, or when the preference changes during a reveal. */
+@utility motion-reveal {
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
 /* Container — shared page-width wrapper. Horizontal padding (px-6 lg:px-10)
    stays a plain Tailwind utility at each call site; only the invariant,
    copy-pasted part (centering + max-width) is extracted here. */

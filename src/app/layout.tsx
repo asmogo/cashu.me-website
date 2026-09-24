@@ -33,7 +33,7 @@ const manrope = Manrope({
 const title = "Cashu Me";
 const ogImageAlt = "Cashu Me — Privacy of a $20 bill. The speed of a tap.";
 const ogImages = [
-  { url: "/images/og-cashu-me.jpg", width: 1200, height: 640, alt: ogImageAlt },
+  { url: "/images/og-cashu-me-v2.jpg", width: 1200, height: 640, alt: ogImageAlt },
 ];
 
 export const metadata: Metadata = {

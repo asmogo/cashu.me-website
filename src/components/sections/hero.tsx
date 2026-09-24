@@ -1,5 +1,7 @@
 "use client";
 
+import { useReducedMotion } from "@/lib/use-reduced-motion";
+
 import { CloudField } from "@/components/sky/cloud-field";
 import { AppStoreBadge } from "@/components/ui/app-store-badge";
 import { BrowserBadge } from "@/components/ui/browser-badge";
@@ -15,7 +17,7 @@ import {
 } from "@/lib/animation";
 import { SECTION_CLOUDS } from "@/lib/clouds";
 import { siteConfig } from "@/lib/config";
-import { m, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
@@ -35,7 +37,7 @@ const HERO_IMAGE_MASK = {
 } as CSSProperties;
 
 export function Hero() {
-  const reduceMotion = useReducedMotion() ?? false;
+  const reduceMotion = useReducedMotion();
 
   return (
     <section
@@ -56,7 +58,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.3 }
           }
-          className="absolute size-[620px] translate-x-[70px] -translate-y-[60px] rounded-full bg-white/45 blur-[150px] dark:bg-white/15"
+          className="motion-reduce:!opacity-100 motion-reduce:!transform-none absolute size-[620px] translate-x-[70px] -translate-y-[60px] rounded-full bg-white/45 blur-[150px] dark:bg-white/15"
         />
         <m.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
@@ -66,7 +68,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: 2.4, ease: easeInOutCubic, delay: 0.5 }
           }
-          className="absolute size-[360px] translate-x-[10px] translate-y-[120px] rounded-full bg-white/40 blur-[100px] dark:bg-white/12"
+          className="motion-reduce:!opacity-100 motion-reduce:!transform-none absolute size-[360px] translate-x-[10px] translate-y-[120px] rounded-full bg-white/40 blur-[100px] dark:bg-white/12"
         />
       </div>
 
@@ -83,7 +85,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: REVEAL_DURATION_LG, ease: easeOutQuart, delay: 0 }
           }
-          className="type-display-1 uppercase tracking-[-0.01em] text-foreground"
+          className="motion-reveal type-display-1 uppercase tracking-[-0.01em] text-foreground"
         >
           {siteConfig.description}
         </m.h1>
@@ -106,7 +108,7 @@ export function Hero() {
                     delay: REVEAL_STAGGER,
                   }
             }
-            className="relative w-64 flex-shrink-0 sm:w-80 md:w-[440px] xl:w-[600px]"
+            className="motion-reveal relative w-64 flex-shrink-0 sm:w-80 md:w-[440px] xl:w-[600px]"
           >
             {/* Theme-swapped hero image and the page's LCP element. Both
                 variants are `priority` (eager + preload) so the browser
@@ -114,17 +116,18 @@ export function Hero() {
                 client JS parses and an observer fires — the difference between
                 a ~4.7s and a ~1.5s mobile LCP. next/image's docs steer theme
                 pairs toward lazy to load only one variant, but here the
-                variants are near-identical in weight (~25KB AVIF each) and the
-                manual `data-theme` override (a white vs. pure-black phone
-                screen) must stay authoritative, so preloading the ~25KB hidden
-                variant is the right trade for a correct, fast hero. The
+                variants are near-identical in weight (~19KB AVIF at the 640w
+                mobile variant, ~41KB at 1200w retina) and the manual
+                `data-theme` override (a white vs. pure-black phone screen)
+                must stay authoritative, so preloading the hidden variant is
+                the right trade for a correct, fast hero. The
                 `dark:hidden`/`hidden dark:block` pair still paints only the
                 active theme. */}
             <Image
-              src="/images/hand-wallet-light-v2.png"
+              src="/images/hand-wallet-light-v3.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
-              width={745}
-              height={806}
+              width={1530}
+              height={1612}
               priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
@@ -133,10 +136,10 @@ export function Hero() {
               draggable={false}
             />
             <Image
-              src="/images/hand-wallet-dark-v2.png"
+              src="/images/hand-wallet-dark-v3.png"
               alt="A hand holding a phone showing the cashu.me wallet balance and recent activity"
-              width={745}
-              height={806}
+              width={1530}
+              height={1612}
               priority
               fetchPriority="high"
               sizes="(min-width: 1280px) 600px, (min-width: 768px) 440px, (min-width: 640px) 320px, 256px"
@@ -155,7 +158,7 @@ export function Hero() {
               ? { duration: 0 }
               : { duration: REVEAL_DURATION_MD, ease: easeOutCubic, delay: REVEAL_STAGGER * 2 }
           }
-          className="mx-auto mt-12 max-w-[50ch] type-lead text-foreground/75"
+          className="motion-reveal mx-auto mt-12 max-w-[50ch] type-lead text-foreground/75"
         >
           {siteConfig.tagline}
         </m.p>
@@ -172,7 +175,7 @@ export function Hero() {
                   delay: REVEAL_STAGGER * 3,
                 }
           }
-          className="mx-auto mt-12 flex w-full max-w-xs flex-col items-stretch gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
+          className="motion-reveal mx-auto mt-12 flex w-full max-w-xs flex-col items-stretch gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
         >
           <AppStoreBadge
             href={siteConfig.links.testflight}

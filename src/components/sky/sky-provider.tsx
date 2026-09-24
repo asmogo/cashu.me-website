@@ -1,9 +1,11 @@
 "use client";
 
+import { useReducedMotion } from "@/lib/use-reduced-motion";
+
 import {
   LazyMotion,
   useScroll,
-  useReducedMotion,
+  useMotionValue,
   type MotionValue,
 } from "framer-motion";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -16,7 +18,8 @@ interface SkyContextValue {
   drift: boolean;
 }
 
-const loadMotionFeatures = () => import("./motion-features").then((m) => m.default);
+const loadMotionFeatures = () =>
+  import("./motion-features").then((m) => m.default);
 
 const SkyContext = createContext<SkyContextValue | null>(null);
 
@@ -24,19 +27,12 @@ export function useSky() {
   return useContext(SkyContext);
 }
 
-export function SkyProvider({ children }: { children: ReactNode }) {
+function SkyScroll({ progress }: { progress: MotionValue<number> }) {
   const { scrollYProgress } = useScroll();
-  const reduceMotion = useReducedMotion() ?? false;
-  const [isDesktop, setIsDesktop] = useState(false);
-
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const update = () => setIsDesktop(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
+    progress.set(scrollYProgress.get());
+    return scrollYProgress.on("change", (value) => progress.set(value));
+  }, [progress, scrollYProgress]);
   // useScroll() with no target tracks document.documentElement, which
   // framer-motion never re-measures via ResizeObserver — only on scroll/
   // resize events. If page height changes after mount (font swap, async
@@ -48,6 +44,22 @@ export function SkyProvider({ children }: { children: ReactNode }) {
     });
     ro.observe(document.body);
     return () => ro.disconnect();
+  }, []);
+
+  return null;
+}
+
+export function SkyProvider({ children }: { children: ReactNode }) {
+  const scrollYProgress = useMotionValue(0);
+  const reduceMotion = useReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   // Every animated element on the page uses `m.*` + this one LazyMotion
@@ -62,6 +74,7 @@ export function SkyProvider({ children }: { children: ReactNode }) {
       <SkyContext.Provider
         value={{ progress: scrollYProgress, drift: isDesktop && !reduceMotion }}
       >
+        {isDesktop && !reduceMotion && <SkyScroll progress={scrollYProgress} />}
         {children}
       </SkyContext.Provider>
     </LazyMotion>
