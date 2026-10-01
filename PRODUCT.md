@@ -28,9 +28,9 @@ The mechanism sits underneath the chronology as support, not as the lead: blinde
 
 ## Operating Context
 
-The site is a single-page marketing surface, statically rendered, with no accounts, no data collection, and no backend. It is not the product; the wallet is. Every path off the page is an install or an open: TestFlight (iOS beta), Google Play testing (Android beta), or `wallet.cashu.me` (browser, no install).
+The site is a single-page marketing surface, statically rendered, with no accounts, no data collection, and no backend. It is not the product; the wallet is. Every path off the page is an install or an open: TestFlight (iOS beta), Google Play (Android), or `wallet.cashu.me` (browser, no install).
 
-Visitors arrive cold from a link, usually on a phone, often on a mobile connection, and decide in well under a minute. The page has to carry its whole argument before they leave. Both native builds are in public beta: iOS uses TestFlight and Android uses Google Play testing, so the page must present each install path honestly.
+Visitors arrive cold from a link, usually on a phone, often on a mobile connection, and decide in well under a minute. The page has to carry its whole argument before they leave. iOS remains in public beta through TestFlight; Android is available through the official Google Play listing, so the page must present each install path honestly.
 
 ## Capabilities and Constraints
 

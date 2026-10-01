@@ -19,7 +19,7 @@ export function GooglePlayBadge({ className }: GooglePlayBadgeProps) {
       />
       <span className="flex flex-col items-start leading-none">
         <span className="type-button text-[11px] text-muted-foreground">
-          Download Beta on
+          Get it on
         </span>
         <span className="mt-1 type-button text-[18px]">Google Play</span>
       </span>
